@@ -1,0 +1,11 @@
+---
+// Meridian's settings: one narrow column, operated on the first screen, so it hydrates at once.
+import Meridian from "@/site/layouts/meridian.astro"
+import { Settings } from "@/site/meridian/settings"
+---
+
+<Meridian title="Settings" section="settings">
+  <div class="mer-page">
+    <Settings client:load />
+  </div>
+</Meridian>

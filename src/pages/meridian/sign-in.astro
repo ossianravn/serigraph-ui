@@ -1,0 +1,19 @@
+---
+// Meridian's sign-in: the form on a plane, and on wide screens an arched window of the observatory beside it.
+import Meridian from "@/site/layouts/meridian.astro"
+import { Folly } from "@/serigraph/extras/folly"
+import { SignIn } from "@/site/meridian/sign-in"
+---
+
+<Meridian title="Sign in">
+  <div class="mer-page">
+    <div class="mer-signin">
+      <SignIn client:load />
+      <Folly
+        template="window"
+        seed="meridian sign-in"
+        className="arch-frame mer-signin-art"
+      />
+    </div>
+  </div>
+</Meridian>

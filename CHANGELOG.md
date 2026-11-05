@@ -2,12 +2,13 @@
 
 ## Unreleased
 
-### Phase 3: core primitives (in progress)
+### Phase 3: core primitives and Meridian
 
 - Button, Badge, Card, Input, Label, Checkbox, Switch and Tabs on Base UI, with shadcn's names, props and slots: pills in the colourway's spot colours inside one ink line, tinted fields, a pinwheel switch thumb that rolls, and tabs drawn as archways that open into their panel.
 - Component docs at `/docs`: every part's states in a matrix, by group, with previous and next.
 - Textarea, Field, Radio group, Select, Native select, Toggle, Toggle group, Slider, Progress, Separator, Skeleton, Avatar, Alert, Kbd, Spinner, Tooltip, Popover, Dialog, Alert dialog and Dropdown menu: the segmented control as a plane-2 track, louvered progress, pinwheel slider thumbs and spinners, avatars drawn from a name, dialogs over a fine stipple screen.
 - The medallion folly's second drawing is a pinwheel seen through an arch.
+- Meridian, the demo observatory, at `/meridian`: tonight's sessions with booking and your seats, sign-in and settings, built from the kit. A dev-only data switch shows each screen with worst-case, empty and one-item data.
 - The registry has 35 items; the install test adds avatar, dialog, dropdown menu, field, select, slider, toggle group and tooltip.
 
 ### Phase 2: Follies

@@ -1,0 +1,91 @@
+---
+// Meridian's own frame: a product, not the docs. The same poster (a paper mat round the canvas in poster mode), its
+// own header with the observatory's sections and the visitor, and a cloud band before a quiet link back to Serigraph.
+import "@/serigraph/styles/serigraph.css"
+import "@/site/site.css"
+import "@/site/meridian/meridian.css"
+import { appearanceScript } from "@/serigraph/theme/appearance-script"
+import { Folly } from "@/serigraph/extras/folly"
+import { Motif } from "@/serigraph/extras/motif"
+import { siteAppearance } from "@/site/appearance"
+import { VISITOR, type Visitor } from "@/site/meridian/data"
+import { VisitorAvatar } from "@/site/meridian/visitor-avatar"
+
+interface Props {
+  title: string
+  /** The section this page belongs to. Sign-in has none, and shows no sections. */
+  section?: "tonight" | "settings"
+  /** Who is signed in; the dev-only data switch passes its own. */
+  visitor?: Visitor
+}
+const { title, section, visitor = VISITOR } = Astro.props
+const sections = [
+  ["tonight", "Tonight", "/meridian"],
+  ["settings", "Settings", "/meridian/settings"],
+] as const
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · Meridian</title>
+    <meta
+      name="description"
+      content="Meridian, an observatory and planetarium: a demo product built with Serigraph."
+    />
+    <script is:inline set:html={appearanceScript(siteAppearance)} />
+  </head>
+  <body>
+    <a class="skip caps" href="#main">
+      Skip to content
+    </a>
+    <div class="mat">
+      <div class="frame canvas meridian">
+        <header class="meridian-header">
+          <a class="meridian-mark caps" href="/meridian">
+            <Motif kind="pinwheel" seed="meridian" />
+            Meridian
+          </a>
+          {section && (
+            <nav class="meridian-nav caps" aria-label="Meridian">
+              {sections.map(([key, label, href]) => (
+                <a
+                  href={href}
+                  aria-current={key === section ? "page" : undefined}
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+          )}
+          {section && (
+            <a
+              class="meridian-visitor"
+              href="/meridian/settings"
+              aria-label={`${visitor.name}, settings`}
+            >
+              <VisitorAvatar name={visitor.name} />
+            </a>
+          )}
+        </header>
+        <main id="main">
+          <slot />
+        </main>
+        <Folly
+          template="band"
+          seed={`meridian ${title}`}
+          className="site-band"
+        />
+        <footer class="ground site-footer caps">
+          Meridian is a demo{" "}
+          <span class="sep" aria-hidden="true">
+            •
+          </span>
+          <a href="/">built with Serigraph</a>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

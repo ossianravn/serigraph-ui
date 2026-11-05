@@ -1,6 +1,6 @@
 # Plan
 
-Status: Phase 3 (core primitives and the observatory's first screens) in progress, 2026-11-05: all 28 core parts and their docs pages are done; Meridian's screens and a `break-ui` pass are next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
+Status: Phase 3 (core primitives and the observatory's first screens) done, 2026-11-05; Phase 4 (data, navigation and the rest of parity) is next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
 
 ## What this is
 
@@ -153,7 +153,7 @@ Exit: server and browser render identical SVG for the same seed; a folly reprint
 - [x] Registry build (`npm run registry`, `registry:check`): `tools/registry` ported from Fineliner, 7 items (base, follies, folly, motif, lettering, letters and the umbrella); the fonts travel inside base's stylesheet as embedded WOFF2 (L11)
 - [x] The install test (`npm run test:consumer`, the second lasting test): `folly`, `motif`, `lettering` and `letters` install offline through the shadcn CLI into a fresh Vite app, bringing `base` and `follies`, arrive byte-identical, type-check under strict settings and build with the fonts in the CSS
 
-### Phase 3: core primitives and the observatory's first screens
+### Phase 3: core primitives and the observatory's first screens (done)
 
 Button, badge, card, input, textarea, label, field, checkbox, radio group, switch, select, native select, tabs, toggle, toggle group, separator, skeleton, avatar, alert, progress, slider, kbd, tooltip, popover, dialog, alert dialog, dropdown menu, spinner; docs pages with state matrices; the observatory's tonight screen, sign-in and settings.
 
@@ -165,7 +165,8 @@ Exit: a `break-ui` pass on the demo screens and the first consumer install test.
 - [x] Docs pages ported from Fineliner: `/docs` and `/docs/components/<name>`, one demo file per part with state matrices, a component rail and previous/next
 - [x] The install test adds button, card, checkbox, input, label, switch and tabs
 - [x] The remaining parts, ported by three agents in parallel from primitives.md and the exemplars: textarea, field (with choice cards), radio group, select, native select, toggle, toggle group (the segmented control), slider (a pinwheel thumb that rolls with the value), progress (louvers), separator, skeleton, avatar (a medallion drawn from the name), alert, kbd, spinner (a turning pinwheel), tooltip, popover, dialog and alert dialog (a plane over the stipple screen), dropdown menu. 35 registry items; the install test adds avatar, dialog, dropdown menu, field, select, slider, toggle group and tooltip
-- [ ] Meridian's tonight screen, sign-in and settings; a `break-ui` pass
+- [x] Meridian at `/meridian`, its own frame with a header, its sections and the visitor: tonight (the night in a line and an arched window, a clouds alert, your seats with a menu to add or release them behind a confirm, the sessions with a segmented filter and a booking dialog, the sky on a plane beside them), sign-in (validation under each field, a link by email) and settings (a narrow column of rows; colourway, poster, line and grain apply live)
+- [x] A `break-ui` pass: worst-case, empty and one data sets behind a dev-only switch (`/meridian/data/<set>/<page>`, built only by the dev server). Fixed: the board's column grew to the filter's width and overflowed at 320 px; the filter did not fit 320 px; an empty night or an empty filter showed nothing; long held titles squeezed beside their hour; hours sat centred against long titles; settings controls ran off when they could not sit beside their words; sessions kept data order; seat counts were unformatted; the close-account confirmation named seats the visitor might not hold
 
 ### Phase 4: data, navigation and the rest of parity
 
@@ -206,6 +207,8 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 - **2026-11-05, Phase 3 (first part)**: Wrote [Primitives](primitives.md) and ported Fineliner's docs pages. The exemplars follow the style brief's interface table: pills in spot colours, tinted fields, the highlight for chosen, the contour line on hover, pinwheel thumbs and archway tabs. Three things found on the way: Fineliner's `Tabs` never passed `orientation` to Base UI, so vertical tabs drew a horizontal mark (and would take left and right arrows); part rules in the components layer lost to the part's own utility classes, so `parts.css` sits in the utilities layer with more specific selectors; disabled words used a fixed quiet ink that vanishes on Night's canvas, so each surface now sets `--text-quiet`. Installing Base UI with the dev server running left Vite with two React copies (invalid hook calls) until a restart. Checked at 1440 (headless Chrome, Sky) and 375 px (the pane, Sky and Night).
 
 - **2026-11-05, Phase 3 (the parts)**: Three agents ported the other twenty parts in parallel, each owning its files and a batch stylesheet (`forms.css`, `feedback.css`, `overlays.css`). Reviewed from their screenshots and in the pane. Fixed on integration: the letters' `skeleton.ts` and shadcn's `skeleton.tsx` shared a base name, which `shadcn add` mixes up (the registry builder refused), so the letters module is now `geometry.ts`; disabled fields and checks tinted 12% toward paper read as cream boxes on every canvas, so they match disabled pills at 35%; the medallion's dome on a platform read as a flying saucer at avatar size, so it is now a pinwheel seen through an arch on clouds (its snapshots changed on purpose). Open: Serigraph Mono lacks arrows (← → fall back) and its % reads poorly when small; candidate shared utilities from the batches (a menu-item, the segmented track, a fine-icon stroke, the tick) wait for the next parts that need them.
+
+- **2026-11-05, Phase 3 (done)**: Meridian's first screens, built from the kit as a consumer would. Composed Base UI parts cannot cross Astro's boundary (each React component Astro places renders alone, so an avatar's fallback lost its context and the page threw); they render from one React component instead. The `break-ui` pass ran the worst case (a collaboration's lecture title, a double-barrelled name, a long work email, a comet's designation, a session over midnight, 1,200 seats), an empty night and a night of one, at 1440 and 320 px; nine breaks were fixed and the switch stays as the regression check. The pane stopped running `requestAnimationFrame` again, so dialogs could not finish closing there; the flows (book, add, release) were checked in headless Chrome over CDP instead. Fineliner's `Tabs` and `ToggleGroup` orientation fix went to its main the same day.
 
 ## Open questions for the maintainer
 

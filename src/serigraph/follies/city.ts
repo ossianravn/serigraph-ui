@@ -133,13 +133,13 @@ export const city: Scene = {
       }) +
       plant(p, r("plant-a"), {
         x: r("plant-a").between(70, 150),
-        ground: 600,
+        ground: 552,
         height: 250,
         blooms: 2,
       }) +
       plant(p, r("plant-b"), {
         x: r("plant-b").between(1050, 1140),
-        ground: 600,
+        ground: 552,
         height: 220,
         blooms: 1,
       }) +

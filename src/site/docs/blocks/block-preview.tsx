@@ -64,10 +64,23 @@ export function BlockPreview({
   const [variant, setVariant] = useState(variants?.[0])
   const src = `/docs/blocks/view/${name}${variant && variant !== variants?.[0] ? `/${variant}` : ""}`
   const phone = width === "phone"
+  // The frame loads its page only when it comes near the window: seven frames each load and hydrate a whole page.
+  const box = useRef<HTMLDivElement>(null)
+  const [near, setNear] = useState(false)
+  useEffect(() => {
+    const el = box.current
+    if (!el || near) return
+    const observer = new IntersectionObserver(
+      ([entry]) => entry?.isIntersecting && setNear(true),
+      { rootMargin: "300px 0px" },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [near])
   const [frame, height] = useFittedHeight(src, !phone)
 
   return (
-    <div className="@container/preview">
+    <div ref={box} className="@container/preview">
       <div className="flex flex-wrap items-center gap-x-snug gap-y-tight">
         {variants && (
           <ToggleGroup
@@ -133,7 +146,7 @@ export function BlockPreview({
           <iframe
             key={src}
             ref={frame}
-            src={src}
+            src={near ? src : undefined}
             title={`${title} preview`}
             loading="lazy"
             style={height ? { height } : undefined}

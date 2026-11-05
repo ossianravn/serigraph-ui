@@ -1,0 +1,46 @@
+/* The site serves Serigraph's fonts and grain tiles as files (public/fonts, public/grain) instead of the kit's
+   embedded copies: cached between pages, preloaded where the first screen needs them, and out of the CSS that blocks
+   the first paint. Keep the font faces in step with tools/fonts/build.mjs and the tiles with
+   tools/paper/build-textures.mjs, which write both forms. */
+:root {
+  --tex-specks: url("/grain/specks.webp");
+  --tex-flecks: url("/grain/flecks.webp");
+  --tex-tooth: url("/grain/tooth.webp");
+  --tex-mottle: url("/grain/mottle.webp");
+}
+
+@font-face {
+  font-family: "Serigraph Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/serigraph-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Serigraph Display Inline";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/serigraph-display-inline.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Serigraph Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/serigraph-sans.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Serigraph Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/serigraph-sans-bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Serigraph Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/serigraph-mono.woff2") format("woff2");
+}

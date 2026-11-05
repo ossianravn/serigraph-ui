@@ -32,7 +32,7 @@ const { meta } = Astro.props
       </Lettering>
       <p class="docs-lead">{meta.description}</p>
       <div class="docs-demo">
-        <DemoHost name={name} client:load />
+        <DemoHost name={name} client:idle />
       </div>
       <ComponentPager current={name} />
     </div>

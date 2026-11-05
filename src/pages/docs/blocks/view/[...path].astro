@@ -1,7 +1,7 @@
 ---
 // One block alone on a page, for the preview frames on /docs/blocks and their "Open" links: the block lays out for
 // the frame's width on the canvas, as it would in an app, without the site's mat or header.
-import "@/serigraph/styles/serigraph.css"
+import "@/site/styles.css"
 import { appearanceScript } from "@/serigraph/theme/appearance-script"
 import { siteAppearance } from "@/site/appearance"
 import { BlockHost } from "@/site/docs/blocks/block-host"
@@ -35,8 +35,8 @@ const { name, title, variant } = Astro.props
     <script is:inline set:html={appearanceScript(siteAppearance)} />
   </head>
   <body class="canvas">
-    <main class="min-h-dvh">
-      <BlockHost name={name} variant={variant} client:load />
+    <main>
+      <BlockHost name={name} variant={variant} client:idle />
     </main>
     <script>
       import {

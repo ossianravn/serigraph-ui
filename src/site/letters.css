@@ -114,3 +114,10 @@
 .ornaments {
   font-size: 2.5rem;
 }
+
+/* (This sheet loads on the letters page only.) Every glyph of three faces, many of them stroked display letters: a
+   section is only laid out and painted when it nears the window, so scrolling past the others costs nothing. */
+main > .section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
+}

@@ -1,11 +1,11 @@
 ---
-// Meridian's settings: one narrow column, operated on the first screen, so it hydrates at once.
+// Meridian's settings: one narrow column, rendered on the server and made operable once the browser is idle.
 import Meridian from "@/site/layouts/meridian.astro"
 import { Settings } from "@/site/meridian/settings"
 ---
 
 <Meridian title="Settings" section="settings">
   <div class="mer-page">
-    <Settings client:load />
+    <Settings client:idle />
   </div>
 </Meridian>

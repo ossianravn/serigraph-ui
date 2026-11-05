@@ -1,7 +1,7 @@
 ---
 // The site's page frame: the appearance before first paint, then the poster: a paper mat (poster mode) around the
 // canvas, with the header on the canvas and the footer on a cloud-coloured ground.
-import "@/serigraph/styles/serigraph.css"
+import "@/site/styles.css"
 import "@/site/site.css"
 import { appearanceScript } from "@/serigraph/theme/appearance-script"
 import { Folly } from "@/serigraph/extras/folly"
@@ -22,6 +22,7 @@ const links = [
   ["Studio", "/studio"],
   ["Meridian", "/meridian"],
 ]
+import ShareMeta from "@/site/share-meta.astro"
 ---
 
 <!doctype html>
@@ -29,8 +30,23 @@ const links = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="/fonts/serigraph-display.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/serigraph-sans-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <ShareMeta title={fullTitle} description={description} />
     <script is:inline set:html={appearanceScript(siteAppearance)} />
   </head>
   <body>

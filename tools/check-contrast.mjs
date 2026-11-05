@@ -14,7 +14,7 @@ const sources = ["tokens.css", "colourways.css", "textures.generated.css"].map(
   (f) => readFileSync(new URL(f, STYLES), "utf8"),
 )
 const COLOURWAYS = ["sky", "pistachio", "coral", "marigold", "night"]
-const GRAIN = { specks: 541, flecks: 613, tooth: 353, mottle: 1201 }
+const GRAIN = { specks: 541, flecks: 613, tooth: 176, mottle: 1201 }
 const CANVAS = 1201
 
 // Top-level rules, in source order.
@@ -122,12 +122,20 @@ const grainVars = Object.assign(
   {},
   ...all.filter((r) => r.selectors.includes(":root")).map((r) => r.decls),
 )
+// A tile's bytes from its data URI: WebP in base64 (the build's), or SVG text.
 const svgOf = (url) =>
-  Buffer.from(
-    decodeURIComponent(
-      url.replace(/^url\("data:image\/svg\+xml;utf8,/, "").replace(/"\)$/, ""),
-    ),
-  )
+  url.includes(";base64,")
+    ? Buffer.from(
+        url.replace(/^url\("data:[^;]+;base64,/, "").replace(/"\)$/, ""),
+        "base64",
+      )
+    : Buffer.from(
+        decodeURIComponent(
+          url
+            .replace(/^url\("data:image\/svg\+xml;utf8,/, "")
+            .replace(/"\)$/, ""),
+        ),
+      )
 const overlays = []
 for (const [name, size] of Object.entries(GRAIN).reverse()) {
   const side = Math.min(size, CANVAS)

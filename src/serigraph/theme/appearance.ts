@@ -26,7 +26,7 @@ export interface Appearance {
 
 export const defaultAppearance: Appearance = {
   colourway: "sky",
-  poster: "on",
+  poster: "off",
   line: "1.5",
   grain: "on",
 }

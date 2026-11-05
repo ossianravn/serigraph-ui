@@ -1,0 +1,21 @@
+---
+// A page's share tags: Open Graph and Twitter, with the page's share image drawn at build time (src/pages/og/).
+// The image's address is absolute once the site's address is set (SITE_URL); until then it is relative.
+import { slugFor } from "@/site/og/pages"
+
+interface Props {
+  title: string
+  description: string
+}
+const { title, description } = Astro.props
+const path = `/og/${slugFor(Astro.url.pathname)}.png`
+const image = Astro.site ? new URL(path, Astro.site).href : path
+---
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />

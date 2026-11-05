@@ -1,7 +1,7 @@
 ---
 // Meridian's own frame: a product, not the docs. The same poster (a paper mat round the canvas in poster mode), its
 // own header with the observatory's sections and the visitor, and a cloud band before a quiet link back to Serigraph.
-import "@/serigraph/styles/serigraph.css"
+import "@/site/styles.css"
 import "@/site/site.css"
 import "@/site/meridian/meridian.css"
 import { appearanceScript } from "@/serigraph/theme/appearance-script"
@@ -23,6 +23,7 @@ const sections = [
   ["tonight", "Tonight", "/meridian"],
   ["settings", "Settings", "/meridian/settings"],
 ] as const
+import ShareMeta from "@/site/share-meta.astro"
 ---
 
 <!doctype html>
@@ -30,10 +31,28 @@ const sections = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="/fonts/serigraph-display.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/serigraph-sans-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>{title} · Meridian</title>
     <meta
       name="description"
       content="Meridian, an observatory and planetarium: a demo product built with Serigraph."
+    />
+    <ShareMeta
+      title={`${title} · Meridian`}
+      description="Meridian, an observatory and planetarium: a demo product built with Serigraph."
     />
     <script is:inline set:html={appearanceScript(siteAppearance)} />
   </head>

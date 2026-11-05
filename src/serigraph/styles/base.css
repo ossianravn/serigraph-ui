@@ -7,7 +7,7 @@
   --text-quiet: var(--ink-quiet);
   --grain:
     var(--tex-specks), var(--tex-flecks), var(--tex-tooth), var(--tex-mottle);
-  --grain-size: 541px, 613px, 353px, 1201px;
+  --grain-size: 541px, 613px, 176px, 1201px;
 }
 :root[data-grain="off"] {
   --grain: none;

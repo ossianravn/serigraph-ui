@@ -1,5 +1,6 @@
-/* Follies on the page: a drawing fills its box and carries the same printed grain as the surfaces around it, laid
-   over the art (never over text). Size the box with CSS; scenes slice from the bottom, marks are fitted whole. */
+/* Follies on the page: a drawing fills its box (size it with CSS; scenes slice from the bottom, marks are fitted
+   whole). It carries no grain of its own: the surface's grain shows through its sky, and a second layer over the art
+   doubled it, drew a seam where the drawing met the next section and cost a repaint on every scroll. */
 @utility folly {
   position: relative;
   display: block;
@@ -7,19 +8,6 @@
     display: block;
     width: 100%;
     height: 100%;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    background-size: var(--grain-size);
-    pointer-events: none;
-  }
-  /* A medallion or a doorway is fitted whole, so most of its box is the surface behind it, which has its own grain:
-     an overlay there would double it and show the box as a faint square. */
-  &:has(> svg:is([data-folly="medallion"], [data-folly="doorway"]))::after {
-    display: none;
   }
 }
 

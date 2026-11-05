@@ -47,6 +47,11 @@
           "target": "~/src/serigraph/styles/conversation.css"
         },
         {
+          "path": "src/serigraph/styles/core.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/core.css"
+        },
+        {
           "path": "src/serigraph/styles/data.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/data.css"

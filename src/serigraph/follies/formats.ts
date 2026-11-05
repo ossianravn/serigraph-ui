@@ -187,7 +187,7 @@ export const band: Scene = {
     })
     art += plant(p, r("plant"), {
       x: w / 2 - r("plant-x").between(260, 520),
-      ground: h + 10,
+      ground: h - 8,
       height: h * 0.95,
       blooms: 2,
     })

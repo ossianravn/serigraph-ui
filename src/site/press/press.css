@@ -2,8 +2,8 @@
 
 .press-hero {
   display: grid;
-  gap: var(--space-snug);
-  padding: var(--space-section) var(--gutter) 0;
+  gap: var(--space-tight);
+  padding: var(--space-line) var(--gutter) 0;
 }
 .press-hero p {
   margin: 0;
@@ -11,7 +11,7 @@
 
 .press-title {
   margin: 0;
-  font-size: clamp(3rem, 12vw, 9rem);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
 }
 .press {
   display: grid;
@@ -92,9 +92,12 @@
   display: grid;
   place-items: center;
 }
+/* The drawing and its controls share one screen: the city is as tall as the window leaves it, sliced from the
+   bottom, so it never runs past the fold. */
 .press-art {
   width: 100%;
   aspect-ratio: 1200 / 560;
+  max-height: max(18rem, calc(100dvh - 14rem));
 }
 .press-stage[data-template="window"] .press-art {
   width: min(18rem, 80%);
@@ -154,4 +157,8 @@
 }
 .motif-row {
   margin-block-start: var(--space-section);
+}
+
+.press-section {
+  padding-top: var(--space-line);
 }

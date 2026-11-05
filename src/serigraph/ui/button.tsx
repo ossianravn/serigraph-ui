@@ -7,7 +7,7 @@ import { cn } from "@/serigraph/lib/utils"
 // comes; destructive is rose with its word. Under the pointer a short contour appears inside the upper left; pressed,
 // the fill steps to its shade. Focus is the page's concentric ring.
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 cursor-pointer items-center justify-center caps whitespace-nowrap select-none press [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 aria-invalid:outline-(length:--line) aria-invalid:outline-rose aria-invalid:outline-offset-3",
+  "group/button inline-flex shrink-0 cursor-pointer items-center justify-center caps whitespace-nowrap no-underline select-none press [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 aria-invalid:outline-(length:--line) aria-invalid:outline-rose aria-invalid:outline-offset-3",
   {
     variants: {
       variant: {

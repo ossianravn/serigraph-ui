@@ -4,7 +4,7 @@ A shadcn/ui component library, website and three typefaces in the style of a lat
 
 <img alt="An exploration of the style: the same phone ticket screen printed in sky blue, pistachio and coral colourways, each with an observatory dome on a round platform above cloud banks." src="docs/style/explorations/round-2/colourways.webp">
 
-**Status:** Phase 0, foundations, done; Phase 1, our own letters, next. The kit has its tokens, five colourways, the printed grain, the surfaces and marks, and the appearance runtime; the site's first page is the foundations specimen. Components, Follies and the fonts follow ([plan](docs/plan.md)). The image above is a generated exploration, for direction only.
+**Status:** Phases 0 and 1 done: the kit's tokens, five colourways, the printed grain, surfaces and marks, the appearance runtime, and our own fonts, Serigraph Display, Sans and Mono (see `/letters`). Follies, the components and the site follow ([plan](docs/plan.md)). The image above is a generated exploration, for direction only.
 
 ## Run the site
 
@@ -18,7 +18,7 @@ npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:4801`. Checks: `typecheck`, `lint`, `format:check`, `build`, and `check:contrast` (every text pair in every colourway, with the grain composited in). `npm run build:textures` regenerates the grain.
+Open `http://127.0.0.1:4801`. Checks: `typecheck`, `lint`, `format:check`, `build`, and `check:contrast` (every text pair in every colourway, with the grain composited in). `npm run build:textures` regenerates the grain; `npm run build:fonts` rebuilds the fonts from the skeleton alphabet.
 
 The static prototype the style was agreed on stays in `specimen/`, with the lettering prototype, Follies and the interface sampler:
 
@@ -41,4 +41,4 @@ Serigraph repeats [Fineliner](https://github.com/ossianravn/naive-indie-line)'s 
 
 ## License
 
-Code, art and generated textures: [MIT](LICENSE). The stand-in fonts (Archivo, Martian Mono) are under the SIL Open Font License, shipped with their Fontsource packages.
+Code, art and generated textures: [MIT](LICENSE). Serigraph Display, Sans and Mono are MIT too. Archivo, the reading face for now, is under the SIL Open Font License, shipped with its Fontsource package.

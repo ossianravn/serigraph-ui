@@ -2,10 +2,11 @@
 
 ## Unreleased
 
-### Phase 1: the letters (in progress)
+### Phase 1: the letters
 
 - Serigraph Display and Display Inline: wide, round, flat capitals from a heavy square pen, layered by `<Lettering>` into paper letters with an ink outline and a thin inline, as on the poster. Every Latin-script European language's capitals.
 - Serigraph Sans Regular and Bold: the same skeleton with a light pen, wider; raised ordinals through `font-variant-numeric: ordinal`. The kit's labels use it.
+- Serigraph Mono: rounded squares in one cell, its own lowercase, a slotted zero, `ss01` staircase diagonals and four ornaments in the Private Use Area. It replaces the Martian Mono stand-in.
 - `npm run build:fonts` builds them from the kit's skeleton alphabet; `/letters` shows every glyph and offers the files.
 
 ### Phase 0: foundations

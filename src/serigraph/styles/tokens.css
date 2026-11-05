@@ -25,10 +25,10 @@
   /* The one line. Borders snap to device pixels, so 1.5px is one pixel at 1x and three at 2x. */
   --line: 1.5px;
 
-  /* Faces. Archivo reads and, at its widest, sets the extended capitals until Serigraph Sans exists (Phase 1). */
+  /* Faces. Archivo reads until Serigraph Sans has a lowercase; the other three are our own (tools/fonts). */
   --face-read: "Archivo Variable", "Archivo", system-ui, sans-serif;
   --face-sans: "Archivo Variable", "Archivo", system-ui, sans-serif;
-  --face-mono: "Martian Mono Variable", "Martian Mono", ui-monospace, monospace;
+  --face-mono: "Serigraph Mono", ui-monospace, monospace;
   /* Our own letters (tools/fonts): Display, set in paper with an ink outline and its Inline over it. */
   --face-display: "Serigraph Display", var(--face-sans);
   --face-display-inline: "Serigraph Display Inline";

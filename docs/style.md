@@ -139,11 +139,19 @@ From a Golden Ratio Typography audit of Archivo (`tokens.css` holds the numbers)
 
 ## Our own letters
 
-All three faces are built in this repository from code, as Fineliner's are (`tools/fonts`, opentype.js, WOFF2 inside the kit's stylesheet), capitals and figures first, every Latin-script European language, MIT. The maintainer's font brief (`.dev-docs/font-descriptions.md`) holds except where the triptych changes it:
+Three faces, built in this repository from code (`npm run build:fonts`), MIT. One **skeleton alphabet** in the kit (`src/serigraph/letters/`) draws every capital, figure and mark as centre lines at a cap height of 100; a face is that skeleton swept by a square pen of a given width (`tools/fonts`, with Clipper's offsetter: mitred joins to a limit of 2, square caps, diagonals cut flat by the glyph's box). The capitals cover every Latin-script European language (112 accented capitals from 15 marks, and Æ Ø Œ Þ Ŋ); lowercase sets the same capitals in Display and Sans.
 
-- **Serigraph Display** is **wider and airier than the brief's**: an average width of about 0.76 of the cap height (about 610 units at a cap height of 800; the brief's condensed face was 0.65), stems about 170, outer shoulders with large radii, slot-like counters, an arch-topped A, rounded U-shaped W and Y, and a default spacing of a tenth of the cap height. It is **flat**: no extrusion. The inline is one thin line inside the left side of each stem, 2–3 % of the cap height wide. It ships as two synchronised layers, Fill (the body in paper) and Line (outline, counters and inline in ink), stacked by the kit, or one COLRv0 font with a paper-and-ink palette; paper and ink never change, so one palette serves every colourway. The specimen's prototype (`specimen/lettering.js`) draws the same construction from centre-line skeletons swept by a square pen.
-- **Serigraph Sans** is **extended**: wide capitals on a monoline drafting pen, flat apices, a 120-unit round middle dot, raised ordinals (`ordn`, without the brief's underline, as in the triptych), Regular and Bold. Capitals and figures first, for labels; a lowercase for reading follows only if it reaches the stand-in's quality at 14–16 px.
-- **Serigraph Mono** is **light**: rounded-square skeletons, a zero with two inward louver bars, flat-bottomed arches, stepped diagonals as `ss01`. Its four ornaments (sparkle, double ring, louvers, cloud tile) sit in the Private Use Area and are reached by class names, not by ligatures on `[*]` or by real characters such as `≡`, so code and screen readers are never changed.
+| Face                     | Pen and set                                                                                 | Job                                            |
+| ------------------------ | ------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Serigraph Display        | Heavy (stem 21% of the cap height), cap 800, a tenth of the cap height between letters      | Titles, heroes, wordmarks, figures, from 32 px |
+| Serigraph Display Inline | The thin line beside each left stem, round-ended                                            | Set over Display in ink                        |
+| Serigraph Sans           | Light (12% Regular, 15% Bold), 18% wider, cap 700; superiors behind `ordn`                  | Labels, navigation, buttons, kickers, metadata |
+| Serigraph Mono           | Light, one 600-unit cell; its own lowercase on rounded-square bowls and flat-bottomed domes | Figures in tables, keys, code                  |
+
+- **Display lettering** is two layers, set by the kit's `lettering` utility and `<Lettering>`: Display in paper with an ink outline, and Display Inline over it in ink. The outline is a text stroke painted under the fill, so it shows outside each letter and inside its counters, at the line's weight or 1.1% of the em, whichever is more. This replaced the brief's Fill and Line fonts and the COLRv0 idea: one font per layer and the browser's own stroke keep the line the same width at every size. The text is read once; the inline layer is hidden from assistive technology.
+- **Sans** sets the poster's caption voice. `font-variant-numeric: ordinal` raises the letters after a figure (15TH), as on the triptych, without the brief's underline.
+- **Mono** has a zero with two louver slots, `ss01` (staircase diagonals for 2, 7, Z and both slashes), and four ornaments in the Private Use Area (U+E000 sparkle, U+E001 double ring, U+E002 louvers, U+E003 a cloud tile that runs on seamlessly), reached by code point, never by ligatures or real characters.
+- Archivo stays the reading face until Sans has a reading lowercase.
 
 ## Motifs
 

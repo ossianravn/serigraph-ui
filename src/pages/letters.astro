@@ -12,6 +12,13 @@ const files = [
   ["Serigraph Display Inline", "serigraph-display-inline"],
   ["Serigraph Sans Regular", "serigraph-sans"],
   ["Serigraph Sans Bold", "serigraph-sans-bold"],
+  ["Serigraph Mono", "serigraph-mono"],
+]
+const monoRows = [
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "abcdefghijklmnopqrstuvwxyz",
+  "0123456789 !?&@#$%*+=<>",
+  "()[]{}/\|_^~`'\".,:;-",
 ]
 ---
 
@@ -80,6 +87,29 @@ const files = [
         <li>{c}</li>
       ))}
     </ul>
+  </section>
+
+  <section class="section" aria-labelledby="h-mono">
+    <Lettering as="h2" className="section-title" id="h-mono">
+      Mono
+    </Lettering>
+    <p class="section-lede">
+      Rounded squares in one cell, for figures, keys and code. The zero has two
+      louver slots; <code>ss01</code> steps the diagonals; four ornaments sit in
+      the Private Use Area.
+    </p>
+    <div class="plane mono-card" data-tone="plane-2">
+      {monoRows.map((row) => (
+        <p class="mono-row">{row}</p>
+      ))}
+      <p class="mono-row">npx shadcn add @serigraph/button</p>
+      <p class="mono-row stepped">
+        2 7 Z / \ <span class="caps">ss01</span>
+      </p>
+      <p class="mono-row ornaments" aria-label="The four ornaments">
+        &#xE000; &#xE001; &#xE002; &#xE003;&#xE003;&#xE003;&#xE003;
+      </p>
+    </div>
   </section>
 
   <section class="section" aria-labelledby="h-files">

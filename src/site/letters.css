@@ -94,3 +94,23 @@
 .file-row .caps {
   margin-right: auto;
 }
+
+.mono-card {
+  display: grid;
+  gap: var(--space-hair);
+  padding: var(--space-line);
+  max-width: 52rem;
+}
+.mono-row {
+  margin: 0;
+  font-family: var(--face-mono);
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.stepped {
+  font-feature-settings: "ss01";
+}
+.ornaments {
+  font-size: 2.5rem;
+}

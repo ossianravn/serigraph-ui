@@ -21,6 +21,9 @@ const { alphabet, CHARACTERS, DISPLAY_PEN } = await jiti.import(
   path.join(letters, "alphabet.ts"),
 )
 const { COMPOSED, SAME } = await jiti.import(path.join(letters, "extras.ts"))
+const { monoAlphabet, MONO_PEN } = await jiti.import(
+  path.join(letters, "mono.ts"),
+)
 const out = path.join(root, "public/fonts")
 fs.mkdirSync(out, { recursive: true })
 const kb = (bytes) => `${(bytes.length / 1024).toFixed(0)} KB`
@@ -155,6 +158,56 @@ const faces = [
       "Serigraph Sans Bold: extended capitals drawn by a broader square pen.",
   }),
 ]
+
+// Serigraph Mono: one 600-unit cell for every glyph, its own lowercase, ss01 steps and the ornaments in the PUA.
+async function mono() {
+  const scale = 7
+  const { glyphs: A, stepped, sb } = monoAlphabet(MONO_PEN)
+  const hm = MONO_PEN.h * 0.62
+  const advance = 600
+  const codes = (char) => {
+    const set = new Set([char.codePointAt(0)])
+    for (const [alias, glyph] of SAME)
+      if (glyph === char) set.add(alias.codePointAt(0))
+    return set
+  }
+  const glyphs = Object.keys(A)
+    .sort((a, b) => a.codePointAt(0) - b.codePointAt(0))
+    .map((char) => ({
+      char,
+      codes: codes(char),
+      advance,
+      path: toPath(glyphShape(A[char], MONO_PEN.h, hm), scale, sb * scale),
+      scale,
+    }))
+  const alternates = Object.entries(stepped).map(([char, g]) => ({
+    char,
+    advance,
+    path: toPath(glyphShape(g, MONO_PEN.h, hm), scale, sb * scale),
+  }))
+  const { otf, woff2 } = await buildFont({
+    family: "Serigraph Mono",
+    postScript: "SerigraphMono",
+    style: { name: "Regular", weight: 400 },
+    description:
+      "Serigraph Mono: rounded-square monospace with a slotted zero, stepped diagonals (ss01) and ornaments.",
+    glyphs,
+    alternates: { tag: "ss01", glyphs: alternates },
+    space: advance,
+    ascender: 900,
+    descender: -220,
+    capHeight: 700,
+    xHeight: 500,
+    kern: false,
+  })
+  fs.writeFileSync(path.join(out, "serigraph-mono.otf"), otf)
+  fs.writeFileSync(path.join(out, "serigraph-mono.woff2"), woff2)
+  console.log(
+    `Serigraph Mono Regular: ${glyphs.length} glyphs, ${kb(otf)} OTF, ${kb(woff2)} WOFF2`,
+  )
+  return fontFace("Serigraph Mono", "serigraph-mono", 400)
+}
+faces.push(await mono())
 
 const css = path.join(root, "src/serigraph/styles/letters.generated.css")
 fs.writeFileSync(

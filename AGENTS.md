@@ -54,6 +54,7 @@ The bar: before showing or reporting a screen, ask whether Apple would ship it. 
 
 - Keep every hand-maintained code file at **300 physical lines or fewer**. Generated files, data and documents are excluded.
 - Keep shadcn's component names, props, variants and `data-slot` attributes.
+- The skeleton alphabet (`src/serigraph/letters/`) is framework-free data and geometry; the fonts are built from it, never edited as files.
 - The Follies engine (`src/serigraph/follies/`) is framework-free TypeScript: no React, no DOM, no `Math.random()` or `Date.now()`. Draw every random choice from `prng(seed)` or a labelled `stream`.
 - Tokens live in `src/serigraph/styles/`: `tokens.css` (paper, ink, spots, the line, type, space, motion), `colourways.css` (roles per colourway), `roles.css` (shadcn roles), `surfaces.css` (the surface and mark utilities). `textures.generated.css` is written by `npm run build:textures`; never edit it by hand.
 - Nothing is translucent, shadowed or extruded: mixes are flat `color-mix(in oklab, …)`; depth belongs to drawings.
@@ -62,7 +63,7 @@ The bar: before showing or reporting a screen, ask whether Apple would ship it. 
 
 Verify with the least total effort; never create unit tests. The dev server runs on **4801** (preview 4802); the static prototype on 4803 (`.claude/launch.json`). Never use framework default ports.
 
-1. Run `npm run typecheck` and `npm run lint` always; `npm run format:check` before committing; `npm run build` when routes, modules or dependencies change; `npm run check:contrast` when tokens, colourways or the grain change (after `npm run build:textures` if you edited the layers).
+1. Run `npm run typecheck` and `npm run lint` always; `npm run format:check` before committing; `npm run build` when routes, modules or dependencies change; `npm run check:contrast` when tokens, colourways or the grain change (after `npm run build:textures` if you edited the layers); `npm run build:fonts` when the skeleton alphabet (`src/serigraph/letters/`) or `tools/fonts` change, then look at `/letters` large in a browser.
 2. Look at the changed screen with realistic content at 1440 and 375 px, in Sky and Night at least, with poster mode on and off. The browser pane may be hidden, which stops it painting: screenshots time out and `requestAnimationFrame` never fires. Then measure layout in the pane (scroll width, element bounds) and take desktop screenshots with headless Chrome (`--headless=new --screenshot`), which cannot go below about 500 px wide; say what you could not see.
 3. Add a lasting test only for a boundary that will change again (from Phase 2: the registry install contract and the seed-to-drawing promise), in `tests/consumer/`.
 4. Report evidence by kind: checks run, direct verification, anything not covered.

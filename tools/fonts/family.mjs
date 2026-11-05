@@ -95,6 +95,18 @@ export async function buildFont(spec) {
     )
   }
 
+  const alternates = new Map()
+  for (const s of spec.alternates?.glyphs ?? []) {
+    alternates.set(s.char, glyphs.length)
+    glyphs.push(
+      new opentype.Glyph({
+        name: `${glyphName(s.char)}.${spec.alternates.tag}`,
+        advanceWidth: s.advance,
+        path: s.path,
+      }),
+    )
+  }
+
   const font = new opentype.Font({
     familyName: spec.family,
     styleName: spec.style.name,
@@ -116,6 +128,7 @@ export async function buildFont(spec) {
   })
 
   if (superiors.size) ordinals(font, ids, superiors, spec)
+  if (alternates.size) stylistic(font, ids, alternates, spec.alternates.tag)
 
   let otf = new Uint8Array(font.toArrayBuffer())
   if (spec.kern !== false)
@@ -198,6 +211,36 @@ function ordinals(font, ids, superiors, spec) {
     ],
   }
   void spec
+}
+
+/** A stylistic set: each glyph swapped for its alternate when the feature (ss01 …) is on. */
+function stylistic(font, ids, alternates, tag) {
+  const order = [...alternates.entries()]
+    .map(([c, alt]) => [ids.get(c), alt])
+    .filter(([g]) => g !== undefined)
+    .sort((a, b) => a[0] - b[0])
+  const langSys = { reserved: 0, reqFeatureIndex: 0xffff, featureIndexes: [0] }
+  font.tables.gsub = {
+    version: 1,
+    scripts: ["DFLT", "latn"].map((script) => ({
+      tag: script,
+      script: { defaultLangSys: langSys, langSysRecords: [] },
+    })),
+    features: [{ tag, feature: { featureParams: 0, lookupListIndexes: [0] } }],
+    lookups: [
+      {
+        lookupType: 1,
+        lookupFlag: 0,
+        subtables: [
+          {
+            substFormat: 2,
+            coverage: { format: 1, glyphs: order.map(([g]) => g) },
+            substitute: order.map(([, s]) => s),
+          },
+        ],
+      },
+    ],
+  }
 }
 
 /** An @font-face rule for a font file served from the site's /fonts. */

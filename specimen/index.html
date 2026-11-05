@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" data-colourway="sky" data-line="1.5" data-fields="tint" data-pressed="shade" data-backdrop="stipple" data-read="archivo" data-grain="on">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Serigraph specimen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wdth,wght@75..100,400..700&family=Manrope:wght@300..800&family=Martian+Mono:wdth,wght@75..112.5,100..800&display=swap"
+    />
+    <link rel="stylesheet" href="tokens.css" />
+    <link rel="stylesheet" href="page.css" />
+    <link rel="stylesheet" href="gallery.css" />
+    <link rel="stylesheet" href="controls.css" />
+    <link rel="stylesheet" href="choices.css" />
+    <link rel="stylesheet" href="parts.css" />
+  </head>
+  <body>
+    <div class="mat">
+      <div class="canvas frame" id="top">
+        <header class="nav">
+          <a class="wordmark caps" href="#top">Serigraph</a>
+          <nav class="nav-links caps" aria-label="Sections">
+            <a href="#colourways">Colourways</a><span class="dot" aria-hidden="true">•</span>
+            <a href="#interface">Interface</a><span class="dot" aria-hidden="true">•</span>
+            <a href="#tonight">In use</a><span class="dot" aria-hidden="true">•</span>
+            <a href="#letters">Letters</a><span class="dot" aria-hidden="true">•</span>
+            <a href="#motifs">Motifs</a>
+          </nav>
+          <button class="btn btn-secondary btn-sm" type="button" aria-expanded="false" aria-controls="appearance" data-panel-toggle>Appearance</button>
+        </header>
+
+        <section class="hero" aria-labelledby="hero-title">
+          <h1 id="hero-title" class="display"><span class="sr-only">Serigraph</span><span data-lettering="Serigraph"></span></h1>
+          <p class="meta-row caps">
+            <span>Components <span class="dot">•</span> Colourways <span class="dot">•</span> Type</span>
+            <span>Style proposal <span class="dot">•</span> <span class="nowrap">November 5<span class="ord">th</span></span></span>
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button">Install</button>
+            <code class="field field-code">npx shadcn add @serigraph/button</code>
+            <button class="btn btn-outline" type="button" data-reroll>Reroll the folly</button>
+          </div>
+          <div class="hero-art" data-folly="poster" data-seed="serigraph"></div>
+        </section>
+
+        <section id="colourways" class="ground section" aria-labelledby="h-colourways">
+          <h2 id="h-colourways" class="section-title"><span class="sr-only">Colourways</span><span data-lettering="Colourways" data-cap="58"></span></h2>
+          <div class="minis" data-minis></div>
+        </section>
+
+        <section id="interface" class="section" aria-labelledby="h-interface">
+          <div class="band" data-band="arcade" aria-hidden="true"></div>
+          <h2 id="h-interface" class="section-title"><span class="sr-only">Interface</span><span data-lettering="Interface" data-cap="58"></span></h2>
+          <div class="sampler">
+            <div class="group">
+              <p class="caps label">Buttons</p>
+              <div class="row">
+                <button class="btn btn-primary" type="button">Book a seat</button>
+                <button class="btn btn-secondary" type="button">Details</button>
+                <button class="btn btn-outline" type="button">Programme</button>
+              </div>
+              <div class="row">
+                <button class="btn btn-destructive" type="button">Cancel booking</button>
+                <button class="btn btn-primary" type="button" disabled>Sold out</button>
+                <button class="btn btn-outline btn-icon" type="button" aria-label="Add to calendar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg></button>
+              </div>
+            </div>
+
+            <div class="group">
+              <p class="caps label">Fields</p>
+              <div class="field-stack">
+                <label class="caps label-sm" for="f-name">Name</label>
+                <input class="field" id="f-name" placeholder="Ada Lovelace" autocomplete="off" />
+              </div>
+              <div class="field-stack">
+                <label class="caps label-sm" for="f-email">Email</label>
+                <input class="field is-focus" id="f-email" value="ada@observatory.org" autocomplete="off" />
+              </div>
+              <div class="field-stack">
+                <label class="caps label-sm" for="f-seats">Seats</label>
+                <input class="field field-short" id="f-seats" value="14" aria-invalid="true" aria-describedby="f-seats-msg" autocomplete="off" />
+                <p class="message" id="f-seats-msg">Twelve seats left tonight.</p>
+              </div>
+            </div>
+
+            <div class="group">
+              <p class="caps label">Choices</p>
+              <div class="choice">
+                <button class="switch" type="button" role="switch" aria-checked="true" aria-labelledby="sw-1"><span class="knob"></span></button>
+                <span id="sw-1">Remind me an hour before</span>
+              </div>
+              <div class="choice">
+                <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="sw-2"><span class="knob"></span></button>
+                <span id="sw-2">Newsletter</span>
+              </div>
+              <label class="choice"><input class="check" type="checkbox" checked /> Wheelchair space</label>
+              <label class="choice"><input class="check" type="checkbox" /> Telescope after the show</label>
+              <div class="row" role="radiogroup" aria-label="Seat">
+                <label class="choice"><input class="radio" type="radio" name="seat" checked /> Stalls</label>
+                <label class="choice"><input class="radio" type="radio" name="seat" /> Balcony</label>
+              </div>
+              <div class="segmented" role="radiogroup" aria-label="Night" data-segmented>
+                <button type="button" role="radio" aria-checked="false">Fri</button>
+                <button type="button" role="radio" aria-checked="true">Sat</button>
+                <button type="button" role="radio" aria-checked="false">Sun</button>
+              </div>
+            </div>
+
+            <div class="group group-wide">
+              <p class="caps label">Tabs</p>
+              <div class="tabs" data-tabs>
+                <div class="tablist" role="tablist" aria-label="Show">
+                  <button class="tab" role="tab" type="button" aria-selected="true" aria-controls="tp-1" id="tb-1">Overview</button>
+                  <button class="tab" role="tab" type="button" aria-selected="false" aria-controls="tp-1" id="tb-2" tabindex="-1">Shows</button>
+                  <button class="tab" role="tab" type="button" aria-selected="false" aria-controls="tp-1" id="tb-3" tabindex="-1">Tickets</button>
+                </div>
+                <div class="plane tabpanel" role="tabpanel" id="tp-1" aria-labelledby="tb-1">
+                  <p data-tab-text>Tonight the dome opens at nine. Three shows, one telescope session, and tea on the terrace between them.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="group">
+              <p class="caps label">Badges <span class="dot">•</span> Avatars</p>
+              <div class="row">
+                <span class="badge" data-tone="3">New</span>
+                <span class="badge" data-tone="4">03</span>
+                <span class="badge" data-tone="2">Sold out</span>
+                <span class="badge badge-rose">Cancelled</span>
+              </div>
+              <div class="row avatars">
+                <span class="avatar" data-tone="1">AL</span>
+                <span class="avatar" data-tone="3">MC</span>
+                <span class="avatar" data-tone="2">HL</span>
+                <span class="avatar" data-tone="4">VR</span>
+              </div>
+            </div>
+
+            <div class="group">
+              <p class="caps label">Progress <span class="dot">•</span> Slider</p>
+              <div class="progress" role="progressbar" aria-label="Seats booked" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100"><span style="width: 64%"></span></div>
+              <label class="caps label-sm" for="s-1">Dome brightness</label>
+              <input class="slider" id="s-1" type="range" min="0" max="100" value="40" />
+              <div class="row">
+                <span class="spinner" role="status" aria-label="Loading"></span>
+                <span class="caps label-sm">Loading the sky</span>
+              </div>
+            </div>
+
+            <article class="plane card group">
+              <div class="arch-window" data-folly="window" data-seed="terrace"></div>
+              <div class="card-body">
+                <h3 class="card-title"><span class="sr-only">The terrace</span><span data-lettering="Terrace" data-cap="40"></span></h3>
+                <p class="caps label-sm">The dome <span class="dot">•</span> <span class="nowrap">Nov 15<span class="ord">th</span></span></p>
+                <p>Tea and the evening sky, an hour before the first show.</p>
+                <button class="btn btn-primary btn-sm" type="button">Reserve</button>
+              </div>
+            </article>
+
+            <div class="group group-wide">
+              <p class="caps label">Dialog</p>
+              <div class="stage">
+                <div class="stage-page" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                <div class="backdrop" data-backdrop-art aria-hidden="true"></div>
+                <div class="plane dialog" role="dialog" aria-labelledby="dlg-t" data-tone="4">
+                  <p class="dialog-title" id="dlg-t">Cancel this booking?</p>
+                  <p>Your two seats for Starlight go back on sale.</p>
+                  <div class="row row-end">
+                    <button class="btn btn-secondary btn-sm" type="button">Keep them</button>
+                    <button class="btn btn-destructive btn-sm" type="button">Cancel booking</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="band" data-band="clouds" aria-hidden="true"></div>
+        </section>
+
+        <section id="tonight" class="ground section" aria-labelledby="h-tonight">
+          <h2 id="h-tonight" class="section-title"><span class="sr-only">Tonight</span><span data-lettering="Tonight" data-cap="58"></span></h2>
+          <p class="caps meta-line">Thursday <span class="dot">•</span> November 6<span class="ord">th</span></p>
+          <div class="stats">
+            <div class="plane stat" data-tone="1"><span data-lettering="412" data-cap="48"></span><span class="caps label-sm">Visitors</span></div>
+            <div class="plane stat" data-tone="3"><span data-lettering="38" data-cap="48"></span><span class="caps label-sm">Seats left</span></div>
+            <div class="plane stat" data-tone="4"><span data-lettering="07" data-cap="48"></span><span class="caps label-sm">Shows</span></div>
+            <div class="plane stat" data-tone="2"><span data-lettering="96%" data-cap="48"></span><span class="caps label-sm">Clear sky</span></div>
+          </div>
+          <div class="plane table-wrap" data-tone="1">
+            <table class="table">
+              <caption class="caps label">Tonight's shows</caption>
+              <thead><tr><th scope="col">Time</th><th scope="col">Show</th><th scope="col">Seats</th><th scope="col">Status</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">18:00</td><td>The evening sky</td><td class="mono">120</td><td><span class="badge badge-rose">Full</span></td></tr>
+                <tr aria-selected="true"><td class="mono">19:30</td><td>Planets in motion</td><td class="mono">108</td><td><span class="badge" data-tone="2">12 left</span></td></tr>
+                <tr><td class="mono">21:00</td><td>Deep sky</td><td class="mono">62</td><td><span class="badge" data-tone="3">Open</span></td></tr>
+                <tr><td class="mono">22:30</td><td>The quiet universe</td><td class="mono">28</td><td><span class="badge" data-tone="3">Open</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="letters" class="section" aria-labelledby="h-letters">
+          <div class="band" data-band="arcade" aria-hidden="true"></div>
+          <h2 id="h-letters" class="section-title"><span class="sr-only">Letters</span><span data-lettering="Letters" data-cap="58"></span></h2>
+          <div class="letters">
+            <p class="caps label">Serigraph Display <span class="dot">•</span> prototype</p>
+            <div class="alphabet" aria-label="A to Z and 0 to 9" role="img">
+              <span data-lettering="ABCDEFGHIJKLM" data-cap="64"></span>
+              <span data-lettering="NOPQRSTUVWXYZ" data-cap="64"></span>
+              <span data-lettering="0123456789%" data-cap="64"></span>
+            </div>
+            <div class="type-pair">
+              <div>
+                <p class="caps label">Sans <span class="dot">•</span> stand-in: Archivo at 125% width</p>
+                <p class="caps sample-caps">Afternoon <span class="dot">•</span> Terrace <span class="dot">•</span> Colour</p>
+                <p class="caps sample-caps sample-bold">November 15–16<span class="ord">th</span></p>
+              </div>
+              <div>
+                <p class="caps label">Reading face <span class="dot">•</span> stand-in</p>
+                <p class="reading">The dome opens at nine. Bring a coat: the terrace is cold after dark, and the telescope session runs until the last visitor has seen Saturn's rings. Tickets bought tonight can be moved to any other clear night this month.</p>
+              </div>
+              <div>
+                <p class="caps label">Mono <span class="dot">•</span> stand-in: Martian Mono</p>
+                <p class="mono sample-mono">npx shadcn add @serigraph/button<br />18:00 · 19:30 · 21:00 · 22:30<br />0123456789 ABCDEF</p>
+              </div>
+            </div>
+          </div>
+          <div class="band" data-band="clouds" aria-hidden="true"></div>
+        </section>
+
+        <section id="motifs" class="ground section" aria-labelledby="h-motifs">
+          <h2 id="h-motifs" class="section-title"><span class="sr-only">Motifs</span><span data-lettering="Motifs" data-cap="58"></span></h2>
+          <div class="motifs" data-motifs></div>
+          <footer class="footer caps">Serigraph <span class="dot">•</span> Phase S specimen <span class="dot">•</span> MIT</footer>
+        </section>
+      </div>
+    </div>
+
+    <aside class="plane panel" id="appearance" aria-label="Appearance" hidden data-tone="4">
+      <div class="panel-head">
+        <p class="caps label">Appearance</p>
+        <button class="btn btn-outline btn-sm" type="button" data-panel-toggle>Done</button>
+      </div>
+      <div class="settings" data-settings></div>
+    </aside>
+
+    <script src="seed.js"></script>
+    <script src="lettering.js"></script>
+    <script src="motifs.js"></script>
+    <script src="follies.js"></script>
+    <script src="specimen.js"></script>
+  </body>
+</html>

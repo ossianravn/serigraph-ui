@@ -1,0 +1,182 @@
+/* Serigraph specimen tokens: paper and ink (fixed), the spot colours, and the colourways that assign spots to roles.
+   Mixed colours (tints, shades) are computed flat in OKLab; nothing is translucent. */
+
+:root {
+  --paper: #eae3c8;
+  --ink: #262420;
+  --ink-quiet: #5b554b;
+
+  --sky: #2e98c8;
+  --cornflower: #61b0da;
+  --seafoam: #7fc9be;
+  --pistachio: #a0c252;
+  --marigold: #f3c140;
+  --coral: #fa733e;
+  --bubblegum: #f2a6cb;
+  --lilac: #b7a6e0;
+  --rose: #f0607a;
+  --prussian: #1d3b57;
+
+  --line: 1.5px;
+  --r-plane: 24px;
+  --r-box: 16px;
+  --r-canvas: 28px;
+  --mat: clamp(8px, 1.6vw, 22px);
+
+  --font-sans: 'Archivo', system-ui, sans-serif;
+  --font-read: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'Martian Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root[data-line='1'] {
+  --line: 1px;
+}
+
+:root[data-read='instrument'] {
+  --font-read: 'Instrument Sans', system-ui, sans-serif;
+}
+:root[data-read='manrope'] {
+  --font-read: 'Manrope', system-ui, sans-serif;
+}
+
+/* Colourways: canvas, planes, action, highlight, clouds, and the drawing roles. Any element can carry one. */
+[data-colourway='sky'] {
+  --canvas: var(--sky);
+  --plane: var(--bubblegum);
+  --plane-2: var(--marigold);
+  --action: var(--coral);
+  --highlight: var(--seafoam);
+  --cloud: var(--marigold);
+  --tone-1: var(--bubblegum);
+  --tone-2: var(--marigold);
+  --tone-3: var(--seafoam);
+  --tone-4: var(--lilac);
+  --structure: var(--coral);
+  --stair: var(--marigold);
+  --platform: var(--seafoam);
+  --sun: var(--coral);
+  --bloom: var(--bubblegum);
+  --leaf: var(--seafoam);
+}
+[data-colourway='pistachio'] {
+  --canvas: var(--pistachio);
+  --plane: var(--bubblegum);
+  --plane-2: var(--seafoam);
+  --action: var(--coral);
+  --highlight: var(--marigold);
+  --cloud: var(--bubblegum);
+  --tone-1: var(--bubblegum);
+  --tone-2: var(--seafoam);
+  --tone-3: var(--marigold);
+  --tone-4: var(--lilac);
+  --structure: var(--coral);
+  --stair: var(--bubblegum);
+  --platform: var(--seafoam);
+  --sun: var(--coral);
+  --bloom: var(--coral);
+  --leaf: var(--seafoam);
+}
+[data-colourway='coral'] {
+  --canvas: var(--coral);
+  --plane: var(--marigold);
+  --plane-2: var(--bubblegum);
+  --action: var(--sky);
+  --highlight: var(--cornflower);
+  --cloud: var(--marigold);
+  --tone-1: var(--marigold);
+  --tone-2: var(--bubblegum);
+  --tone-3: var(--cornflower);
+  --tone-4: var(--seafoam);
+  --structure: var(--cornflower);
+  --stair: var(--marigold);
+  --platform: var(--bubblegum);
+  --sun: var(--sky);
+  --bloom: var(--bubblegum);
+  --leaf: var(--seafoam);
+}
+[data-colourway='marigold'] {
+  --canvas: var(--marigold);
+  --plane: var(--lilac);
+  --plane-2: var(--bubblegum);
+  --action: var(--coral);
+  --highlight: var(--seafoam);
+  --cloud: var(--bubblegum);
+  --tone-1: var(--lilac);
+  --tone-2: var(--bubblegum);
+  --tone-3: var(--seafoam);
+  --tone-4: var(--cornflower);
+  --structure: var(--coral);
+  --stair: var(--lilac);
+  --platform: var(--cornflower);
+  --sun: var(--coral);
+  --bloom: var(--lilac);
+  --leaf: var(--pistachio);
+}
+[data-colourway='night'] {
+  --canvas: var(--prussian);
+  --plane: var(--lilac);
+  --plane-2: var(--cornflower);
+  --action: var(--marigold);
+  --highlight: var(--bubblegum);
+  --cloud: var(--lilac);
+  --tone-1: var(--lilac);
+  --tone-2: var(--cornflower);
+  --tone-3: var(--bubblegum);
+  --tone-4: var(--seafoam);
+  --structure: var(--coral);
+  --stair: var(--marigold);
+  --platform: var(--seafoam);
+  --sun: var(--marigold);
+  --bloom: var(--bubblegum);
+  --leaf: var(--seafoam);
+}
+
+/* Derived roles, recomputed wherever a colourway is set. */
+[data-colourway] {
+  --on-canvas: var(--ink);
+  --walk: color-mix(in oklab, var(--structure) 42%, var(--paper));
+  --structure-shade: color-mix(in oklab, var(--structure) 88%, var(--ink));
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .15 0 0 0 0 .14 0 0 0 0 .12 0 0 0 1.8 -.98'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+[data-colourway='night'] {
+  --on-canvas: var(--paper);
+}
+:root[data-grain='off'] [data-colourway],
+:root[data-grain='off'][data-colourway] {
+  --grain: none;
+}
+
+/* Surfaces: what a part sits on decides its fill, its text and its edge. */
+.canvas,
+.ground {
+  --surface: var(--canvas);
+  --text: var(--on-canvas);
+  --edge: var(--on-canvas);
+}
+.ground {
+  --surface: var(--cloud);
+  --text: var(--ink);
+  --edge: var(--ink);
+}
+.plane {
+  --tone: initial;
+  --surface: var(--tone, var(--plane));
+  --text: var(--ink);
+  --edge: var(--ink);
+}
+.plane[data-tone='1'] {
+  --tone: var(--tone-1);
+}
+.plane[data-tone='2'] {
+  --tone: var(--tone-2);
+}
+.plane[data-tone='3'] {
+  --tone: var(--tone-3);
+}
+.plane[data-tone='4'] {
+  --tone: var(--tone-4);
+}
+.plane[data-tone='plane-2'] {
+  --tone: var(--plane-2);
+}

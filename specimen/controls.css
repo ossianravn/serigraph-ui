@@ -1,0 +1,207 @@
+/* The interface sampler: flat planes, pills, arches and fine lines. Nothing is extruded, shadowed or translucent. */
+
+.plane {
+  background: var(--surface) var(--grain);
+  color: var(--text);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-plane);
+}
+
+.sampler {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 44px 40px;
+  align-items: start;
+}
+.group {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  min-width: 0;
+}
+.group-wide {
+  grid-column: span 2;
+}
+.label {
+  margin: 0;
+}
+.label-sm {
+  font-size: 0.6875rem;
+  margin: 0;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+.row-end {
+  justify-content: flex-end;
+}
+
+/* Buttons: pills in the colourway's colours; hover draws a short contour inside the upper left. */
+.btn {
+  --fill: var(--surface);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 20px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: var(--fill) var(--grain);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-stretch: 125%;
+  font-weight: 650;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 140ms var(--ease), background-color 140ms var(--ease);
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 5px;
+  width: 11px;
+  height: 9px;
+  border-top: var(--line) solid currentColor;
+  border-left: var(--line) solid currentColor;
+  border-top-left-radius: 11px 9px;
+  opacity: 0;
+  transition: opacity 120ms var(--ease);
+}
+.btn:hover::before {
+  opacity: 1;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+:root[data-pressed='shade'] .btn:active {
+  background-color: color-mix(in oklab, var(--fill) 82%, var(--ink));
+}
+:root[data-pressed='stipple'] .btn:active {
+  background-image: radial-gradient(circle, var(--ink) 0.6px, transparent 0.9px);
+  background-size: 3px 3px;
+}
+:root[data-pressed='line'] .btn:active::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: var(--line) solid var(--ink);
+  border-radius: inherit;
+}
+.btn-primary {
+  --fill: var(--action);
+}
+.btn-secondary {
+  --fill: var(--plane-2);
+}
+.btn-outline {
+  border-color: var(--edge);
+  color: var(--text);
+}
+.btn-destructive {
+  --fill: var(--rose);
+}
+.btn:disabled {
+  --fill: color-mix(in oklab, var(--surface) 35%, var(--paper));
+  color: var(--ink-quiet);
+  border-color: var(--ink-quiet);
+  cursor: not-allowed;
+  transform: none;
+}
+.btn:disabled::before {
+  display: none;
+}
+.btn-sm {
+  height: 32px;
+  padding: 0 14px;
+}
+.btn-icon {
+  width: 40px;
+  padding: 0;
+}
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.btn-icon::before {
+  left: 9px;
+}
+
+/* Focus: a second ring outside the first, with a gap of whatever lies beneath. */
+.btn:focus-visible,
+.field:focus-visible,
+.field.is-focus,
+.switch:focus-visible,
+.check:focus-visible,
+.radio:focus-visible,
+.segmented button:focus-visible,
+.tab:focus-visible,
+.slider:focus-visible,
+.swatch:focus-visible {
+  outline: var(--line) solid var(--edge);
+  outline-offset: 3px;
+}
+
+/* Fields: pills filled with a tint of the plane beneath (or paper), a fine line round them. */
+.field {
+  height: 40px;
+  width: min(100%, 18rem);
+  padding: 0 16px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+:root[data-fields='paper'] .field,
+:root[data-fields='paper'] .segmented,
+:root[data-fields='paper'] .check,
+:root[data-fields='paper'] .radio,
+:root[data-fields='paper'] .switch[aria-checked='false'] {
+  background-color: var(--paper);
+}
+.field::placeholder {
+  color: var(--ink-quiet);
+}
+.field-short {
+  width: 6.5rem;
+}
+.field-code {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 350;
+}
+.field[aria-invalid='true'] {
+  outline: var(--line) solid var(--rose);
+  outline-offset: 3px;
+}
+.field-stack {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  width: 100%;
+}
+.message {
+  margin: 4px 0 0 16px;
+  font-size: 0.8125rem;
+}

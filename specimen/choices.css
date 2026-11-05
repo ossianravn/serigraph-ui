@@ -1,0 +1,167 @@
+/* Choices and tabs: switches with pinwheel knobs, checkboxes, radios, segmented controls and archway tabs. */
+
+/* Choices. */
+.choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+.switch {
+  position: relative;
+  flex: none;
+  width: 50px;
+  height: 28px;
+  padding: 0;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+  cursor: pointer;
+  transition: background-color 180ms var(--ease);
+}
+.switch[aria-checked='true'] {
+  background: var(--highlight);
+}
+.knob {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 23px;
+  height: 23px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: repeating-conic-gradient(var(--paper) 0 30deg, var(--action) 30deg 60deg);
+  transition: transform 220ms var(--ease);
+}
+.switch[aria-checked='true'] .knob {
+  transform: translateX(22px) rotate(110deg);
+}
+.check,
+.radio {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: var(--line) solid var(--edge);
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+  cursor: pointer;
+}
+.check:checked {
+  background: var(--highlight);
+  border-color: var(--ink);
+}
+.check::after {
+  content: '';
+  width: 10px;
+  height: 5px;
+  margin-top: -3px;
+  border-left: calc(var(--line) + 0.5px) solid var(--ink);
+  border-bottom: calc(var(--line) + 0.5px) solid var(--ink);
+  transform: rotate(-45deg) scale(0);
+  transition: transform 140ms var(--ease);
+}
+.check:checked::after {
+  transform: rotate(-45deg) scale(1);
+}
+.radio {
+  border-radius: 50%;
+}
+.radio::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(0);
+  transition: transform 140ms var(--ease);
+}
+.radio:checked::after {
+  transform: scale(1);
+}
+.segmented {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+}
+.segmented button {
+  height: 30px;
+  padding: 0 16px;
+  border: var(--line) solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-stretch: 125%;
+  font-weight: 650;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.segmented button[aria-checked='true'] {
+  background: var(--highlight);
+  border-color: var(--ink);
+}
+
+/* Tabs: archways with small ink doorways; the chosen arch takes the panel's colour and opens into it. */
+.tabs {
+  width: 100%;
+}
+.tablist {
+  display: flex;
+  gap: 10px;
+  padding-left: 28px;
+}
+.tab {
+  position: relative;
+  flex: 0 1 118px;
+  min-width: 0;
+  height: 78px;
+  padding: 24px 6px 0;
+  border: var(--line) solid var(--edge);
+  border-bottom: 0;
+  border-radius: 59px 59px 0 0;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-stretch: 125%;
+  font-weight: 650;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 16px;
+  height: 22px;
+  margin-left: -8px;
+  border-radius: 8px 8px 0 0;
+  background: var(--ink);
+}
+.tab[aria-selected='true'] {
+  z-index: 1;
+  height: calc(78px + var(--line));
+  margin-bottom: calc(-1 * var(--line));
+  border-color: var(--ink);
+  background: var(--plane) var(--grain);
+  color: var(--ink);
+}
+.tabpanel {
+  padding: 20px 24px;
+}
+.tabpanel p {
+  margin: 0;
+  max-width: 36em;
+}

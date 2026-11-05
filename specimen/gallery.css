@@ -1,0 +1,163 @@
+/* The specimen's galleries: colourway minis, letters, motifs and the appearance panel. */
+
+/* Colourway minis: the same small poster printed five times. */
+.minis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+.mini {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.mini-sheet {
+  width: 100%;
+  background: var(--paper) var(--grain);
+  border: var(--line) solid var(--ink);
+  border-radius: 18px;
+  padding: 8px;
+}
+.mini-canvas {
+  background: var(--canvas) var(--grain);
+  color: var(--text);
+  border: var(--line) solid var(--ink);
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 10px;
+}
+.mini-canvas .arch-window {
+  height: 150px;
+}
+
+/* Letters. */
+.letters {
+  display: grid;
+  gap: 18px;
+}
+.alphabet {
+  display: grid;
+  gap: 14px;
+  max-width: 64rem;
+  min-width: 0;
+}
+.letters > *,
+.type-pair > * {
+  min-width: 0;
+}
+.alphabet [data-lettering] {
+  display: block;
+}
+.type-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+.sample-caps {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+.sample-bold {
+  font-weight: 800;
+}
+.reading {
+  max-width: 34em;
+  margin: 0;
+}
+.sample-mono {
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* Motifs. */
+.motifs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 28px 20px;
+  margin-top: 28px;
+}
+.motif {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+.motif svg {
+  width: 120px;
+  height: 120px;
+}
+.motif .spin {
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+  animation: turn 2.4s linear infinite;
+}
+.footer {
+  margin-top: 56px;
+  text-align: center;
+}
+
+/* The appearance panel: a narrow column of settings rows. */
+.panel {
+  position: fixed;
+  right: calc(var(--mat) + 16px);
+  bottom: calc(var(--mat) + 16px);
+  z-index: 10;
+  width: min(23rem, calc(100vw - 2 * var(--mat) - 32px));
+  max-height: calc(100vh - 2 * var(--mat) - 32px);
+  overflow: auto;
+  background: var(--surface) var(--grain);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-plane);
+  padding: 16px 18px 18px;
+}
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.panel-head .label {
+  margin: 0;
+}
+.settings {
+  display: grid;
+}
+.setting {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: var(--line) solid var(--ink);
+}
+.setting:first-child {
+  border-top: 0;
+}
+.panel {
+  overflow-x: hidden;
+}
+.panel .segmented button {
+  padding: 0 11px;
+  font-stretch: 112%;
+}
+.swatches {
+  display: flex;
+  gap: 6px;
+}
+.swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: var(--line) solid var(--ink);
+  background: var(--canvas);
+  padding: 0;
+  cursor: pointer;
+}
+.swatch[aria-checked='true'] {
+  outline: var(--line) solid var(--ink);
+  outline-offset: 3px;
+}

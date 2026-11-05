@@ -1,0 +1,295 @@
+/* Badges, avatars, progress, slider, spinner, the card, the dialog stage, figures and the table. */
+
+/* Badges and avatars. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: var(--badge, var(--tone-3));
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge[data-tone='1'] { --badge: var(--tone-1); }
+.badge[data-tone='2'] { --badge: var(--tone-2); }
+.badge[data-tone='3'] { --badge: var(--tone-3); }
+.badge[data-tone='4'] { --badge: var(--tone-4); }
+.badge-rose { --badge: var(--rose); }
+.avatars {
+  gap: 8px;
+}
+.avatar {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--av, var(--tone-1));
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-stretch: 125%;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle, var(--ink) 0.6px, transparent 0.9px);
+  background-size: 3px 3px;
+  mask-image: radial-gradient(circle at 36% 32%, transparent 0 66%, #000 66.5%);
+}
+.avatar[data-tone='2'] { --av: var(--tone-2); }
+.avatar[data-tone='3'] { --av: var(--tone-3); }
+.avatar[data-tone='4'] { --av: var(--tone-4); }
+
+/* Progress fills with louvers; the slider's thumb is a pinwheel that turns as it moves. */
+.progress {
+  width: min(100%, 18rem);
+  height: 16px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+  overflow: hidden;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  border-right: var(--line) solid var(--ink);
+  background: repeating-linear-gradient(to bottom, var(--action) 0 3px, var(--ink) 3px 5px);
+}
+.slider {
+  --v: 40%;
+  --turn: 144deg;
+  appearance: none;
+  width: min(100%, 18rem);
+  height: 28px;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--action) 0 var(--v), color-mix(in oklab, var(--surface) 30%, var(--paper)) var(--v));
+}
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  margin-top: calc((8px - 2 * var(--line) - 24px) / 2);
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: repeating-conic-gradient(from var(--turn), var(--paper) 0 30deg, var(--action) 30deg 60deg);
+}
+.slider::-moz-range-track {
+  height: 8px;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+}
+.slider::-moz-range-progress {
+  height: 8px;
+  border-radius: 999px 0 0 999px;
+  background: var(--action);
+}
+.slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: repeating-conic-gradient(from var(--turn), var(--paper) 0 30deg, var(--action) 30deg 60deg);
+}
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: repeating-conic-gradient(var(--paper) 0 30deg, var(--action) 30deg 60deg);
+  animation: turn 1.6s linear infinite;
+}
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card with an arched window. */
+.card {
+  grid-template-columns: minmax(0, 1fr) 128px;
+  align-items: start;
+  gap: 16px;
+  padding: 16px 16px 18px 20px;
+}
+.card .arch-window {
+  order: 2;
+  width: 128px;
+}
+.card-body {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.card-body p {
+  margin: 0;
+}
+.card-title {
+  margin: 4px 0 0;
+  width: 100%;
+  line-height: 0;
+}
+.card-title [data-lettering] {
+  display: block;
+}
+.arch-window {
+  --archy: 37.5%;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  border: var(--line) solid var(--ink);
+  border-radius: 50% 50% 12px 12px / var(--archy) var(--archy) 12px 12px;
+  overflow: hidden;
+  background: var(--canvas);
+}
+.mini-canvas .arch-window {
+  --archy: 66.7%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+}
+
+/* Dialog on a small stage, over the chosen backdrop. */
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 270px;
+  padding: 32px 16px;
+  border: var(--line) solid var(--edge);
+  border-radius: var(--r-plane);
+  overflow: hidden;
+}
+.stage-page {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 18px;
+}
+.stage-page i {
+  height: 72px;
+  border: var(--line) solid var(--ink);
+  border-radius: 16px;
+  background: var(--tone-1);
+}
+.stage-page i:nth-child(2) { background: var(--tone-2); }
+.stage-page i:nth-child(3) { background: var(--tone-3); }
+.stage-page i:nth-child(4) { background: var(--tone-4); }
+:root[data-backdrop='stipple'] .backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--ink) 0.75px, transparent 1.05px);
+  background-size: 4px 4px;
+}
+:root[data-backdrop='clouds'] .backdrop {
+  position: absolute;
+  inset: auto 0 0;
+  height: 78%;
+}
+.backdrop svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.dialog {
+  position: relative;
+  width: min(22rem, 100%);
+  padding: 20px 22px;
+}
+.dialog p {
+  margin: 0 0 16px;
+}
+.dialog .dialog-title {
+  margin-bottom: 6px;
+  font-family: var(--font-sans);
+  font-stretch: 112%;
+  font-weight: 750;
+  font-size: 1.125rem;
+}
+
+/* In use: figures and a table. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat {
+  display: grid;
+  gap: 10px;
+  padding: 18px 20px 16px;
+}
+.stat [data-lettering] {
+  display: block;
+  line-height: 0;
+}
+.table-wrap {
+  padding: 4px 20px 10px;
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.table caption {
+  padding: 14px 0 6px;
+  text-align: left;
+}
+.table th {
+  padding: 10px 12px;
+  border-bottom: var(--line) solid var(--ink);
+  text-align: left;
+  font-family: var(--font-sans);
+  font-stretch: 125%;
+  font-weight: 650;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.table td {
+  padding: 11px 12px;
+  border-bottom: var(--line) solid var(--ink);
+}
+.table tr:last-child td {
+  border-bottom: 0;
+}
+.table tr[aria-selected='true'] td {
+  background: var(--highlight);
+}
+
+@media (max-width: 720px) {
+  .group-wide {
+    grid-column: auto;
+  }
+  .card {
+    grid-template-columns: minmax(0, 1fr) 96px;
+  }
+  .card .arch-window {
+    width: 96px;
+  }
+}

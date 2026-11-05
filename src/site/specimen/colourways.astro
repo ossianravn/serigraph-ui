@@ -1,0 +1,43 @@
+---
+// The colourways side by side: each a small print with its roles named, the way the triptych rotates its colours.
+import { APPEARANCE } from "@/serigraph/theme"
+
+const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
+---
+
+<section class="section" id="colourways" aria-labelledby="h-colourways">
+  <h2 class="section-title" id="h-colourways">Colourways</h2>
+  <p class="section-lede">
+    One print, its spot colours rotated among the same roles. Paper and ink
+    never change.
+  </p>
+  <div class="cw-grid">
+    {
+      APPEARANCE.colourway.map((colourway) => (
+        <figure class="cw" data-colourway={colourway}>
+          <div class="cw-sheet">
+            <div class="canvas cw-canvas">
+              <p class="caps cw-name">{title(colourway)}</p>
+              <div class="cw-roles">
+                <span class="plane cw-chip">Plane</span>
+                <span class="plane cw-chip" data-tone="plane-2">
+                  Plane 2
+                </span>
+                <span class="cw-pill cw-action">Action</span>
+                <span class="cw-pill cw-highlight">Highlight</span>
+              </div>
+              <div class="cw-tones" aria-label="Tones">
+                {[1, 2, 3, 4].map((tone) => (
+                  <span class="plane cw-tone" data-tone={String(tone)}>
+                    {tone}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <p class="ground caps cw-cloud">Clouds</p>
+          </div>
+        </figure>
+      ))
+    }
+  </div>
+</section>

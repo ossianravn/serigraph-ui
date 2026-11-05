@@ -1,0 +1,7 @@
+dist/
+.astro/
+node_modules/
+package-lock.json
+src/serigraph/styles/textures.generated.css
+specimen/
+docs/style/explorations/

@@ -1,0 +1,91 @@
+---
+// The voices and the Golden Ratio scale: every type step, the extended capitals, the reading measure, the mono and
+// the six spacing units.
+const steps = [
+  ["title", "41.9"],
+  ["h1", "32.9"],
+  ["h2", "25.9"],
+  ["lead", "20.4"],
+  ["body", "16"],
+  ["small", "12.6"],
+] as const
+const units = [
+  ["hair", "6.1"],
+  ["tight", "9.9"],
+  ["snug", "16"],
+  ["line", "25.9"],
+  ["section", "41.9"],
+  ["page", "67.8"],
+] as const
+---
+
+<section class="section" id="voices" aria-labelledby="h-voices">
+  <h2 class="section-title" id="h-voices">Voices</h2>
+  <div class="voices">
+    <div class="plane voice-card" data-tone="plane-2">
+      <p class="caps">Type scale <span class="sep">•</span> 16 × φ^(n/2)</p>
+      <ol class="scale">
+        {
+          steps.map(([name, px]) => (
+            <li class="scale-step">
+              <span class="caps scale-name">
+                {name} <span class="sep">•</span> {px}
+              </span>
+              <span
+                class="scale-sample"
+                style={`font-size: var(--type-${name}); line-height: var(--lh-${name})`}
+              >
+                The terrace at dusk
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="voice-stack">
+      <div>
+        <p class="caps">Extended capitals <span class="sep">•</span> Archivo 125%</p>
+        <p class="caps caps-sample">
+          Afternoon <span class="sep">•</span> Terrace <span class="sep">•</span>
+          Colour
+        </p>
+      </div>
+      <div>
+        <p class="caps">Reading <span class="sep">•</span> Archivo, 34rem</p>
+        <p class="reading">
+          The dome opens at nine. Bring a coat: the terrace is cold after dark,
+          and the telescope session runs until the last visitor has seen
+          Saturn's rings. Tickets bought tonight can be moved to any other clear
+          night this month, and members keep two seats on the balcony for every
+          show.
+        </p>
+      </div>
+      <div>
+        <p class="caps">Mono <span class="sep">•</span> Martian Mono</p>
+        <p class="mono-sample">
+          npx shadcn add @serigraph/button<br />18:00 · 19:30 · 21:00 · 22:30
+        </p>
+      </div>
+      <div>
+        <p class="caps">Space <span class="sep">•</span> 25.9 × φ^n</p>
+        <ul class="units">
+          {
+            units.map(([name, px]) => (
+              <li>
+                <span
+                  class="unit-bar"
+                  style={`width: var(--space-${name})`}
+                  aria-hidden="true"
+                />
+                <span class="caps">
+                  {name} <span class="sep">•</span> {px}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

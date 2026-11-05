@@ -1,0 +1,111 @@
+/* Colourways: the same print with its colours rotated. Each assigns the spots to roles; paper and ink never change.
+   Any element can carry data-colourway, so a page can show several. Sky is the default. */
+
+:root,
+[data-colourway="sky"] {
+  --canvas: var(--sky);
+  --plane: var(--bubblegum);
+  --plane-2: var(--marigold);
+  --action: var(--coral);
+  --highlight: var(--seafoam);
+  --cloud: var(--marigold);
+  --tone-1: var(--bubblegum);
+  --tone-2: var(--marigold);
+  --tone-3: var(--seafoam);
+  --tone-4: var(--lilac);
+  /* Drawing roles (Follies). */
+  --structure: var(--coral);
+  --stair: var(--marigold);
+  --platform: var(--seafoam);
+  --sun: var(--coral);
+  --bloom: var(--bubblegum);
+  --leaf: var(--seafoam);
+}
+
+[data-colourway="pistachio"] {
+  --canvas: var(--pistachio);
+  --plane: var(--bubblegum);
+  --plane-2: var(--seafoam);
+  --action: var(--coral);
+  --highlight: var(--marigold);
+  --cloud: var(--bubblegum);
+  --tone-1: var(--bubblegum);
+  --tone-2: var(--seafoam);
+  --tone-3: var(--marigold);
+  --tone-4: var(--lilac);
+  --structure: var(--coral);
+  --stair: var(--bubblegum);
+  --platform: var(--seafoam);
+  --sun: var(--coral);
+  --bloom: var(--coral);
+  --leaf: var(--seafoam);
+}
+
+[data-colourway="coral"] {
+  --canvas: var(--coral);
+  --plane: var(--marigold);
+  --plane-2: var(--bubblegum);
+  --action: var(--sky);
+  --highlight: var(--cornflower);
+  --cloud: var(--marigold);
+  --tone-1: var(--marigold);
+  --tone-2: var(--bubblegum);
+  --tone-3: var(--cornflower);
+  --tone-4: var(--seafoam);
+  --structure: var(--cornflower);
+  --stair: var(--marigold);
+  --platform: var(--bubblegum);
+  --sun: var(--sky);
+  --bloom: var(--bubblegum);
+  --leaf: var(--seafoam);
+}
+
+[data-colourway="marigold"] {
+  --canvas: var(--marigold);
+  --plane: var(--lilac);
+  --plane-2: var(--bubblegum);
+  --action: var(--coral);
+  --highlight: var(--seafoam);
+  --cloud: var(--bubblegum);
+  --tone-1: var(--lilac);
+  --tone-2: var(--bubblegum);
+  --tone-3: var(--seafoam);
+  --tone-4: var(--cornflower);
+  --structure: var(--coral);
+  --stair: var(--lilac);
+  --platform: var(--cornflower);
+  --sun: var(--coral);
+  --bloom: var(--lilac);
+  --leaf: var(--pistachio);
+}
+
+/* Night: the poster printed on a dark card. Text placed on the canvas turns paper; planes stay bright with ink. */
+[data-colourway="night"] {
+  --canvas: var(--prussian);
+  --plane: var(--lilac);
+  --plane-2: var(--cornflower);
+  --action: var(--marigold);
+  --highlight: var(--bubblegum);
+  --cloud: var(--lilac);
+  --tone-1: var(--lilac);
+  --tone-2: var(--cornflower);
+  --tone-3: var(--bubblegum);
+  --tone-4: var(--seafoam);
+  --structure: var(--coral);
+  --stair: var(--marigold);
+  --platform: var(--seafoam);
+  --sun: var(--marigold);
+  --bloom: var(--bubblegum);
+  --leaf: var(--seafoam);
+}
+
+/* Derived roles, recomputed wherever a colourway is set. Mixed in OKLab, flat: nothing is translucent. */
+:root,
+[data-colourway] {
+  --on-canvas: var(--ink);
+  --walk: color-mix(in oklab, var(--structure) 42%, var(--paper));
+  --structure-shade: color-mix(in oklab, var(--structure) 88%, var(--ink));
+}
+[data-colourway="night"] {
+  --on-canvas: var(--paper);
+}

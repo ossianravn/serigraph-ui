@@ -1,0 +1,144 @@
+/* Surfaces and the marks the style is built from. A surface decides the fill beneath its children (--surface),
+   their text (--text) and their edges (--edge), so a field or an outline button sitting on it knows what to mix
+   with. Flat colour, one fine line, grain under the content; nothing is shadowed, extruded or translucent. */
+
+/* The poster: a paper mat (on in poster mode) around the canvas, which has a fine line and a big radius. */
+@utility mat {
+  padding: var(--mat);
+}
+@utility frame {
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-canvas);
+  overflow: clip;
+  :root[data-poster="off"] & {
+    border: 0;
+  }
+}
+
+@utility canvas {
+  --surface: var(--canvas);
+  --text: var(--on-canvas);
+  --edge: var(--on-canvas);
+  background-color: var(--canvas);
+  background-image: var(--grain);
+  background-size: var(--grain-size);
+  color: var(--text);
+}
+
+/* Ground: a section in the cloud colour, which a cloud bank rising into it continues. */
+@utility ground {
+  --surface: var(--cloud);
+  --text: var(--ink);
+  --edge: var(--ink);
+  background-color: var(--cloud);
+  background-image: var(--grain);
+  background-size: var(--grain-size);
+  color: var(--ink);
+}
+
+/* Plane: a card or panel in its colourway colour, or one of the four tones (data-tone="1" … "4"). */
+@utility plane {
+  --tone: initial;
+  --surface: var(--tone, var(--plane));
+  --text: var(--ink);
+  --edge: var(--ink);
+  background-color: var(--surface);
+  background-image: var(--grain);
+  background-size: var(--grain-size);
+  color: var(--ink);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-plane);
+}
+.plane[data-tone="1"] {
+  --tone: var(--tone-1);
+}
+.plane[data-tone="2"] {
+  --tone: var(--tone-2);
+}
+.plane[data-tone="3"] {
+  --tone: var(--tone-3);
+}
+.plane[data-tone="4"] {
+  --tone: var(--tone-4);
+}
+.plane[data-tone="plane-2"] {
+  --tone: var(--plane-2);
+}
+
+/* Field: a tint of the surface beneath, so cream stays rare. */
+@utility field-fill {
+  background-color: color-mix(
+    in oklab,
+    var(--surface, var(--canvas)) 30%,
+    var(--paper)
+  );
+  color: var(--ink);
+}
+
+/* Pressed: the fill steps toward ink and prints flat, without grain, so ink text keeps 4.5:1 on every spot.
+   Set --fill on the element. */
+@utility pressed-shade {
+  background-color: color-mix(
+    in oklab,
+    var(--fill, var(--surface)) 92%,
+    var(--ink)
+  );
+  background-image: none;
+}
+
+/* Stipple: fine ink dots, for the shadow side of round forms and the dialog backdrop. */
+@utility stipple {
+  background-image: radial-gradient(
+    circle,
+    var(--ink) 0.6px,
+    transparent 0.9px
+  );
+  background-size: 3px 3px;
+}
+@utility stipple-screen {
+  background-image: radial-gradient(
+    circle,
+    var(--ink) 0.75px,
+    transparent 1.05px
+  );
+  background-size: 4px 4px;
+}
+
+/* Louvers: thin slats of the action colour and ink, like a stair seen from below. */
+@utility louvers {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--action) 0 3px,
+    var(--ink) 3px 5px
+  );
+}
+
+/* The extended capitals: labels, navigation, buttons, kickers and metadata. */
+@utility caps {
+  font-family: var(--face-sans);
+  font-stretch: var(--sans-stretch);
+  font-weight: 600;
+  font-size: var(--type-small);
+  line-height: var(--lh-ui);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+}
+
+/* A raised ordinal (15TH) and the round middle dot between details, as on the poster. */
+@utility ord {
+  font-size: 0.7em;
+  letter-spacing: 0.06em;
+  vertical-align: 0.62em;
+  margin-left: 0.1em;
+}
+@utility sep {
+  display: inline-block;
+  margin-inline: 0.45em;
+  transform: scale(0.8);
+}
+
+/* The concentric focus ring, for parts that draw their own focus. */
+@utility focus-ring {
+  outline: var(--line) solid var(--edge, var(--ink));
+  outline-offset: 3px;
+}

@@ -1,0 +1,71 @@
+---
+// The site's page frame: the appearance before first paint, then the poster: a paper mat (poster mode) around the
+// canvas, with the header on the canvas and the footer on a cloud-coloured ground.
+import "@/serigraph/styles/serigraph.css"
+import "@/site/site.css"
+import { appearanceScript } from "@/serigraph/theme/appearance-script"
+import { siteAppearance } from "@/site/appearance"
+
+interface Props {
+  title: string
+  description: string
+}
+const { title, description } = Astro.props
+const fullTitle = title === "Serigraph" ? title : `${title} · Serigraph`
+const links = [
+  ["Colourways", "#colourways"],
+  ["Surfaces", "#surfaces"],
+  ["Voices", "#voices"],
+]
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <script is:inline set:html={appearanceScript(siteAppearance)} />
+  </head>
+  <body>
+    <a class="skip caps" href="#main">
+      Skip to content
+    </a>
+    <div class="mat">
+      <div class="frame canvas">
+        <header class="site-header">
+          <a class="caps wordmark" href="/">
+            Serigraph
+          </a>
+          <nav class="site-nav caps" aria-label="Sections">
+            {links.map(([label, href], i) => (
+              <>
+                {i > 0 && (
+                  <span class="sep" aria-hidden="true">
+                    •
+                  </span>
+                )}
+                <a href={href}>{label}</a>
+              </>
+            ))}
+          </nav>
+        </header>
+        <main id="main">
+          <slot />
+        </main>
+        <footer class="ground site-footer caps">
+          Serigraph{" "}
+          <span class="sep" aria-hidden="true">
+            •
+          </span>{" "}
+          Phase 0
+          <span class="sep" aria-hidden="true">
+            •
+          </span>{" "}
+          foundations
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

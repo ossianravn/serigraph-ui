@@ -1,0 +1,39 @@
+/* shadcn's semantic roles, mapped from the colourway's roles so shadcn-shaped code works unchanged. Ink is every
+   border, input and ring, and the text on every bright surface. Charts take the action colour and the four tones,
+   and tell series apart by fill (flat, stipple, louvers) as well as by colour. */
+
+:root,
+[data-colourway] {
+  --background: var(--canvas);
+  --foreground: var(--on-canvas);
+  --card: var(--plane);
+  --card-foreground: var(--ink);
+  --popover: var(--plane);
+  --popover-foreground: var(--ink);
+  --primary: var(--action);
+  --primary-foreground: var(--ink);
+  --secondary: var(--plane-2);
+  --secondary-foreground: var(--ink);
+  --muted: color-mix(in oklab, var(--canvas) 30%, var(--paper));
+  --muted-foreground: var(--ink);
+  --accent: var(--highlight);
+  --accent-foreground: var(--ink);
+  --destructive: var(--rose);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--ink);
+  --chart-1: var(--action);
+  --chart-2: var(--tone-1);
+  --chart-3: var(--tone-2);
+  --chart-4: var(--tone-3);
+  --chart-5: var(--tone-4);
+  --sidebar: var(--plane);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--action);
+  --sidebar-primary-foreground: var(--ink);
+  --sidebar-accent: var(--highlight);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--ink);
+  --sidebar-ring: var(--ink);
+  --radius: var(--r-box);
+}

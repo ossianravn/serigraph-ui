@@ -1,0 +1,92 @@
+/* Serigraph's raw tokens: paper and ink (fixed in every colourway), the spot colours, the line, the type scale and
+   the spacing units. Type and space come from a Golden Ratio Typography audit of Archivo: a 16px body, a 34rem
+   measure (about 76 characters), mu 2.23, x-height ratio 0.77, no x-height correction (product and docs UI in a
+   sans with a large x-height). Sizes are 16 × phi^(n/2); line heights are tuned to the measure; the six spacing
+   units are the 25.9px line height × phi^n. Exceptions are noted where they are set. */
+
+:root {
+  /* Paper and ink. Paper is the mat, display lettering and the brightest cloud; ink is every line and all text. */
+  --paper: #eae3c8;
+  --ink: #262420;
+  --ink-quiet: #5b554b;
+
+  /* Spot colours, sampled from the reference triptych. Each passes 4.5:1 with ink as text. */
+  --sky: #3aa1d2;
+  --cornflower: #61b0da;
+  --seafoam: #7fc9be;
+  --pistachio: #a0c252;
+  --marigold: #f3c140;
+  --coral: #fa733e;
+  --bubblegum: #f2a6cb;
+  --lilac: #b7a6e0;
+  --rose: #fb6a83;
+  --prussian: #1d3b57;
+
+  /* The one line. Borders snap to device pixels, so 1.5px is one pixel at 1x and three at 2x. */
+  --line: 1.5px;
+
+  /* Faces. Archivo reads and, at its widest, sets the extended capitals until Serigraph Sans exists (Phase 1). */
+  --face-read: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --face-sans: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --face-mono: "Martian Mono Variable", "Martian Mono", ui-monospace, monospace;
+  --sans-stretch: 125%;
+
+  /* Type scale: 16 × phi^(n/2). */
+  --type-small: 0.786rem; /* n = -1, 12.6px: captions, messages, labels */
+  --type-body: 1rem; /* n = 0, 16px: reading and interface text */
+  --type-lead: 1.272rem; /* n = 1, 20.4px: leads, h3 */
+  --type-h2: 1.618rem; /* n = 2, 25.9px */
+  --type-h1: 2.058rem; /* n = 3, 32.9px */
+  --type-title: 2.618rem; /* n = 4, 41.9px */
+  /* Exception: display lettering runs past the scale, sized to the canvas. */
+  --type-display: clamp(2.25rem, 10.4vw, 9rem);
+
+  /* Line heights tuned to the 34rem measure (unitless). Single-line controls use --lh-ui. */
+  --lh-small: 1.682;
+  --lh-body: 1.618;
+  --lh-lead: 1.568;
+  --lh-h2: 1.528;
+  --lh-h1: 1.497;
+  --lh-title: 1.472;
+  --lh-display: 1;
+  --lh-ui: 1.25;
+
+  /* The extended capitals: wide and tracked, so they read larger than their size. */
+  --label-track: 0.14em;
+
+  /* Spacing units: the line height (25.9px) × phi^n, n = -3 … 2. */
+  --space-hair: 0.382rem; /* 6.1px */
+  --space-tight: 0.618rem; /* 9.9px */
+  --space-snug: 1rem; /* 16px */
+  --space-line: 1.618rem; /* 25.9px */
+  --space-section: 2.618rem; /* 41.9px */
+  --space-page: 4.236rem; /* 67.8px */
+  --measure: 34rem;
+
+  /* Controls: 41.9px on the section unit. Exception: compact controls at 32px, shadcn's small size. */
+  --control-height: 2.618rem;
+  --control-height-compact: 2rem;
+
+  /* Radii: planes on the line unit, boxed fields on the snug unit, pills fully round. */
+  --r-plane: var(--space-line);
+  --r-box: var(--space-snug);
+  --r-canvas: var(--space-line);
+
+  /* The paper mat around the canvas in poster mode. */
+  --mat: clamp(var(--space-tight), 1.6vw, var(--space-line));
+
+  /* Motion: one curve; controls answer quickly. */
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --duration-control: 140ms;
+  --duration-overlay: 180ms;
+}
+
+:root[data-line="1"] {
+  --line: 1px;
+}
+
+/* Poster off: no mat and no frame; the canvas runs to the window's edges. */
+:root[data-poster="off"] {
+  --mat: 0px;
+  --r-canvas: 0px;
+}

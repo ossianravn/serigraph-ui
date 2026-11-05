@@ -1,0 +1,91 @@
+---
+// Paper, ink and the spots, then the surfaces and marks every part is built from: planes in their tones, a field in
+// the tint of what it sits on, the focus ring, the pressed shade, stipple, louvers and the poster's small details.
+const spots = [
+  "sky",
+  "cornflower",
+  "seafoam",
+  "pistachio",
+  "marigold",
+  "coral",
+  "bubblegum",
+  "lilac",
+  "rose",
+]
+const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
+---
+
+<section class="section" id="surfaces" aria-labelledby="h-surfaces">
+  <h2 class="section-title" id="h-surfaces">Surfaces</h2>
+  <p class="section-lede">
+    Flat colour laid on colour, one fine line, a printed grain under the
+    content. Nothing is shadowed, extruded or translucent.
+  </p>
+
+  <div class="spots">
+    <span class="spot spot-paper caps">Paper</span>
+    <span class="spot spot-ink caps">Ink</span>
+    {
+      spots.map((spot) => (
+        <span class="spot caps" style={`background-color: var(--${spot})`}>
+          {title(spot)}
+        </span>
+      ))
+    }
+  </div>
+
+  <div class="surface-grid">
+    <div class="surface-group">
+      <p class="caps">Planes</p>
+      <div class="planes">
+        {
+          ["1", "2", "3", "4"].map((tone) => (
+            <div class="plane plane-sample" data-tone={tone}>
+              <span class="caps">Tone {tone}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="surface-group">
+      <p class="caps">Fields</p>
+      <label class="caps field-label" for="sample-canvas">On the canvas</label>
+      <input
+        class="field-fill sample-field"
+        id="sample-canvas"
+        value="ada@meridian.org"
+      />
+      <div class="plane field-on-plane">
+        <label class="caps field-label" for="sample-plane">On a plane</label>
+        <input class="field-fill sample-field" id="sample-plane" value="14" />
+      </div>
+    </div>
+
+    <div class="surface-group">
+      <p class="caps">Focus <span class="sep">•</span> pressed</p>
+      <div class="pills">
+        <span class="sample-pill caps" style="--fill: var(--action)">Book</span>
+        <span
+          class="sample-pill pressed-shade caps"
+          style="--fill: var(--action)">Pressed</span
+        >
+        <span class="sample-pill focus-ring caps" style="--fill: var(--plane-2)"
+          >Focus</span
+        >
+      </div>
+    </div>
+
+    <div class="surface-group">
+      <p class="caps">Stipple <span class="sep">•</span> louvers</p>
+      <div class="marks">
+        <span class="medallion" aria-hidden="true"></span>
+        <span class="louver-bar" aria-hidden="true"><span class="louvers"></span></span>
+      </div>
+      <p class="caps detail">
+        Meridian <span class="sep">•</span> The dome <span class="sep">•</span>
+        November 15<span class="ord">th</span>
+      </p>
+    </div>
+  </div>
+</section>

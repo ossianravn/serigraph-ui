@@ -1,0 +1,4 @@
+/* The voices until Serigraph's own fonts exist (Phase 1). Each package ships its SIL Open Font License. Archivo's
+   width axis (62–125%) gives both the reading face and the extended capitals; Martian Mono stands in for the mono. */
+@import "@fontsource-variable/archivo/standard.css";
+@import "@fontsource-variable/martian-mono/standard.css";

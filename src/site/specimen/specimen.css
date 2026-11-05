@@ -1,0 +1,278 @@
+/* The foundations specimen's own layout. Everything it shows is a kit utility or token. */
+
+.hero {
+  display: grid;
+  gap: var(--space-line);
+  padding: var(--space-section) var(--gutter) 0;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-hair) var(--space-line);
+  margin: 0;
+}
+.hero-body {
+  display: grid;
+  gap: var(--space-line);
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .hero-body {
+    grid-template-columns: minmax(0, var(--measure)) auto;
+    justify-content: space-between;
+  }
+}
+.hero-lede {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+}
+
+/* Colourways. */
+.cw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: var(--space-line);
+}
+.cw {
+  margin: 0;
+}
+.cw-sheet {
+  overflow: clip;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-plane);
+  background: var(--paper);
+  padding: var(--space-hair);
+}
+.cw-canvas {
+  display: grid;
+  gap: var(--space-tight);
+  padding: var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: calc(var(--r-plane) - var(--space-hair)) calc(var(--r-plane) - var(--space-hair)) 0 0;
+}
+.cw-name {
+  margin: 0;
+}
+.cw-roles,
+.cw-tones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-hair);
+}
+.cw-chip,
+.cw-pill {
+  padding: var(--space-hair) var(--space-tight);
+  border-radius: 999px;
+  font-size: var(--type-small);
+  line-height: var(--lh-ui);
+}
+.cw-pill {
+  border: var(--line) solid var(--ink);
+  color: var(--ink);
+}
+.cw-action {
+  background: var(--action);
+}
+.cw-highlight {
+  background: var(--highlight);
+}
+.cw-tone {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-family: var(--face-mono);
+  font-size: var(--type-small);
+}
+.cw-cloud {
+  margin: 0;
+  padding: var(--space-tight) var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-top: 0;
+  border-radius: 0 0 calc(var(--r-plane) - var(--space-hair)) calc(var(--r-plane) - var(--space-hair));
+}
+
+/* Surfaces. */
+.spots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-tight);
+  margin-bottom: var(--space-section);
+}
+.spot {
+  padding: var(--space-tight) var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+}
+.spot-paper {
+  background: var(--paper);
+}
+.spot-ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+.surface-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-section) var(--space-line);
+  align-items: start;
+}
+.surface-group {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-tight);
+}
+.surface-group > p {
+  margin: 0;
+}
+.planes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-tight);
+  width: 100%;
+}
+.plane-sample {
+  padding: var(--space-line) var(--space-snug) var(--space-snug);
+}
+.field-label {
+  margin-top: var(--space-hair);
+}
+.sample-field {
+  height: var(--control-height);
+  width: min(100%, 16rem);
+  padding: 0 var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  font: inherit;
+}
+.field-on-plane {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-hair);
+  margin-top: var(--space-tight);
+  padding: var(--space-snug);
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-tight);
+}
+.sample-pill {
+  display: inline-grid;
+  place-items: center;
+  height: var(--control-height);
+  padding: 0 var(--space-line);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background-color: var(--fill);
+  color: var(--ink);
+}
+.marks {
+  display: flex;
+  align-items: center;
+  gap: var(--space-line);
+}
+.medallion {
+  position: relative;
+  isolation: isolate;
+  width: 4.236rem;
+  height: 4.236rem;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: var(--tone-1);
+  overflow: hidden;
+}
+.medallion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle, var(--ink) 0.6px, transparent 0.9px);
+  background-size: 3px 3px;
+  mask-image: radial-gradient(circle at 36% 32%, transparent 0 64%, #000 64.5%);
+}
+.louver-bar {
+  display: block;
+  width: 10rem;
+  height: 1rem;
+  overflow: hidden;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+}
+.louver-bar > span {
+  display: block;
+  width: 64%;
+  height: 100%;
+  border-right: var(--line) solid var(--ink);
+}
+.detail {
+  margin: var(--space-tight) 0 0;
+}
+
+/* Voices. */
+.voices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-line) var(--space-section);
+  align-items: start;
+}
+.voice-card {
+  padding: var(--space-snug) var(--space-line) var(--space-line);
+}
+.voice-card > p,
+.voice-stack p {
+  margin: 0 0 var(--space-tight);
+}
+.scale {
+  display: grid;
+  gap: var(--space-tight);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.scale-step {
+  display: grid;
+  gap: 2px;
+}
+.scale-sample {
+  font-family: var(--face-read);
+}
+.voice-stack {
+  display: grid;
+  gap: var(--space-line);
+}
+.caps-sample {
+  font-size: var(--type-body);
+}
+.reading {
+  max-width: var(--measure);
+}
+.mono-sample {
+  font-family: var(--face-mono);
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+}
+.units {
+  display: grid;
+  gap: var(--space-hair);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.units li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+}
+.unit-bar {
+  height: var(--space-tight);
+  background: var(--action);
+  border: var(--line) solid var(--ink);
+  border-radius: 2px;
+}

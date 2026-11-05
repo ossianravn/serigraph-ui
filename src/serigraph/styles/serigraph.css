@@ -1,0 +1,109 @@
+/* Serigraph: the Tailwind entry. Import this file once; it brings Tailwind, the faces, the tokens, the colourways,
+   the grain and the surfaces. */
+@import "tailwindcss";
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./colourways.css";
+@import "./textures.generated.css";
+@import "./roles.css";
+@import "./base.css";
+@import "./surfaces.css";
+
+/* Night is a colourway; it also answers shadcn's dark variant, so parts that read it work. */
+@custom-variant night (&:where([data-colourway="night"], [data-colourway="night"] *));
+@custom-variant dark (&:where([data-colourway="night"], [data-colourway="night"] *));
+
+@theme inline {
+  --default-font-family: var(--face-read);
+  --font-read: var(--face-read);
+  --font-sans: var(--face-sans);
+  --font-mono: var(--face-mono);
+
+  --text-small: var(--type-small);
+  --text-body: var(--type-body);
+  --text-lead: var(--type-lead);
+  --text-h2: var(--type-h2);
+  --text-h1: var(--type-h1);
+  --text-title: var(--type-title);
+  --text-display: var(--type-display);
+
+  --leading-small: var(--lh-small);
+  --leading-body: var(--lh-body);
+  --leading-lead: var(--lh-lead);
+  --leading-h2: var(--lh-h2);
+  --leading-h1: var(--lh-h1);
+  --leading-title: var(--lh-title);
+  --leading-display: var(--lh-display);
+  --leading-ui: var(--lh-ui);
+
+  --spacing-hair: var(--space-hair);
+  --spacing-tight: var(--space-tight);
+  --spacing-snug: var(--space-snug);
+  --spacing-line: var(--space-line);
+  --spacing-section: var(--space-section);
+  --spacing-page: var(--space-page);
+  --spacing-control: var(--control-height);
+  --spacing-control-compact: var(--control-height-compact);
+  --container-measure: var(--measure);
+
+  --radius-plane: var(--r-plane);
+  --radius-box: var(--r-box);
+
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-quiet: var(--ink-quiet);
+  --color-sky: var(--sky);
+  --color-cornflower: var(--cornflower);
+  --color-seafoam: var(--seafoam);
+  --color-pistachio: var(--pistachio);
+  --color-marigold: var(--marigold);
+  --color-coral: var(--coral);
+  --color-bubblegum: var(--bubblegum);
+  --color-lilac: var(--lilac);
+  --color-rose: var(--rose);
+  --color-prussian: var(--prussian);
+
+  --color-canvas: var(--canvas);
+  --color-on-canvas: var(--on-canvas);
+  --color-plane: var(--plane);
+  --color-plane-2: var(--plane-2);
+  --color-action: var(--action);
+  --color-highlight: var(--highlight);
+  --color-cloud: var(--cloud);
+  --color-tone-1: var(--tone-1);
+  --color-tone-2: var(--tone-2);
+  --color-tone-3: var(--tone-3);
+  --color-tone-4: var(--tone-4);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type RefObject } from "react"
 import { Button } from "@/serigraph/ui/button"
 import {
   Dialog,
@@ -27,12 +27,15 @@ export function BookDialog({
   open,
   onClose,
   onBook,
+  finalFocus,
 }: {
   /** The last session chosen; it stays while the dialog closes, so the content leaves with it. */
   session: Session | undefined
   open: boolean
   onClose: () => void
   onBook: (id: string, seats: number) => void
+  /** Where focus lands when the dialog closes; by default the control that opened it. */
+  finalFocus?: RefObject<HTMLElement | null>
 }) {
   const [name, setName] = useState(VISITOR.name)
   const [seats, setSeats] = useState("2")
@@ -46,7 +49,7 @@ export function BookDialog({
   return (
     <Dialog open={open} onOpenChange={(next) => !next && onClose()}>
       {session && (
-        <DialogContent>
+        <DialogContent finalFocus={finalFocus}>
           <DialogHeader>
             <DialogTitle>{session.title}</DialogTitle>
             <DialogDescription>

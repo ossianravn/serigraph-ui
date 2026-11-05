@@ -3,13 +3,15 @@
 // flecks, a fine tooth and a slow mottle, at tile sizes that share no factors. base.css stacks them as --grain.
 // The layers are drawn as SVG (layers.mjs) and rasterised here to WebP: a browser then only tiles decoded bitmaps,
 // where SVG tiles with noise filters were re-rasterised at the screen's density on every repaint of every surface.
-// The mottle is low in frequency, so it is stored at a quarter size and drawn at full. The tiles are also written to
+// The mottle is low in frequency, so it is stored at a quarter size and drawn at full; it is drawn as pixels, since
+// sharp's SVG renderer ignores stitchTiles and the tile showed its seam. The tiles are also written to
 // public/grain for the site, which loads them as files.
 //
 //   npm run build:textures
 import { mkdirSync, writeFileSync } from "node:fs"
 import sharp from "sharp"
-import { flecks, relief, tinted } from "./layers.mjs"
+import { flecks, relief } from "./layers.mjs"
+import { mottle } from "./mottle.mjs"
 
 const INK = "#262420"
 const PAPER = "#eae3c8"
@@ -27,8 +29,11 @@ const layers = {
   ]),
   // The tooth of heavy poster stock, embossed light and dark.
   tooth: relief(176, 0.6, 3, 0.1, [0.15, 0.14, 0.12]),
-  // A slow, faint unevenness in how the ink lay down.
-  mottle: tinted(1201, 0.004, 4, 41, [0.15, 0.14, 0.12], 0.14, -0.05),
+}
+// A slow, faint unevenness in how the ink lay down: periodic noise drawn as pixels (mottle.mjs), five cells across,
+// stored at 300 px and drawn at 1201.
+const pixels = {
+  mottle: mottle(300, 5, 4, 41, [0.15, 0.14, 0.12], 0.0228, 0.0147),
 }
 
 const svgOf = (url) =>
@@ -46,11 +51,24 @@ const ENCODE = {
 }
 const STORED = { specks: 541, flecks: 613, tooth: 176, mottle: 300 }
 const tiles = {}
-for (const [name, url] of Object.entries(layers)) {
-  const webp = await sharp(svgOf(url))
-    .resize(STORED[name], STORED[name])
-    .webp({ ...ENCODE[name], effort: 6 })
-    .toBuffer()
+const sources = {
+  ...Object.fromEntries(
+    Object.entries(layers).map(([name, url]) => [
+      name,
+      sharp(svgOf(url)).resize(STORED[name], STORED[name]),
+    ]),
+  ),
+  ...Object.fromEntries(
+    Object.entries(pixels).map(([name, raw]) => [
+      name,
+      sharp(raw, {
+        raw: { width: STORED[name], height: STORED[name], channels: 4 },
+      }),
+    ]),
+  ),
+}
+for (const [name, source] of Object.entries(sources)) {
+  const webp = await source.webp({ ...ENCODE[name], effort: 6 }).toBuffer()
   tiles[name] = `url("data:image/webp;base64,${webp.toString("base64")}")`
   // The same tile as a file, for the site (src/site/files.css): cached, and never in the render-blocking CSS.
   const grain = new URL("../../public/grain/", import.meta.url)
@@ -72,5 +90,5 @@ const file = new URL(
 )
 writeFileSync(file, css)
 console.log(
-  `wrote ${file.pathname}: ${Object.keys(layers).length} grain layers, ${(css.length / 1024).toFixed(0)} KB`,
+  `wrote ${file.pathname}: ${Object.keys(sources).length} grain layers, ${(css.length / 1024).toFixed(0)} KB`,
 )

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Folly } from "@/serigraph/extras/folly"
 import { Button } from "@/serigraph/ui/button"
 import { ToggleGroup, ToggleGroupItem } from "@/serigraph/ui/toggle-group"
@@ -29,6 +29,9 @@ export function Tonight({
   const [kind, setKind] = useState<Kind | "all">("all")
   const [bookId, setBookId] = useState<string>()
   const [booking, setBooking] = useState(false)
+  // After a booking the Book button is gone (the row shows the seats held), so focus moves to the new ticket's heading.
+  const [booked, setBooked] = useState(false)
+  const seatsHeading = useRef<HTMLHeadingElement>(null)
 
   const ordered = inTimeOrder(sessions)
   const shown = ordered.filter((s) => kind === "all" || s.kind === kind)
@@ -38,6 +41,7 @@ export function Tonight({
     .map((session) => ({ session, seats: seats[session.id] ?? 0 }))
   const book = (id: string) => {
     setBookId(id)
+    setBooked(false)
     setBooking(true)
   }
   const release = (id: string) =>
@@ -49,10 +53,14 @@ export function Tonight({
     <div className="mer-main">
       <section aria-labelledby="your-seats">
         <div className="mer-section-head">
-          <h2 id="your-seats">Your seats</h2>
+          <h2 id="your-seats" ref={seatsHeading} tabIndex={-1}>
+            Your seats
+          </h2>
         </div>
         <YourSeats
           held={held}
+          member={visitor.member}
+          heading={seatsHeading}
           bookable={sessions.some((s) => seatsLeft(s) > 0)}
           onAdd={book}
           onRelease={release}
@@ -113,8 +121,10 @@ export function Tonight({
         session={sessions.find((s) => s.id === bookId)}
         open={booking}
         onClose={() => setBooking(false)}
+        finalFocus={booked ? seatsHeading : undefined}
         onBook={(id, count) => {
           setSeats((now) => ({ ...now, [id]: (now[id] ?? 0) + count }))
+          setBooked(true)
           setBooking(false)
         }}
       />

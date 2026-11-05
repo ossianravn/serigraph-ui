@@ -1,5 +1,5 @@
 ---
-// Home: the kit at its best, then where to go. The hero is the kit's hero-01 block (the one island on the page); the
+// Home: the kit at its best, then where to go. The hero is the kit's hero-01 block (the one island, hydrated when idle); the
 // sections below render at build time.
 import Base from "@/site/layouts/base.astro"
 import { Hero01 } from "@/serigraph/blocks/hero-01"
@@ -15,7 +15,7 @@ import "@/site/home/home.css"
   title="Serigraph"
   description="A shadcn/ui kit printed like a silkscreen gig poster: flat spot colours on spot colours, one fine ink line, seeded drawings of follies in the clouds, and fonts of its own."
 >
-  <Hero01 client:load />
+  <Hero01 client:idle />
   <!-- The city's clouds run on into a section of their colour; the next opens under the arcade wall. -->
   <div class="ground home-ground">
     <InUse />

@@ -82,7 +82,12 @@
 }
 
 :root {
-  --gutter: clamp(var(--space-snug), 3vw, var(--space-section));
+  /* The page's one column: content keeps an 80rem measure, so the header, the hero and every section share their
+     left and right edges, while section colours still run the full width. */
+  --gutter: max(
+    clamp(var(--space-snug), 3vw, var(--space-section)),
+    calc((100vw - 80rem) / 2)
+  );
 }
 
 /* Sections: a heading in extended capitals, then content. */

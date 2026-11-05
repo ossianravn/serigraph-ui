@@ -1,8 +1,9 @@
 ---
 import { Lettering } from "@/serigraph/extras/lettering"
 import { Folly } from "@/serigraph/extras/folly"
-// Paper, ink and the spots, then the surfaces and marks every part is built from: planes in their tones, a field in
-// the tint of what it sits on, the focus ring, the pressed shade, stipple, louvers and the poster's small details.
+// Paper, ink and the spots, then the surfaces and marks every part is built from, as a specimen sheet: one row per
+// material, its name on the left and its samples centred on one line beside it. Planes in their tones, a field in the
+// tint of what it sits on, the pressed shade and the focus ring, stipple, louvers and the poster's small details.
 const spots = [
   "sky",
   "cornflower",
@@ -25,22 +26,25 @@ const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
     content. Nothing is shadowed, extruded or translucent.
   </p>
 
-  <div class="spots">
-    <span class="spot spot-paper caps">Paper</span>
-    <span class="spot spot-ink caps">Ink</span>
-    {
-      spots.map((spot) => (
-        <span class="spot caps" style={`background-color: var(--${spot})`}>
-          {title(spot)}
-        </span>
-      ))
-    }
-  </div>
+  <dl class="sheet">
+    <div class="sheet-row">
+      <dt class="caps">Paper <span class="sep">•</span> ink <span class="sep">•</span> spots</dt>
+      <dd class="spots">
+        <span class="spot spot-paper caps">Paper</span>
+        <span class="spot spot-ink caps">Ink</span>
+        {
+          spots.map((spot) => (
+            <span class="spot caps" style={`background-color: var(--${spot})`}>
+              {title(spot)}
+            </span>
+          ))
+        }
+      </dd>
+    </div>
 
-  <div class="surface-grid">
-    <div class="surface-group">
-      <p class="caps">Planes</p>
-      <div class="planes">
+    <div class="sheet-row">
+      <dt class="caps">Planes</dt>
+      <dd class="sheet-samples">
         {
           ["1", "2", "3", "4"].map((tone) => (
             <div class="plane plane-sample" data-tone={tone}>
@@ -48,47 +52,50 @@ const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
             </div>
           ))
         }
-      </div>
+      </dd>
     </div>
 
-    <div class="surface-group">
-      <p class="caps">Fields</p>
-      <label class="caps field-label" for="sample-canvas">On the canvas</label>
-      <input
-        class="field-fill sample-field"
-        id="sample-canvas"
-        value="ada@meridian.org"
-      />
-      <div class="plane field-on-plane">
-        <label class="caps field-label" for="sample-plane">On a plane</label>
-        <input class="field-fill sample-field" id="sample-plane" value="14" />
-      </div>
+    <div class="sheet-row">
+      <dt class="caps">Fields <span class="sep">•</span> tinted from beneath</dt>
+      <dd class="sheet-samples">
+        <input
+          class="field-fill sample-field"
+          aria-label="On the canvas"
+          value="ada@meridian.org"
+        />
+        <div class="plane field-on-plane" data-tone="1">
+          <input
+            class="field-fill sample-field"
+            aria-label="On a plane"
+            value="ada@meridian.org"
+          />
+        </div>
+      </dd>
     </div>
 
-    <div class="surface-group">
-      <p class="caps">Focus <span class="sep">•</span> pressed</p>
-      <div class="pills">
+    <div class="sheet-row">
+      <dt class="caps">Pressed <span class="sep">•</span> focus</dt>
+      <dd class="sheet-samples">
         <span class="sample-pill caps" style="--fill: var(--action)">Book</span>
-        <span
-          class="sample-pill pressed-shade caps"
-          style="--fill: var(--action)">Pressed</span
+        <span class="sample-pill pressed-shade caps" style="--fill: var(--action)"
+          >Pressed</span
         >
         <span class="sample-pill focus-ring caps" style="--fill: var(--plane-2)"
           >Focus</span
         >
-      </div>
+      </dd>
     </div>
 
-    <div class="surface-group">
-      <p class="caps">Stipple <span class="sep">•</span> louvers</p>
-      <div class="marks">
+    <div class="sheet-row">
+      <dt class="caps">Stipple <span class="sep">•</span> louvers</dt>
+      <dd class="sheet-samples">
         <span class="medallion" aria-hidden="true"></span>
         <span class="louver-bar" aria-hidden="true"><span class="louvers"></span></span>
-      </div>
-      <p class="caps detail">
-        Meridian <span class="sep">•</span> The dome <span class="sep">•</span>
-        November 15<span class="ord">th</span>
-      </p>
+        <span class="caps">
+          Meridian <span class="sep">•</span> The dome <span class="sep">•</span>
+          November 15<span class="ord">th</span>
+        </span>
+      </dd>
     </div>
-  </div>
+  </dl>
 </section>

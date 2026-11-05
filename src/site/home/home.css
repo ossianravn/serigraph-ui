@@ -1,7 +1,6 @@
 /* The home page below the hero: few large groups, each a lettered head with one sentence and a way on. */
 .home-section {
-  max-width: 72rem;
-  margin-inline: auto;
+  max-width: none;
 }
 .home-ground {
   padding-bottom: var(--space-page);

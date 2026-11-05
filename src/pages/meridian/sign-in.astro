@@ -1,11 +1,12 @@
 ---
-// Meridian's sign-in is the kit's sign-in-01 block, as a consumer would install it.
+// Meridian's sign-in is the kit's sign-in-01 block, as a consumer would install it; under the header it drops the
+// block's own full-window height, so the band and the footer stay in view.
 import Meridian from "@/site/layouts/meridian.astro"
 import { SignIn01 } from "@/serigraph/blocks/sign-in-01"
 ---
 
 <Meridian title="Sign in">
   <div class="mer-page">
-    <SignIn01 redirectTo="/meridian" client:idle />
+    <SignIn01 redirectTo="/meridian" className="min-h-0" client:idle />
   </div>
 </Meridian>

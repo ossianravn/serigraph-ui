@@ -1,0 +1,208 @@
+/* The specimen sheet: one row per material, its name in the capitals on the left and its samples beside it, centred
+   on one line (top-aligned where a sample runs to several lines). Rows are divided by the one ink line. */
+.sheet {
+  margin: 0;
+  border-bottom: var(--line) solid var(--edge);
+}
+.sheet-row {
+  display: grid;
+  gap: var(--space-tight) var(--space-line);
+  padding-block: var(--space-line);
+  border-top: var(--line) solid var(--edge);
+}
+@media (min-width: 48rem) {
+  .sheet-row {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    align-items: center;
+  }
+  .sheet-row-top {
+    align-items: start;
+  }
+}
+.sheet-row > dt sup {
+  font-size: 0.7em;
+  line-height: 0;
+  vertical-align: 0.62em;
+}
+.sheet-row > dd {
+  margin: 0;
+  min-width: 0;
+}
+.sheet-link {
+  display: block;
+  margin-top: var(--space-hair);
+  font-family: var(--face-read);
+  font-weight: 400;
+  font-size: var(--type-small);
+  letter-spacing: 0;
+}
+.sheet-samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-snug) var(--space-line);
+}
+
+/* Surfaces. */
+.spots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-tight);
+}
+.spot {
+  padding: var(--space-tight) var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+}
+.spot-paper {
+  background: var(--paper);
+}
+.spot-ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+.plane-sample {
+  display: grid;
+  align-items: end;
+  width: 9rem;
+  height: 4.236rem;
+  padding: var(--space-tight) var(--space-snug);
+}
+.sample-field {
+  height: var(--control-height);
+  width: 14rem;
+  max-width: 100%;
+  padding: 0 var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  font: inherit;
+}
+.field-on-plane {
+  padding: var(--space-snug);
+}
+.sample-pill {
+  display: inline-grid;
+  place-items: center;
+  height: var(--control-height);
+  padding: 0 var(--space-line);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background-color: var(--fill);
+  color: var(--ink);
+}
+.medallion {
+  position: relative;
+  isolation: isolate;
+  width: 4.236rem;
+  height: 4.236rem;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: var(--tone-1);
+  overflow: hidden;
+}
+.medallion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle, var(--ink) 0.6px, transparent 0.9px);
+  background-size: 3px 3px;
+  mask-image: radial-gradient(circle at 36% 32%, transparent 0 64%, #000 64.5%);
+}
+.louver-bar {
+  display: block;
+  width: 10rem;
+  height: 1rem;
+  overflow: hidden;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+}
+.louver-bar > span {
+  display: block;
+  width: 64%;
+  height: 100%;
+  border-right: var(--line) solid var(--ink);
+}
+
+/* Voices. */
+.voice-display {
+  display: grid;
+  gap: var(--space-snug);
+}
+.voice-display-word {
+  font-size: clamp(4rem, 13vw, 10rem);
+  line-height: 0.9;
+}
+.voice-display-set {
+  max-width: 44rem;
+  font-size: clamp(1.75rem, 3.4vw, 2.618rem);
+  line-height: 1.25;
+}
+.voice-caps {
+  display: grid;
+  gap: var(--space-tight);
+}
+.voice-caps p {
+  margin: 0;
+}
+.voice-caps-line {
+  font-size: clamp(var(--type-lead), 3vw, var(--type-h1));
+}
+.voice-reading {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+}
+.voice-mono {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-hair);
+  font-family: var(--face-mono);
+  font-size: var(--type-lead);
+  line-height: var(--lh-ui);
+  overflow-wrap: anywhere;
+}
+.voice-mono code {
+  font: inherit;
+}
+.scale,
+.units {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.scale-step {
+  display: grid;
+  grid-template-columns: 3.75rem 2.75rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-snug);
+  padding-block: var(--space-hair);
+}
+.scale-px {
+  font-family: var(--face-mono);
+  font-size: var(--type-small);
+  font-variant-numeric: tabular-nums;
+}
+.scale-sample {
+  font-family: var(--face-read);
+  overflow-wrap: anywhere;
+}
+.units {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-snug) var(--space-line);
+}
+.units li {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-hair);
+}
+.unit-step {
+  background: var(--action);
+  border: var(--line) solid var(--ink);
+  border-radius: 2px;
+}

@@ -1,7 +1,7 @@
 ---
 import { Lettering } from "@/serigraph/extras/lettering"
-// The voices and the Golden Ratio scale: every type step, the extended capitals, the reading measure, the mono and
-// the six spacing units.
+// The voices as a specimen sheet, one row per face at a size where it can be seen, then the Golden Ratio scale (every
+// step on one shared column of names) and the six spacing units, drawn as a stair.
 const steps = [
   ["title", "41.9"],
   ["h1", "32.9"],
@@ -22,71 +22,99 @@ const units = [
 
 <section class="section" id="voices" aria-labelledby="h-voices">
   <Lettering as="h2" className="section-title" id="h-voices">Voices</Lettering>
-  <div class="voices">
-    <div class="plane voice-card" data-tone="plane-2">
-      <p class="caps">Type scale <span class="sep">•</span> 16 × φ^(n/2)</p>
-      <ol class="scale">
-        {
-          steps.map(([name, px]) => (
-            <li class="scale-step">
-              <span class="caps scale-name">
-                {name} <span class="sep">•</span> {px}
-              </span>
-              <span
-                class="scale-sample"
-                style={`font-size: var(--type-${name}); line-height: var(--lh-${name})`}
-              >
-                The terrace at dusk
-              </span>
-            </li>
-          ))
-        }
-      </ol>
+  <p class="section-lede">
+    Three faces of our own and Archivo for reading. Titles are lettered, labels
+    are extended capitals, and everything is set on one Golden Ratio scale.
+  </p>
+
+  <dl class="sheet">
+    <div class="sheet-row sheet-row-top">
+      <dt class="caps">
+        Display <span class="sep">•</span> Serigraph Display
+        <a class="sheet-link" href="/letters">All the letters</a>
+      </dt>
+      <dd class="voice-display">
+        <Lettering className="voice-display-word">Terrace</Lettering>
+        <Lettering className="voice-display-set">ABCDEFGHIJKLM NOPQRSTUVWXYZ 0123456789</Lettering>
+      </dd>
     </div>
 
-    <div class="voice-stack">
-      <div>
-        <p class="caps">Extended capitals <span class="sep">•</span> Serigraph Sans</p>
-        <p class="caps caps-sample">
-          Afternoon <span class="sep">•</span> Terrace <span class="sep">•</span>
-          Colour
+    <div class="sheet-row sheet-row-top">
+      <dt class="caps">Labels <span class="sep">•</span> Serigraph Sans</dt>
+      <dd class="voice-caps">
+        <p class="caps voice-caps-line">
+          Afternoon <span class="sep">•</span> Terrace <span class="sep">•</span> 21:30
         </p>
-      </div>
-      <div>
-        <p class="caps">Reading <span class="sep">•</span> Archivo, 34rem</p>
-        <p class="reading">
+        <p class="caps">
+          Members' night <span class="sep">•</span> The east dome <span class="sep"
+            >•</span
+          > November 15<span class="ord">th</span>
+        </p>
+      </dd>
+    </div>
+
+    <div class="sheet-row sheet-row-top">
+      <dt class="caps">Reading <span class="sep">•</span> Archivo, 34rem</dt>
+      <dd>
+        <p class="voice-reading">
           The dome opens at nine. Bring a coat: the terrace is cold after dark,
           and the telescope session runs until the last visitor has seen
           Saturn's rings. Tickets bought tonight can be moved to any other clear
           night this month, and members keep two seats on the balcony for every
           show.
         </p>
-      </div>
-      <div>
-        <p class="caps">Mono <span class="sep">•</span> Serigraph Mono</p>
-        <p class="mono-sample">
-          npx shadcn add @serigraph/button<br />18:00 · 19:30 · 21:00 · 22:30
-        </p>
-      </div>
-      <div>
-        <p class="caps">Space <span class="sep">•</span> 25.9 × φ^n</p>
-        <ul class="units">
+      </dd>
+    </div>
+
+    <div class="sheet-row">
+      <dt class="caps">Code <span class="sep">•</span> Serigraph Mono</dt>
+      <dd class="voice-mono">
+        <code>npx shadcn add @serigraph/button</code>
+        <code>18:00 · 19:30 · 21:00 · 22:30</code>
+      </dd>
+    </div>
+
+    <div class="sheet-row sheet-row-top">
+      <dt class="caps">Scale <span class="sep">•</span> 16 × φ<sup>n/2</sup></dt>
+      <dd>
+        <ol class="scale">
           {
-            units.map(([name, px]) => (
-              <li>
+            steps.map(([name, px]) => (
+              <li class="scale-step">
+                <span class="caps scale-name">{name}</span>
+                <span class="scale-px">{px}</span>
                 <span
-                  class="unit-bar"
-                  style={`width: var(--space-${name})`}
-                  aria-hidden="true"
-                />
-                <span class="caps">
-                  {name} <span class="sep">•</span> {px}
+                  class="scale-sample"
+                  style={`font-size: var(--type-${name}); line-height: var(--lh-ui)`}
+                >
+                  The terrace at dusk
                 </span>
               </li>
             ))
           }
-        </ul>
-      </div>
+        </ol>
+      </dd>
     </div>
-  </div>
+
+    <div class="sheet-row sheet-row-top">
+      <dt class="caps">Space <span class="sep">•</span> 25.9 × φ<sup>n</sup></dt>
+      <dd>
+        <ol class="units">
+          {
+            units.map(([name, px]) => (
+              <li>
+                <span
+                  class="unit-step"
+                  style={`width: var(--space-${name}); height: var(--space-${name})`}
+                  aria-hidden="true"
+                />
+                <span class="caps">{name}</span>
+                <span class="scale-px">{px}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </dd>
+    </div>
+  </dl>
 </section>

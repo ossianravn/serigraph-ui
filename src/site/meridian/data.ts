@@ -22,7 +22,7 @@ export interface SkyObject {
   name: string
   /** Where and when to look, in one short line. */
   where: string
-  /** The window it is best seen in, 24-hour. */
+  /** When to look, 24-hour: a window ("19:00–23:30") or a start ("from 21:40"). */
   best: string
   kind: "planet" | "moon" | "galaxy" | "cluster"
 }
@@ -130,17 +130,27 @@ export const SKY: SkyObject[] = [
   {
     name: "Jupiter",
     where: "Rises in the east",
-    best: "21:40–",
+    best: "from 21:40",
     kind: "planet",
   },
   {
     name: "Andromeda",
     where: "Almost overhead",
-    best: "20:00–",
+    best: "from 20:00",
     kind: "galaxy",
   },
-  { name: "Pleiades", where: "East, 35° up", best: "21:00–", kind: "cluster" },
-  { name: "Moon", where: "Rises in the east", best: "22:14–", kind: "moon" },
+  {
+    name: "Pleiades",
+    where: "East, 35° up",
+    best: "from 21:00",
+    kind: "cluster",
+  },
+  {
+    name: "Moon",
+    where: "Rises in the east",
+    best: "from 22:14",
+    kind: "moon",
+  },
 ]
 
 export const VISITOR: Visitor = {

@@ -1,0 +1,46 @@
+---
+// The drawing library: every object in the Follies library by collection, drawn large on the canvas with its name.
+// A new object appears here by itself.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import { Drawing } from "@/serigraph/extras/drawing"
+import { COLLECTIONS, OBJECTS } from "@/serigraph/follies"
+import "@/site/drawings/drawings.css"
+
+const count = Object.keys(OBJECTS).length
+---
+
+<Base
+  title="Drawings"
+  description="The Follies library: seeded objects of surreal architecture, the sky, instruments and gardens, drawn flat in spot colours inside one fine ink line."
+>
+  <div class="drawings">
+    <header class="drawings-head">
+      <Lettering as="h1" className="drawings-title">Drawings</Lettering>
+      <p class="drawings-lede">
+        {count} objects, each a seeded drawing that reprints in every colourway.
+        Scenes and pages are composed from them.
+      </p>
+    </header>
+    {
+      COLLECTIONS.map((c) => (
+        <section class="drawings-collection" aria-labelledby={`c-${c.name}`}>
+          <h2 id={`c-${c.name}`} class="caps drawings-kicker">
+            {c.title} <span class="sep">•</span> {c.things.length}
+          </h2>
+          <ul class="drawings-grid">
+            {c.things.map((t) => (
+              <li class="drawings-item">
+                <Drawing object={t.name} seed={t.name} className="drawings-art" />
+                <p class="drawings-name">
+                  <span class="caps">{t.name}</span>
+                  <span>{t.title}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Base>

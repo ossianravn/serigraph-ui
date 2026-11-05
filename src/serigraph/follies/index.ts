@@ -5,10 +5,13 @@ import { MOTIFS, type Motif } from "./marks"
 import type { Scene } from "./scene"
 import { defs, pitchOf, seedNumber, TEMPLATES, type Template } from "./scenes"
 import { el, pen } from "./svg"
+import { thing, type Fills } from "./objects"
+import { streams } from "./objects/library"
 
 export { TEMPLATES, type Template } from "./scenes"
 export { MOTIFS, type Motif } from "./marks"
 export { seedOf, prng, fork, stream } from "./seed"
+export { OBJECTS, COLLECTIONS, put, thing, type Thing } from "./objects"
 
 interface Drawn {
   /** Any string or number; the same seed always draws the same folly. */
@@ -71,3 +74,23 @@ export const folly = ({ template = "city", ...options }: FollyOptions = {}) =>
 /** A motif on its own as an SVG string, sized by its container; it keeps its proportions inside the box. */
 export const motif = ({ kind = "sparkle", ...options }: MotifOptions = {}) =>
   draw(MOTIFS[kind], `motif-${kind}`, { "data-motif": kind }, 2.6, options)
+
+export interface DrawingOptions extends Drawn {
+  /** The object's name in the library: "spiral-stair", "telescope" … */
+  object: string
+  /** Role overrides by the object's part names. */
+  fills?: Fills
+}
+
+/** One object from the library as an SVG string, sized by its container; it keeps its proportions, standing on the
+ * box's foot. */
+export function drawing({ object, fills = {}, ...options }: DrawingOptions) {
+  const t = thing(object)
+  const scene: Scene = {
+    w: t.w,
+    h: t.h,
+    fit: "xMidYMax meet",
+    body: (p, seed) => t.draw(p, streams(seed, `${t.name}:`), fills),
+  }
+  return draw(scene, `object-${object}`, { "data-drawing": object }, 2.6, options)
+}

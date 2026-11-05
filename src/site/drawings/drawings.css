@@ -1,0 +1,49 @@
+/* The drawing library: collections of objects on the canvas, each above its name. */
+.drawings {
+  display: grid;
+  gap: var(--space-page);
+  padding: var(--space-section) var(--gutter) var(--space-page);
+}
+.drawings-head {
+  display: grid;
+  gap: var(--space-snug);
+}
+.drawings-title {
+  margin: 0;
+  font-size: var(--type-display);
+}
+.drawings-lede {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+}
+.drawings-kicker {
+  margin: 0 0 var(--space-line);
+  padding-bottom: var(--space-tight);
+  border-bottom: var(--line) solid var(--edge);
+}
+.drawings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-section) var(--space-line);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.drawings-item {
+  display: grid;
+  gap: var(--space-tight);
+}
+.drawings-art {
+  height: 16rem;
+}
+.drawings-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-hair) var(--space-tight);
+  margin: 0;
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+}

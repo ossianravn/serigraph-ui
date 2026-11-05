@@ -4,6 +4,7 @@
 import "@/serigraph/styles/serigraph.css"
 import "@/site/site.css"
 import { appearanceScript } from "@/serigraph/theme/appearance-script"
+import { Folly } from "@/serigraph/extras/folly"
 import { siteAppearance } from "@/site/appearance"
 
 interface Props {
@@ -17,6 +18,7 @@ const links = [
   ["Surfaces", "/#surfaces"],
   ["Voices", "/#voices"],
   ["Letters", "/letters"],
+  ["Press", "/press"],
 ]
 ---
 
@@ -55,6 +57,7 @@ const links = [
         <main id="main">
           <slot />
         </main>
+        <Folly template="band" seed={title} className="site-band" />
         <footer class="ground site-footer caps">
           Serigraph{" "}
           <span class="sep" aria-hidden="true">

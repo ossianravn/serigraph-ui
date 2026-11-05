@@ -23,7 +23,8 @@
     "format:check": "prettier --check .",
     "check:contrast": "node tools/check-contrast.mjs",
     "build:textures": "node tools/paper/build-textures.mjs",
-    "build:fonts": "node tools/fonts/build.mjs"
+    "build:fonts": "node tools/fonts/build.mjs",
+    "test:seeds": "node --test tests/follies.test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.2",

@@ -1,5 +1,6 @@
 ---
 import { Lettering } from "@/serigraph/extras/lettering"
+import { Folly } from "@/serigraph/extras/folly"
 // Paper, ink and the spots, then the surfaces and marks every part is built from: planes in their tones, a field in
 // the tint of what it sits on, the focus ring, the pressed shade, stipple, louvers and the poster's small details.
 const spots = [
@@ -16,7 +17,8 @@ const spots = [
 const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
 ---
 
-<section class="section" id="surfaces" aria-labelledby="h-surfaces">
+<section class="section section-after-ground" id="surfaces" aria-labelledby="h-surfaces">
+  <Folly template="arcade" className="arcade-edge" />
   <Lettering as="h2" className="section-title" id="h-surfaces">Surfaces</Lettering>
   <p class="section-lede">
     Flat colour laid on colour, one fine line, a printed grain under the

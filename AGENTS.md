@@ -7,7 +7,7 @@ Working instructions for coding agents in Serigraph. Follow explicit user direct
 Serigraph is a shadcn/ui component library, a website and three typefaces in the style of a late-1970s silkscreen gig poster drawn with a technical pen: flat luminous spot colours laid on one another, one fine ink line, weightless surreal architecture in cloud banks, and wide round lettering with a line inside each stem. It repeats [Fineliner](https://github.com/ossianravn/naive-indie-line)'s logic (local checkout `C:\CodexApp\naive-indie-line`) in this style.
 
 - **The kit** (`src/serigraph/`) is what consumers install through the shadcn registry. **The site** (everything else under `src/`) documents and exercises it. Kit code imports nothing from the site; ESLint enforces it.
-- **Follies**, the seeded drawings, will live in the kit's framework-free engine (`src/serigraph/follies/`, Phase 2). The static prototype in `specimen/` holds the agreed style, a lettering prototype and the first Follies; it stays as the reference.
+- **Follies**, the seeded drawings, live in the kit's framework-free engine (`src/serigraph/follies/`): `folly({ template, seed })` returns SVG, `<Folly>` renders it, `/press` rerolls it. A new template goes in `scenes.ts` from the parts in `buildings.ts`, `parts.ts`, `clouds.ts` and `motifs.ts`; look at it large in the Press in two colourways before reporting. The static prototype in `specimen/` stays as the style reference.
 - **Every variation is seeded.** Same seed, same output on the server, in the browser and in every build.
 - [The plan](docs/plan.md) is the source of truth for decisions, phases and progress. Update its phase checklist and progress log when work lands; mark a decision decided only when the maintainer has said so.
 - `.dev-docs/` is unpublished: the reference posters, the maintainer's first briefs and their crops live there because the triptych is someone else's artwork. Never commit it or copy it into published folders.
@@ -65,7 +65,7 @@ Verify with the least total effort; never create unit tests. The dev server runs
 
 1. Run `npm run typecheck` and `npm run lint` always; `npm run format:check` before committing; `npm run build` when routes, modules or dependencies change; `npm run check:contrast` when tokens, colourways or the grain change (after `npm run build:textures` if you edited the layers); `npm run build:fonts` when the skeleton alphabet (`src/serigraph/letters/`) or `tools/fonts` change, then look at `/letters` large in a browser.
 2. Look at the changed screen with realistic content at 1440 and 375 px, in Sky and Night at least, with poster mode on and off. The browser pane may be hidden, which stops it painting: screenshots time out and `requestAnimationFrame` never fires. Then measure layout in the pane (scroll width, element bounds) and take desktop screenshots with headless Chrome (`--headless=new --screenshot`), which cannot go below about 500 px wide; say what you could not see.
-3. Add a lasting test only for a boundary that will change again (from Phase 2: the registry install contract and the seed-to-drawing promise), in `tests/consumer/`.
+3. `npm run test:seeds` when the Follies engine changes; a drawing changed on purpose updates its snapshot with `UPDATE=1 npm run test:seeds`. Add a lasting test only for a boundary that will change again (next: the registry install contract, in `tests/consumer/`).
 4. Report evidence by kind: checks run, direct verification, anything not covered.
 
 ## Release notes and publishing

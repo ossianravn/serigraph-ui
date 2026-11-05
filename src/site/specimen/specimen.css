@@ -12,6 +12,10 @@
   gap: var(--space-hair) var(--space-line);
   margin: 0;
 }
+.hero-art {
+  height: clamp(300px, 44vw, 600px);
+  margin: 0 calc(-1 * var(--gutter));
+}
 .hero-body {
   display: grid;
   gap: var(--space-line);

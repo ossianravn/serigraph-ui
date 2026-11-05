@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Phase 2: Follies (in progress)
+
+- The Follies engine in the kit: seeded surreal architecture drawn as SVG from a seed, the same on the server and in the browser, recoloured by the colourway. Templates: city, window, medallion, band, arcade and doorway; `<Folly>` renders one.
+- The Press (`/press`): reroll any template in any colourway and take the SVG away.
+- The home page opens on a city whose clouds run into the next section; every page ends on a cloud band.
+- `npm run test:seeds` holds every template to its snapshot.
+
 ### Phase 1: the letters
 
 - Serigraph Display and Display Inline: wide, round, flat capitals from a heavy square pen, layered by `<Lettering>` into paper letters with an ink outline and a thin inline, as on the poster. Every Latin-script European language's capitals.

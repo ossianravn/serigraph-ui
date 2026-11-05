@@ -1,6 +1,6 @@
 # Plan
 
-Status: Phase 1 (the letters) done, 2026-11-05; Phase 2 (Follies and the motifs) next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
+Status: Phase 2 (Follies and the motifs) in progress, 2026-11-05: the engine, templates, `<Folly>` and the Press are done; the registry and its install test are next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
 
 ## What this is
 
@@ -144,6 +144,13 @@ The framework-free engine with labelled forks per part; templates (arcade, platf
 
 Exit: server and browser render identical SVG for the same seed; a folly reprints in every colourway; `base` and `folly` install into a scratch Vite app that builds.
 
+- [x] The Follies engine in the kit (`src/serigraph/follies/`): the specimen's drawings ported to typed, framework-free modules (svg, motifs, clouds, buildings, parts, scenes); a pen per drawing carries the line and a seed-derived id prefix, so ids are unique on a page and identical on every render
+- [x] Templates: city (the hero), window, medallion, band (a cloud bank with a building and a plant), arcade (the wall at a section's head) and doorway (the empty state); `folly()` returns an SVG string that fills its box, sliced from the bottom, so nothing measures
+- [x] `<Folly>` (kit extra) and the `folly`, `arch-frame` utilities; the home page's hero is a city, the Colourways section is a cloud-coloured ground the city's clouds run into, the next section opens with the arcade wall, and every page ends on a band
+- [x] The Press (`/press`): template, seed, colourway, reroll, copy and download the SVG with its colours written in; the formats below it
+- [x] Seed stability (`npm run test:seeds`, the plan's first lasting test): six templates × five seeds hashed against snapshots; the built pages contain exactly the engine's SVG
+- [ ] Registry build and the install test (`base` and `folly` into a scratch Vite app)
+
 ### Phase 3: core primitives and the observatory's first screens
 
 Button, badge, card, input, textarea, label, field, checkbox, radio group, switch, select, native select, tabs, toggle, toggle group, separator, skeleton, avatar, alert, progress, slider, kbd, tooltip, popover, dialog, alert dialog, dropdown menu, spinner; docs pages with state matrices; the observatory's tonight screen, sign-in and settings.
@@ -183,6 +190,7 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 - **2026-11-05, review round**: The maintainer agreed the direction, colourways, Night, fields, pressed, backdrop, reading face and the observatory (named Meridian), and asked for more interwoven drawings, better tabs and cloud outlines that are not cut off. Tabs are now archways (semicircular heads on jambs, an inner line, labels below the spring line). Bands are drawn at their measured size, one unit to a pixel, so no puff is cropped; each cloud band carries a building and a plant. Follies gained building parts (`specimen/buildings.js`: oblique boxes with arched windows, stairs with treads and risers, an observatory, a pinwheel arch, plants) and a `city` template for the hero and a finale; floating cloud strata are cut flat and outlined at their base. The pane was hidden for part of the check, so desktop was verified with headless Chrome screenshots and phone width by measuring overflow in the pane.
 - **2026-11-05, Phase 0**: The maintainer signed off the style. Ported Fineliner's scaffold and runtime into `src/serigraph/` (kit) and `src/site/` (site). A Golden Ratio audit of Archivo set the type and space tokens (16 px body at 1.618, a 34rem measure, steps of 12.6 to 41.9 px, units of 6.1 to 67.8 px). The grain is neutral, so one set of tiles serves every colourway. The grained contrast check failed sky, rose and the pressed shade, all three fixed at the token level (sky `#3aa1d2`, rose `#fb6a83`, pressed 92% and flat). The page at `/` is built from the kit; display lettering waits for Phase 1, so the title is Archivo at its widest with a paper fill and an ink outline. Checked in the browser pane at 1440 and 375 px.
 - **2026-11-05, Phase 1**: The maintainer confirmed MIT and standing permission to commit, push and continue. The skeleton alphabet moved into the kit, parametric in the pen, so one skeleton makes Display (heavy) and Sans (light, 18% wider); Mono fits it to a cell and adds a lowercase. polygon-clipping failed on the slivers flattened arcs make; Clipper's offsetter strokes and unions reliably. The curve fitter bulged thin capsules (it measures error only at points), fixed by resampling every 8 units before fitting. Display is layered with a text stroke under the fill rather than Fill/Line fonts or COLRv0, so the outline keeps the line's weight at every size. Display, Sans and Mono are 3–11 KB each as WOFF2 and build the same bytes every time; the site's titles and labels now use them.
+- **2026-11-05, Phase 2 (first half)**: The specimen's Follies became the kit's engine, typed and framework-free, and draw on the server: the city, window, medallion, band, arcade and doorway templates. Bands no longer measure: they are drawn wide (3200 units) at their real height and sliced from the bottom, so nothing crops. The home page now runs city → cloud ground → arcade wall like the specimen. A faint seam remains where an element's grain overlay meets the next section's grain (two tile origins). The Press rerolls and exports standalone SVG. Seed stability is the first lasting test.
 
 ## Open questions for the maintainer
 

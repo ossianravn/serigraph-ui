@@ -1,0 +1,30 @@
+/* Follies on the page: a drawing fills its box and carries the same printed grain as the surfaces around it, laid
+   over the art (never over text). Size the box with CSS; scenes slice from the bottom, marks are fitted whole. */
+@utility folly {
+  position: relative;
+  display: block;
+  & > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: var(--grain-size);
+    pointer-events: none;
+  }
+}
+
+/* An arch-topped frame for a window folly: round head, small bottom radii, a fine line. Set the width; the head
+   stays a half circle at an aspect ratio of 3:4. */
+@utility arch-frame {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: var(--line) solid var(--ink);
+  border-radius: 50% 50% var(--r-box) var(--r-box) / 37.5% 37.5% var(--r-box)
+    var(--r-box);
+  background: var(--canvas);
+}

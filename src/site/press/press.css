@@ -1,0 +1,150 @@
+/* The Press: a narrow column of controls beside the drawing. */
+
+.press-hero {
+  display: grid;
+  gap: var(--space-snug);
+  padding: var(--space-section) var(--gutter) 0;
+}
+.press-hero p {
+  margin: 0;
+}
+
+.press-title {
+  margin: 0;
+  font-size: clamp(3rem, 12vw, 9rem);
+}
+.press {
+  display: grid;
+  gap: var(--space-line);
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .press {
+    grid-template-columns: 22rem minmax(0, 1fr);
+  }
+}
+.press-controls {
+  display: grid;
+  padding: var(--space-snug) var(--space-line);
+}
+.press-templates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-hair);
+}
+.press-chip span {
+  display: inline-grid;
+  place-items: center;
+  min-height: 2rem;
+  padding: 0 var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--face-caps);
+  font-weight: 700;
+  font-size: var(--type-small);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.press-chip:has(:checked) span {
+  background: var(--highlight);
+}
+.press-chip:has(:focus-visible) span {
+  outline: var(--line) solid var(--ink);
+  outline-offset: 2px;
+}
+.press-seed {
+  display: flex;
+  gap: var(--space-tight);
+}
+.press-input {
+  width: 9rem;
+  height: var(--control-height-compact);
+  padding: 0 var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--face-mono);
+  font-size: var(--type-small);
+}
+.press-button {
+  height: var(--control-height-compact);
+  padding: 0 var(--space-snug);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: var(--action);
+  color: var(--ink);
+  font-family: var(--face-caps);
+  font-weight: 700;
+  font-size: var(--type-small);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.press-button:active {
+  background-color: color-mix(in oklab, var(--action) 92%, var(--ink));
+}
+.press-actions {
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+}
+.press-stage {
+  overflow: hidden;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-plane);
+  display: grid;
+  place-items: center;
+}
+.press-art {
+  width: 100%;
+  aspect-ratio: 1200 / 560;
+}
+.press-stage[data-template="window"] .press-art {
+  width: min(18rem, 80%);
+  aspect-ratio: 3 / 4;
+  margin: var(--space-line);
+  border: var(--line) solid var(--ink);
+  border-radius: 50% 50% var(--r-box) var(--r-box) / 37.5% 37.5% var(--r-box)
+    var(--r-box);
+  overflow: hidden;
+}
+.press-stage[data-template="medallion"] .press-art {
+  width: min(16rem, 70%);
+  aspect-ratio: 1;
+  margin: var(--space-line);
+}
+.press-stage[data-template="band"] .press-art {
+  aspect-ratio: auto;
+  height: 210px;
+  margin-top: var(--space-section);
+}
+.press-stage[data-template="arcade"] .press-art {
+  aspect-ratio: auto;
+  height: 104px;
+}
+.press-stage[data-template="doorway"] .press-art {
+  width: min(14rem, 60%);
+  aspect-ratio: 160 / 150;
+  margin: var(--space-line);
+}
+
+.formats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-section);
+}
+.formats figure {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-tight);
+  margin: 0;
+}
+.format-window {
+  width: 10rem;
+}
+.format-medallion {
+  width: 7rem;
+  aspect-ratio: 1;
+}
+.format-doorway {
+  width: 9rem;
+  aspect-ratio: 160 / 150;
+}

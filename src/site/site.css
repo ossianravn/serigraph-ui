@@ -50,8 +50,11 @@
 .site-nav a:hover {
   text-decoration: underline;
 }
-.site-footer {
+.site-band {
+  height: 210px;
   margin-top: var(--space-page);
+}
+.site-footer {
   padding: var(--space-line) var(--gutter);
   text-align: center;
 }
@@ -68,6 +71,18 @@
   margin: 0 0 var(--space-snug);
   font-size: var(--type-title);
 }
+/* A section on the cloud colour continues the cloud bank above it; the next one opens with the arcade wall. */
+.ground-section {
+  padding-bottom: var(--space-page);
+}
+.section-after-ground {
+  padding-top: 0;
+}
+.arcade-edge {
+  height: 104px;
+  margin: 0 calc(-1 * var(--gutter)) var(--space-section);
+}
+
 .section-lede {
   margin: 0 0 var(--space-line);
   max-width: var(--measure);

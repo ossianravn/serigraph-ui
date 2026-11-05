@@ -1,0 +1,57 @@
+---
+// The Press: Follies, rerolled. Every template, any seed, any colourway, and the SVG to take away.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import { Folly } from "@/serigraph/extras/folly"
+import { Press } from "@/site/press/press"
+import "@/site/press/press.css"
+---
+
+<Base
+  title="The Press"
+  description="Follies, Serigraph's seeded drawings of surreal architecture: every template, any seed, any colourway, and the SVG to take away."
+>
+  <div class="press-hero">
+    <Lettering as="h1" className="press-title">
+      The Press
+    </Lettering>
+    <p class="caps">
+      Follies <span class="sep">•</span> seeded architecture{" "}
+      <span class="sep">•</span> every colourway
+    </p>
+  </div>
+  <section class="section press-section" aria-label="The press">
+    <Press client:load />
+  </section>
+  <section class="section" aria-labelledby="h-formats">
+    <Lettering as="h2" className="section-title" id="h-formats">
+      Formats
+    </Lettering>
+    <div class="formats">
+      <figure>
+        <Folly
+          template="window"
+          seed="terrace"
+          className="arch-frame format-window"
+        />
+        <figcaption class="caps">Window</figcaption>
+      </figure>
+      <figure>
+        <Folly template="medallion" seed="ada" className="format-medallion" />
+        <figcaption class="caps">Medallion</figcaption>
+      </figure>
+      <figure>
+        <Folly
+          template="medallion"
+          seed="saturn"
+          className="format-medallion"
+        />
+        <figcaption class="caps">Medallion</figcaption>
+      </figure>
+      <figure>
+        <Folly template="doorway" seed="empty" className="format-doorway" />
+        <figcaption class="caps">Doorway</figcaption>
+      </figure>
+    </div>
+  </section>
+</Base>

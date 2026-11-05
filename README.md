@@ -4,7 +4,7 @@ A shadcn/ui component library, website and three typefaces in the style of a lat
 
 <img alt="An exploration of the style: the same phone ticket screen printed in sky blue, pistachio and coral colourways, each with an observatory dome on a round platform above cloud banks." src="docs/style/explorations/round-2/colourways.webp">
 
-**Status:** Phases 0 and 1 done: the kit's tokens, five colourways, the printed grain, surfaces and marks, the appearance runtime, and our own fonts, Serigraph Display, Sans and Mono (see `/letters`). Follies, the components and the site follow ([plan](docs/plan.md)). The image above is a generated exploration, for direction only.
+**Status:** Phases 0 and 1 done and Phase 2 under way: the kit's tokens, five colourways, the printed grain, surfaces and marks, the appearance runtime, our own fonts (Serigraph Display, Sans and Mono, see `/letters`), and Follies, the seeded drawings (see `/press`). The registry, the components and the site follow ([plan](docs/plan.md)). The image above is a generated exploration, for direction only.
 
 ## Run the site
 
@@ -18,7 +18,7 @@ npm ci
 npm run dev
 ```
 
-Open `http://127.0.0.1:4801`. Checks: `typecheck`, `lint`, `format:check`, `build`, and `check:contrast` (every text pair in every colourway, with the grain composited in). `npm run build:textures` regenerates the grain; `npm run build:fonts` rebuilds the fonts from the skeleton alphabet.
+Open `http://127.0.0.1:4801`. Checks: `typecheck`, `lint`, `format:check`, `build`, `test:seeds` (every Follies template against its snapshot) and `check:contrast` (every text pair in every colourway, with the grain composited in). `npm run build:textures` regenerates the grain; `npm run build:fonts` rebuilds the fonts from the skeleton alphabet.
 
 The static prototype the style was agreed on stays in `specimen/`, with the lettering prototype, Follies and the interface sampler:
 

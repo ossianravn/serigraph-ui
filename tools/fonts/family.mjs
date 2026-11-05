@@ -243,12 +243,12 @@ function stylistic(font, ids, alternates, tag) {
   }
 }
 
-/** An @font-face rule for a font file served from the site's /fonts. */
-export const fontFace = (family, file, weight = 400) => `@font-face {
+/** An @font-face rule with the WOFF2 embedded, so the stylesheet carries its font wherever the kit is installed. */
+export const fontFace = (family, woff2, weight = 400) => `@font-face {
   font-family: "${family}";
   font-style: normal;
   font-weight: ${weight};
   font-display: swap;
-  src: url("/fonts/${file}.woff2") format("woff2");
+  src: url(data:font/woff2;base64,${Buffer.from(woff2).toString("base64")}) format("woff2");
 }
 `

@@ -8,8 +8,8 @@ import { platform } from "./parts"
 import { el, rs } from "./svg"
 import type { Scene } from "./scene"
 
-export /** A window: a platform and dome above clouds under a pinwheel sun, for an arch-topped card image. */
-const windowScene: Scene = {
+/** A window: a platform and dome above clouds under a pinwheel sun, for an arch-topped card image. */
+export const windowScene: Scene = {
   w: 300,
   h: 320,
   fit: "xMidYMax slice",
@@ -65,8 +65,8 @@ const windowScene: Scene = {
   },
 }
 
-export /** A medallion: a pinwheel, or a small dome on clouds, in a round frame (avatars, featured figures). */
-const medallion: Scene = {
+/** A medallion: a pinwheel, or a small dome on clouds, in a round frame (avatars, featured figures). */
+export const medallion: Scene = {
   w: 120,
   h: 120,
   fit: "xMidYMid meet",
@@ -98,8 +98,8 @@ const medallion: Scene = {
   },
 }
 
-export /** The band between sections: a cloud bank with a building rising behind it and a plant in front. */
-const band: Scene = {
+/** The band between sections: a cloud bank with a building rising behind it and a plant in front. */
+export const band: Scene = {
   w: 3200,
   h: 210,
   fit: "xMidYMax slice",
@@ -200,16 +200,16 @@ const band: Scene = {
   },
 }
 
-export /** The arcade wall at the head of a section: arches open onto the section below. */
-const arcadeWall: Scene = {
+/** The arcade wall at the head of a section: arches open onto the section below. */
+export const arcadeWall: Scene = {
   w: 3200,
   h: 104,
   fit: "xMidYMin slice",
   body: (p) => arcadeBand(p, { width: 3200 }),
 }
 
-export /** The empty state: an archway with a solid ink doorway, a sparkle above it, on a small cloud. */
-const doorway: Scene = {
+/** The empty state: an archway with a solid ink doorway, a sparkle above it, on a small cloud. */
+export const doorway: Scene = {
   w: 160,
   h: 150,
   fit: "xMidYMax meet",

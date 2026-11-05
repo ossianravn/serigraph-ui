@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "serigraph",
+  "title": "Serigraph",
+  "description": "Every part of Serigraph: the base, the Follies engine and every component.",
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/follies",
+    "@serigraph/folly",
+    "@serigraph/lettering",
+    "@serigraph/letters",
+    "@serigraph/motif"
+  ],
+  "files": [],
+  "type": "registry:item"
+}

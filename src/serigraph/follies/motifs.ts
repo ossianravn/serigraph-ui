@@ -147,6 +147,17 @@ export function pinwheel(
   )
 }
 
+/** Loose marks in the sky take the surface's text colour: ink on bright canvases, paper on Night's, like stars. */
+const LOOSE = "var(--text, var(--ink))"
+
+/** A hollow ring, loose in the sky. */
+export const ring = (p: Pen, cx: number, cy: number, r: number) =>
+  line(p, circle(cx, cy, r), { style: `fill:none;stroke:${LOOSE}` })
+
+/** A pinpoint dot, loose in the sky. */
+export const pinpoint = (cx: number, cy: number, r: number) =>
+  tint(circle(cx, cy, r), LOOSE)
+
 /** A four-point concave sparkle, paper inside a fine ink line. */
 export function sparkle(p: Pen, x: number, y: number, s: number) {
   const k = s * 0.13
@@ -189,12 +200,8 @@ export function scatter(
       r.between(size[0], size[1]),
     )
   for (let i = 0; i < rings; i++)
-    out += shape(
-      p,
-      circle(r.between(x0, x1), r.between(y0, y1), r.between(2.5, 4.5)),
-      "none",
-    )
+    out += ring(p, r.between(x0, x1), r.between(y0, y1), r.between(2.5, 4.5))
   for (let i = 0; i < dots; i++)
-    out += tint(circle(r.between(x0, x1), r.between(y0, y1), 1.6), "ink")
+    out += pinpoint(r.between(x0, x1), r.between(y0, y1), 1.6)
   return out
 }

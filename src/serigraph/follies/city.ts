@@ -10,8 +10,8 @@ import type { Scene } from "./scene"
 const mirror = (w: number, flip: boolean, svg: string) =>
   flip ? el("g", { transform: `translate(${w} 0) scale(-1 1)` }, svg) : svg
 
-export /** The city: cloud strata, a sun, an arcade, a tower with an observatory, a pinwheel block, a stair, plants, clouds. */
-const city: Scene = {
+/** The city: cloud strata, a sun, an arcade, a tower with an observatory, a pinwheel block, a stair, plants, clouds. */
+export const city: Scene = {
   w: 1200,
   h: 560,
   fit: "xMidYMax slice",

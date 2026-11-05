@@ -30,7 +30,7 @@ function standalone(svg: string, host: HTMLElement) {
       /color-mix\(in oklab, var\(--[\w-]+\) \d+%, var\(--[\w-]+\)\)/g,
       resolve,
     )
-    .replace(/var\(--[\w-]+\)/g, resolve)
+    .replace(/var\(--[\w-]+(?:, var\(--[\w-]+\))?\)/g, resolve)
   probe.remove()
   return out
 }

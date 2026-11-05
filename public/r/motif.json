@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "motif",
+  "title": "Motif",
+  "description": "Motif: a pinwheel, a sparkle, a cloud or an archway from the Follies engine, an em tall beside text unless sized, in its colourway role or --motif.",
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/follies"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/motif.tsx",
+      "content": "import { useMemo, type ComponentPropsWithoutRef } from \"react\"\nimport { motif, type MotifOptions } from \"@/serigraph/follies\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\ntype MotifProps = MotifOptions &\n  Omit<ComponentPropsWithoutRef<\"span\">, \"children\">\n\n/**\n * A motif on its own: a pinwheel, a sparkle, a cloud or an archway, an em tall beside text unless sized with CSS.\n * Its colour is the colourway's role for it, or --motif where set. Decorative unless it has a label.\n */\nexport function Motif({\n  kind = \"sparkle\",\n  seed,\n  line,\n  label,\n  className,\n  ...props\n}: MotifProps) {\n  const svg = useMemo(\n    () => motif({ kind, seed, line, label }),\n    [kind, seed, line, label],\n  )\n  return (\n    <span\n      data-slot=\"motif\"\n      data-motif={kind}\n      className={cn(\"motif\", className)}\n      dangerouslySetInnerHTML={{ __html: svg }}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/motif.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

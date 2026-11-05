@@ -1,0 +1,283 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "serigraph",
+  "homepage": "https://github.com/ossianravn/serigraph-ui",
+  "items": [
+    {
+      "name": "base",
+      "type": "registry:item",
+      "title": "Base",
+      "description": "Tokens, colourways, the paper grain, surfaces, Serigraph's own fonts (embedded in the stylesheet), the appearance runtime and cn. Every other item builds on it; make src/serigraph/styles/serigraph.css your Tailwind entry.",
+      "dependencies": [
+        "cn@^0.5.1"
+      ],
+      "devDependencies": [
+        "@fontsource-variable/archivo@^5.3.0"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/lib/utils.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/lib/utils.ts"
+        },
+        {
+          "path": "src/serigraph/styles/base.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/base.css"
+        },
+        {
+          "path": "src/serigraph/styles/colourways.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/colourways.css"
+        },
+        {
+          "path": "src/serigraph/styles/follies.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/follies.css"
+        },
+        {
+          "path": "src/serigraph/styles/fonts.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/fonts.css"
+        },
+        {
+          "path": "src/serigraph/styles/lettering.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/lettering.css"
+        },
+        {
+          "path": "src/serigraph/styles/letters.generated.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/letters.generated.css"
+        },
+        {
+          "path": "src/serigraph/styles/roles.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/roles.css"
+        },
+        {
+          "path": "src/serigraph/styles/serigraph.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/serigraph.css"
+        },
+        {
+          "path": "src/serigraph/styles/surfaces.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/surfaces.css"
+        },
+        {
+          "path": "src/serigraph/styles/textures.generated.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/textures.generated.css"
+        },
+        {
+          "path": "src/serigraph/styles/tokens.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/tokens.css"
+        },
+        {
+          "path": "src/serigraph/theme/appearance-script.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/theme/appearance-script.ts"
+        },
+        {
+          "path": "src/serigraph/theme/appearance.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/theme/appearance.ts"
+        },
+        {
+          "path": "src/serigraph/theme/index.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/theme/index.ts"
+        },
+        {
+          "path": "src/serigraph/theme/use-appearance.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/theme/use-appearance.ts"
+        }
+      ]
+    },
+    {
+      "name": "follies",
+      "type": "registry:component",
+      "title": "Follies",
+      "description": "The Follies engine, framework-free: seeded surreal architecture in cloud banks, drawn as SVG strings on a server, at build time or in the browser. folly({ template, seed }) draws the city, a window, a medallion, a band, the arcade wall or a doorway, filled from the colourway's roles.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/follies/buildings.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/buildings.ts"
+        },
+        {
+          "path": "src/serigraph/follies/city.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/city.ts"
+        },
+        {
+          "path": "src/serigraph/follies/clouds.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/clouds.ts"
+        },
+        {
+          "path": "src/serigraph/follies/formats.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/formats.ts"
+        },
+        {
+          "path": "src/serigraph/follies/index.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/index.ts"
+        },
+        {
+          "path": "src/serigraph/follies/marks.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/marks.ts"
+        },
+        {
+          "path": "src/serigraph/follies/motifs.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/motifs.ts"
+        },
+        {
+          "path": "src/serigraph/follies/parts.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/parts.ts"
+        },
+        {
+          "path": "src/serigraph/follies/plants.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/plants.ts"
+        },
+        {
+          "path": "src/serigraph/follies/scene.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/scene.ts"
+        },
+        {
+          "path": "src/serigraph/follies/scenes.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/scenes.ts"
+        },
+        {
+          "path": "src/serigraph/follies/seed.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/seed.ts"
+        },
+        {
+          "path": "src/serigraph/follies/svg.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/svg.ts"
+        }
+      ]
+    },
+    {
+      "name": "folly",
+      "type": "registry:component",
+      "title": "Folly",
+      "description": "Folly: a seeded drawing from the Follies engine as inline SVG that fills its box and reprints in every colourway. The same seed draws the same SVG on the server and in the browser.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/follies"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/folly.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/folly.tsx"
+        }
+      ]
+    },
+    {
+      "name": "lettering",
+      "type": "registry:component",
+      "title": "Lettering",
+      "description": "Lettering: display words in Serigraph Display, paper with an ink outline and the inline line inside each stem.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/lettering.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/lettering.tsx"
+        }
+      ]
+    },
+    {
+      "name": "letters",
+      "type": "registry:component",
+      "title": "Letters",
+      "description": "The skeleton alphabet behind Serigraph's fonts, as framework-free data and geometry: the centrelines and pens of every capital, figure and mark. The fonts already come with base; add this to draw the letters yourself.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/letters/alphabet.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/alphabet.ts"
+        },
+        {
+          "path": "src/serigraph/letters/capitals.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/capitals.ts"
+        },
+        {
+          "path": "src/serigraph/letters/extras.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/extras.ts"
+        },
+        {
+          "path": "src/serigraph/letters/figures.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/figures.ts"
+        },
+        {
+          "path": "src/serigraph/letters/mono.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/mono.ts"
+        },
+        {
+          "path": "src/serigraph/letters/skeleton.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/skeleton.ts"
+        }
+      ]
+    },
+    {
+      "name": "motif",
+      "type": "registry:component",
+      "title": "Motif",
+      "description": "Motif: a pinwheel, a sparkle, a cloud or an archway from the Follies engine, an em tall beside text unless sized, in its colourway role or --motif.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/follies"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/motif.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/motif.tsx"
+        }
+      ]
+    },
+    {
+      "name": "serigraph",
+      "type": "registry:item",
+      "title": "Serigraph",
+      "description": "Every part of Serigraph: the base, the Follies engine and every component.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/follies",
+        "@serigraph/folly",
+        "@serigraph/lettering",
+        "@serigraph/letters",
+        "@serigraph/motif"
+      ],
+      "files": []
+    }
+  ]
+}

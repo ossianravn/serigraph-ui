@@ -1,6 +1,6 @@
 # Plan
 
-Status: Phase 2 (Follies and the motifs) in progress, 2026-11-05: the engine, templates, `<Folly>` and the Press are done; the registry and its install test are next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
+Status: Phase 2 (Follies and the motifs) done, 2026-11-05; Phase 3 (core primitives and the observatory's first screens) is next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
 
 ## What this is
 
@@ -86,7 +86,7 @@ Logic decisions (L) follow Fineliner's, carried over by request; each still need
 | `styles/` tokens, stocks, pens                                                | Tokens, spots, colourways                                    | Colourway roles instead of one pen per document                                         |
 | `theme/` appearance runtime                                                   | Same                                                         | Attributes: colourway, poster, line, fields, grain, motion, density                     |
 | `tools/fonts` (skeleton swept by a round pen)                                 | Same pipeline                                                | Skeletons swept by a square pen; Fill and Line layers or COLRv0; extended sans and mono |
-| `tools/paper`, `tools/check-contrast.mjs`, `tools/registry`, `tests/consumer` | Same                                                         | Paper grain only; contrast checked per colourway role pair                              |
+| `tools/paper`, `tools/check-contrast.mjs`, `tools/registry`, `tests/consumer` | Same                                                         | Paper grain only; contrast per role pair; fixture lockfile; Vite only until Phase 6     |
 | Site: specimen, desk, docs, studio, demo                                      | Specimen, the Press, docs, colourway studio, the observatory | The Press rerolls follies and reprints them in every colourway                          |
 
 ## Phases
@@ -138,7 +138,7 @@ Exit: the fonts render the same in Chromium, Firefox and WebKit; Display reads a
 - [x] All five fonts pass OTS (the sanitizer Chromium and Firefox apply); they render in Chromium at 1440 and 375 px
 - [ ] Look in Firefox and Safari: headless Firefox cannot draw in this environment and no WebKit is installed (maintainer, or a Playwright setup later)
 
-### Phase 2: Follies and the motifs
+### Phase 2: Follies and the motifs (done)
 
 The framework-free engine with labelled forks per part; templates (arcade, platform, stair, dome, column, flowers, sun, cloud banks); formats (poster, window, medallion, band, doorway); `<Folly>` and `folly()`; motifs as components (cloud bank, pinwheel, archway, louvers, sparkle, stipple). The Press: seed, template, colourway, reroll, copy, download SVG. First registry build and install test.
 
@@ -149,7 +149,9 @@ Exit: server and browser render identical SVG for the same seed; a folly reprint
 - [x] `<Folly>` (kit extra) and the `folly`, `arch-frame` utilities; the home page's hero is a city, the Colourways section is a cloud-coloured ground the city's clouds run into, the next section opens with the arcade wall, and every page ends on a band
 - [x] The Press (`/press`): template, seed, colourway, reroll, copy and download the SVG with its colours written in; the formats below it
 - [x] Seed stability (`npm run test:seeds`, the plan's first lasting test): six templates × five seeds hashed against snapshots; the built pages contain exactly the engine's SVG
-- [ ] Registry build and the install test (`base` and `folly` into a scratch Vite app)
+- [x] Motifs on their own (`follies/marks.ts`): `motif({ kind, seed })` and `<Motif>` draw a pinwheel, a sparkle, a cumulus cloud or an archway, an em tall beside text unless sized, recoloured by `--motif`; louvers, stipple and the arch frame stay CSS utilities. Loose rings and pinpoints in a sky take the surface's text colour, so they are stars on Night
+- [x] Registry build (`npm run registry`, `registry:check`): `tools/registry` ported from Fineliner, 7 items (base, follies, folly, motif, lettering, letters and the umbrella); the fonts travel inside base's stylesheet as embedded WOFF2 (L11)
+- [x] The install test (`npm run test:consumer`, the second lasting test): `folly`, `motif`, `lettering` and `letters` install offline through the shadcn CLI into a fresh Vite app, bringing `base` and `follies`, arrive byte-identical, type-check under strict settings and build with the fonts in the CSS
 
 ### Phase 3: core primitives and the observatory's first screens
 
@@ -191,6 +193,7 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 - **2026-11-05, Phase 0**: The maintainer signed off the style. Ported Fineliner's scaffold and runtime into `src/serigraph/` (kit) and `src/site/` (site). A Golden Ratio audit of Archivo set the type and space tokens (16 px body at 1.618, a 34rem measure, steps of 12.6 to 41.9 px, units of 6.1 to 67.8 px). The grain is neutral, so one set of tiles serves every colourway. The grained contrast check failed sky, rose and the pressed shade, all three fixed at the token level (sky `#3aa1d2`, rose `#fb6a83`, pressed 92% and flat). The page at `/` is built from the kit; display lettering waits for Phase 1, so the title is Archivo at its widest with a paper fill and an ink outline. Checked in the browser pane at 1440 and 375 px.
 - **2026-11-05, Phase 1**: The maintainer confirmed MIT and standing permission to commit, push and continue. The skeleton alphabet moved into the kit, parametric in the pen, so one skeleton makes Display (heavy) and Sans (light, 18% wider); Mono fits it to a cell and adds a lowercase. polygon-clipping failed on the slivers flattened arcs make; Clipper's offsetter strokes and unions reliably. The curve fitter bulged thin capsules (it measures error only at points), fixed by resampling every 8 units before fitting. Display is layered with a text stroke under the fill rather than Fill/Line fonts or COLRv0, so the outline keeps the line's weight at every size. Display, Sans and Mono are 3–11 KB each as WOFF2 and build the same bytes every time; the site's titles and labels now use them.
 - **2026-11-05, Phase 2 (first half)**: The specimen's Follies became the kit's engine, typed and framework-free, and draw on the server: the city, window, medallion, band, arcade and doorway templates. Bands no longer measure: they are drawn wide (3200 units) at their real height and sliced from the bottom, so nothing crops. The home page now runs city → cloud ground → arcade wall like the specimen. A faint seam remains where an element's grain overlay meets the next section's grain (two tile origins). The Press rerolls and exports standalone SVG. Seed stability is the first lasting test.
+- **2026-11-05, Phase 2 (done)**: Fineliner's registry builder and offline install test ported. A registry cannot carry binary files, so the font build now embeds each WOFF2 in `letters.generated.css` (44 KB of fonts, 60 KB of CSS; the downloadable files stay in `public/fonts`). The fixture's first offline install failed for want of cached tarballs; its `package-lock.json` is now committed, so the test needs the cache filled once, not tracked by hand. The kit installs into a fresh Vite app, type-checks under the fixture's strict settings and renders as it does on the site (checked in headless Chrome). The motifs became parts of their own; the first cloud motif read as a loaf, so it is a cumulus with a crown. On Night the sky's loose rings and dots were ink on a dark canvas and vanished; they now take the surface's text colour. The four templates that scatter them changed their snapshots on purpose.
 
 ## Open questions for the maintainer
 

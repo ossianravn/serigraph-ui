@@ -3,8 +3,8 @@
 //   Serigraph Display         the heavy square pen: wide, round, flat letters; set it in paper with an ink outline
 //   Serigraph Display Inline  the thin line inside each left stem, to set over Display in ink
 //   Serigraph Sans            the light square pen, wider: extended capitals, Regular and Bold, superiors for `ordn`
-// Writes public/fonts/<file>.otf and .woff2 and the kit's styles/letters.generated.css. The same sources build the
-// same bytes.
+// Writes public/fonts/<file>.otf and .woff2 for download, and the kit's styles/letters.generated.css with each WOFF2
+// embedded, so the kit installs with its fonts. The same sources build the same bytes.
 //
 //   npm run build:fonts
 import fs from "node:fs"
@@ -94,7 +94,7 @@ async function face(f) {
   console.log(
     `${f.family} ${f.name}: ${glyphs.length} glyphs, ${kb(otf)} OTF, ${kb(woff2)} WOFF2`,
   )
-  return fontFace(f.family, f.file, f.weight)
+  return fontFace(f.family, woff2, f.weight)
 }
 
 const display = {
@@ -205,7 +205,7 @@ async function mono() {
   console.log(
     `Serigraph Mono Regular: ${glyphs.length} glyphs, ${kb(otf)} OTF, ${kb(woff2)} WOFF2`,
   )
-  return fontFace("Serigraph Mono", "serigraph-mono", 400)
+  return fontFace("Serigraph Mono", woff2, 400)
 }
 faces.push(await mono())
 

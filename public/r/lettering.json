@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lettering",
+  "title": "Lettering",
+  "description": "Lettering: display words in Serigraph Display, paper with an ink outline and the inline line inside each stem.",
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/lettering.tsx",
+      "content": "import type { ComponentPropsWithoutRef, ElementType } from \"react\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\ntype LetteringProps<T extends ElementType> = {\n  /** The words, as real text: search engines and screen readers read them. */\n  children: string\n  /** The element to render, a heading where the lettering is one. */\n  as?: T\n} & Omit<ComponentPropsWithoutRef<T>, \"children\" | \"as\">\n\n/**\n * Display lettering: Serigraph Display in paper with an ink outline, and the thin inline inside each left stem laid\n * over it. The inline layer is hidden from assistive technology; the text is read once. Size it with font-size.\n */\nexport function Lettering<T extends ElementType = \"span\">({\n  children,\n  as,\n  className,\n  ...props\n}: LetteringProps<T>) {\n  const Tag: ElementType = as ?? \"span\"\n  return (\n    <Tag\n      data-slot=\"lettering\"\n      className={cn(\"lettering\", className)}\n      {...props}\n    >\n      {children}\n      <span className=\"lettering-inline\" aria-hidden=\"true\">\n        {children}\n      </span>\n    </Tag>\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/lettering.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

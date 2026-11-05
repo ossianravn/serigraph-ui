@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "folly",
+  "title": "Folly",
+  "description": "Folly: a seeded drawing from the Follies engine as inline SVG that fills its box and reprints in every colourway. The same seed draws the same SVG on the server and in the browser.",
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/follies"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/folly.tsx",
+      "content": "import { useMemo, type ComponentPropsWithoutRef } from \"react\"\nimport { folly, type FollyOptions } from \"@/serigraph/follies\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\ntype FollyProps = FollyOptions &\n  Omit<ComponentPropsWithoutRef<\"div\">, \"children\">\n\n/**\n * A folly: seeded surreal architecture that fills its box (size it with CSS) and reprints in the colourway around it.\n * The same seed draws the same SVG on the server and in the browser, so it renders without hydrating.\n */\nexport function Folly({\n  template = \"city\",\n  seed,\n  line,\n  label,\n  className,\n  ...props\n}: FollyProps) {\n  const svg = useMemo(\n    () => folly({ template, seed, line, label }),\n    [template, seed, line, label],\n  )\n  return (\n    <div\n      data-slot=\"folly\"\n      data-template={template}\n      className={cn(\"folly\", className)}\n      dangerouslySetInnerHTML={{ __html: svg }}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/folly.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

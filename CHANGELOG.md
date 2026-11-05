@@ -2,12 +2,15 @@
 
 ## Unreleased
 
-### Phase 2: Follies (in progress)
+### Phase 2: Follies
 
 - The Follies engine in the kit: seeded surreal architecture drawn as SVG from a seed, the same on the server and in the browser, recoloured by the colourway. Templates: city, window, medallion, band, arcade and doorway; `<Folly>` renders one.
 - The Press (`/press`): reroll any template in any colourway and take the SVG away.
 - The home page opens on a city whose clouds run into the next section; every page ends on a cloud band.
-- `npm run test:seeds` holds every template to its snapshot.
+- Motifs on their own: `<Motif>` draws a pinwheel, a sparkle, a cloud or an archway beside text, in its colourway role or `--motif`.
+- On Night, the rings and dots in a folly's sky are paper, like stars.
+- `npm run test:seeds` holds every template and motif to its snapshot.
+- The shadcn registry (`npm run registry`): base, follies, folly, motif, lettering and letters, with Serigraph's fonts embedded in base's stylesheet. `npm run test:consumer` installs them offline into a fresh Vite app that must type-check and build.
 
 ### Phase 1: the letters
 

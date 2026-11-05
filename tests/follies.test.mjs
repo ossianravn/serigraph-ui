@@ -7,21 +7,24 @@ import { test } from "node:test"
 import { createJiti } from "jiti"
 
 const jiti = createJiti(import.meta.url)
-const { folly, TEMPLATES } = await jiti.import(
+const { folly, motif, MOTIFS, TEMPLATES } = await jiti.import(
   "../src/serigraph/follies/index.ts",
 )
 const SEEDS = ["serigraph", "meridian", "terrace", "1975", "ada"]
 const file = new URL("./follies.snapshots.json", import.meta.url)
 const hash = (s) => createHash("sha256").update(s).digest("hex").slice(0, 16)
 
-const now = Object.fromEntries(
-  Object.keys(TEMPLATES).flatMap((template) =>
+const now = Object.fromEntries([
+  ...Object.keys(TEMPLATES).flatMap((template) =>
     SEEDS.map((seed) => [
       `${template}:${seed}`,
       hash(folly({ template, seed })),
     ]),
   ),
-)
+  ...Object.keys(MOTIFS).flatMap((kind) =>
+    SEEDS.map((seed) => [`motif-${kind}:${seed}`, hash(motif({ kind, seed }))]),
+  ),
+])
 
 if (process.env.UPDATE || !fs.existsSync(file))
   fs.writeFileSync(file, `${JSON.stringify(now, null, 2)}\n`)
@@ -33,6 +36,8 @@ test("the same seed draws the same folly twice", () => {
       folly({ template, seed: "twice" }),
       template,
     )
+  for (const kind of Object.keys(MOTIFS))
+    assert.equal(motif({ kind, seed: "twice" }), motif({ kind, seed: "twice" }))
 })
 
 test("every folly matches its snapshot", () => {

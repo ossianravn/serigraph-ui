@@ -148,3 +148,10 @@
   width: 9rem;
   aspect-ratio: 160 / 150;
 }
+
+.motif-sample {
+  block-size: 7rem;
+}
+.motif-row {
+  margin-block-start: var(--space-section);
+}

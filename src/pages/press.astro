@@ -1,8 +1,10 @@
 ---
-// The Press: Follies, rerolled. Every template, any seed, any colourway, and the SVG to take away.
+// The Press: Follies, rerolled. Every template, any seed, any colourway, and the SVG to take away; then the formats
+// and the motifs on their own.
 import Base from "@/site/layouts/base.astro"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { Folly } from "@/serigraph/extras/folly"
+import { Motif } from "@/serigraph/extras/motif"
 import { Press } from "@/site/press/press"
 import "@/site/press/press.css"
 ---
@@ -53,5 +55,29 @@ import "@/site/press/press.css"
         <figcaption class="caps">Doorway</figcaption>
       </figure>
     </div>
+  </section>
+  <section class="section" aria-labelledby="h-motifs">
+    <Lettering as="h2" className="section-title" id="h-motifs">
+      Motifs
+    </Lettering>
+    <div class="formats">
+      {(
+        [
+          ["pinwheel", "Pinwheel"],
+          ["sparkle", "Sparkle"],
+          ["cloud", "Cloud"],
+          ["archway", "Archway"],
+        ] as const
+      ).map(([kind, name]) => (
+        <figure>
+          <Motif kind={kind} seed="press" className="motif-sample" />
+          <figcaption class="caps">{name}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="caps motif-row">
+      <Motif kind="sparkle" seed="new" /> New <span class="sep">•</span>
+      <Motif kind="pinwheel" seed="tonight" /> Tonight
+    </p>
   </section>
 </Base>

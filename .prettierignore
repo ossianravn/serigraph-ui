@@ -2,6 +2,8 @@ dist/
 .astro/
 node_modules/
 package-lock.json
-src/serigraph/styles/textures.generated.css
+src/serigraph/styles/*.generated.css
 specimen/
 docs/style/explorations/
+registry.json
+public/r/

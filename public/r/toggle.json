@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "Toggle: a button that stays down while a mode is on, such as red-light mode: a pill that takes the highlight when pressed.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/toggle.tsx",
+      "content": "import { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// A pill that stays down. Pressed, it takes the highlight inside an ink line; disabled and pressed, a pale highlight\n// with the quiet line, so the state still shows. The default has no line until the pointer comes (like a ghost\n// button); outline keeps the surface's edge. Words in the extended capitals, the contour under the pointer, and in\n// forced colours the pressed line doubles, since fills vanish there.\nconst toggleVariants = cva(\n  \"group/toggle pill contour press inline-flex shrink-0 cursor-pointer items-center justify-center gap-hair caps whitespace-nowrap select-none [--fill-grain:none] [--fill:transparent] [--pill-text:var(--text)] [--press-fill:var(--surface)] aria-invalid:outline-(length:--line) aria-invalid:outline-offset-3 aria-invalid:outline-rose data-pressed:[--fill:var(--highlight)] data-pressed:[--pill-line:var(--ink)] data-pressed:[--pill-text:var(--ink)] data-pressed:[--press-fill:var(--highlight)] disabled:data-pressed:bg-[color-mix(in_oklab,var(--highlight)_40%,var(--paper))] forced-colors:data-pressed:[border-width:calc(var(--line)*2)] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"[--pill-line:transparent] hover:not-data-pressed:[--pill-line:var(--edge)]\",\n        outline: \"[--pill-line:var(--edge)]\",\n      },\n      size: {\n        default:\n          \"h-control min-w-control px-snug has-[>svg:only-child]:px-0 has-[>svg:only-child]:[--contour-x:0.5625rem]\",\n        sm: \"h-control-compact min-w-control-compact px-tight [--contour-x:0.5625rem] [--contour-y:0.25rem] has-[>svg:only-child]:px-0 has-[>svg:only-child]:[--contour-x:0.4375rem] [&_svg:not([class*='size-'])]:size-3.5\",\n        lg: \"h-12 min-w-12 px-line has-[>svg:only-child]:px-0 has-[>svg:only-child]:[--contour-x:0.625rem]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n)\n\nfunction Toggle({\n  className,\n  variant = \"default\",\n  size = \"default\",\n  ...props\n}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle\"\n      className={cn(toggleVariants({ variant, size, className }))}\n      {...props}\n    />\n  )\n}\n\nexport { Toggle, toggleVariants }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/toggle.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

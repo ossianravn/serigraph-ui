@@ -1,0 +1,42 @@
+/* Part drawing for the overlays parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* On Night's dark canvas an ink tooltip takes the paper line that every edge on that canvas has, and its point
+     carries the line round: the two outer edges of the turned square are paper, the two inside the pill ink. */
+  [data-colourway="night"] [data-slot="tooltip-content"] {
+    border-color: var(--paper);
+    & > [data-side] {
+      border: var(--line) solid var(--ink);
+    }
+    & > [data-side="top"] {
+      border-right-color: var(--paper);
+      border-bottom-color: var(--paper);
+    }
+    & > [data-side="bottom"] {
+      border-top-color: var(--paper);
+      border-left-color: var(--paper);
+    }
+    & > :is([data-side="left"], [data-side="inline-start"]) {
+      border-top-color: var(--paper);
+      border-right-color: var(--paper);
+    }
+    & > :is([data-side="right"], [data-side="inline-end"]) {
+      border-bottom-color: var(--paper);
+      border-left-color: var(--paper);
+    }
+  }
+
+  /* A disabled menu item can still take roving focus. Its mark is the quiet line of a disabled control, drawn inside
+     the pill, never the highlight, which promises something to press. */
+  :is(
+      [data-slot="dropdown-menu-item"],
+      [data-slot="dropdown-menu-sub-trigger"],
+      [data-slot="dropdown-menu-checkbox-item"],
+      [data-slot="dropdown-menu-radio-item"]
+    )[data-disabled][data-highlighted] {
+    background-color: transparent;
+    outline: var(--line) solid var(--text-quiet, var(--ink-quiet));
+    outline-offset: calc(-1 * var(--line));
+  }
+}

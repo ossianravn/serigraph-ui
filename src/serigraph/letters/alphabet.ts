@@ -10,7 +10,7 @@ import {
   MARKS,
 } from "./extras"
 import { FIGURE_INLINES, FIGURES } from "./figures"
-import { frame, type Def, type Pen, type Skeleton } from "./skeleton"
+import { frame, type Def, type Pen, type Skeleton } from "./geometry"
 
 export const DISPLAY_PEN: Pen = { h: 10.5, ext: 1 }
 

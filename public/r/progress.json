@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "title": "Progress",
+  "description": "Progress: shows how far a task has gone: a pill slot that fills with louvers of the action colour and ink.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/progress.tsx",
+      "content": "\"use client\"\n\nimport { Progress as ProgressPrimitive } from \"@base-ui/react/progress\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// A pill slot in the ink line, tinted from the surface beneath, filling with louvers: thin slats of the action colour\n// and ink, like stair risers, that grow as the task moves on, closed by an ink line at their leading end. Indeterminate,\n// a short run of louvers crosses the slot; under reduced motion it stands still in the middle (styles/forms.css).\n// Label in the extended capitals, value in the mono face.\n\nfunction Progress({\n  className,\n  children,\n  value,\n  locale = \"en-US\",\n  ...props\n}: ProgressPrimitive.Root.Props) {\n  // A fixed locale by default, so the value reads the same on the server and in the browser (no hydration mismatch).\n  return (\n    <ProgressPrimitive.Root\n      value={value}\n      locale={locale}\n      data-slot=\"progress\"\n      className={cn(\n        \"flex flex-wrap items-baseline gap-x-tight gap-y-hair\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n      <ProgressTrack>\n        <ProgressIndicator />\n      </ProgressTrack>\n    </ProgressPrimitive.Root>\n  )\n}\n\nfunction ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {\n  return (\n    <ProgressPrimitive.Track\n      className={cn(\n        \"relative flex h-4 w-full items-stretch overflow-hidden rounded-full border-(length:--line) border-ink bg-[color-mix(in_oklab,var(--surface,var(--canvas))_30%,var(--paper))]\",\n        className,\n      )}\n      data-slot=\"progress-track\"\n      {...props}\n    />\n  )\n}\n\nfunction ProgressIndicator({\n  className,\n  ...props\n}: ProgressPrimitive.Indicator.Props) {\n  return (\n    <ProgressPrimitive.Indicator\n      data-slot=\"progress-indicator\"\n      className={cn(\n        \"louvers relative h-auto! transition-[width] duration-200 ease-(--ease) after:absolute after:inset-y-0 after:end-0 after:w-(--line) after:bg-ink data-complete:after:hidden forced-colors:bg-[CanvasText] forced-colors:forced-color-adjust-none\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {\n  return (\n    <ProgressPrimitive.Label\n      className={cn(\"caps text-(--text)\", className)}\n      data-slot=\"progress-label\"\n      {...props}\n    />\n  )\n}\n\nfunction ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {\n  return (\n    <ProgressPrimitive.Value\n      className={cn(\n        \"ms-auto font-mono text-small leading-small text-(--text) tabular-nums\",\n        className,\n      )}\n      data-slot=\"progress-value\"\n      {...props}\n    />\n  )\n}\n\nexport {\n  Progress,\n  ProgressTrack,\n  ProgressIndicator,\n  ProgressLabel,\n  ProgressValue,\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/progress.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

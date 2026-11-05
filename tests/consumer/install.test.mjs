@@ -42,6 +42,14 @@ const items = [
   "label",
   "switch",
   "tabs",
+  "avatar",
+  "dialog",
+  "dropdown-menu",
+  "field",
+  "select",
+  "slider",
+  "toggle-group",
+  "tooltip",
 ]
 
 test(

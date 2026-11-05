@@ -1,0 +1,70 @@
+/* Part drawing for the feedback parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* Skeleton: the field tint, with a deeper tint of the same surface breathing over it. Only the overlay's opacity
+     moves, so the part stays opaque and the phone only composites; under reduced motion the overlay stays out. */
+  [data-slot="skeleton"] {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background-color: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 58%,
+        var(--paper)
+      );
+      opacity: 0;
+      animation: skeleton-breathe 1.3s cubic-bezier(0.4, 0, 0.6, 1) infinite
+        alternate;
+      pointer-events: none;
+    }
+    @media (forced-colors: active) {
+      outline: var(--line) dashed GrayText;
+      outline-offset: calc(-1 * var(--line));
+    }
+  }
+  @keyframes skeleton-breathe {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Avatar initials: micro-stipple on the circle's shadow side (lower right), left where a disc of the fill, set up
+     and to the left, does not cover it; the grain over both, under the letters. The extended capitals' tracking
+     trails the last letter, so the letters move over by it to sit centred. */
+  [data-slot="avatar-fallback"]:not([data-portrait]) {
+    padding-inline-start: 0.1em;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+    &::before {
+      background:
+        radial-gradient(
+          ellipse 50% 50% at 41% 39%,
+          var(--avatar-fill, var(--plane-2)) 99%,
+          transparent 100%
+        ),
+        radial-gradient(circle, var(--ink) 0.55px, transparent 0.85px) 0 0 / 3px
+          3px;
+    }
+    &::after {
+      background-image: var(--grain);
+      background-size: var(--grain-size);
+    }
+  }
+  /* Too small for stipple to read as shade: the small size keeps the flat circle. */
+  [data-slot="avatar"][data-size="sm"]
+    > [data-slot="avatar-fallback"]:not([data-portrait])::before {
+    display: none;
+  }
+}

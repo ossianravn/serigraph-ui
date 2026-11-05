@@ -97,7 +97,7 @@
     border-color: var(--ink-quiet);
     background-color: color-mix(
       in oklab,
-      var(--surface, var(--canvas)) 12%,
+      var(--surface, var(--canvas)) 35%,
       var(--paper)
     );
     color: var(--ink-quiet);
@@ -147,7 +147,7 @@
     border-color: var(--ink-quiet);
     background-color: color-mix(
       in oklab,
-      var(--surface, var(--canvas)) 12%,
+      var(--surface, var(--canvas)) 35%,
       var(--paper)
     );
     color: var(--ink-quiet);

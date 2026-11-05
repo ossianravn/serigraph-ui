@@ -1,6 +1,6 @@
 // The capitals A to Z: wide, with round shoulders, slot-like counters, an arch-topped A and U-shaped W and Y.
 // Each is [span, draw]: the span between its left and right skeleton lines, and its centre lines in that frame.
-import { ccw, cw, diag, rr, v, type Def } from "./skeleton"
+import { ccw, cw, diag, rr, v, type Def } from "./geometry"
 
 // prettier-ignore
 export const CAPITALS: Record<string, Def> = {
@@ -64,7 +64,7 @@ export const CAPITALS: Record<string, Def> = {
 
 /** Inlines beside the left stems, for Serigraph Display. */
 // prettier-ignore
-export const INLINES: Record<string, (f: import("./skeleton").Frame) => import("./skeleton").Inline[]> = {
+export const INLINES: Record<string, (f: import("./geometry").Frame) => import("./geometry").Inline[]> = {
   A: (f) => [v(f, f.l, f.t + (f.r - f.l) / 2, 92)],
   B: (f) => [v(f, f.l, 8, 92)],
   C: (f) => [v(f, f.l, f.t + 26, f.b - 26)],

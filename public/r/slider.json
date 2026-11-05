@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "title": "Slider",
+  "description": "Slider: sets a value or a range by dragging along a line, such as the dome's light: the thumb is a pinwheel that rolls as it goes.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/slider.tsx",
+      "content": "import * as React from \"react\"\nimport { Slider as SliderPrimitive } from \"@base-ui/react/slider\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// The track is one fine line in the surface's edge colour; the range is a thicker line in the action colour inside the\n// ink line; each thumb is a pinwheel that rolls the distance it travels along a horizontal track (styles/forms.css).\n// The thumb's focus lives on a hidden range input, so the page's concentric ring is drawn on the thumb with\n// has-focus-visible. The root's width stays a plain class so a call-site width replaces it; a vertical slider takes\n// its height from the call site (at least 10rem).\nfunction Slider({\n  className,\n  defaultValue,\n  value,\n  min = 0,\n  max = 100,\n  ...props\n}: SliderPrimitive.Root.Props) {\n  const _values = Array.isArray(value)\n    ? value\n    : Array.isArray(defaultValue)\n      ? defaultValue\n      : [min, max]\n\n  return (\n    <SliderPrimitive.Root\n      className={cn(\"w-full data-[orientation=vertical]:w-auto\", className)}\n      data-slot=\"slider\"\n      defaultValue={defaultValue}\n      value={value}\n      min={min}\n      max={max}\n      thumbAlignment=\"edge\"\n      {...props}\n    >\n      <SliderPrimitive.Control className=\"relative flex w-full touch-none items-center select-none data-disabled:cursor-not-allowed data-[orientation=horizontal]:min-h-7 data-[orientation=horizontal]:@container data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-40 data-[orientation=vertical]:w-auto data-[orientation=vertical]:min-w-7 data-[orientation=vertical]:flex-col\">\n        <SliderPrimitive.Track\n          data-slot=\"slider-track\"\n          className=\"relative grow select-none\"\n        >\n          <SliderPrimitive.Indicator\n            data-slot=\"slider-range\"\n            className=\"rounded-full border-(length:--line) border-ink bg-action select-none data-disabled:border-ink-quiet data-disabled:bg-[color-mix(in_oklab,var(--surface,var(--canvas))_35%,var(--paper))]\"\n          />\n        </SliderPrimitive.Track>\n        {Array.from({ length: _values.length }, (_, index) => (\n          <SliderPrimitive.Thumb\n            data-slot=\"slider-thumb\"\n            key={index}\n            style={(state) =>\n              ({\n                \"--turn\":\n                  ((state.values[index] ?? state.min) - state.min) /\n                  (state.max - state.min || 1),\n              }) as React.CSSProperties\n            }\n            className=\"pinwheel block size-[1.4375rem] shrink-0 cursor-grab select-none after:absolute after:-inset-1.5 after:rounded-full has-focus-visible:focus-ring data-dragging:cursor-grabbing data-disabled:cursor-not-allowed data-disabled:border-ink-quiet data-disabled:[--wheel:var(--ink-quiet)]\"\n          />\n        ))}\n      </SliderPrimitive.Control>\n    </SliderPrimitive.Root>\n  )\n}\n\nexport { Slider }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/slider.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

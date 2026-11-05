@@ -65,7 +65,7 @@ export const windowScene: Scene = {
   },
 }
 
-/** A medallion: a pinwheel, or a small dome on clouds, in a round frame (avatars, featured figures). */
+/** A medallion: a pinwheel, or a pinwheel seen through an arch on clouds, in a round frame (avatars, featured figures). */
 export const medallion: Scene = {
   w: 120,
   h: 120,
@@ -80,14 +80,21 @@ export const medallion: Scene = {
           ring: false,
         })
       : shape(p, "M 0 0 H 120 V 120 H 0 Z", "canvas") +
-        platform(p, r, { cx: 60, cy: 70, rx: 34, ground: 140, dome: true }) +
+        pinwheelArch(p, {
+          x: r.between(30, 36),
+          base: 104,
+          w: 52,
+          h: 74,
+          frame: r.pick(["structure", "bloom", "platform"]),
+          colour: "sun",
+        }) +
         cloudBank(p, rs(seed, "medal-cloud"), {
           x0: 0,
           x1: 120,
           base: 140,
-          top: 84,
-          rmin: 12,
-          rmax: 20,
+          top: 92,
+          rmin: 10,
+          rmax: 16,
           fill: "cloud",
         })
     return (

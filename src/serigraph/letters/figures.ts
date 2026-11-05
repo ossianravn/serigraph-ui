@@ -9,7 +9,7 @@ import {
   type Def,
   type Frame,
   type Inline,
-} from "./skeleton"
+} from "./geometry"
 
 // prettier-ignore
 export const FIGURES: Record<string, Def> = {

@@ -15,7 +15,7 @@ import {
   type Frame,
   type Pen,
   type Skeleton,
-} from "./skeleton"
+} from "./geometry"
 
 /** The cell: 600 units at a cap height of 700, so 85.7 skeleton units; glyphs sit in a box inset by SB. */
 export const MONO_CELL = 600 / 7

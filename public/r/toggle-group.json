@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "title": "Toggle Group",
+  "description": "Toggle group: a row of toggles: joined, the segmented control for two to four choices; spaced, a set of filters that switch on and off.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/toggle"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/toggle-group.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { Toggle as TogglePrimitive } from \"@base-ui/react/toggle\"\nimport { ToggleGroup as ToggleGroupPrimitive } from \"@base-ui/react/toggle-group\"\nimport { type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/serigraph/lib/utils\"\nimport { toggleVariants } from \"@/serigraph/ui/toggle\"\n\n// Toggles in a row. Joined (spacing 0), the group is the segmented control: a plane 2 pill track in the ink line whose\n// chosen segment is a highlight pill with its own ink line (styles/forms.css). The whole control stands as tall as a\n// button. With spacing, each toggle keeps its own treatment, for filters that switch on and off, and the row wraps.\nconst ToggleGroupContext = React.createContext<\n  VariantProps<typeof toggleVariants> & {\n    spacing?: number\n    orientation?: \"horizontal\" | \"vertical\"\n  }\n>({\n  size: \"default\",\n  variant: \"default\",\n  spacing: 2,\n  orientation: \"horizontal\",\n})\n\nfunction ToggleGroup({\n  className,\n  variant,\n  size,\n  spacing = 2,\n  orientation = \"horizontal\",\n  style,\n  children,\n  ...props\n}: ToggleGroupPrimitive.Props &\n  VariantProps<typeof toggleVariants> & {\n    spacing?: number\n    orientation?: \"horizontal\" | \"vertical\"\n  }) {\n  const gap = { \"--gap\": spacing } as React.CSSProperties\n  return (\n    <ToggleGroupPrimitive\n      data-slot=\"toggle-group\"\n      data-variant={variant}\n      data-size={size}\n      data-spacing={spacing}\n      data-orientation={orientation}\n      orientation={orientation}\n      style={\n        typeof style === \"function\"\n          ? (state: ToggleGroupPrimitive.State) => ({ ...gap, ...style(state) })\n          : { ...gap, ...style }\n      }\n      className={cn(\n        \"group/toggle-group flex w-fit flex-row flex-wrap items-center gap-[--spacing(var(--gap))] data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch data-[spacing=0]:flex-nowrap\",\n        className,\n      )}\n      {...props}\n    >\n      <ToggleGroupContext.Provider\n        value={{ variant, size, spacing, orientation }}\n      >\n        {children}\n      </ToggleGroupContext.Provider>\n    </ToggleGroupPrimitive>\n  )\n}\n\nfunction ToggleGroupItem({\n  className,\n  children,\n  variant = \"default\",\n  size = \"default\",\n  ...props\n}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {\n  const context = React.useContext(ToggleGroupContext)\n  const itemVariant = context.variant || variant\n  const itemSize = context.size || size\n\n  return (\n    <TogglePrimitive\n      data-slot=\"toggle-group-item\"\n      data-variant={itemVariant}\n      data-size={itemSize}\n      data-spacing={context.spacing}\n      className={cn(\n        \"shrink-0 focus:z-10 focus-visible:z-10\",\n        toggleVariants({ variant: itemVariant, size: itemSize }),\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </TogglePrimitive>\n  )\n}\n\nexport { ToggleGroup, ToggleGroupItem }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/toggle-group.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

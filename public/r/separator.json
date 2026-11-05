@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "description": "Separator: divides content inside a group: one fine line across it, or the same line turned between items in a row.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// One fine line in the surface's edge colour (ink on bright surfaces, paper on Night's canvas), or the same line\n// turned to run down. Drawn as a border, so it snaps to device pixels like every other line.\nfunction Separator({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: SeparatorPrimitive.Props) {\n  return (\n    <SeparatorPrimitive\n      data-slot=\"separator\"\n      orientation={orientation}\n      className={cn(\n        \"shrink-0 border-[color:var(--edge,var(--ink))] data-[orientation=horizontal]:h-0 data-[orientation=horizontal]:w-full data-[orientation=horizontal]:border-t-(length:--line) data-[orientation=vertical]:w-0 data-[orientation=vertical]:self-stretch data-[orientation=vertical]:border-s-(length:--line)\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Separator }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/separator.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

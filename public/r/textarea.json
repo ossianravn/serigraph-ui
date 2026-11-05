@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "textarea",
+  "title": "Textarea",
+  "description": "Textarea: a few lines of text, such as a note with a booking: the field's tint in a rounded box that grows as you write.",
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/textarea.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// A few lines of text: the field's tint inside the ink line, in a 16px-radius box rather than a pill, growing with\n// what is written. 16px text so phones never zoom. Width follows the writing it expects (the 34rem measure for a\n// note); set it at the call site.\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n  return (\n    <textarea\n      data-slot=\"textarea\"\n      className={cn(\n        \"control-field flex field-sizing-content min-h-26 w-full rounded-box px-snug py-tight leading-body supports-[field-sizing:content]:resize-none\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Textarea }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/textarea.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

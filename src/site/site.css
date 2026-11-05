@@ -41,8 +41,30 @@
   letter-spacing: 0.2em;
   text-decoration: none;
 }
+/* The sections, a dot between each. When the list wraps, the dot that would start a line falls outside the nav's
+   left edge and is clipped, so no line begins or ends with a dot; the clip leaves room for focus rings. */
 .site-nav {
   margin-left: auto;
+  clip-path: inset(-1em -1em -1em -5px);
+}
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: var(--space-hair);
+  margin: 0;
+  margin-inline-start: -1.3em;
+  padding: 0;
+  list-style: none;
+}
+.site-nav li {
+  position: relative;
+  margin-inline-start: 1.3em;
+}
+.site-nav li::before {
+  content: "•" / "";
+  position: absolute;
+  inset-inline-start: -0.82em;
+  scale: 0.8;
 }
 .site-nav a {
   text-decoration: none;

@@ -1,0 +1,139 @@
+"use client"
+
+import * as React from "react"
+import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
+import { Folly } from "@/serigraph/extras/folly"
+import { cn } from "@/serigraph/lib/utils"
+
+// A circle in a spot colour (plane 2, or a tone with data-tone="1" … "4") with the ink line drawn over its edge, so a
+// picture runs right to the line. The fallback's initials sit in the extended capitals with stipple on the circle's
+// shadow side (feedback.css). Give the fallback a `name` and it becomes a medallion folly seeded by that name, so
+// the same person is drawn the same way everywhere; the children stay as its accessible text. The medallion's sky is
+// the avatar's spot colour and its clouds are paper, so it reads as a circle of colour on any canvas, Night's too.
+const ring =
+  "after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-full after:border-(length:--line) after:border-ink"
+
+function Avatar({
+  className,
+  size = "default",
+  ...props
+}: AvatarPrimitive.Root.Props & {
+  size?: "default" | "sm" | "lg"
+}) {
+  return (
+    <AvatarPrimitive.Root
+      data-slot="avatar"
+      data-size={size}
+      className={cn(
+        "group/avatar relative isolate flex size-8 shrink-0 rounded-full bg-(--avatar-fill) text-ink select-none [--avatar-fill:var(--plane-2)] data-[size=lg]:size-10 data-[size=sm]:size-6 data-[tone=1]:[--avatar-fill:var(--tone-1)] data-[tone=2]:[--avatar-fill:var(--tone-2)] data-[tone=3]:[--avatar-fill:var(--tone-3)] data-[tone=4]:[--avatar-fill:var(--tone-4)]",
+        ring,
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
+  return (
+    <AvatarPrimitive.Image
+      data-slot="avatar-image"
+      className={cn(
+        "aspect-square size-full rounded-full object-cover",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarFallback({
+  className,
+  name,
+  children,
+  ...props
+}: AvatarPrimitive.Fallback.Props & {
+  /** Draws a medallion seeded by this name; the children stay as the accessible text. */
+  name?: string
+}) {
+  return (
+    <AvatarPrimitive.Fallback
+      data-slot="avatar-fallback"
+      data-portrait={name ? "" : undefined}
+      className={cn(
+        "relative isolate flex size-full items-center justify-center overflow-hidden rounded-full caps leading-none text-ink text-[0.6875rem] data-portrait:[--canvas:var(--avatar-fill)] data-portrait:[--cloud:var(--paper)] group-data-[size=lg]/avatar:text-[0.8125rem] group-data-[size=sm]/avatar:text-[0.5625rem]",
+        className,
+      )}
+      {...props}
+    >
+      {name ? (
+        <>
+          <Folly
+            template="medallion"
+            seed={name}
+            label={children ? undefined : name}
+            className="pointer-events-none size-[120%] shrink-0"
+          />
+          {children ? <span className="sr-only">{children}</span> : null}
+        </>
+      ) : (
+        children
+      )}
+    </AvatarPrimitive.Fallback>
+  )
+}
+
+function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="avatar-badge"
+      className={cn(
+        "absolute end-0 bottom-0 z-20 inline-flex items-center justify-center rounded-full border-(length:--line) border-ink bg-action text-ink select-none",
+        "group-data-[size=sm]/avatar:size-2.5 group-data-[size=sm]/avatar:[&>svg]:hidden",
+        "group-data-[size=default]/avatar:size-3 group-data-[size=default]/avatar:[&>svg]:size-2",
+        "group-data-[size=lg]/avatar:size-3.5 group-data-[size=lg]/avatar:[&>svg]:size-2.5",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="avatar-group"
+      className={cn(
+        "group/avatar-group flex -space-x-1.5 has-data-[size=lg]:-space-x-2 has-data-[size=sm]:-space-x-1",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function AvatarGroupCount({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="avatar-group-count"
+      className={cn(
+        "field-fill relative isolate flex size-8 shrink-0 items-center justify-center rounded-full font-mono text-[0.75rem] leading-none group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=lg]/avatar-group:text-small group-has-data-[size=sm]/avatar-group:size-6 group-has-data-[size=sm]/avatar-group:text-[0.625rem] [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        ring,
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarBadge,
+}

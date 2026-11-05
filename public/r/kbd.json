@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "title": "Kbd",
+  "description": "Kbd: names a key or a shortcut: the key in the mono face inside a small pill with the line.",
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/kbd.tsx",
+      "content": "import { cn } from \"@/serigraph/lib/utils\"\n\n// A key: its name in Serigraph Mono inside a small pill with the ink line, on a tint of the surface beneath. A single\n// key is a circle, a word a pill. Inside a tooltip's ink pill the line and the name turn paper.\nfunction Kbd({ className, ...props }: React.ComponentProps<\"kbd\">) {\n  return (\n    <kbd\n      data-slot=\"kbd\"\n      className={cn(\n        \"field-fill pointer-events-none inline-flex h-[1.375rem] w-fit min-w-[1.375rem] items-center justify-center gap-1 rounded-full border-(length:--line) border-ink px-[0.4375rem] font-mono text-[0.75rem] leading-none text-ink select-none in-data-[slot=tooltip-content]:border-paper in-data-[slot=tooltip-content]:bg-transparent in-data-[slot=tooltip-content]:text-paper [&_svg:not([class*='size-'])]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction KbdGroup({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <kbd\n      data-slot=\"kbd-group\"\n      className={cn(\"inline-flex items-center gap-1\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Kbd, KbdGroup }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/kbd.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

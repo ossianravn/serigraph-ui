@@ -17,7 +17,7 @@ function Switch({
       data-slot="switch"
       data-size={size}
       className={cn(
-        "peer group/switch relative inline-flex shrink-0 cursor-pointer items-center rounded-full border-(length:--line) border-ink bg-[color-mix(in_oklab,var(--surface,var(--canvas))_30%,var(--paper))] p-px transition-colors duration-(--duration-control) ease-(--ease) data-checked:bg-highlight data-[size=default]:h-7 data-[size=default]:w-[3.125rem] data-[size=sm]:h-[1.4375rem] data-[size=sm]:w-[2.5625rem] aria-invalid:outline-(length:--line) aria-invalid:outline-rose aria-invalid:outline-offset-3 data-disabled:cursor-not-allowed data-disabled:border-ink-quiet data-disabled:bg-[color-mix(in_oklab,var(--surface,var(--canvas))_12%,var(--paper))]",
+        "peer group/switch relative inline-flex shrink-0 cursor-pointer items-center rounded-full border-(length:--line) border-ink bg-[color-mix(in_oklab,var(--surface,var(--canvas))_30%,var(--paper))] p-px transition-colors duration-(--duration-control) ease-(--ease) data-checked:bg-highlight data-[size=default]:h-7 data-[size=default]:w-[3.125rem] data-[size=sm]:h-[1.4375rem] data-[size=sm]:w-[2.5625rem] aria-invalid:outline-(length:--line) aria-invalid:outline-rose aria-invalid:outline-offset-3 data-disabled:cursor-not-allowed data-disabled:border-ink-quiet data-disabled:bg-[color-mix(in_oklab,var(--surface,var(--canvas))_35%,var(--paper))]",
         className,
       )}
       {...props}

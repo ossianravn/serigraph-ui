@@ -43,16 +43,13 @@ const links = [
             Serigraph
           </a>
           <nav class="site-nav caps" aria-label="Sections">
-            {links.map(([label, href], i) => (
-              <>
-                {i > 0 && (
-                  <span class="sep" aria-hidden="true">
-                    •
-                  </span>
-                )}
-                <a href={href}>{label}</a>
-              </>
-            ))}
+            <ul>
+              {links.map(([label, href]) => (
+                <li>
+                  <a href={href}>{label}</a>
+                </li>
+              ))}
+            </ul>
           </nav>
         </header>
         <main id="main">

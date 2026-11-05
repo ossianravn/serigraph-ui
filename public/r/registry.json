@@ -37,6 +37,11 @@
           "target": "~/src/serigraph/styles/controls.css"
         },
         {
+          "path": "src/serigraph/styles/feedback.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/feedback.css"
+        },
+        {
           "path": "src/serigraph/styles/follies.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/follies.css"
@@ -47,6 +52,11 @@
           "target": "~/src/serigraph/styles/fonts.css"
         },
         {
+          "path": "src/serigraph/styles/forms.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/forms.css"
+        },
+        {
           "path": "src/serigraph/styles/lettering.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/lettering.css"
@@ -55,6 +65,11 @@
           "path": "src/serigraph/styles/letters.generated.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/letters.generated.css"
+        },
+        {
+          "path": "src/serigraph/styles/overlays.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/overlays.css"
         },
         {
           "path": "src/serigraph/styles/parts.css",
@@ -105,6 +120,66 @@
           "path": "src/serigraph/theme/use-appearance.ts",
           "type": "registry:file",
           "target": "~/src/serigraph/theme/use-appearance.ts"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:component",
+      "title": "Alert",
+      "description": "Alert: tells people something they should know now: a small plane with a sparkle or an icon by its title.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/motif"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/alert.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:component",
+      "title": "Alert Dialog",
+      "description": "Alert dialog: asks for a decision before something that cannot be taken back, and waits for an answer.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/alert-dialog.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/alert-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:component",
+      "title": "Avatar",
+      "description": "Avatar: stands for a person: their picture or initials in a circle of spot colour, or a medallion drawn from their name.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/folly"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/avatar.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/avatar.tsx"
         }
       ]
     },
@@ -180,6 +255,68 @@
           "path": "src/serigraph/ui/checkbox.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:component",
+      "title": "Dialog",
+      "description": "Dialog: a task that needs full attention before returning to the page: a plane centred over a fine screen of ink dots.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/dialog.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:component",
+      "title": "Dropdown Menu",
+      "description": "Dropdown menu: a list of actions or view options that opens from a button and closes once one is chosen.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/dropdown-menu.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:component",
+      "title": "Field",
+      "description": "Field: keeps a label, its control, a description and an error together in one readable column, for building forms.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/label",
+        "@serigraph/separator"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/field.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/field.tsx"
         }
       ]
     },
@@ -296,6 +433,22 @@
       ]
     },
     {
+      "name": "kbd",
+      "type": "registry:component",
+      "title": "Kbd",
+      "description": "Kbd: names a key or a shortcut: the key in the mono face inside a small pill with the line.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/kbd.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/kbd.tsx"
+        }
+      ]
+    },
+    {
       "name": "label",
       "type": "registry:component",
       "title": "Label",
@@ -357,14 +510,14 @@
           "target": "~/src/serigraph/letters/figures.ts"
         },
         {
+          "path": "src/serigraph/letters/geometry.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/letters/geometry.ts"
+        },
+        {
           "path": "src/serigraph/letters/mono.ts",
           "type": "registry:file",
           "target": "~/src/serigraph/letters/mono.ts"
-        },
-        {
-          "path": "src/serigraph/letters/skeleton.ts",
-          "type": "registry:file",
-          "target": "~/src/serigraph/letters/skeleton.ts"
         }
       ]
     },
@@ -382,6 +535,173 @@
           "path": "src/serigraph/extras/motif.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/extras/motif.tsx"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:component",
+      "title": "Native Select",
+      "description": "Native select: picks one value with the platform's own list, best on phones: a field with a chevron over the browser's select.",
+      "dependencies": [
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/native-select.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/native-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:component",
+      "title": "Popover",
+      "description": "Popover: holds a few details or one small task beside the control that opened it, on a plane that grows from it.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/popover.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:component",
+      "title": "Progress",
+      "description": "Progress: shows how far a task has gone: a pill slot that fills with louvers of the action colour and ink.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/progress.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:component",
+      "title": "Radio Group",
+      "description": "Radio group: picks one of a few options shown together: circles that take the highlight and a solid ink dot.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/radio-group.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:component",
+      "title": "Select",
+      "description": "Select: picks one value from a list too long to show at once: a field with a chevron that opens a plane of options.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/select.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:component",
+      "title": "Separator",
+      "description": "Separator: divides content inside a group: one fine line across it, or the same line turned between items in a row.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/separator.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:component",
+      "title": "Skeleton",
+      "description": "Skeleton: holds the place of content still loading: a tint in that content's own shape, breathing slowly.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/skeleton.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:component",
+      "title": "Slider",
+      "description": "Slider: sets a value or a range by dragging along a line, such as the dome's light: the thumb is a pinwheel that rolls as it goes.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/slider.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:component",
+      "title": "Spinner",
+      "description": "Spinner: says something is on its way: a pinwheel turning at a steady pace, announced as loading.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/follies"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/spinner.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/spinner.tsx"
         }
       ]
     },
@@ -425,25 +745,121 @@
       ]
     },
     {
+      "name": "textarea",
+      "type": "registry:component",
+      "title": "Textarea",
+      "description": "Textarea: a few lines of text, such as a note with a booking: the field's tint in a rounded box that grows as you write.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/textarea.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:component",
+      "title": "Toggle",
+      "description": "Toggle: a button that stays down while a mode is on, such as red-light mode: a pill that takes the highlight when pressed.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/toggle.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:component",
+      "title": "Toggle Group",
+      "description": "Toggle group: a row of toggles: joined, the segmented control for two to four choices; spaced, a set of filters that switch on and off.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/toggle"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/toggle-group.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/toggle-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:component",
+      "title": "Tooltip",
+      "description": "Tooltip: names a control, or defines a term, in a small ink pill while it is hovered or focused, or held on a touch screen.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/tooltip.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
       "name": "serigraph",
       "type": "registry:item",
       "title": "Serigraph",
       "description": "Every part of Serigraph: the base, the Follies engine and every component.",
       "registryDependencies": [
         "@serigraph/base",
+        "@serigraph/alert",
+        "@serigraph/alert-dialog",
+        "@serigraph/avatar",
         "@serigraph/badge",
         "@serigraph/button",
         "@serigraph/card",
         "@serigraph/checkbox",
+        "@serigraph/dialog",
+        "@serigraph/dropdown-menu",
+        "@serigraph/field",
         "@serigraph/follies",
         "@serigraph/folly",
         "@serigraph/input",
+        "@serigraph/kbd",
         "@serigraph/label",
         "@serigraph/lettering",
         "@serigraph/letters",
         "@serigraph/motif",
+        "@serigraph/native-select",
+        "@serigraph/popover",
+        "@serigraph/progress",
+        "@serigraph/radio-group",
+        "@serigraph/select",
+        "@serigraph/separator",
+        "@serigraph/skeleton",
+        "@serigraph/slider",
+        "@serigraph/spinner",
         "@serigraph/switch",
-        "@serigraph/tabs"
+        "@serigraph/tabs",
+        "@serigraph/textarea",
+        "@serigraph/toggle",
+        "@serigraph/toggle-group",
+        "@serigraph/tooltip"
       ],
       "files": []
     }

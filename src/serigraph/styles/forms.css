@@ -1,0 +1,172 @@
+/* Part drawing for the forms parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* A choice card: a label that wraps a whole Field. Just the edge line on whatever is beneath; chosen, it takes the
+     highlight inside an ink line (the option's own dot or tick carries the choice too). */
+  [data-slot="field-label"]:has(> [data-slot="field"]) {
+    border: var(--line) solid var(--edge, var(--ink));
+    border-radius: var(--r-box);
+    color: var(--text, var(--ink));
+    cursor: pointer;
+    transition: background-color var(--duration-control) var(--ease);
+    & > [data-slot="field"] {
+      padding: var(--space-snug);
+    }
+    @media (hover: hover) {
+      &:hover:not(:has([data-checked], [data-disabled])) {
+        background-color: color-mix(
+          in oklab,
+          var(--surface, var(--canvas)) 70%,
+          var(--paper)
+        );
+      }
+    }
+    &:has([data-checked]) {
+      --surface: var(--highlight);
+      --text: var(--ink);
+      --text-quiet: var(--ink-quiet);
+      --edge: var(--ink);
+      border-color: var(--ink);
+      background-color: var(--highlight);
+      color: var(--ink);
+    }
+    &:has([data-disabled]) {
+      border-color: var(--text-quiet, var(--ink-quiet));
+      color: var(--text-quiet, var(--ink-quiet));
+      cursor: not-allowed;
+    }
+    @media (forced-colors: active) {
+      &:has([data-checked]) {
+        border-width: calc(var(--line) * 2);
+      }
+    }
+  }
+
+  /* The segmented control: joined toggles on a plane 2 pill track. The track is as tall as a button, so each segment
+     is the control height less the track's padding and line. Unchosen segments have no line; the chosen one is a
+     highlight pill with the ink line (from the toggle). */
+  [data-slot="toggle-group"][data-spacing="0"] {
+    --surface: var(--plane-2);
+    --text: var(--ink);
+    --text-quiet: var(--ink-quiet);
+    --edge: var(--ink);
+    --track-pad: 3px;
+    --segment-inset: calc(var(--track-pad) + var(--line));
+    gap: 2px;
+    padding: var(--track-pad);
+    border: var(--line) solid var(--ink);
+    border-radius: 999px;
+    background-color: var(--plane-2);
+    background-image: var(--grain);
+    background-size: var(--grain-size);
+    color: var(--ink);
+    /* Compact, the track gives its segments room to stay 24px targets. */
+    &[data-size="sm"] {
+      --track-pad: 2px;
+    }
+    &[data-orientation="vertical"] {
+      border-radius: calc(var(--control-height) / 2);
+    }
+    &[data-disabled] {
+      border-color: var(--ink-quiet);
+      background-color: color-mix(in oklab, var(--plane-2) 35%, var(--paper));
+      background-image: none;
+      color: var(--ink-quiet);
+    }
+    & > [data-slot="toggle-group-item"] {
+      --segment: calc(var(--control-height) - 2 * var(--segment-inset));
+      height: var(--segment);
+      min-width: calc(var(--segment) + var(--space-tight));
+      &[data-size="sm"] {
+        --segment: calc(
+          var(--control-height-compact) - 2 * var(--segment-inset)
+        );
+      }
+      &[data-size="lg"] {
+        --segment: calc(3rem - 2 * var(--segment-inset));
+      }
+      &:not([data-pressed]) {
+        --pill-line: transparent;
+      }
+      &[data-disabled]:not([data-pressed]) {
+        border-color: transparent;
+        background-color: transparent;
+      }
+      /* Outside, the ring would fall on the track's own line; it turns inward, still a second line with a gap. */
+      &:focus-visible {
+        outline-offset: calc(-2 * var(--line) - 2px);
+      }
+    }
+  }
+
+  /* Slider: the track is one fine line through the middle of a box as tall as the range; the range is a thicker line
+     inside the ink line, which Base UI sizes to the track (height or width: inherit). */
+  [data-slot="slider-track"] {
+    &[data-orientation="horizontal"] {
+      width: 100%;
+      height: 0.4375rem;
+    }
+    &[data-orientation="vertical"] {
+      width: 0.4375rem;
+      height: 100%;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      border: 0 solid var(--edge, var(--ink));
+    }
+    &[data-orientation="horizontal"]::before {
+      inset-inline: 0;
+      top: calc(50% - var(--line) / 2);
+      border-top-width: var(--line);
+    }
+    &[data-orientation="vertical"]::before {
+      inset-block: 0;
+      left: calc(50% - var(--line) / 2);
+      border-left-width: var(--line);
+    }
+    &[data-disabled]::before {
+      border-color: var(--text-quiet, var(--ink-quiet));
+    }
+  }
+  /* The pinwheel thumb rolls the distance it travels: a turn of travel ÷ radius, the travel being the control's width
+     less the thumb (Base UI's edge alignment). --turn is the thumb's place from 0 to 1, set by the part. */
+  [data-slot="slider-thumb"][data-orientation="horizontal"] {
+    --roll: 1rad;
+    rotate: calc(
+      var(--turn, 0) * (100cqi - 1.4375rem) / 0.71875rem * var(--roll)
+    );
+    &:dir(rtl) {
+      --roll: -1rad;
+    }
+  }
+
+  /* Progress: indeterminate, a short run of louvers crosses the slot with an ink line at each end; under reduced
+     motion it stands in the middle. */
+  [data-slot="progress-indicator"][data-indeterminate] {
+    width: 40%;
+    animation: serigraph-progress-cross 1.8s ease-in-out infinite;
+    &::before {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 0;
+      width: var(--line);
+      background: var(--ink);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      translate: 75% 0;
+    }
+  }
+}
+
+@keyframes serigraph-progress-cross {
+  from {
+    translate: -100% 0;
+  }
+  to {
+    translate: 250% 0;
+  }
+}

@@ -57,7 +57,7 @@ Sizes gzipped (unpacked in brackets), speed on the lab profile, measured 2026-11
 
 ### Fixes, ranked
 
-Ranked by gain on a phone for the work. None is made yet. Each gain is expected, not measured.
+Ranked by gain on a phone for the work, as proposed before the repair pass. Each gain was expected, not measured; what landed and what it measured is under "After the repair pass".
 
 | #   | Fix                                                                                                                                                                                                        | Where                                                                                                                 | Expected gain                                                                                                                                                                                  |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -72,6 +72,27 @@ Ranked by gain on a phone for the work. None is made yet. Each gain is expected,
 | 9   | Precompress at build (Brotli) and give `/_astro/` and `/fonts/` a year's immutable cache when the site is deployed                                                                                         | The deployment, once the maintainer approves it                                                                       | The stylesheet 95.6 to 83 KB on the wire; repeat visits fetch only HTML                                                                                                                        |
 | 10  | Split Archivo: the weight-only file (35 KB) for reading text, the width axis only for the few stretched headings                                                                                           | `src/serigraph/styles/fonts.css`, `src/serigraph/styles/tokens.css`                                                   | About 55 KB less font on pages without a stretched heading                                                                                                                                     |
 
+### After the repair pass (2026-11-06)
+
+Landed: fix 2 (frames load one at a time from a queue, near ones first and none while the page scrolls; the frame's block hydrates on idle), fix 3 (the site loads the five faces and the grain as files and preloads Display and Sans Bold; the registry's stylesheet keeps them embedded), fix 4 (all four grain tiles are WebP bitmaps; the mottle is periodic noise drawn as pixels, since the rasterised SVG tile showed its seam), fix 6, fix 7 (Shiki loads when the export comes near), and fix 8 in part (a reroll is a React transition). Fix 5 went to `client:idle` instead of a script. Fix 1 was tried for the chart demo as one hydration boundary per chart and measured worse (about 980 ms against 660 ms), so it was reverted.
+
+Production build, headless Chrome at 1440 × 1000, CPU throttled 4×, cache off. Total blocking time after first paint and the longest task:
+
+| Page                      | FCP    | Blocking | Longest task | JS     |
+| ------------------------- | ------ | -------- | ------------ | ------ |
+| `/`                       | 256 ms | 0 ms     | 67 ms        | 111 KB |
+| `/specimen`               | 280 ms | 0 ms     | 142 ms       | 73 KB  |
+| `/letters`                | 312 ms | 0 ms     | 0            | 0      |
+| `/press`                  | 256 ms | 0 ms     | 0            | 80 KB  |
+| `/studio`                 | 788 ms | 34 ms    | 396 ms       | 205 KB |
+| `/docs`                   | 272 ms | 15 ms    | 114 ms       | 0      |
+| `/docs/components/button` | 232 ms | 0 ms     | 51 ms        | 108 KB |
+| `/docs/components/chart`  | 168 ms | 663 ms   | 624 ms       | 223 KB |
+| `/docs/blocks`            | 156 ms | 0 ms     | 0            | 120 KB |
+| `/meridian`               | 192 ms | 0 ms     | 0            | 204 KB |
+
+Scrolling top to bottom at 4× (dev server): `/`, `/letters`, `/specimen` and `/docs` hold a 17–18 ms p95 frame; `/docs/blocks` went from a 54 ms p95 and 39 frames over 20 ms to 27 ms and 20 (18 ms and 5 unthrottled). The chart docs page stays over budget: six interactive charts hydrate together.
+
 ### Techniques
 
 | Technique                                                                       | State                                                                             |
@@ -79,11 +100,11 @@ Ranked by gain on a phone for the work. None is made yet. Each gain is expected,
 | Static HTML first, islands only where something is operated                     | In use; several islands load on the first view that could wait (fixes 1, 2, 5, 6) |
 | Follies drawn at build time as inline SVG; a hydrating drawing keeps its markup | In use                                                                            |
 | Grain under the content on every surface, scrolled on the compositor            | In use; the docs nav scrolls without repainting                                   |
-| Filter-free grain tiles                                                         | Not yet (fix 4)                                                                   |
-| First-screen fonts as preloaded WOFF2 files, `font-display: swap`               | Not yet: embedded in the stylesheet (fix 3)                                       |
+| Filter-free grain tiles                                                         | In use: WebP bitmaps                                                              |
+| First-screen fonts as preloaded WOFF2 files, `font-display: swap`               | In use on the site; the registry's stylesheet keeps them embedded                 |
 | A metric-matched fallback font (`size-adjust`, `ascent-override`)               | Not needed while the faces are embedded; needed with fix 3                        |
 | Per-demo chunks for docs pages                                                  | In use (`demo-host.tsx` loads one demo by name)                                   |
-| `content-visibility: auto` on long pages                                        | Not yet; a candidate for the table demo's rows and `/letters`                     |
+| `content-visibility: auto` on long pages                                        | In use on the sections of `/letters`                                              |
 | Same-origin prefetch through the Speculation Rules API (moderate eagerness)     | Not yet                                                                           |
 | Cross-document view transitions (`@view-transition`), none under reduced motion | Not yet                                                                           |
 | Back/forward cache: no `unload` handlers, no `no-store`                         | Believed eligible; not checked                                                    |
@@ -93,5 +114,5 @@ Ranked by gain on a phone for the work. None is made yet. Each gain is expected,
 ## Where v0.1 stands
 
 - **Loading:** every page paints its largest content in 1.1–2.0 s and does not shift on the lab phone.
-- **Over budget:** the main thread (hydration on the chart, blocks, table, studio and home pages), JavaScript on the studio, Meridian, settings, chart and blocks pages, the render-blocking stylesheet (the embedded fonts), and two reroll taps.
+- **Over budget:** the chart docs page's hydration (six Recharts charts at once), and JavaScript on the studio, Meridian and chart pages. The other pages measured above block for 0–34 ms at 4× throttling.
 - **Not covered yet:** a real phone (GPU raster and memory of the grain, real touch scrolling), Safari and Firefox, field data, and the deployed host's compression and caching.

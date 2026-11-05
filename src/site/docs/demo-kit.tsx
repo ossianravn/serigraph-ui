@@ -1,4 +1,5 @@
 import {
+  Children,
   createContext,
   useContext,
   type CSSProperties,
@@ -24,8 +25,22 @@ export interface DemoMeta {
     | "Serigraph extras"
 }
 
-/** How many named columns the rows of the current section line up in (DemoSection's `columns`). */
-const Columns = createContext(0)
+type Claim = (part: "section" | "row") => boolean
+
+/**
+ * Preview mode, for the Components index: a demo shows its first example row alone, without section titles or
+ * state labels. Each preview gets its own `previewClaim()`, which answers true once per part; it relies on rendering
+ * in order, as the server renderer does.
+ */
+export const DemoPreview = createContext<Claim | null>(null)
+
+export function previewClaim(): Claim {
+  const taken = new Set<string>()
+  return (part) => !taken.has(part) && Boolean(taken.add(part))
+}
+
+/** The named columns the rows of the current section line up in (DemoSection's `columns`). */
+const Columns = createContext<readonly string[]>([])
 
 /** A row's columns when its section names them (from md): each as wide as its widest usual example. Narrower, the
  * examples wrap and the column names are hidden. */
@@ -57,6 +72,11 @@ export function DemoSection({
   columns?: readonly string[]
   children: ReactNode
 }) {
+  const preview = useContext(DemoPreview)
+  if (preview)
+    return preview("section") ? (
+      <Columns.Provider value={columns ?? []}>{children}</Columns.Provider>
+    ) : null
   const n = columns?.length ?? 0
   return (
     <section className="py-snug">
@@ -77,7 +97,7 @@ export function DemoSection({
           </div>
         </div>
       )}
-      <Columns.Provider value={n}>{children}</Columns.Provider>
+      <Columns.Provider value={columns ?? []}>{children}</Columns.Provider>
     </section>
   )
 }
@@ -90,7 +110,20 @@ export function StateRow({
   label: string
   children: ReactNode
 }) {
-  const n = useContext(Columns)
+  const preview = useContext(DemoPreview)
+  const columns = useContext(Columns)
+  const n = columns.length
+  // A preview leaves out a disabled twin: the part at rest is the picture.
+  if (preview)
+    return preview("row") ? (
+      <div className="flex min-w-0 flex-wrap items-center justify-center gap-tight">
+        {n
+          ? Children.toArray(children).filter(
+              (_, i) => columns[i] !== "Disabled",
+            )
+          : children}
+      </div>
+    ) : null
   return (
     <div className={`${ROW} py-tight`}>
       <span className={ROW_LABEL}>{label}</span>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { ExternalLinkIcon } from "lucide-react"
 import { cn } from "@/serigraph/lib/utils"
 import { ToggleGroup, ToggleGroupItem } from "@/serigraph/ui/toggle-group"
+import { enqueue, loaded } from "./frame-queue"
 
 // A block running in a frame of its own page, so it lays out for the frame's width (full width, or a 390 px phone)
 // and its fixed and full-height parts behave as they would in an app. A segmented control picks the width, another
@@ -64,19 +65,31 @@ export function BlockPreview({
   const [variant, setVariant] = useState(variants?.[0])
   const src = `/docs/blocks/view/${name}${variant && variant !== variants?.[0] ? `/${variant}` : ""}`
   const phone = width === "phone"
-  // The frame loads its page only when it comes near the window: seven frames each load and hydrate a whole page.
+  // The frame waits its turn in the page's queue (frame-queue.ts): one frame loads at a time, near ones first, and
+  // none while the page scrolls. Once it has its page, changing the width or the state reloads it at once.
   const box = useRef<HTMLDivElement>(null)
-  const [near, setNear] = useState(false)
+  const [ready, setReady] = useState(false)
+  const queued = useRef(false)
   useEffect(() => {
     const el = box.current
-    if (!el || near) return
+    if (!el) return
+    queued.current = true
+    const entry = enqueue(() => setReady(true))
     const observer = new IntersectionObserver(
-      ([entry]) => entry?.isIntersecting && setNear(true),
+      ([seen]) => seen?.isIntersecting && entry.near(),
       { rootMargin: "300px 0px" },
     )
     observer.observe(el)
-    return () => observer.disconnect()
-  }, [near])
+    return () => {
+      observer.disconnect()
+      entry.remove()
+    }
+  }, [])
+  const onLoad = () => {
+    if (!queued.current) return
+    queued.current = false
+    loaded()
+  }
   const [frame, height] = useFittedHeight(src, !phone)
 
   return (
@@ -146,9 +159,9 @@ export function BlockPreview({
           <iframe
             key={src}
             ref={frame}
-            src={near ? src : undefined}
+            src={ready ? src : undefined}
+            onLoad={ready ? onLoad : undefined}
             title={`${title} preview`}
-            loading="lazy"
             style={height ? { height } : undefined}
             className={cn(
               "block w-full bg-canvas",

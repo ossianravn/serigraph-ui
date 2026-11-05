@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
 import { DownloadIcon } from "lucide-react"
 import {
   useAppearance,
@@ -39,13 +40,26 @@ export function ExportPanel({
 }) {
   const [appearance, update] = useAppearance(siteAppearance)
   const css = colourwayCss(name, colourway)
-  const lines = useHighlightedCode(css, "css")
+  // The highlighter (Shiki) loads only when the export comes near the window; until then the lines are plain ink.
+  const box = useRef<HTMLElement>(null)
+  const [near, setNear] = useState(false)
+  useEffect(() => {
+    const el = box.current
+    if (!el || near) return
+    const observer = new IntersectionObserver(
+      ([seen]) => seen?.isIntersecting && setNear(true),
+      { rootMargin: "400px 0px" },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [near])
   const file = `${slugOf(name)}.css`
   const failing = pairs.filter((p) => p.ratio < PASS)
   const site = preset?.builtIn ? (preset.id as SiteColourway) : undefined
 
   return (
     <section
+      ref={box}
       id="studio-export"
       aria-labelledby="studio-export-title"
       className="studio-export"
@@ -111,9 +125,16 @@ export function ExportPanel({
           </CodeBlockActions>
         </CodeBlockHeader>
         <CodeBlockContent lineNumbers>
-          {lines.map((line, index) => (
-            <CodeBlockLine key={index}>{line}</CodeBlockLine>
-          ))}
+          {near ? (
+            <HighlightedLines code={css} />
+          ) : (
+            css
+              .replace(/\n$/, "")
+              .split("\n")
+              .map((line, index) => (
+                <CodeBlockLine key={index}>{line}</CodeBlockLine>
+              ))
+          )}
         </CodeBlockContent>
         <CodeBlockFooter>
           <span>
@@ -124,4 +145,11 @@ export function ExportPanel({
       </CodeBlock>
     </section>
   )
+}
+
+function HighlightedLines({ code }: { code: string }) {
+  const lines = useHighlightedCode(code, "css")
+  return lines.map((line, index) => (
+    <CodeBlockLine key={index}>{line}</CodeBlockLine>
+  ))
 }

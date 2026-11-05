@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useState, type ReactNode } from "react"
+import { Fragment, useState, useTransition, type ReactNode } from "react"
 import { DicesIcon } from "lucide-react"
 import { Folly } from "@/serigraph/extras/folly"
 import { Lettering } from "@/serigraph/extras/lettering"
@@ -78,6 +78,8 @@ export function Hero01({
   className,
 }: Hero01Props) {
   const [seed, setSeed] = useState(first)
+  // A new city is a large drawing to paint, so it arrives in a transition: the button answers at once.
+  const [, startTransition] = useTransition()
   // The name fills the column: about 0.66 em a letter in Serigraph Display, capped for very short names.
   const fit = `min(14rem, calc(100cqi / ${(product.length * 0.66).toFixed(2)}))`
   return (
@@ -143,7 +145,7 @@ export function Hero01({
               variant="ghost"
               size="sm"
               data-hero-reroll=""
-              onClick={() => setSeed(nextSeed(seed))}
+              onClick={() => startTransition(() => setSeed(nextSeed(seed)))}
               className="justify-self-end"
             >
               <DicesIcon data-icon="inline-start" /> Draw another city

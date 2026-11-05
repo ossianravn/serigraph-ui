@@ -1,42 +1,41 @@
 ---
-// The Components index: every part with a docs page, by group, each a title and the sentence on what it is for.
+// The Components index: every part with a docs page, by group, each a card with the part itself at rest, its title
+// and the sentence on what it is for. The previews render on the server; the page ships no script of its own.
 import Base from "@/site/layouts/base.astro"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { GROUPS } from "@/site/docs/catalogue"
+import { GalleryCard } from "@/site/docs/gallery/gallery-card"
 import "@/site/docs/docs.css"
+
+const slug = (group: string) => `g-${group.toLowerCase().replace(/\s+/g, "-")}`
 ---
 
 <Base
   title="Components"
   description="Serigraph's parts: shadcn's names, props and slots on Base UI, printed flat in the colourway's spot colours inside one fine line."
 >
-  <div class="docs">
-    <div class="min-w-0">
-      <Lettering as="h1" className="docs-title">
-        Components
-      </Lettering>
-      <p class="docs-lead">
-        shadcn's parts with their names, props and slots, printed flat in the
-        colourway's spot colours inside one fine line. Whole pages built from
-        them are under <a href="/docs/blocks">Blocks</a>.
-      </p>
-      <div class="docs-index">
-        {GROUPS.map(({ group, items }) => (
-          <section aria-labelledby={`g-${group}`}>
-            <h2 id={`g-${group}`} class="caps">
-              {group}
-            </h2>
-            <ul>
-              {items.map(({ name, title, description }) => (
-                <li>
-                  <a href={`/docs/components/${name}`}>{title}</a>
-                  <p>{description}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
-    </div>
+  <div class="docs-index">
+    <Lettering as="h1" className="docs-title">
+      Components
+    </Lettering>
+    <p class="docs-lead">
+      shadcn's parts with their names, props and slots, printed flat in the
+      colourway's spot colours inside one fine line. Whole pages built from them
+      are under <a href="/docs/blocks">Blocks</a>.
+    </p>
+    {GROUPS.map(({ group, items }) => (
+      <section class="docs-group" aria-labelledby={slug(group)}>
+        <Lettering as="h2" id={slug(group)} className="docs-group-title">
+          {group}
+        </Lettering>
+        <ul class="gallery">
+          {items.map((item) => (
+            <li>
+              <GalleryCard name={item.name} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
   </div>
 </Base>

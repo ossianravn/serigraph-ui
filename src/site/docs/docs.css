@@ -1,5 +1,5 @@
 /* The docs pages: a component's states in one column of a fixed width, the nav of every component beside it from
-   lg; the index lists the components by group at the reading measure. */
+   lg; the index shows every part as a card with its preview, by group. */
 .docs {
   display: grid;
   gap: var(--space-page);
@@ -100,36 +100,102 @@
   text-decoration: underline;
 }
 
-/* The index: groups as sections, each component a title and its sentence. */
+/* The index: groups as sections under lettered titles, each part a card: a plate in plane 2 showing the part at
+   rest, its title (the card's one link, which covers the card) and its sentence. 1 column on phones, 2 from md,
+   3 from 80rem, where a plate is wide enough for a menu or a dialog, in the site's column. */
 .docs-index {
+  padding: var(--space-section) var(--gutter) var(--space-page);
+}
+.docs-group {
+  margin-top: var(--space-page);
+}
+.docs-group-title {
+  margin: 0 0 var(--space-line);
+  font-size: clamp(var(--type-h1), 4vw, var(--type-title));
+}
+.gallery {
   display: grid;
-  gap: var(--space-section);
-  max-width: 48rem;
-  margin-top: var(--space-section);
-  & h2 {
-    margin: 0 0 var(--space-tight);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-section) var(--space-line);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  & > li {
+    min-width: 0;
   }
-  & ul {
-    display: grid;
-    gap: var(--space-snug);
-    margin: 0;
-    padding: 0;
-    list-style: none;
+}
+@media (min-width: 48rem) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+@media (min-width: 80rem) {
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.gallery-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+}
+.gallery-plate {
+  position: relative;
+  height: 14rem;
+  overflow: clip;
+}
+.gallery-preview {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: safe center;
+  justify-items: safe center;
+  padding: var(--space-snug);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  & > * {
+    max-width: 100%;
+  }
+}
+.gallery-title {
+  margin: var(--space-snug) 0 0;
+  font-family: var(--face-read);
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+  font-weight: 600;
   & a {
-    font-size: var(--type-lead);
-    line-height: var(--lh-lead);
+    color: inherit;
+    text-decoration: none;
   }
-  & p {
-    max-width: var(--measure);
-    margin: var(--space-hair) 0 0;
+  /* The link covers the card, so the whole card is its target; its focus ring goes round the plate. */
+  & a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
   }
+  & a:focus-visible {
+    outline: none;
+  }
+}
+.gallery-card:hover .gallery-title a {
+  text-decoration: underline;
+  text-decoration-thickness: var(--line);
+  text-underline-offset: 0.2em;
+}
+.gallery-card:has(a:focus-visible) .gallery-plate {
+  outline: var(--line) solid var(--edge, var(--ink));
+  outline-offset: 3px;
+}
+.gallery-sentence {
+  max-width: var(--measure);
+  margin: var(--space-hair) 0 0;
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
 }
 
 /* The blocks page: each block's title, name and sentence over its preview frame. */
 .docs-blocks {
-  max-width: 76rem;
-  margin-inline: auto;
   padding: var(--space-section) var(--gutter) 0;
 }
 .docs-block {

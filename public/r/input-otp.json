@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input-otp",
+  "title": "Input Otp",
+  "description": "Input OTP: one tinted box per digit for a short one-time code, such as the sign-in code Meridian sends its members.",
+  "dependencies": [
+    "input-otp@^1.5.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/input-otp.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { OTPInput, OTPInputContext } from \"input-otp\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// One tinted round box per digit, square at control height: the surface's tint inside the ink line, digits in the mono\n// face. The box that takes the next keystroke carries the page's concentric ring (a little closer, so it clears its\n// neighbours); invalid boxes take a rose second ring, disabled ones the quiet tint (styles/composites.css). Groups are\n// divided by a short fine dash.\nfunction InputOTP({\n  className,\n  containerClassName,\n  ...props\n}: React.ComponentProps<typeof OTPInput> & {\n  containerClassName?: string\n}) {\n  return (\n    <OTPInput\n      data-slot=\"input-otp\"\n      containerClassName={cn(\n        \"group/input-otp flex items-center gap-tight has-disabled:cursor-not-allowed\",\n        containerClassName,\n      )}\n      spellCheck={false}\n      className={cn(\"disabled:cursor-not-allowed\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPGroup({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"input-otp-group\"\n      className={cn(\"flex items-center gap-hair\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction InputOTPSlot({\n  index,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & {\n  index: number\n}) {\n  const inputOTPContext = React.useContext(OTPInputContext)\n  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}\n\n  return (\n    <div\n      data-slot=\"input-otp-slot\"\n      data-active={isActive}\n      className={cn(\n        \"field-fill relative flex h-control w-[2.375rem] items-center justify-center rounded-box border-(length:--line) border-ink font-mono text-lead leading-none text-ink tabular-nums\",\n        className,\n      )}\n      {...props}\n    >\n      {char}\n      {hasFakeCaret && (\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n          <div className=\"h-[1.1em] w-(--line) animate-caret-blink bg-ink duration-1000\" />\n        </div>\n      )}\n    </div>\n  )\n}\n\nfunction InputOTPSeparator({ ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"input-otp-separator\"\n      className=\"flex items-center text-[color:var(--edge,var(--ink))] group-has-disabled/input-otp:text-[color:var(--text-quiet,var(--ink-quiet))]\"\n      role=\"separator\"\n      {...props}\n    >\n      <span\n        aria-hidden=\"true\"\n        className=\"block h-0 w-3 border-t-(length:--line) border-current\"\n      />\n    </div>\n  )\n}\n\nexport { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/input-otp.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

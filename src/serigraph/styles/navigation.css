@@ -1,0 +1,123 @@
+/* Part drawing for the navigation parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* A sheet lies against one edge of the window: the big radius only on its open side, and no line along the edge.
+     The mobile sidebar is a sheet under the sidebar's own data-slot. */
+  :is([data-slot="sheet-content"], [data-slot="sidebar"][data-mobile]) {
+    &[data-side="right"] {
+      border-right-width: 0;
+      border-radius: var(--r-plane) 0 0 var(--r-plane);
+    }
+    &[data-side="left"] {
+      border-left-width: 0;
+      border-radius: 0 var(--r-plane) var(--r-plane) 0;
+    }
+    &[data-side="top"] {
+      border-top-width: 0;
+      border-radius: 0 0 var(--r-plane) var(--r-plane);
+    }
+    &[data-side="bottom"] {
+      border-bottom-width: 0;
+      border-radius: var(--r-plane) var(--r-plane) 0 0;
+    }
+  }
+
+  /* Sidebar rows: the surface's line under the pointer, like a ghost button; the current row a highlight pill inside
+     the ink line, its words in ink; disabled, the quiet ink and no line. */
+  :is(
+    [data-slot="sidebar-menu-button"],
+    [data-slot="sidebar-menu-sub-button"]
+  ) {
+    @media (hover: hover) {
+      &:hover:not([data-active], :disabled, [aria-disabled="true"]) {
+        border-color: var(--edge, var(--ink));
+      }
+    }
+    &[data-active] {
+      border-color: var(--ink);
+      background-color: var(--highlight);
+      color: var(--ink);
+    }
+    &:is(:disabled, [aria-disabled="true"]) {
+      color: var(--text-quiet, var(--ink-quiet));
+      cursor: not-allowed;
+    }
+    @media (forced-colors: active) {
+      &[data-active] {
+        border-width: calc(var(--line) * 2);
+      }
+    }
+  }
+
+  /* A row's action with showOnHover waits for its row to be hovered or focused, or its menu to be open; only on a wide
+     screen with a pointer, so a touch screen always shows it. */
+  @media (min-width: 48rem) and (hover: hover) {
+    [data-sidebar="menu-action"][data-show-on-hover] {
+      visibility: hidden;
+    }
+    [data-sidebar="menu-item"]:is(:hover, :focus-within)
+      > [data-sidebar="menu-action"][data-show-on-hover],
+    [data-sidebar="menu-action"][data-show-on-hover][aria-expanded="true"] {
+      visibility: visible;
+    }
+  }
+
+  /* A disabled menu title is a quiet word with no pill, so it stands back from the titles that work. */
+  :is([data-slot="menubar-trigger"], [data-slot="navigation-menu-trigger"]):is(
+    :disabled,
+    [data-disabled]
+  ) {
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--text-quiet, var(--ink-quiet));
+  }
+
+  /* Command results are menu items, but cmdk marks them data-selected and writes data-disabled="false" on every
+     enabled one: the selected one takes the highlight pill, and only a true data-disabled is quiet. */
+  .menu-item[data-slot="command-item"] {
+    &[data-disabled="false"] {
+      color: var(--text, var(--ink));
+      cursor: default;
+    }
+    &[data-selected="true"] {
+      background-color: var(--highlight);
+      color: var(--ink);
+    }
+    @media (forced-colors: active) {
+      &[data-selected="true"] {
+        outline: var(--line) solid Highlight;
+      }
+    }
+  }
+
+  /* Inside a dialog the dialog's plane is the command's frame. */
+  [data-slot="dialog-content"] > [data-slot="command"] {
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  /* Links in a navigation menu's panel: rows in the reading face whose corners follow the plane's, a flat highlight
+     under the pointer, and the ink line round the current page's. A top-level link styled as a trigger is not inside a
+     panel, so it keeps the trigger's capitals and pill. */
+  [data-slot="navigation-menu-content"] [data-slot="navigation-menu-link"] {
+    border: var(--line) solid transparent;
+    border-radius: calc(var(--r-box) - var(--space-hair));
+    color: var(--text, var(--ink));
+    font-family: var(--face-read);
+    font-size: var(--type-small);
+    line-height: var(--lh-small);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--highlight);
+        color: var(--ink);
+      }
+    }
+    &[data-active] {
+      border-color: var(--ink);
+      background-color: var(--highlight);
+      color: var(--ink);
+    }
+  }
+}

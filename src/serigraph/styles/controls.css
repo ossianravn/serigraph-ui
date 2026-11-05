@@ -174,3 +174,52 @@
     var(--wheel, var(--action)) 30deg 60deg
   );
 }
+
+/* An item in a menu or list (dropdown, context menu, menubar, select, combobox, command): the reading face on no
+   fill; highlighted, a flat highlight pill, which is also its focus mark. A disabled item can still take roving
+   focus: its mark is then the quiet line of a disabled control inside the pill, never the highlight. Set the padding
+   at the call site. */
+@utility menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  border-radius: 999px;
+  color: var(--text, var(--ink));
+  font-family: var(--face-read);
+  font-size: var(--type-body);
+  line-height: var(--lh-ui);
+  cursor: default;
+  outline: none;
+  user-select: none;
+  /* cmdk marks the highlighted item data-selected="true", and every item data-disabled="true" or "false". */
+  &:is([data-highlighted], [data-selected="true"]) {
+    background-color: var(--highlight);
+    color: var(--ink);
+  }
+  &[data-disabled]:not([data-disabled="false"]) {
+    color: var(--text-quiet, var(--ink-quiet));
+    cursor: not-allowed;
+  }
+  &[data-disabled]:not([data-disabled="false"]):is(
+      [data-highlighted],
+      [data-selected="true"]
+    ) {
+    background-color: transparent;
+    outline: var(--line) solid var(--text-quiet, var(--ink-quiet));
+    outline-offset: calc(-1 * var(--line));
+  }
+  & svg {
+    flex: none;
+    pointer-events: none;
+  }
+  & svg:not([class*="size-"]) {
+    width: 1rem;
+    height: 1rem;
+  }
+  @media (forced-colors: active) {
+    &[data-highlighted] {
+      outline: var(--line) solid Highlight;
+    }
+  }
+}

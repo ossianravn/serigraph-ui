@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner",
+  "title": "Sonner",
+  "description": "Sonner: brief notes that confirm what just happened, or offer to undo it, without taking anyone away from what they were doing.",
+  "dependencies": [
+    "lucide-react@^1.69.0",
+    "sonner@^2.0.8"
+  ],
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/button",
+    "@serigraph/motif",
+    "@serigraph/spinner"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/sonner.tsx",
+      "content": "\"use client\"\n\nimport type * as React from \"react\"\nimport {\n  CircleAlertIcon,\n  InfoIcon,\n  TriangleAlertIcon,\n  XIcon,\n} from \"lucide-react\"\nimport { Toaster as Sonner, type ToasterProps } from \"sonner\"\nimport { Motif } from \"@/serigraph/extras/motif\"\nimport { cn } from \"@/serigraph/lib/utils\"\nimport { buttonVariants } from \"@/serigraph/ui/button\"\nimport { Spinner } from \"@/serigraph/ui/spinner\"\n\n// A toast is a small floating plane in the ink line, with no shadow: the plane colour, or a tone for its kind (success\n// the highlight with a sparkle, an error rose with a warning mark and its title saying what went wrong, a warning\n// plane 2). The title in the reading face, the description under it; the action is a pill, the cancel an outline\n// pill; the close button a small pill on the corner. A toast fades in and grows a little where it lands, and shrinks\n// away as it goes; it never slides in. Only a swipe moves it, under the finger. Sonner's own stylesheet is unlayered,\n// so the few rules that must beat it are marked important.\n\nconst mark = (icon: React.ReactNode) => (\n  <span aria-hidden=\"true\" className=\"grid size-5 place-items-center\">\n    {icon}\n  </span>\n)\n\nconst Toaster = ({ style, ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      className=\"toaster group\"\n      icons={{\n        success: mark(<Motif kind=\"sparkle\" seed=\"toast\" className=\"size-5\" />),\n        info: mark(<InfoIcon className=\"size-4\" />),\n        warning: mark(<TriangleAlertIcon className=\"size-4\" />),\n        error: mark(<CircleAlertIcon className=\"size-4\" />),\n        loading: mark(<Spinner className=\"size-[1.125rem]\" />),\n        close: <XIcon className=\"size-3\" />,\n      }}\n      style={{ \"--width\": \"22rem\", ...style } as React.CSSProperties}\n      toastOptions={{\n        unstyled: true,\n        classNames: {\n          toast: cn(\n            \"float-plane flex w-(--width) items-start gap-tight py-tight ps-snug pe-tight font-read text-small leading-small data-[expanded=false]:data-[front=false]:*:opacity-0\",\n            // Focus: the page's concentric ring, in the canvas's line; never sonner's shadow.\n            \"focus-visible:[box-shadow:none]! focus-visible:outline-(length:--line)! focus-visible:outline-offset-3! focus-visible:outline-(--on-canvas)! focus-visible:outline-solid!\",\n            // Fade and grow in, shrink and fade out, on the one curve.\n            \"[transition-duration:var(--duration-overlay)]! [transition-timing-function:var(--ease)]! data-[mounted=false]:[--y:scale(0.97)]! data-[removed=true]:data-[front=true]:data-[swipe-out=false]:[--y:scale(0.97)]! data-[removed=true]:data-[front=false]:data-[swipe-out=false]:data-[expanded=true]:[--y:translateY(calc(var(--lift)*var(--offset)))_scale(0.97)]!\",\n          ),\n          success: \"[--plane:var(--highlight)]\",\n          error: \"[--plane:var(--rose)]\",\n          warning: \"[--plane:var(--plane-2)]\",\n          icon: \"relative mt-px flex size-5 shrink-0 items-center justify-center\",\n          content: \"flex min-w-0 flex-1 flex-col gap-0.5 py-px\",\n          title: \"font-read text-body leading-ui font-semibold\",\n          description: \"text-small leading-small\",\n          actionButton: buttonVariants({\n            size: \"xs\",\n            className: \"shrink-0 self-center\",\n          }),\n          cancelButton: buttonVariants({\n            variant: \"outline\",\n            size: \"xs\",\n            className: \"shrink-0 self-center\",\n          }),\n          closeButton: buttonVariants({\n            variant: \"secondary\",\n            size: \"icon-xs\",\n            className:\n              \"absolute! -top-2.5 -left-2.5 size-6! [--fill:var(--surface)]\",\n          }),\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/sonner.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "title": "Aspect Ratio",
+  "description": "Aspect ratio: a frame that keeps its proportions as it resizes, holding a tinted well in place until the picture it frames has loaded.",
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/aspect-ratio.tsx",
+      "content": "import { cn } from \"@/serigraph/lib/utils\"\n\n// A frame of fixed proportion: a well tinted from the surface beneath, the 16px radius, and the ink line drawn over\n// its edge so a picture runs right to the line. Its children stack to fill it, in order, so a folly placed before an\n// image holds the frame until the image paints over it, with no script. Images and video cover the frame; a folly\n// fills it (scenes slice from the bottom).\n\nfunction AspectRatio({\n  ratio,\n  className,\n  ...props\n}: React.ComponentProps<\"div\"> & { ratio: number }) {\n  return (\n    <div\n      data-slot=\"aspect-ratio\"\n      style={\n        {\n          \"--ratio\": ratio,\n        } as React.CSSProperties\n      }\n      className={cn(\n        \"field-fill relative isolate aspect-(--ratio) overflow-hidden rounded-box *:absolute *:inset-0 *:size-full [&>img]:object-cover [&>video]:object-cover\",\n        \"after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-[inherit] after:border-(length:--line) after:border-ink\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { AspectRatio }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/aspect-ratio.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

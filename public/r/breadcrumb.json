@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumb",
+  "title": "Breadcrumb",
+  "description": "Breadcrumb: where a page sits in the site, as a trail of links back up to its sections.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "lucide-react@^1.69.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/breadcrumb.tsx",
+      "content": "import * as React from \"react\"\nimport { mergeProps } from \"@base-ui/react/merge-props\"\nimport { useRender } from \"@base-ui/react/use-render\"\nimport { ChevronRightIcon, MoreHorizontalIcon } from \"lucide-react\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// A trail in the reading face at small size, in the surface's text colour (ink, or paper on Night's canvas). The steps\n// back are plain until hovered, when the fine underline comes, as a trail's convention already says they are links;\n// the current page stands in semibold. Between steps sits a fine chevron pointing onward, turned in right-to-left text.\n\n// Lucide's 24-unit icons at 14px: a stroke of 1.5 × the line × 24/14 renders as exactly one line.\nconst fineChevron = \"size-3.5 [stroke-width:calc(var(--line)*1.5*16/14)]\"\n\nfunction Breadcrumb({ className, ...props }: React.ComponentProps<\"nav\">) {\n  return (\n    <nav\n      aria-label=\"breadcrumb\"\n      data-slot=\"breadcrumb\"\n      className={cn(className)}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbList({ className, ...props }: React.ComponentProps<\"ol\">) {\n  return (\n    <ol\n      data-slot=\"breadcrumb-list\"\n      className={cn(\n        \"m-0 flex list-none flex-wrap items-center gap-x-hair gap-y-1 p-0 font-read text-small leading-small wrap-break-word text-(--text)\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbItem({ className, ...props }: React.ComponentProps<\"li\">) {\n  return (\n    <li\n      data-slot=\"breadcrumb-item\"\n      className={cn(\"inline-flex items-center gap-1\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbLink({\n  className,\n  render,\n  ...props\n}: useRender.ComponentProps<\"a\">) {\n  return useRender({\n    defaultTagName: \"a\",\n    props: mergeProps<\"a\">(\n      {\n        className: cn(\n          \"text-(--text) no-underline decoration-(length:--line) underline-offset-[0.22em] hover:underline\",\n          className,\n        ),\n      },\n      props,\n    ),\n    render,\n    state: {\n      slot: \"breadcrumb-link\",\n    },\n  })\n}\n\nfunction BreadcrumbPage({ className, ...props }: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      data-slot=\"breadcrumb-page\"\n      role=\"link\"\n      aria-disabled=\"true\"\n      aria-current=\"page\"\n      className={cn(\"font-semibold text-(--text)\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction BreadcrumbSeparator({\n  children,\n  className,\n  ...props\n}: React.ComponentProps<\"li\">) {\n  return (\n    <li\n      data-slot=\"breadcrumb-separator\"\n      role=\"presentation\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"inline-flex items-center text-(--text) [&>svg]:size-3.5\",\n        className,\n      )}\n      {...props}\n    >\n      {children ?? (\n        <ChevronRightIcon className={cn(fineChevron, \"rtl:rotate-180\")} />\n      )}\n    </li>\n  )\n}\n\nfunction BreadcrumbEllipsis({\n  className,\n  ...props\n}: React.ComponentProps<\"span\">) {\n  return (\n    <span\n      data-slot=\"breadcrumb-ellipsis\"\n      role=\"presentation\"\n      aria-hidden=\"true\"\n      className={cn(\n        \"flex size-5 items-center justify-center [&>svg]:size-4\",\n        className,\n      )}\n      {...props}\n    >\n      <MoreHorizontalIcon />\n      <span className=\"sr-only\">More</span>\n    </span>\n  )\n}\n\nexport {\n  Breadcrumb,\n  BreadcrumbList,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbPage,\n  BreadcrumbSeparator,\n  BreadcrumbEllipsis,\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/breadcrumb.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

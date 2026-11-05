@@ -50,6 +50,14 @@ const items = [
   "slider",
   "toggle-group",
   "tooltip",
+  "calendar",
+  "chart",
+  "code-block",
+  "command",
+  "empty",
+  "sidebar",
+  "sonner",
+  "table",
 ]
 
 test(

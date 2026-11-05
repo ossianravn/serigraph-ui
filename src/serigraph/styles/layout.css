@@ -1,0 +1,5 @@
+/* Part drawing for the layout parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+}

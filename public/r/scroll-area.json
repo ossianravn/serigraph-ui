@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "description": "Scroll area: a region that scrolls inside a fixed frame, with a thin ink thumb that stays out of the way of its content.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/scroll-area.tsx",
+      "content": "\"use client\"\n\nimport { ScrollArea as ScrollAreaPrimitive } from \"@base-ui/react/scroll-area\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// A thin ink thumb on no track: a pill in the surface's edge colour (ink on bright surfaces, paper on Night's\n// canvas), two lines wide, that doubles under the pointer or while dragged. The thumb scales rather than resizes, so\n// nothing moves layout; the bar keeps a 10px hit area and stands in from the edges, clear of a rounded frame's\n// corners. The viewport takes the page's concentric focus ring.\n\nfunction ScrollArea({\n  className,\n  children,\n  ...props\n}: ScrollAreaPrimitive.Root.Props) {\n  return (\n    <ScrollAreaPrimitive.Root\n      data-slot=\"scroll-area\"\n      className={cn(\"relative\", className)}\n      {...props}\n    >\n      <ScrollAreaPrimitive.Viewport\n        data-slot=\"scroll-area-viewport\"\n        className=\"size-full rounded-[inherit]\"\n      >\n        {children}\n      </ScrollAreaPrimitive.Viewport>\n      <ScrollBar />\n      <ScrollAreaPrimitive.Corner />\n    </ScrollAreaPrimitive.Root>\n  )\n}\n\nfunction ScrollBar({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: ScrollAreaPrimitive.Scrollbar.Props) {\n  return (\n    <ScrollAreaPrimitive.Scrollbar\n      data-slot=\"scroll-area-scrollbar\"\n      data-orientation={orientation}\n      orientation={orientation}\n      className={cn(\n        \"group/scrollbar flex touch-none p-px select-none data-[orientation=horizontal]:mx-tight data-[orientation=horizontal]:mb-1 data-[orientation=horizontal]:h-2.5 data-[orientation=horizontal]:flex-col data-[orientation=vertical]:my-tight data-[orientation=vertical]:me-1 data-[orientation=vertical]:w-2.5\",\n        className,\n      )}\n      {...props}\n    >\n      <ScrollAreaPrimitive.Thumb\n        data-slot=\"scroll-area-thumb\"\n        className=\"relative flex-1 text-[var(--edge,var(--ink))] before:absolute before:rounded-full before:bg-current before:transition-[scale] before:duration-(--duration-control) before:ease-(--ease) data-[orientation=horizontal]:before:inset-x-0 data-[orientation=horizontal]:before:top-1/2 data-[orientation=horizontal]:before:h-[calc(var(--line)*4)] data-[orientation=horizontal]:before:-translate-y-1/2 data-[orientation=horizontal]:before:scale-y-50 data-[orientation=vertical]:before:inset-y-0 data-[orientation=vertical]:before:left-1/2 data-[orientation=vertical]:before:w-[calc(var(--line)*4)] data-[orientation=vertical]:before:-translate-x-1/2 data-[orientation=vertical]:before:scale-x-50 hover:before:scale-100 active:before:scale-100 forced-colors:before:bg-[CanvasText]\"\n      />\n    </ScrollAreaPrimitive.Scrollbar>\n  )\n}\n\nexport { ScrollArea, ScrollBar }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/scroll-area.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

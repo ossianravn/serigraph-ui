@@ -26,17 +26,4 @@
       border-left-color: var(--paper);
     }
   }
-
-  /* A disabled menu item can still take roving focus. Its mark is the quiet line of a disabled control, drawn inside
-     the pill, never the highlight, which promises something to press. */
-  :is(
-      [data-slot="dropdown-menu-item"],
-      [data-slot="dropdown-menu-sub-trigger"],
-      [data-slot="dropdown-menu-checkbox-item"],
-      [data-slot="dropdown-menu-radio-item"]
-    )[data-disabled][data-highlighted] {
-    background-color: transparent;
-    outline: var(--line) solid var(--text-quiet, var(--ink-quiet));
-    outline-offset: calc(-1 * var(--line));
-  }
 }

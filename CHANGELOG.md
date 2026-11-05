@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Phase 4: the rest of parity
+
+- 44 more parts on Base UI with shadcn's names and slots, each with a docs page: drawer, sheet, sidebar, scroll area, resizable, aspect ratio, typography, direction, empty, item, accordion, collapsible, breadcrumb, pagination, menubar, navigation menu, context menu, hover card, command, input group, button group, input OTP, combobox, calendar and date picker, carousel, table, chart, sonner, and the conversation set (attachment, bubble, marker, message, message scroller, questionnaire, trace, code block).
+- Charts tell series apart by fill as well as colour: flat, stipple, louvers and tint.
+- A 200-row table scrolls at 60 frames a second.
+- The registry has 72 items.
+
 ### Phase 3: core primitives and Meridian
 
 - Button, Badge, Card, Input, Label, Checkbox, Switch and Tabs on Base UI, with shadcn's names, props and slots: pills in the colourway's spot colours inside one ink line, tinted fields, a pinwheel switch thumb that rolls, and tabs drawn as archways that open into their panel.

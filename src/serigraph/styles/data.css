@@ -1,0 +1,155 @@
+/* Part drawing for the data parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* Table. Heads over the line, rows divided by the same line, in the edge colour of the surface the table sits on
+     (taken once, at the table, so a selected row's ink does not change its neighbours' lines). The lines are borders
+     on cells, so the head's line travels with it when it sticks and 200 rows cost nothing extra. */
+  [data-slot="table"] {
+    --table-rule: var(--edge, var(--ink));
+  }
+  [data-slot="table-head"] {
+    border-bottom: var(--line) solid var(--table-rule);
+  }
+  [data-slot="table-body"]
+    > [data-slot="table-row"]:not(:last-child)
+    > :where(td, th) {
+    border-bottom: var(--line) solid var(--table-rule);
+  }
+  [data-slot="table-footer"] > [data-slot="table-row"]:first-child > * {
+    border-top: var(--line) solid var(--table-rule);
+  }
+
+  /* The head sticks to the top of a container that scrolls, and takes the surface's colour only once rows pass
+     under it (where scroll-state queries exist; elsewhere it always has it). */
+  [data-slot="table-header"] {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--surface, var(--canvas));
+    background-image: var(--grain);
+    background-size: var(--grain-size);
+  }
+  @container not scroll-state(scrollable: top) {
+    [data-slot="table-header"] {
+      background: none;
+    }
+  }
+
+  /* Under the pointer a row lightens a little toward paper, flat; selected, it is a highlight band with ink text. */
+  [data-slot="table-row"] {
+    transition: background-color var(--duration-control) var(--ease);
+  }
+  @media (hover: hover) {
+    :where([data-slot="table-body"]) > [data-slot="table-row"]:hover {
+      background-color: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 82%,
+        var(--paper)
+      );
+    }
+  }
+  :where([data-slot="table-body"])
+    > [data-slot="table-row"]:has([aria-expanded="true"]) {
+    background-color: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 82%,
+      var(--paper)
+    );
+  }
+  [data-slot="table-row"][data-state="selected"] {
+    --surface: var(--highlight);
+    --text: var(--ink);
+    --text-quiet: var(--ink-quiet);
+    --edge: var(--ink);
+    background-color: var(--highlight);
+    color: var(--ink);
+  }
+  @media (forced-colors: active) {
+    [data-slot="table-row"][data-state="selected"] {
+      outline: calc(var(--line) * 2) solid Highlight;
+      outline-offset: calc(var(--line) * -2);
+    }
+  }
+
+  /* Chart. Figures in the mono face on the chart's surface; axes the fine line; the grid rows of fine dots, like a
+     stipple drawn out; every bar, area and slice inside the ink line, opaque; lines the edge's fine line. */
+  [data-slot="chart"] {
+    & :is(.recharts-text, .recharts-label, .recharts-pie-label-text) {
+      fill: var(--text, var(--ink));
+    }
+    &
+      :is(
+        .recharts-cartesian-axis-line,
+        .recharts-cartesian-axis-tick-line,
+        .recharts-polar-angle-axis-line,
+        .recharts-reference-line-line,
+        .recharts-pie-label-line
+      ) {
+      stroke: var(--edge, var(--ink));
+      stroke-width: var(--line);
+    }
+    &
+      :is(
+        .recharts-cartesian-grid line,
+        .recharts-polar-grid-angle line,
+        .recharts-polar-grid-concentric :is(path, circle, polygon)
+      ) {
+      stroke: var(--edge, var(--ink));
+      stroke-width: calc(var(--line) * 1.2);
+      stroke-dasharray: 0.01 5;
+      stroke-linecap: round;
+    }
+    &
+      :is(
+        .recharts-bar-rectangle .recharts-rectangle,
+        .recharts-sector:not(.recharts-radial-bar-background-sector),
+        .recharts-dot
+      ) {
+      stroke: var(--ink);
+      stroke-width: var(--line);
+      stroke-linejoin: round;
+    }
+    & .recharts-dot[fill="#fff"] {
+      fill: var(--paper);
+    }
+    & .recharts-area-area {
+      fill-opacity: 1;
+    }
+    & .recharts-area-curve {
+      stroke: var(--ink);
+      stroke-width: var(--line);
+    }
+    & .recharts-line-curve {
+      stroke: var(--edge, var(--ink));
+      stroke-width: calc(var(--line) * 1.5);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    & .recharts-radial-bar-background-sector {
+      fill: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 30%,
+        var(--paper)
+      );
+    }
+    /* Hover: a band a little toward paper behind the bars, or one fine line across the lines. */
+    & .recharts-rectangle.recharts-tooltip-cursor {
+      fill: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 72%,
+        var(--paper)
+      );
+    }
+    & .recharts-curve.recharts-tooltip-cursor {
+      stroke: var(--edge, var(--ink));
+      stroke-width: var(--line);
+    }
+    & .recharts-surface {
+      overflow: visible;
+    }
+    & :is(.recharts-layer, .recharts-sector):focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+}

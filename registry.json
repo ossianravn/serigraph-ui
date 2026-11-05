@@ -32,9 +32,24 @@
           "target": "~/src/serigraph/styles/colourways.css"
         },
         {
+          "path": "src/serigraph/styles/composites.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/composites.css"
+        },
+        {
           "path": "src/serigraph/styles/controls.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/controls.css"
+        },
+        {
+          "path": "src/serigraph/styles/conversation.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/conversation.css"
+        },
+        {
+          "path": "src/serigraph/styles/data.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/data.css"
         },
         {
           "path": "src/serigraph/styles/feedback.css",
@@ -57,6 +72,11 @@
           "target": "~/src/serigraph/styles/forms.css"
         },
         {
+          "path": "src/serigraph/styles/layout.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/layout.css"
+        },
+        {
           "path": "src/serigraph/styles/lettering.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/lettering.css"
@@ -65,6 +85,11 @@
           "path": "src/serigraph/styles/letters.generated.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/letters.generated.css"
+        },
+        {
+          "path": "src/serigraph/styles/navigation.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/navigation.css"
         },
         {
           "path": "src/serigraph/styles/overlays.css",
@@ -124,6 +149,26 @@
       ]
     },
     {
+      "name": "accordion",
+      "type": "registry:component",
+      "title": "Accordion",
+      "description": "Accordion: rows of questions or sections that open one at a time, so a long page of answers stays easy to scan.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/accordion.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/accordion.tsx"
+        }
+      ]
+    },
+    {
       "name": "alert",
       "type": "registry:component",
       "title": "Alert",
@@ -160,6 +205,43 @@
           "path": "src/serigraph/ui/alert-dialog.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/alert-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:component",
+      "title": "Aspect Ratio",
+      "description": "Aspect ratio: a frame that keeps its proportions as it resizes, holding a tinted well in place until the picture it frames has loaded.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/aspect-ratio.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/aspect-ratio.tsx"
+        }
+      ]
+    },
+    {
+      "name": "attachment",
+      "type": "registry:component",
+      "title": "Attachment",
+      "description": "Attachment: a file handed over with a message, as a small pill: what it is, how big, and whether it has arrived.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/attachment.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/attachment.tsx"
         }
       ]
     },
@@ -204,6 +286,46 @@
       ]
     },
     {
+      "name": "breadcrumb",
+      "type": "registry:component",
+      "title": "Breadcrumb",
+      "description": "Breadcrumb: where a page sits in the site, as a trail of links back up to its sections.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/breadcrumb.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/breadcrumb.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bubble",
+      "type": "registry:component",
+      "title": "Bubble",
+      "description": "Bubble: one turn of a conversation: your words in the highlight, the other side’s in a tone, each a small plane in the ink line.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/bubble.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/bubble.tsx"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:component",
       "title": "Button",
@@ -224,6 +346,48 @@
       ]
     },
     {
+      "name": "button-group",
+      "type": "registry:component",
+      "title": "Button Group",
+      "description": "Button group: related actions joined in one pill with a fine line between them, so a toolbar reads as a single control.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/separator"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/button-group.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/button-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:component",
+      "title": "Calendar",
+      "description": "Calendar: a printed month for choosing a night or a run of nights, and the date pickers built from it.",
+      "dependencies": [
+        "lucide-react@^1.69.0",
+        "react-day-picker@^10.0.2"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/calendar.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/calendar.tsx"
+        }
+      ]
+    },
+    {
       "name": "card",
       "type": "registry:component",
       "title": "Card",
@@ -236,6 +400,61 @@
           "path": "src/serigraph/ui/card.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:component",
+      "title": "Carousel",
+      "description": "Carousel: a row of slides to leaf through one at a time, such as the objects worth finding in tonight's sky.",
+      "dependencies": [
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/carousel.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/carousel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:component",
+      "title": "Chart",
+      "description": "Chart: recharts printed like the poster: flat shapes in the ink line, series told apart by flat, stippled and louvered fills as well as colour.",
+      "dependencies": [
+        "recharts@^3.10.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/chart-context.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/chart-context.ts"
+        },
+        {
+          "path": "src/serigraph/ui/chart-marks.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/chart-marks.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/chart-tooltip.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/chart-tooltip.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/chart.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/chart.tsx"
         }
       ]
     },
@@ -255,6 +474,114 @@
           "path": "src/serigraph/ui/checkbox.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-block",
+      "type": "registry:component",
+      "title": "Code Block",
+      "description": "Code block: code or data in mono on a tinted plane, with line numbers, calm highlighting and a copy button.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/code-block.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/code-block.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:component",
+      "title": "Collapsible",
+      "description": "Collapsible: a section that opens and closes in place, for detail a reader asks for rather than reads by default.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/collapsible.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:component",
+      "title": "Combobox",
+      "description": "Combobox: a field that filters a list as you type, for finding one telescope, or several objects, in a list too long to scroll.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/combobox-chips.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/combobox-chips.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/combobox.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:component",
+      "title": "Command",
+      "description": "Command: a searchable index of the observatory, for jumping to a session, a planet or an action by typing.",
+      "dependencies": [
+        "cmdk@^1.1.1",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/command.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:component",
+      "title": "Context Menu",
+      "description": "Context menu: the actions on one thing, opened where the pointer is with a right-click or a long press.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/context-menu.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/context-menu.tsx"
         }
       ]
     },
@@ -280,6 +607,44 @@
       ]
     },
     {
+      "name": "direction",
+      "type": "registry:component",
+      "title": "Direction",
+      "description": "Direction: tells every primitive which way the page reads, so menus, sliders, segmented controls and keyboard arrows follow right-to-left text.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/direction.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/direction.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:component",
+      "title": "Drawer",
+      "description": "Drawer: a plane pulled up from the edge of the screen for a quick task on a phone, dismissed by swiping it back.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/drawer.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/drawer.tsx"
+        }
+      ]
+    },
+    {
       "name": "dropdown-menu",
       "type": "registry:component",
       "title": "Dropdown Menu",
@@ -296,6 +661,26 @@
           "path": "src/serigraph/ui/dropdown-menu.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:component",
+      "title": "Empty",
+      "description": "Empty: what a place shows when it has nothing in it yet: a doorway drawn from a seed, a title, one line on why, and the one action that helps.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/folly"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/empty.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/empty.tsx"
         }
       ]
     },
@@ -414,6 +799,25 @@
       ]
     },
     {
+      "name": "hover-card",
+      "type": "registry:component",
+      "title": "Hover Card",
+      "description": "Hover card: a glance at what a link points to, such as a host or a planet, shown while the link is hovered or focused.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/hover-card.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/hover-card.tsx"
+        }
+      ]
+    },
+    {
       "name": "input",
       "type": "registry:component",
       "title": "Input",
@@ -429,6 +833,68 @@
           "path": "src/serigraph/ui/input.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:component",
+      "title": "Input Group",
+      "description": "Input group: one field pill shared by an input and its units, icons or buttons, for values that need a word or an action beside them.",
+      "dependencies": [
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/input",
+        "@serigraph/textarea"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/input-group.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/input-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:component",
+      "title": "Input Otp",
+      "description": "Input OTP: one tinted box per digit for a short one-time code, such as the sign-in code Meridian sends its members.",
+      "dependencies": [
+        "input-otp@^1.5.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/input-otp.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/input-otp.tsx"
+        }
+      ]
+    },
+    {
+      "name": "item",
+      "type": "registry:component",
+      "title": "Item",
+      "description": "Item: an open row for one thing in a list: a medallion, an icon or a figure, a title, one line about it and its actions.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/separator"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/item.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/item.tsx"
         }
       ]
     },
@@ -522,6 +988,83 @@
       ]
     },
     {
+      "name": "marker",
+      "type": "registry:component",
+      "title": "Marker",
+      "description": "Marker: a line in a thread that is not a message: the day, where unread messages begin, or something that happened.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/marker.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/marker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:component",
+      "title": "Menubar",
+      "description": "Menubar: a row of menus along the top of an app, for the commands of a desktop tool such as the dome's show console.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/menubar.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/menubar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message",
+      "type": "registry:component",
+      "title": "Message",
+      "description": "Message: one turn in a conversation: who wrote it and when, what they said, and what can be done with it.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/message.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/message.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message-scroller",
+      "type": "registry:component",
+      "title": "Message Scroller",
+      "description": "Message scroller: the scrolling column of a conversation: it keeps the newest message in view and offers a way back when you read up.",
+      "dependencies": [
+        "@shadcn/react@^0.3.1",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/message-scroller.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/message-scroller.tsx"
+        }
+      ]
+    },
+    {
       "name": "motif",
       "type": "registry:component",
       "title": "Motif",
@@ -554,6 +1097,47 @@
           "path": "src/serigraph/ui/native-select.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/native-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:component",
+      "title": "Navigation Menu",
+      "description": "Navigation menu: a site's main links, with panels that open to show the pages in each section; the page you are on takes the highlight.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/navigation-menu.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/navigation-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:component",
+      "title": "Pagination",
+      "description": "Pagination: moves through a long list a page at a time, such as the archive of past sessions.",
+      "dependencies": [
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/pagination.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/pagination.tsx"
         }
       ]
     },
@@ -596,6 +1180,32 @@
       ]
     },
     {
+      "name": "questionnaire",
+      "type": "registry:component",
+      "title": "Questionnaire",
+      "description": "Questionnaire: a short run of questions answered one at a time, such as choosing a telescope for tonight.",
+      "dependencies": [
+        "@shadcn/react@^0.3.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/kbd"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/questionnaire-choice.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/questionnaire-choice.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/questionnaire.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/questionnaire.tsx"
+        }
+      ]
+    },
+    {
       "name": "radio-group",
       "type": "registry:component",
       "title": "Radio Group",
@@ -611,6 +1221,44 @@
           "path": "src/serigraph/ui/radio-group.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:component",
+      "title": "Resizable",
+      "description": "Resizable: panels side by side or stacked, divided by one fine line you can drag to give one of them more room.",
+      "dependencies": [
+        "react-resizable-panels@^4.18.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/resizable.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/resizable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:component",
+      "title": "Scroll Area",
+      "description": "Scroll area: a region that scrolls inside a fixed frame, with a thin ink thumb that stays out of the way of its content.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/scroll-area.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/scroll-area.tsx"
         }
       ]
     },
@@ -654,6 +1302,75 @@
       ]
     },
     {
+      "name": "sheet",
+      "type": "registry:component",
+      "title": "Sheet",
+      "description": "Sheet: a plane laid against one edge of the window, for a session's details or a short task beside the page it came from.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/sheet.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:component",
+      "title": "Sidebar",
+      "description": "Sidebar: an app's main navigation in a column beside the page, which folds to icons on a desktop and becomes a sheet on a phone.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/follies",
+        "@serigraph/input",
+        "@serigraph/separator",
+        "@serigraph/sheet",
+        "@serigraph/skeleton",
+        "@serigraph/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/hooks/use-mobile.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/hooks/use-mobile.ts"
+        },
+        {
+          "path": "src/serigraph/ui/sidebar-menu.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/sidebar-menu.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/sidebar-provider.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/sidebar-provider.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/sidebar-sections.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/sidebar-sections.tsx"
+        },
+        {
+          "path": "src/serigraph/ui/sidebar.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/sidebar.tsx"
+        }
+      ]
+    },
+    {
       "name": "skeleton",
       "type": "registry:component",
       "title": "Skeleton",
@@ -685,6 +1402,29 @@
           "path": "src/serigraph/ui/slider.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:component",
+      "title": "Sonner",
+      "description": "Sonner: brief notes that confirm what just happened, or offer to undo it, without taking anyone away from what they were doing.",
+      "dependencies": [
+        "lucide-react@^1.69.0",
+        "sonner@^2.0.8"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/motif",
+        "@serigraph/spinner"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/sonner.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/sonner.tsx"
         }
       ]
     },
@@ -721,6 +1461,22 @@
           "path": "src/serigraph/ui/switch.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:component",
+      "title": "Table",
+      "description": "Table: records that compare across columns: heads in capitals over a fine line, rows divided by the same line, figures that line up.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/table.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/table.tsx"
         }
       ]
     },
@@ -821,45 +1577,135 @@
       ]
     },
     {
+      "name": "trace",
+      "type": "registry:component",
+      "title": "Trace",
+      "description": "Trace: the steps an assistant took to reach an answer, numbered in order, each one open for its detail.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/collapsible",
+        "@serigraph/spinner"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/trace.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/trace.tsx"
+        }
+      ]
+    },
+    {
+      "name": "typography",
+      "type": "registry:component",
+      "title": "Typography",
+      "description": "Typography: a prose container that typesets plain long-form content, such as an observatory's newsletter or a guide, without a class on every element.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/typography.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/typography.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-highlighted-code",
+      "type": "registry:component",
+      "title": "Use Highlighted Code",
+      "description": "Use Highlighted Code, in the Serigraph style.",
+      "dependencies": [
+        "shiki@^4.6.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/ui/use-highlighted-code.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/ui/use-highlighted-code.tsx"
+        }
+      ]
+    },
+    {
       "name": "serigraph",
       "type": "registry:item",
       "title": "Serigraph",
       "description": "Every part of Serigraph: the base, the Follies engine and every component.",
       "registryDependencies": [
         "@serigraph/base",
+        "@serigraph/accordion",
         "@serigraph/alert",
         "@serigraph/alert-dialog",
+        "@serigraph/aspect-ratio",
+        "@serigraph/attachment",
         "@serigraph/avatar",
         "@serigraph/badge",
+        "@serigraph/breadcrumb",
+        "@serigraph/bubble",
         "@serigraph/button",
+        "@serigraph/button-group",
+        "@serigraph/calendar",
         "@serigraph/card",
+        "@serigraph/carousel",
+        "@serigraph/chart",
         "@serigraph/checkbox",
+        "@serigraph/code-block",
+        "@serigraph/collapsible",
+        "@serigraph/combobox",
+        "@serigraph/command",
+        "@serigraph/context-menu",
         "@serigraph/dialog",
+        "@serigraph/direction",
+        "@serigraph/drawer",
         "@serigraph/dropdown-menu",
+        "@serigraph/empty",
         "@serigraph/field",
         "@serigraph/follies",
         "@serigraph/folly",
+        "@serigraph/hover-card",
         "@serigraph/input",
+        "@serigraph/input-group",
+        "@serigraph/input-otp",
+        "@serigraph/item",
         "@serigraph/kbd",
         "@serigraph/label",
         "@serigraph/lettering",
         "@serigraph/letters",
+        "@serigraph/marker",
+        "@serigraph/menubar",
+        "@serigraph/message",
+        "@serigraph/message-scroller",
         "@serigraph/motif",
         "@serigraph/native-select",
+        "@serigraph/navigation-menu",
+        "@serigraph/pagination",
         "@serigraph/popover",
         "@serigraph/progress",
+        "@serigraph/questionnaire",
         "@serigraph/radio-group",
+        "@serigraph/resizable",
+        "@serigraph/scroll-area",
         "@serigraph/select",
         "@serigraph/separator",
+        "@serigraph/sheet",
+        "@serigraph/sidebar",
         "@serigraph/skeleton",
         "@serigraph/slider",
+        "@serigraph/sonner",
         "@serigraph/spinner",
         "@serigraph/switch",
+        "@serigraph/table",
         "@serigraph/tabs",
         "@serigraph/textarea",
         "@serigraph/toggle",
         "@serigraph/toggle-group",
-        "@serigraph/tooltip"
+        "@serigraph/tooltip",
+        "@serigraph/trace",
+        "@serigraph/typography",
+        "@serigraph/use-highlighted-code"
       ],
       "files": []
     }

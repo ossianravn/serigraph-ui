@@ -1,0 +1,233 @@
+/* Part drawing for the composites parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* A field group (input group, combobox chips, a button group holding a field) is one field pill. Its members sit on
+     the field's tint, so inside it the context is the field's: ink text and ink edges, whatever the surface beneath.
+     --group-fill is the group's tint, mixed from the surface the group itself sits on. */
+  [data-slot="input-group"],
+  [data-slot="combobox-chips"],
+  [data-slot="button-group"]:has(> .control-field) {
+    --group-fill: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 30%,
+      var(--paper)
+    );
+    & > * {
+      --surface: var(--group-fill);
+      --text: var(--ink);
+      --text-quiet: var(--ink-quiet);
+      --edge: var(--ink);
+    }
+  }
+
+  /* Input group: the inner control gives its line, fill and ring up to the group. The group takes the page's ring
+     while the control has focus, the rose ring when anything in it is invalid (thicker while focused), and the quiet
+     tint when the control is disabled. */
+  [data-slot="input-group"] {
+    & > [data-slot="input-group-control"] {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      outline: none;
+    }
+    &:has([data-slot="input-group-control"]:focus-visible) {
+      outline: var(--line) solid var(--edge, var(--ink));
+      outline-offset: 3px;
+    }
+    &:has([data-slot="input-group-control"]:disabled) {
+      --group-fill: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 35%,
+        var(--paper)
+      );
+      border-color: var(--ink-quiet);
+      background-color: var(--group-fill);
+      color: var(--ink-quiet);
+      cursor: not-allowed;
+      & > * {
+        --text: var(--ink-quiet);
+        --edge: var(--ink-quiet);
+      }
+    }
+  }
+
+  /* Buttons inside a field stay calm: a disabled one is just its quiet icon, and one whose list is open does not keep
+     the pressed shade (the open list says so), like the select's trigger. */
+  [data-slot="input-group-addon"] > button {
+    &:disabled {
+      border-color: transparent;
+      background-color: transparent;
+    }
+    &:is([aria-expanded="true"], [data-popup-open]):not(:hover, :active) {
+      --pill-line: transparent;
+      background-color: transparent;
+    }
+  }
+
+  /* Combobox chips: the same field states, keyed on the chips' own input. */
+  [data-slot="combobox-chips"] {
+    &:has(input:focus-visible) {
+      outline: var(--line) solid var(--edge, var(--ink));
+      outline-offset: 3px;
+    }
+    &:has(input:disabled) {
+      border-color: var(--ink-quiet);
+      background-color: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 35%,
+        var(--paper)
+      );
+      color: var(--ink-quiet);
+      cursor: not-allowed;
+    }
+  }
+
+  [data-slot="input-group"]:has([data-slot][aria-invalid="true"]),
+  [data-slot="combobox-chips"]:has([aria-invalid="true"]),
+  [data-slot="button-group"]:has(> .control-field[aria-invalid="true"]) {
+    outline: var(--line) solid var(--rose);
+    outline-offset: 3px;
+    &:has(:focus-visible) {
+      outline-width: calc(var(--line) * 2);
+    }
+  }
+
+  /* Button group: members join into one pill. Each after the first gives up its leading line and corners, so the line
+     the one before draws is the divider; only the group's two ends stay round (a select's hidden input after its
+     trigger does not count as a member). Groups of groups and the separator stand outside the joining. A focused
+     member stands over its neighbours so its ring shows whole. */
+  [data-slot="button-group"] > * {
+    position: relative;
+    &:focus-visible {
+      z-index: 1;
+    }
+  }
+  [data-slot="button-group"]:not([data-orientation="vertical"])
+    > :where(
+      :not([data-slot="button-group"], [data-slot="button-group-separator"])
+    ) {
+    &:not(:first-child) {
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+      border-inline-start-width: 0;
+    }
+    &:has(~ :not(input[aria-hidden="true"])) {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+  }
+  [data-slot="button-group"][data-orientation="vertical"]
+    > :where(
+      :not([data-slot="button-group"], [data-slot="button-group-separator"])
+    ) {
+    border-radius: calc(var(--control-height) / 2);
+    &:not(:first-child) {
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+      border-block-start-width: 0;
+    }
+    &:has(~ :not(input[aria-hidden="true"])) {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+    }
+  }
+  /* Holding a field, the group is one field pill: the tint beneath every member (fields lay none of their own, so it
+     is not tinted twice), every line and word in ink. The field's own ring moves to the group. */
+  [data-slot="button-group"]:has(> .control-field) {
+    border-radius: 999px;
+    background-color: var(--group-fill);
+    & > * {
+      --pill-line: var(--ink);
+      --pill-text: var(--ink);
+    }
+    & > .control-field {
+      background-color: transparent;
+      outline: none;
+    }
+    &:has(> .control-field:focus-visible) {
+      outline: var(--line) solid var(--edge, var(--ink));
+      outline-offset: 3px;
+    }
+  }
+
+  /* Input OTP: the box taking the next keystroke carries the concentric ring, 2px out so it clears its neighbours.
+     Invalid, each group of boxes takes one rose ring, far enough out to clear the active box's ring (thicker while the
+     code has focus); disabled boxes take the quiet tint and line. */
+  [data-slot="input-otp-slot"][data-active="true"] {
+    z-index: 1;
+    outline: var(--line) solid var(--edge, var(--ink));
+    outline-offset: 2px;
+  }
+  [data-input-otp-container]:has(input[aria-invalid="true"])
+    [data-slot="input-otp-group"] {
+    border-radius: var(--r-box);
+    outline: var(--line) solid var(--rose);
+    outline-offset: 5px;
+  }
+  [data-input-otp-container]:has(input[aria-invalid="true"]:focus)
+    [data-slot="input-otp-group"] {
+    outline-width: calc(var(--line) * 2);
+  }
+  [data-input-otp-container]:has(input:disabled) [data-slot="input-otp-slot"] {
+    border-color: var(--ink-quiet);
+    background-color: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 35%,
+      var(--paper)
+    );
+    color: var(--ink-quiet);
+  }
+
+  /* Calendar days: ghost pills with the day in the reading face and tabular figures. Today is ringed by a fine line
+     just inside its cell; chosen days and a range's ends are highlight circles in the ink line; a range's middle days
+     sit on the band in ink; outside days are quiet; disabled days are struck through, untinted and unlined. */
+  [data-slot="calendar"] [data-outside] > button[data-day] {
+    --pill-text: var(--text-quiet, var(--ink-quiet));
+  }
+  [data-slot="calendar"] button[data-day] {
+    font-family: var(--face-read);
+    font-size: var(--type-body);
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1;
+    font-variant-numeric: lining-nums tabular-nums;
+    &[data-today]::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border: var(--line) solid currentColor;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    &[data-range-middle="true"] {
+      --edge: var(--ink);
+      --pill-text: var(--ink);
+      --press-fill: var(--highlight);
+    }
+    &[data-selected-single="true"],
+    &[data-range-start="true"],
+    &[data-range-end="true"] {
+      --fill: var(--highlight);
+      --fill-grain: var(--grain);
+      --pill-line: var(--ink);
+      --pill-text: var(--ink);
+      --press-fill: var(--highlight);
+      --edge: var(--ink);
+    }
+    &:disabled {
+      border-color: transparent;
+      background-color: transparent;
+      color: var(--text-quiet, var(--ink-quiet));
+      text-decoration: line-through;
+      text-decoration-thickness: var(--line);
+    }
+    @media (forced-colors: active) {
+      &[data-selected-single="true"],
+      &[data-range-start="true"],
+      &[data-range-end="true"] {
+        border-width: calc(var(--line) * 2);
+      }
+    }
+  }
+}

@@ -17,10 +17,18 @@
 @import "./forms.css";
 @import "./feedback.css";
 @import "./overlays.css";
+@import "./layout.css";
+@import "./navigation.css";
+@import "./composites.css";
+@import "./data.css";
+@import "./conversation.css";
 
 /* Night is a colourway; it also answers shadcn's dark variant, so parts that read it work. */
 @custom-variant night (&:where([data-colourway="night"], [data-colourway="night"] *));
 @custom-variant dark (&:where([data-colourway="night"], [data-colourway="night"] *));
+/* shadcn's orientation variants, so parts ported from base-nova keep their classes. */
+@custom-variant data-horizontal (&[data-orientation="horizontal"]);
+@custom-variant data-vertical (&[data-orientation="vertical"]);
 
 @theme inline {
   --default-font-family: var(--face-read);

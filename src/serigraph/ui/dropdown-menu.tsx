@@ -12,7 +12,7 @@ import { cn } from "@/serigraph/lib/utils"
 // Submenus open at the inline end. The plane stands 8px off its trigger, clear of the trigger's focus ring.
 
 const item =
-  "relative flex cursor-default items-center gap-tight rounded-full px-tight py-hair font-read text-body leading-ui text-(--text) outline-hidden select-none data-highlighted:bg-highlight data-inset:ps-[calc(var(--space-tight)*2+1rem)] data-disabled:cursor-not-allowed data-disabled:text-(--text-quiet) forced-colors:data-highlighted:outline-(length:--line) forced-colors:data-highlighted:outline-[Highlight] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+  "menu-item px-tight py-hair data-inset:ps-[calc(var(--space-tight)*2+1rem)]"
 
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />

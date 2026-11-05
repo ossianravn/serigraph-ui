@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "title": "Accordion",
+  "description": "Accordion: rows of questions or sections that open one at a time, so a long page of answers stays easy to scan.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "lucide-react@^1.69.0"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/accordion.tsx",
+      "content": "\"use client\"\n\nimport { Accordion as AccordionPrimitive } from \"@base-ui/react/accordion\"\nimport { ChevronDownIcon } from \"lucide-react\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// Rows between fine lines in the surface's edge colour. The trigger is the row's heading in the reading face,\n// semibold, with a fine chevron at its end that turns as the row opens; the panel's height and opacity ease open and\n// shut quickly, and its text keeps the reading measure. Focus is the page's concentric ring round the row's heading;\n// a disabled row takes the quiet text.\n\nfunction Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {\n  return (\n    <AccordionPrimitive.Root\n      data-slot=\"accordion\"\n      className={cn(\"flex w-full flex-col\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {\n  return (\n    <AccordionPrimitive.Item\n      data-slot=\"accordion-item\"\n      className={cn(\n        \"border-[var(--edge,var(--ink))] not-last:border-b-(length:--line)\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction AccordionTrigger({\n  className,\n  children,\n  ...props\n}: AccordionPrimitive.Trigger.Props) {\n  return (\n    <AccordionPrimitive.Header className=\"m-0 flex\">\n      <AccordionPrimitive.Trigger\n        data-slot=\"accordion-trigger\"\n        className={cn(\n          \"group/accordion-trigger relative flex flex-1 cursor-pointer items-start justify-between gap-snug rounded-[0.625rem] py-snug text-left font-read text-body leading-ui font-semibold text-(--text) decoration-(length:--line) underline-offset-[0.25em] hover:underline aria-disabled:cursor-not-allowed aria-disabled:text-(--text-quiet) aria-disabled:no-underline data-disabled:cursor-not-allowed data-disabled:text-(--text-quiet) data-disabled:no-underline\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n        <ChevronDownIcon\n          data-slot=\"accordion-trigger-icon\"\n          aria-hidden=\"true\"\n          className=\"pointer-events-none ms-auto size-4 shrink-0 translate-y-[calc((1lh-1rem)/2)] transition-transform duration-(--duration-overlay) ease-(--ease) [stroke-width:calc(var(--line)*1.5)] group-aria-expanded/accordion-trigger:rotate-180\"\n        />\n      </AccordionPrimitive.Trigger>\n    </AccordionPrimitive.Header>\n  )\n}\n\nfunction AccordionContent({\n  className,\n  children,\n  ...props\n}: AccordionPrimitive.Panel.Props) {\n  return (\n    <AccordionPrimitive.Panel\n      data-slot=\"accordion-content\"\n      className=\"h-(--accordion-panel-height) overflow-hidden text-body leading-body text-(--text) transition-[height,opacity] duration-(--duration-overlay) ease-(--ease) data-ending-style:h-0 data-ending-style:opacity-0 data-starting-style:h-0 data-starting-style:opacity-0\"\n      {...props}\n    >\n      <div\n        className={cn(\n          \"max-w-measure pb-snug [&_a]:underline [&_a]:underline-offset-[0.22em] [&_p]:m-0 [&_p:not(:last-child)]:mb-tight\",\n          className,\n        )}\n      >\n        {children}\n      </div>\n    </AccordionPrimitive.Panel>\n  )\n}\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/accordion.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

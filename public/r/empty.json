@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "title": "Empty",
+  "description": "Empty: what a place shows when it has nothing in it yet: a doorway drawn from a seed, a title, one line on why, and the one action that helps.",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/folly"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/empty.tsx",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\"\nimport { Folly } from \"@/serigraph/extras/folly\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// What a place shows when there is nothing in it: the doorway folly (an archway with a dark door, a sparkle above,\n// on a small cloud), a title and one line in the reading face, and one action, centred in a reading column, open on\n// whatever surface it sits on. EmptyMedia draws the doorway seeded by `seed`, so each empty place has its own;\n// children (any other drawing or picture) take its place. The icon variant sets a Lucide icon in a small spot-colour\n// circle inside the ink line instead.\n\nfunction Empty({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"empty\"\n      className={cn(\n        \"flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-snug rounded-plane p-line text-center text-balance text-(--text)\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction EmptyHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"empty-header\"\n      className={cn(\n        \"flex max-w-[28rem] flex-col items-center gap-hair\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nconst emptyMediaVariants = cva(\n  \"mb-hair flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"bg-transparent [&>[data-slot=folly]]:aspect-[160/150] [&>[data-slot=folly]]:w-32 [&>[data-slot=folly]]:after:hidden\",\n        icon: \"size-12 rounded-full border-(length:--line) border-ink bg-plane-2 text-ink [&_svg:not([class*='size-'])]:size-5 [&_svg]:[stroke-width:calc(var(--line)*1.5)]\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n)\n\nfunction EmptyMedia({\n  className,\n  variant = \"default\",\n  seed,\n  children,\n  ...props\n}: React.ComponentProps<\"div\"> &\n  VariantProps<typeof emptyMediaVariants> & {\n    /** Seeds the doorway folly drawn when the default variant has no children. */\n    seed?: string | number\n  }) {\n  return (\n    <div\n      data-slot=\"empty-icon\"\n      data-variant={variant}\n      className={cn(emptyMediaVariants({ variant, className }))}\n      {...props}\n    >\n      {children ??\n        (variant === \"default\" ? (\n          <Folly template=\"doorway\" seed={seed ?? \"empty\"} />\n        ) : null)}\n    </div>\n  )\n}\n\nfunction EmptyTitle({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"empty-title\"\n      className={cn(\n        \"font-read text-lead leading-lead font-semibold\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction EmptyDescription({ className, ...props }: React.ComponentProps<\"p\">) {\n  return (\n    <div\n      data-slot=\"empty-description\"\n      className={cn(\n        \"text-body leading-body [&>a]:underline [&>a]:underline-offset-[0.22em]\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction EmptyContent({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"empty-content\"\n      className={cn(\n        \"flex w-full max-w-[28rem] min-w-0 flex-col items-center gap-tight text-small leading-small text-balance\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Empty,\n  EmptyHeader,\n  EmptyTitle,\n  EmptyDescription,\n  EmptyContent,\n  EmptyMedia,\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/empty.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

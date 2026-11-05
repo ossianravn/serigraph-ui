@@ -16,6 +16,11 @@
     background-size: var(--grain-size);
     pointer-events: none;
   }
+  /* A medallion or a doorway is fitted whole, so most of its box is the surface behind it, which has its own grain:
+     an overlay there would double it and show the box as a faint square. */
+  &:has(> svg:is([data-folly="medallion"], [data-folly="doorway"]))::after {
+    display: none;
+  }
 }
 
 /* An arch-topped frame for a window folly: round head, small bottom radii, a fine line. Set the width; the head

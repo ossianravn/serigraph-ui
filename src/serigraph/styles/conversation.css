@@ -1,0 +1,150 @@
+/* Part drawing for the conversation parts that classes cannot reach, keyed on data-slot like parts.css. In the utilities
+   layer, so these rules (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* A filled bubble is a surface: what it holds (a field, an outline button, a code block) mixes with its colour.
+     Outline and ghost bubbles keep the surface beneath. */
+  [data-slot="bubble"]:not([data-variant="outline"], [data-variant="ghost"])
+    > [data-slot="bubble-content"] {
+    --surface: var(--bubble-fill);
+    --text: var(--ink);
+    --text-quiet: var(--ink-quiet);
+    --edge: var(--ink);
+  }
+  /* An outline bubble that is a button or a link takes a tint of the surface under the pointer. */
+  @media (hover: hover) {
+    [data-slot="bubble"][data-variant="outline"]
+      > [data-slot="bubble-content"]:is(a, button):hover {
+      background-color: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 70%,
+        var(--paper)
+      );
+      color: var(--ink);
+    }
+  }
+  @media (forced-colors: active) {
+    [data-slot="bubble"][data-variant="default"]
+      > [data-slot="bubble-content"] {
+      border-width: calc(var(--line) * 2);
+    }
+  }
+
+  /* A separator marker's pill is a tint of the surface, at no specificity, so a fill class on the content (the
+     highlight, where unread messages begin) wins. */
+  :where([data-slot="marker"][data-variant="separator"])
+    > :where([data-slot="marker-content"]) {
+    background-color: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 30%,
+      var(--paper)
+    );
+  }
+
+  /* Attachments: colour arrives with the file. Waiting, sending and reading, the ticket is a flat tint of the surface
+     beneath (dashed while it waits, as a technical drawing marks what is not yet built); an error is rose. What the
+     ticket holds takes the ticket as its surface (set on the children, since the tint reads the surface beneath). */
+  [data-slot="attachment"] {
+    &:is(
+      [data-state="idle"],
+      [data-state="uploading"],
+      [data-state="processing"]
+    ) {
+      --ticket-fill: color-mix(
+        in oklab,
+        var(--surface, var(--canvas)) 30%,
+        var(--paper)
+      );
+      --ticket-grain: none;
+    }
+    &[data-state="idle"] {
+      border-style: dashed;
+    }
+    &[data-state="error"] {
+      --ticket-fill: var(--rose);
+    }
+    & > * {
+      --surface: var(--ticket-fill);
+      --text: var(--ink);
+      --text-quiet: var(--ink-quiet);
+      --edge: var(--ink);
+    }
+    /* A ticket that opens darkens a step under the pointer, and gives a little when pressed. */
+    &:has(> [data-slot="attachment-trigger"]) {
+      transition:
+        background-color var(--duration-control) var(--ease),
+        scale var(--duration-control) var(--ease);
+      @media (hover: hover) {
+        &:hover {
+          background-color: color-mix(
+            in oklab,
+            var(--ticket-fill) 94%,
+            var(--ink)
+          );
+        }
+      }
+      &:has(> [data-slot="attachment-trigger"]:active) {
+        background-color: color-mix(
+          in oklab,
+          var(--ticket-fill) 92%,
+          var(--ink)
+        );
+        background-image: none;
+        scale: 0.98;
+      }
+    }
+    /* Over a picture, a tile's actions are small plane pills so they read on any image. */
+    &[data-orientation="vertical"] [data-slot="attachment-action"] {
+      --fill: var(--plane);
+      --fill-grain: none;
+      --pill-line: var(--ink);
+      --pill-text: var(--ink);
+      --press-fill: var(--plane);
+    }
+  }
+
+  /* The code block's colours. The plane is a tint of the plane colour, flat; comments are ink mixed toward it, and the
+     one accent (strings) is a deep sky. Both keep 4.5:1 on the plane and on the added and highlighted bands in every
+     colourway, and on the destructive variant's rose tint. */
+  [data-slot="code-block"] {
+    --code-fill: color-mix(in oklab, var(--plane) 30%, var(--paper));
+    --code-quiet: color-mix(in oklab, var(--ink) 75%, var(--code-fill));
+    --code-accent: color-mix(in oklab, var(--sky) 38%, var(--ink));
+    --code-added: color-mix(in oklab, var(--highlight) 25%, var(--code-fill));
+    --code-highlighted: color-mix(
+      in oklab,
+      var(--highlight) 40%,
+      var(--code-fill)
+    );
+    --surface: var(--code-fill);
+    --text: var(--ink);
+    --text-quiet: var(--ink-quiet);
+    --edge: var(--ink);
+    &[data-variant="destructive"] {
+      --code-fill: color-mix(in oklab, var(--rose) 30%, var(--paper));
+    }
+    /* Numbered, the gutter steps in a little so a line's + or − stands clear of its number. */
+    & [data-slot="code-block-content"][data-numbered] {
+      padding-inline-start: 1.5rem;
+      & [data-slot="code-block-line"] {
+        margin-inline-start: -1.5rem;
+        padding-inline-start: 1.5rem;
+      }
+    }
+    /* Actions without a header sit beside the code, at its top end, so a long first line scrolls under nothing. */
+    &:has(> [data-slot="code-block-actions"]):not(
+        :has(> [data-slot="code-block-header"])
+      ) {
+      flex-direction: row;
+      align-items: flex-start;
+      & > [data-slot="code-block-content"] {
+        flex: 1;
+      }
+      & > [data-slot="code-block-actions"] {
+        position: static;
+        order: 2;
+        margin: 0.25rem 0.25rem 0 0;
+      }
+    }
+  }
+}

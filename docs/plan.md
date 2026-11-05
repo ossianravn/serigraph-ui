@@ -1,6 +1,6 @@
 # Plan
 
-Status: Phase 3 (core primitives and the observatory's first screens) done, 2026-11-05; Phase 4 (data, navigation and the rest of parity) is next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
+Status: Phase 4 (data, navigation and the rest of parity) done, 2026-11-05; Phase 5 (extras, blocks, the home page and the colourway studio) is next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
 
 ## What this is
 
@@ -168,11 +168,17 @@ Exit: a `break-ui` pass on the demo screens and the first consumer install test.
 - [x] Meridian at `/meridian`, its own frame with a header, its sections and the visitor: tonight (the night in a line and an arched window, a clouds alert, your seats with a menu to add or release them behind a confirm, the sessions with a segmented filter and a booking dialog, the sky on a plane beside them), sign-in (validation under each field, a link by email) and settings (a narrow column of rows; colourway, poster, line and grain apply live)
 - [x] A `break-ui` pass: worst-case, empty and one data sets behind a dev-only switch (`/meridian/data/<set>/<page>`, built only by the dev server). Fixed: the board's column grew to the filter's width and overflowed at 320 px; the filter did not fit 320 px; an empty night or an empty filter showed nothing; long held titles squeezed beside their hour; hours sat centred against long titles; settings controls ran off when they could not sit beside their words; sessions kept data order; seat counts were unformatted; the close-account confirmation named seats the visitor might not hold
 
-### Phase 4: data, navigation and the rest of parity
+### Phase 4: data, navigation and the rest of parity (done)
 
 Table, pagination, breadcrumb, accordion, collapsible, command, combobox, sheet, drawer, menubar, navigation menu, context menu, hover card, calendar and date picker, chart (series told apart by fill: flat, stipple and louvers), sonner, sidebar, scroll area, resizable, carousel, input OTP, input group, button group, empty, item, aspect ratio, typography, direction and the conversation set.
 
 Exit: parity complete; a 200-row table scrolls without dropped frames.
+
+- [x] The Phase 4 rows of [Primitives](primitives.md) and a shared `menu-item` utility (dropdown, select, context menu, menubar, command and combobox use it; it understands cmdk's attributes)
+- [x] Five agents ported 44 parts in parallel, each with a docs page: layout (drawer, scroll area, resizable, aspect ratio, typography, direction, empty, item, accordion), navigation (sheet, sidebar, breadcrumb, pagination, menubar, navigation menu, context menu, hover card, command), input composites (input group, button group, input OTP, combobox, calendar and date picker, carousel), data (table, chart, sonner) and the conversation set (collapsible, attachment, bubble, marker, message, message scroller, questionnaire, trace, code block)
+- [x] Chart fills: `ChartConfig` takes `fill: flat | stipple | louvers | tint` per series (by position otherwise); shadcn code that fills with `var(--color-<key>)` picks them up; `chartFill(key)` for custom shapes
+- [x] A 200-row table: 16.7 ms median frame interval at 1× and 4× CPU throttling in headless Chrome, one or two frames over 20 ms; without its own scroll layer it repainted the grain every frame (21.8 ms median)
+- [x] Registry: 72 items; the install test adds calendar, chart, code block, command, empty, sidebar, sonner and table (27 items, all their packages, offline)
 
 ### Phase 5: extras, blocks, the home page and the colourway studio
 
@@ -209,6 +215,8 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 - **2026-11-05, Phase 3 (the parts)**: Three agents ported the other twenty parts in parallel, each owning its files and a batch stylesheet (`forms.css`, `feedback.css`, `overlays.css`). Reviewed from their screenshots and in the pane. Fixed on integration: the letters' `skeleton.ts` and shadcn's `skeleton.tsx` shared a base name, which `shadcn add` mixes up (the registry builder refused), so the letters module is now `geometry.ts`; disabled fields and checks tinted 12% toward paper read as cream boxes on every canvas, so they match disabled pills at 35%; the medallion's dome on a platform read as a flying saucer at avatar size, so it is now a pinwheel seen through an arch on clouds (its snapshots changed on purpose). Open: Serigraph Mono lacks arrows (← → fall back) and its % reads poorly when small; candidate shared utilities from the batches (a menu-item, the segmented track, a fine-icon stroke, the tick) wait for the next parts that need them.
 
 - **2026-11-05, Phase 3 (done)**: Meridian's first screens, built from the kit as a consumer would. Composed Base UI parts cannot cross Astro's boundary (each React component Astro places renders alone, so an avatar's fallback lost its context and the page threw); they render from one React component instead. The `break-ui` pass ran the worst case (a collaboration's lecture title, a double-barrelled name, a long work email, a comet's designation, a session over midnight, 1,200 seats), an empty night and a night of one, at 1440 and 320 px; nine breaks were fixed and the switch stays as the regression check. The pane stopped running `requestAnimationFrame` again, so dialogs could not finish closing there; the flows (book, add, release) were checked in headless Chrome over CDP instead. Fineliner's `Tabs` and `ToggleGroup` orientation fix went to its main the same day.
+
+- **2026-11-05, Phase 4 (done)**: Parity is complete: 72 registry items. Measured the table: scrolling it repainted the printed grain behind the rows every frame, so the table container scrolls on its own layer (`will-change: scroll-position`). From the batches: a folly's grain overlay doubled the canvas grain around fitted drawings (medallion, doorway), now off for those; shadcn's `data-horizontal`/`data-vertical` variants were missing and are now defined; cmdk marks every item `data-disabled="false"`, which the menu-item utility now reads correctly. Open for consolidation: a `fine-icon` stroke utility, the fine tick, a ghost pill, a current-page pill, the group-takes-focus rules and a tinted-surface context are each repeated across batches; `cn` does not know `caps` and `pill` clash with `font-*`, `text-*` and `rounded-*`. Name-drawn avatars read busy as small pinwheels in threads. The screenshot script's fixed port collided between parallel agents.
 
 ## Open questions for the maintainer
 

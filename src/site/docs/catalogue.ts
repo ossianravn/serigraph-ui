@@ -11,6 +11,8 @@ const ORDER: (Group | "Other")[] = [
   "Overlays",
   "Navigation",
   "Data display",
+  "Charts",
+  "Conversation",
   "Serigraph extras",
   "Other",
 ]

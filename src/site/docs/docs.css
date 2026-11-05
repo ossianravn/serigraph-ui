@@ -1,0 +1,127 @@
+/* The docs pages: a component's states in one column of a fixed width, the nav of every component beside it from
+   lg; the index lists the components by group at the reading measure. */
+.docs {
+  display: grid;
+  gap: var(--space-page);
+  padding: var(--space-section) var(--gutter) var(--space-page);
+}
+@media (min-width: 64rem) {
+  .docs {
+    grid-template-columns: minmax(0, 1fr) 12rem;
+  }
+}
+.docs-title {
+  margin: 0;
+  font-size: clamp(2.25rem, 7vw, 5rem);
+}
+.docs-lead {
+  max-width: var(--measure);
+  margin: var(--space-snug) 0 0;
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+}
+.docs-demo {
+  margin-top: var(--space-section);
+}
+.docs-nav {
+  position: sticky;
+  top: var(--space-snug);
+  display: none;
+  align-self: start;
+  max-height: calc(100dvh - 2 * var(--space-snug));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-block: var(--space-section) var(--space-line);
+  & h2 {
+    margin: var(--space-snug) 0 var(--space-hair);
+  }
+  & ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  & li {
+    display: grid;
+    grid-template-columns: 1.125rem minmax(0, 1fr);
+    align-items: center;
+  }
+  & li .motif {
+    font-size: 0.75rem;
+  }
+  & li a {
+    grid-column: 2;
+    padding-block: 0.1875rem;
+    font-size: var(--type-small);
+    line-height: var(--lh-small);
+    text-decoration: none;
+  }
+  & li a:hover,
+  & li a[aria-current="page"] {
+    text-decoration: underline;
+  }
+  & > a {
+    text-decoration: none;
+  }
+}
+@media (min-width: 64rem) {
+  .docs-nav {
+    display: block;
+  }
+}
+.docs-pager {
+  margin-top: var(--space-page);
+  & ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-line);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  & a {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-hair);
+    text-decoration: none;
+  }
+  & .docs-pager-next {
+    justify-self: end;
+    & a {
+      justify-items: end;
+      text-align: end;
+    }
+  }
+}
+.docs-pager-title {
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+}
+.docs-pager a:hover .docs-pager-title {
+  text-decoration: underline;
+}
+
+/* The index: groups as sections, each component a title and its sentence. */
+.docs-index {
+  display: grid;
+  gap: var(--space-section);
+  max-width: 48rem;
+  margin-top: var(--space-section);
+  & h2 {
+    margin: 0 0 var(--space-tight);
+  }
+  & ul {
+    display: grid;
+    gap: var(--space-snug);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  & a {
+    font-size: var(--type-lead);
+    line-height: var(--lh-lead);
+  }
+  & p {
+    max-width: var(--measure);
+    margin: var(--space-hair) 0 0;
+  }
+}

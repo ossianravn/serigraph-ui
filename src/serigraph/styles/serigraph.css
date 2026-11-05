@@ -1,6 +1,7 @@
 /* Serigraph: the Tailwind entry. Import this file once; it brings Tailwind, the faces, the tokens, the colourways,
    the grain and the surfaces. */
 @import "tailwindcss";
+@import "tw-animate-css";
 @import "./fonts.css";
 @import "./letters.generated.css";
 @import "./lettering.css";
@@ -11,6 +12,8 @@
 @import "./roles.css";
 @import "./base.css";
 @import "./surfaces.css";
+@import "./controls.css";
+@import "./parts.css";
 
 /* Night is a colourway; it also answers shadcn's dark variant, so parts that read it work. */
 @custom-variant night (&:where([data-colourway="night"], [data-colourway="night"] *));

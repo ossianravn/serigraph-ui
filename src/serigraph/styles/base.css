@@ -3,6 +3,8 @@
 /* The printed grain: four neutral layers at tile sizes that share no factors, so the grain never visibly repeats.
    Surfaces lay it over their colour, under their content; data-grain="off" takes it away. */
 :root {
+  /* Quiet text (disabled words) where no surface has set its own. */
+  --text-quiet: var(--ink-quiet);
   --grain:
     var(--tex-specks), var(--tex-flecks), var(--tex-tooth), var(--tex-mottle);
   --grain-size: 541px, 613px, 353px, 1201px;

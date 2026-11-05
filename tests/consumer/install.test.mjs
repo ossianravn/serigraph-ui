@@ -30,7 +30,19 @@ const shadcn = path.join(repo, "node_modules/shadcn/dist/index.js")
 // The items whose parts fixture/src/App.tsx imports. base and follies arrive as their item dependencies, which
 // exercises the --base dependency URLs and fails the type-check if an item leaves out one it imports. Not the
 // serigraph umbrella: it lists every item, so it would hide a missing dependency.
-const items = ["folly", "lettering", "letters", "motif"]
+const items = [
+  "folly",
+  "lettering",
+  "letters",
+  "motif",
+  "button",
+  "card",
+  "checkbox",
+  "input",
+  "label",
+  "switch",
+  "tabs",
+]
 
 test(
   "registry items install into a fresh Vite app that type-checks and builds",

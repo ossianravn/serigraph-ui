@@ -1,0 +1,46 @@
+---
+// Every component by group, beside a component's docs page from lg: a rail that stays in view and scrolls on its
+// own, the current page marked with a sparkle. Narrower, the page ends with previous and next instead.
+import { Motif } from "@/serigraph/extras/motif"
+import { GROUPS } from "./catalogue"
+
+interface Props {
+  current: string
+}
+const { current } = Astro.props
+---
+
+<nav aria-label="Components" data-component-nav class="docs-nav">
+  <a href="/docs" class="caps">
+    All components
+  </a>
+  {GROUPS.map(({ group, items }) => (
+    <section aria-labelledby={`nav-${group}`}>
+      <h2 id={`nav-${group}`} class="caps">
+        {group}
+      </h2>
+      <ul>
+        {items.map(({ name, title }) => (
+          <li>
+            {name === current && <Motif kind="sparkle" seed={name} />}
+            <a
+              href={`/docs/components/${name}`}
+              aria-current={name === current ? "page" : undefined}
+            >
+              {title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</nav>
+
+<script is:inline>
+  // Bring the current page into the rail's view without scrolling the page.
+  ;(() => {
+    const nav = document.querySelector("[data-component-nav]")
+    const here = nav?.querySelector("[aria-current=page]")
+    if (nav && here) nav.scrollTop = here.offsetTop - nav.clientHeight / 2
+  })()
+</script>

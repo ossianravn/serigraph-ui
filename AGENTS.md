@@ -23,10 +23,11 @@ Prefer installed packages. Propose a new dependency with the need it serves.
 
 ## Read the owning document
 
-| When changing                                                                            | Read                         |
-| ---------------------------------------------------------------------------------------- | ---------------------------- |
-| Colour, colourways, the line, surfaces, type and space, letters, motifs, Follies, motion | [Style brief](docs/style.md) |
-| Phase scope, decisions, what ports from Fineliner, progress                              | [Plan](docs/plan.md)         |
+| When changing                                                                            | Read                             |
+| ---------------------------------------------------------------------------------------- | -------------------------------- |
+| Colour, colourways, the line, surfaces, type and space, letters, motifs, Follies, motion | [Style brief](docs/style.md)     |
+| Phase scope, decisions, what ports from Fineliner, progress                              | [Plan](docs/plan.md)             |
+| A shadcn part in `src/serigraph/ui/`, the control utilities, a docs demo                 | [Primitives](docs/primitives.md) |
 
 ## This style is not neo-brutalism
 

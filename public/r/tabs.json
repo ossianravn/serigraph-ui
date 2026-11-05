@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "title": "Tabs",
+  "description": "Tabs: a row of archways standing on their panel; the chosen arch takes the panel's colour and opens into it. A line variant for compact and vertical lists.",
+  "dependencies": [
+    "@base-ui/react@^1.9.0",
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/tabs.tsx",
+      "content": "\"use client\"\n\nimport { Tabs as TabsPrimitive } from \"@base-ui/react/tabs\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// The default tabs are a row of archways standing on the panel they open (styles/parts.css): a semicircular head on\n// straight jambs, a second line inside the head, the label in extended capitals below the spring line. The chosen arch\n// takes the panel's colour and opens into it. The line variant, and vertical tabs, are labels with an ink bar under\n// (or beside) the chosen one. Orientation is matched on data-orientation directly.\n\nfunction Tabs({\n  className,\n  orientation = \"horizontal\",\n  ...props\n}: TabsPrimitive.Root.Props) {\n  return (\n    <TabsPrimitive.Root\n      data-slot=\"tabs\"\n      orientation={orientation}\n      data-orientation={orientation}\n      className={cn(\n        \"group/tabs flex gap-snug data-[orientation=horizontal]:flex-col\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nconst tabsListVariants = cva(\n  \"group/tabs-list relative max-w-full group-data-[orientation=vertical]/tabs:flex group-data-[orientation=vertical]/tabs:h-fit group-data-[orientation=vertical]/tabs:w-fit group-data-[orientation=vertical]/tabs:flex-col group-data-[orientation=vertical]/tabs:items-stretch\",\n  {\n    variants: {\n      variant: {\n        default: \"\",\n        line: \"flex items-center gap-snug overflow-x-auto py-1 [scrollbar-width:none] group-data-[orientation=vertical]/tabs:gap-0 group-data-[orientation=vertical]/tabs:overflow-visible\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n)\n\nfunction TabsList({\n  className,\n  variant = \"default\",\n  ...props\n}: TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>) {\n  return (\n    <TabsPrimitive.List\n      data-slot=\"tabs-list\"\n      data-variant={variant}\n      className={cn(tabsListVariants({ variant }), className)}\n      {...props}\n    />\n  )\n}\n\nfunction TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {\n  return (\n    <TabsPrimitive.Tab\n      data-slot=\"tabs-trigger\"\n      className={cn(\n        \"group/tabs-trigger relative inline-flex cursor-pointer caps whitespace-nowrap select-none data-disabled:cursor-not-allowed data-disabled:text-(--text-quiet) [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {\n  return (\n    <TabsPrimitive.Panel\n      data-slot=\"tabs-content\"\n      className={cn(\"flex-1\", className)}\n      {...props}\n    />\n  )\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/tabs.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

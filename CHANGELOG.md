@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Phase 3: core primitives (in progress)
+
+- Button, Badge, Card, Input, Label, Checkbox, Switch and Tabs on Base UI, with shadcn's names, props and slots: pills in the colourway's spot colours inside one ink line, tinted fields, a pinwheel switch thumb that rolls, and tabs drawn as archways that open into their panel.
+- Component docs at `/docs`: every part's states in a matrix, by group, with previous and next.
+- The registry has 15 items; the install test adds the new parts.
+
 ### Phase 2: Follies
 
 - The Follies engine in the kit: seeded surreal architecture drawn as SVG from a seed, the same on the server and in the browser, recoloured by the colourway. Templates: city, window, medallion, band, arcade and doorway; `<Folly>` renders one.

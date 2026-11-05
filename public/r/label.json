@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "title": "Label",
+  "description": "Label: names the control beside it in the reading voice.",
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/ui/label.tsx",
+      "content": "import * as React from \"react\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n// A label in the reading voice beside the control it names (a check, a switch). Labels above a field use FieldLabel,\n// which sets them in the extended capitals.\nfunction Label({ className, ...props }: React.ComponentProps<\"label\">) {\n  return (\n    <label\n      data-slot=\"label\"\n      className={cn(\n        \"flex items-center gap-tight text-body leading-ui select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:text-(--text-quiet) peer-disabled:cursor-not-allowed peer-disabled:text-(--text-quiet) has-data-disabled:cursor-not-allowed has-data-disabled:text-(--text-quiet)\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Label }\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/ui/label.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,148 @@
+/* Part-specific drawing that classes cannot reach (pseudo-elements keyed on a part's own state), found by shadcn's
+   data-slot attributes so a part's JSX stays shadcn's. In the utilities layer, so these rules (more specific than a
+   single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* Archway tabs. Each tab's box is its arch: the top corners fully rounded on a box at least half as tall as it is
+     wide make a semicircular head on straight jambs, so nothing is measured. Every arch is as wide as the widest. */
+  [data-slot="tabs-list"][data-variant="default"][data-orientation="horizontal"] {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: end;
+    gap: var(--space-tight);
+    padding-inline: var(--space-line);
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* The chosen arch stands over the panel's top line. */
+    padding-bottom: var(--line);
+    margin-bottom: calc(-1 * var(--line));
+  }
+  [data-variant="default"][data-orientation="horizontal"]
+    > [data-slot="tabs-trigger"] {
+    aspect-ratio: 5 / 4;
+    min-width: 5.5rem;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 var(--space-tight) var(--space-tight);
+    border: var(--line) solid var(--edge, var(--ink));
+    border-bottom: 0;
+    border-radius: 999px 999px 0 0;
+    color: var(--text, var(--ink));
+    transition: background-color var(--duration-control) var(--ease);
+    /* The arch's depth: a second line inside the head. */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0.4375rem;
+      inset-inline: 0.4375rem;
+      aspect-ratio: 2 / 1;
+      border: var(--line) solid currentColor;
+      border-bottom: 0;
+      border-radius: 999px 999px 0 0;
+      pointer-events: none;
+    }
+    @media (hover: hover) {
+      &:hover:not([data-active], [data-disabled]) {
+        background-color: color-mix(
+          in oklab,
+          var(--surface, var(--canvas)) 30%,
+          var(--paper)
+        );
+        color: var(--ink);
+      }
+    }
+    &[data-disabled] {
+      border-color: var(--text-quiet, var(--ink-quiet));
+      color: var(--text-quiet, var(--ink-quiet));
+    }
+    &[data-active] {
+      z-index: 1;
+      margin-bottom: calc(-1 * var(--line));
+      padding-bottom: calc(var(--space-tight) + var(--line));
+      border-color: var(--ink);
+      background-color: var(--plane);
+      background-image: var(--grain);
+      background-size: var(--grain-size);
+      color: var(--ink);
+    }
+    @media (forced-colors: active) {
+      &[data-active] {
+        border-width: calc(var(--line) * 2);
+      }
+    }
+  }
+  /* The panel the arches stand on: a plane they open into. */
+  [data-slot="tabs"]:has(
+    > [data-slot="tabs-list"][data-variant="default"][data-orientation="horizontal"]
+  ) {
+    gap: 0;
+    & > [data-slot="tabs-content"] {
+      --surface: var(--plane);
+      --text: var(--ink);
+      --edge: var(--ink);
+      padding: var(--space-line);
+      border: var(--line) solid var(--ink);
+      border-radius: var(--r-plane);
+      background-color: var(--plane);
+      background-image: var(--grain);
+      background-size: var(--grain-size);
+      color: var(--ink);
+    }
+  }
+  @media (max-width: 30rem) {
+    [data-slot="tabs-list"][data-variant="default"][data-orientation="horizontal"] {
+      gap: var(--space-hair);
+      padding-inline: var(--space-snug);
+    }
+    [data-variant="default"][data-orientation="horizontal"]
+      > [data-slot="tabs-trigger"] {
+      min-width: 4.5rem;
+      padding-inline: var(--space-hair);
+      font-size: 0.6875rem;
+    }
+  }
+
+  /* Line tabs, and every vertical tab list: labels with an ink bar under (or beside) the chosen one. */
+  [data-slot="tabs-list"]:is(
+      [data-variant="line"],
+      [data-orientation="vertical"]
+    )
+    > [data-slot="tabs-trigger"] {
+    align-items: center;
+    min-height: var(--control-height-compact);
+    padding-inline: var(--space-hair);
+    color: var(--text, var(--ink));
+    &::after {
+      content: "";
+      position: absolute;
+      inset-inline: var(--space-hair);
+      bottom: 0;
+      height: calc(var(--line) * 2);
+      border-radius: 999px;
+      background: currentColor;
+      scale: 0 1;
+      transition: scale var(--duration-control) var(--ease);
+    }
+    &[data-active]::after {
+      scale: 1;
+    }
+    &[data-disabled] {
+      color: var(--text-quiet, var(--ink-quiet));
+    }
+  }
+  [data-slot="tabs-list"][data-orientation="vertical"]
+    > [data-slot="tabs-trigger"] {
+    justify-content: flex-start;
+    padding-inline: var(--space-snug) var(--space-tight);
+    &::after {
+      inset: var(--space-hair) auto var(--space-hair) 0;
+      width: calc(var(--line) * 2);
+      height: auto;
+      scale: 1 0;
+    }
+    &[data-active]::after {
+      scale: 1;
+    }
+  }
+}

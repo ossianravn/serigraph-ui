@@ -1,0 +1,56 @@
+# Primitives
+
+How Serigraph treats shadcn's parts (`src/serigraph/ui/`). Each file starts from the matching Fineliner file (`C:\CodexApp\naive-indie-line\src\fineliner\ui\<name>.tsx`, which is shadcn's `base-nova` source on Base UI with Fineliner's classes) and keeps shadcn's component names, parts, props, variants and `data-slot` attributes, so Serigraph swaps in without JSX changes. Only the classes change, plus a motif where a part has one. The exemplars are `button.tsx`, `input.tsx`, `checkbox.tsx`, `switch.tsx`, `tabs.tsx`, `badge.tsx`, `label.tsx` and `card.tsx`; the shared utilities are in `styles/controls.css`.
+
+## Calm controls on colour
+
+Controls are flat spot colour inside one fine ink line, on whatever surface they sit on. What people press is a pill; what holds text is a pill (or a 16 px box) tinted from the surface beneath; a chosen option takes the highlight colour. Nothing is shadowed, extruded, blurred or translucent. The delight is in two small things only: a short contour line that appears inside a pill's upper left under the pointer (the ligne-claire highlight), and pinwheels that roll.
+
+## Shared treatment
+
+| Concern               | Treatment                                                                                                                                                                                                                                          |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pressables            | `pill` (ink line, round ends, `--fill` laid flat with grain; pressed: `--fill` steps to its shade, 92% toward ink, flat) plus `contour` (the hover highlight). Set `--fill` per variant: `--action`, `--plane-2`, `--rose`, or the surface beneath |
+| Text fields, triggers | `control-field` (a pill tinted 30% from `--surface` toward paper, ink line, 16 px text so phones never zoom) at `h-control` (2.618 rem) or `h-control-compact` (2 rem); text areas take `rounded-box`                                              |
+| Floating surfaces     | `float-plane` (a plane in `--plane`, ink line, `rounded-box`, grain, no shadow). Sheets grow from their trigger (`zoom-in-97`, `fade-in-0`, 140–180 ms, `ease-(--ease)`); none slide. The sheet's inner list scrolls, never the sheet              |
+| Backdrop              | `stipple-screen` over the page, never a dim or a blur                                                                                                                                                                                              |
+| Chosen, checked       | The highlight colour (`--highlight`) inside the ink line, with an ink mark (a tick, a dot, a pinwheel's position), never colour alone                                                                                                              |
+| Highlighted item      | A flat `--highlight` pill behind the item, which is also its focus mark                                                                                                                                                                            |
+| Voices                | Buttons, tabs, badges' words, labels above fields and table heads in `caps` (Serigraph Sans); sentences, field values and menu items in the reading face (Archivo); figures, keys and codes in `font-mono` (Serigraph Mono)                        |
+| Focus                 | The page's concentric ring (`:focus-visible` in `base.css`: a second line outside the first, in `--edge`). Remove shadcn's `outline-none`, `ring-*` and `focus-visible:border-ring` classes rather than restyling them                             |
+| Disabled              | The tint fill and `text-ink-quiet` with an `--ink-quiet` line; never opacity. `cursor-not-allowed`; no contour, no press                                                                                                                           |
+| Invalid, destructive  | A rose second ring (`outline` in `--rose`, thicker on focus) and the message in ink below; destructive buttons are rose pills with their word                                                                                                      |
+| Corners               | Pills for what is pressed or typed into on one line; `rounded-box` (16 px) for text areas, menus and small planes; `rounded-plane` (24 px) for cards and dialogs                                                                                   |
+| Spacing               | The φ units (`p-snug`, `gap-tight`, `py-hair`…). Tailwind's numeric spacing only for optical nudges                                                                                                                                                |
+| Icons                 | Lucide at `size-4` where shadcn has them; a motif where the motif is the meaning (pinwheel, sparkle)                                                                                                                                               |
+| Motion                | `press` on pressables; enter and exit from `tw-animate-css`, 140–180 ms on `--ease`; a pinwheel rolls the distance it travels; everything stops under reduced motion                                                                               |
+| Forced colours        | Fills vanish there, so a chosen state also changes its line (thicker, or `Highlight`)                                                                                                                                                              |
+
+Replace these shadcn tokens on sight: `bg-background` → nothing (the surface sets it) or `bg-canvas`; `text-muted-foreground` → `text-ink-quiet`; `bg-muted`, `bg-accent` → `bg-highlight` or `field-fill`; `rounded-md`/`rounded-lg`/`rounded-xl` → `rounded-full`, `rounded-box` or `rounded-plane`; `shadow-*` → nothing; `text-sm`/`text-xs` → `text-small` or `caps`; any `dark:` variant → nothing (Night recolours through roles); `ring-*`, `outline-none` → nothing; `border` → `border-(length:--line) border-ink`.
+
+## Per part (Phase 3)
+
+| Part                  | Serigraph treatment                                                                                                                                                                  |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Button                | Default an action pill; secondary a plane-2 pill; outline just the line on whatever is beneath; ghost no line until hovered; destructive a rose pill; link underlined. Words in caps |
+| Badge                 | A small flat pill in the mono face, in a tone (`data-tone`) or the highlight; outline just the line; destructive rose                                                                |
+| Card                  | A plane (`--plane`, or a tone), 24 px radius; title in the reading face at `text-lead`, kicker in caps; an optional arched window for a folly                                        |
+| Input, textarea       | `control-field`; width set by the caller to fit the value                                                                                                                            |
+| Label, field          | `caps` above its control in a vertical field; the reading voice beside a check or switch; descriptions `text-small`; errors in ink after a rose dot                                  |
+| Checkbox, radio       | A rounded square (6 px) and a circle, line in `--edge`, tinted; checked: highlight fill, ink line, a fine ink tick or a solid ink dot                                                |
+| Switch                | A pill track, tinted; on: the highlight; the thumb a pinwheel (paper and action) that rolls the distance it slides                                                                   |
+| Select, native select | Trigger a `control-field` with a fine chevron; list a `float-plane` with the highlight pill under the pointer and a tick beside the chosen item                                      |
+| Toggle, toggle group  | Pressed takes the highlight inside the line; a group is a plane-2 pill track whose chosen segment is a highlight pill (the segmented control)                                        |
+| Tabs                  | A row of archways: a semicircular head on straight jambs with a second line inside the head; the chosen arch takes the panel's colour and opens into it; labels in caps              |
+| Slider                | A fine line track; the range a thicker line in the action colour; the thumb a pinwheel                                                                                               |
+| Progress              | A pill slot; the indicator louvers (action and ink slats) that grow                                                                                                                  |
+| Separator             | One fine ink line; vertical the same line turned                                                                                                                                     |
+| Skeleton              | A `field-fill` shape in the content's own geometry with a slow pulse                                                                                                                 |
+| Spinner               | A pinwheel turning at a steady pace                                                                                                                                                  |
+| Kbd                   | `font-mono` in a small pill with the line                                                                                                                                            |
+| Avatar                | A circle in a spot colour with the line; initials in caps; the medallion folly as a seeded fallback picture                                                                          |
+| Alert                 | A small plane in a tone with a motif by the title; destructive a rose plane with its word                                                                                            |
+| Tooltip               | A small ink pill with paper text in the reading face at `text-small`                                                                                                                 |
+| Popover               | A `float-plane`                                                                                                                                                                      |
+| Dialog, alert dialog  | A plane with the 24 px radius over a `stipple-screen`; title in the reading face at `text-h2`; actions as pills, the main one last                                                   |
+| Dropdown menu         | The select list's surface and items; checkbox and radio items marked with a tick or a dot; shortcuts in `font-mono`; separators a fine line                                          |

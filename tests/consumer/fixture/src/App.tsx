@@ -5,9 +5,16 @@ import { Motif } from "@/serigraph/extras/motif"
 import { alphabet, DISPLAY_PEN } from "@/serigraph/letters/alphabet"
 import { cn } from "@/serigraph/lib/utils"
 import { APPEARANCE, useAppearance } from "@/serigraph/theme"
+import { Button } from "@/serigraph/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/serigraph/ui/card"
+import { Checkbox } from "@/serigraph/ui/checkbox"
+import { Input } from "@/serigraph/ui/input"
+import { Label } from "@/serigraph/ui/label"
+import { Switch } from "@/serigraph/ui/switch"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/serigraph/ui/tabs"
 
 // The observatory's opening night: lettering, the city and a window drawn from seeds, a colourway switch and the
-// alphabet's size, a motif beside the text, using the parts the install test adds.
+// alphabet's size, a motif beside the text, a booking card and archway tabs, using the parts the install test adds.
 export function App() {
   const [appearance, setAppearance] = useAppearance()
   const night = appearance.colourway === "night"
@@ -43,6 +50,33 @@ export function App() {
           ))}
         </div>
       </div>
+      <Card className="max-w-[24rem]">
+        <CardHeader>
+          <CardTitle>Book a seat</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <Input
+            aria-label="Name"
+            placeholder="Ada Lovelace"
+            className="w-64"
+          />
+          <Label>
+            <Checkbox defaultChecked /> Bring a red torch
+          </Label>
+          <Label>
+            <Switch /> Remind me at dusk
+          </Label>
+          <Button className="w-fit">Book</Button>
+        </CardContent>
+      </Card>
+      <Tabs defaultValue="tonight" className="max-w-[34rem]">
+        <TabsList>
+          <TabsTrigger value="tonight">Tonight</TabsTrigger>
+          <TabsTrigger value="week">This week</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tonight">Saturn rises at 18:52.</TabsContent>
+        <TabsContent value="week">Four clear nights.</TabsContent>
+      </Tabs>
       <div
         className="folly h-40 w-32"
         dangerouslySetInnerHTML={{

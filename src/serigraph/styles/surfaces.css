@@ -18,6 +18,7 @@
 @utility canvas {
   --surface: var(--canvas);
   --text: var(--on-canvas);
+  --text-quiet: color-mix(in oklab, var(--on-canvas) 62%, var(--canvas));
   --edge: var(--on-canvas);
   background-color: var(--canvas);
   background-image: var(--grain);
@@ -29,6 +30,7 @@
 @utility ground {
   --surface: var(--cloud);
   --text: var(--ink);
+  --text-quiet: var(--ink-quiet);
   --edge: var(--ink);
   background-color: var(--cloud);
   background-image: var(--grain);
@@ -41,6 +43,7 @@
   --tone: initial;
   --surface: var(--tone, var(--plane));
   --text: var(--ink);
+  --text-quiet: var(--ink-quiet);
   --edge: var(--ink);
   background-color: var(--surface);
   background-image: var(--grain);

@@ -1,0 +1,41 @@
+---
+// One component's docs page: its title lettered and one sentence, the component's states in one column of a fixed
+// width, then previous and next; from lg the nav of every component runs beside it.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import ComponentNav from "@/site/docs/component-nav.astro"
+import ComponentPager from "@/site/docs/component-pager.astro"
+import { DemoHost } from "@/site/docs/demo-host"
+import type { DemoMeta } from "@/site/docs/demo-kit"
+import "@/site/docs/docs.css"
+
+export function getStaticPaths() {
+  const modules = import.meta.glob<{ meta: DemoMeta }>(
+    "../../../site/docs/demos/*.tsx",
+    { eager: true },
+  )
+  return Object.entries(modules).map(([path, mod]) => ({
+    params: { name: path.replace(/^.*\/(.+)\.tsx$/, "$1") },
+    props: { meta: mod.meta },
+  }))
+}
+
+const name = Astro.params.name ?? ""
+const { meta } = Astro.props
+---
+
+<Base title={meta.title} description={meta.description}>
+  <div class="docs">
+    <div class="min-w-0">
+      <Lettering as="h1" className="docs-title">
+        {meta.title}
+      </Lettering>
+      <p class="docs-lead">{meta.description}</p>
+      <div class="docs-demo">
+        <DemoHost name={name} client:load />
+      </div>
+      <ComponentPager current={name} />
+    </div>
+    <ComponentNav current={name} />
+  </div>
+</Base>

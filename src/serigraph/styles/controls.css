@@ -1,0 +1,176 @@
+/* Controls: flat spot colour inside one fine ink line. What people press is a pill, what holds text is a tinted pill,
+   a chosen option takes the highlight. Nothing is shadowed, extruded or translucent; disabled is a tint and a muted
+   ink, never opacity. See docs/primitives.md. */
+
+/* A pressable pill: --fill laid flat with the grain, one ink line, round ends. Pressed, the fill steps to its shade
+   (toward ink, flat, so ink text keeps its contrast). A variant sets --fill, and an open one (no fill) sets
+   --fill: transparent, --fill-grain: none, --pill-line and --pill-text to the surface's edge and text, and
+   --press-fill to the surface. */
+@utility pill {
+  --fill: var(--surface, var(--canvas));
+  position: relative;
+  isolation: isolate;
+  border: var(--line) solid var(--pill-line, var(--ink));
+  border-radius: 999px;
+  background-color: var(--fill);
+  background-image: var(--fill-grain, var(--grain));
+  background-size: var(--grain-size);
+  color: var(--pill-text, var(--ink));
+  transition:
+    background-color var(--duration-control) var(--ease),
+    border-color var(--duration-control) var(--ease),
+    scale var(--duration-control) var(--ease);
+  &:active:not(:disabled, [data-disabled]),
+  &[aria-expanded="true"],
+  &[data-popup-open] {
+    background-color: color-mix(
+      in oklab,
+      var(--press-fill, var(--fill)) 92%,
+      var(--ink)
+    );
+    background-image: none;
+  }
+  &:disabled,
+  &[data-disabled] {
+    border-color: var(--ink-quiet);
+    background-color: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 35%,
+      var(--paper)
+    );
+    background-image: none;
+    color: var(--ink-quiet);
+    cursor: not-allowed;
+  }
+}
+
+/* The ligne-claire highlight: under the pointer, a short contour line appears inside the pill's upper left. */
+@utility contour {
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: var(--contour-x, 0.6875rem);
+    top: var(--contour-y, 0.3125rem);
+    width: 0.6875rem;
+    height: 0.5625rem;
+    border-top: var(--line) solid currentColor;
+    border-inline-start: var(--line) solid currentColor;
+    border-start-start-radius: 0.6875rem 0.5625rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 120ms var(--ease);
+  }
+  @media (hover: hover) {
+    &:hover:not(:disabled, [data-disabled])::before {
+      opacity: 1;
+    }
+  }
+}
+
+/* The control gives a little under the finger. */
+@utility press {
+  &:active:not(:disabled, [data-disabled]) {
+    scale: 0.98;
+  }
+}
+
+/* A field: a pill tinted from the surface beneath, the ink line, 16px text so phones never zoom. Invalid adds a rose
+   second ring, thicker while focused. */
+@utility control-field {
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background-color: color-mix(
+    in oklab,
+    var(--surface, var(--canvas)) 30%,
+    var(--paper)
+  );
+  background-image: none;
+  color: var(--ink);
+  font-family: var(--face-read);
+  font-size: max(1rem, 16px);
+  line-height: var(--lh-ui);
+  &::placeholder {
+    color: var(--ink-quiet);
+  }
+  &:disabled,
+  &[data-disabled] {
+    border-color: var(--ink-quiet);
+    background-color: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 12%,
+      var(--paper)
+    );
+    color: var(--ink-quiet);
+    cursor: not-allowed;
+  }
+  &[aria-invalid="true"] {
+    outline: var(--line) solid var(--rose);
+    outline-offset: 3px;
+  }
+  &[aria-invalid="true"]:focus-visible {
+    outline-width: calc(var(--line) * 2);
+  }
+}
+
+/* A floating plane: menus, lists, popovers. The plane colour, the line, a 16px radius, the grain; no shadow. */
+@utility float-plane {
+  --surface: var(--plane);
+  --text: var(--ink);
+  --text-quiet: var(--ink-quiet);
+  --edge: var(--ink);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-box);
+  background-color: var(--plane);
+  background-image: var(--grain);
+  background-size: var(--grain-size);
+  color: var(--ink);
+}
+
+/* A check or radio box: line in --edge, tinted; checked takes the highlight inside an ink line. */
+@utility choice-box {
+  display: grid;
+  place-content: center;
+  flex: none;
+  border: var(--line) solid var(--edge, var(--ink));
+  background-color: color-mix(
+    in oklab,
+    var(--surface, var(--canvas)) 30%,
+    var(--paper)
+  );
+  color: var(--ink);
+  &[data-checked],
+  &[data-indeterminate] {
+    border-color: var(--ink);
+    background-color: var(--highlight);
+  }
+  &[data-disabled] {
+    border-color: var(--ink-quiet);
+    background-color: color-mix(
+      in oklab,
+      var(--surface, var(--canvas)) 12%,
+      var(--paper)
+    );
+    color: var(--ink-quiet);
+    cursor: not-allowed;
+  }
+  &[aria-invalid="true"] {
+    outline: var(--line) solid var(--rose);
+    outline-offset: 3px;
+  }
+  @media (forced-colors: active) {
+    &[data-checked] {
+      border-width: calc(var(--line) * 2);
+    }
+  }
+}
+
+/* A pinwheel in CSS: twelve wedges of paper and --wheel (the action colour) in the ink line. Switch thumbs, slider
+   thumbs and spinners; the drawn motif is <Motif kind="pinwheel">. */
+@utility pinwheel {
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    var(--paper) 0 30deg,
+    var(--wheel, var(--action)) 30deg 60deg
+  );
+}

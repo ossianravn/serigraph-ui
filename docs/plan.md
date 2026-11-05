@@ -1,6 +1,6 @@
 # Plan
 
-Status: Phase 2 (Follies and the motifs) done, 2026-11-05; Phase 3 (core primitives and the observatory's first screens) is next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
+Status: Phase 3 (core primitives and the observatory's first screens) in progress, 2026-11-05: the shared treatment, eight exemplar parts and the docs pages are done; the remaining parts, then Meridian's screens, are next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
 
 ## What this is
 
@@ -159,6 +159,14 @@ Button, badge, card, input, textarea, label, field, checkbox, radio group, switc
 
 Exit: a `break-ui` pass on the demo screens and the first consumer install test.
 
+- [x] [Primitives](primitives.md): the shared treatment (pills, tinted fields, floating planes, the highlight for chosen, `--text-quiet` for disabled words) and a row per part
+- [x] Shared utilities in the kit (`styles/controls.css`: `pill`, `contour`, `press`, `control-field`, `float-plane`, `choice-box`, `pinwheel`) and part drawing keyed on `data-slot` (`styles/parts.css`); Base UI, class-variance-authority, Lucide and tw-animate-css added, as in Fineliner
+- [x] Exemplars in `src/serigraph/ui/`: button, badge, card, input, label, checkbox, switch (a pinwheel thumb that rolls the distance it slides) and tabs (archways whose heads are the tab's own rounded box, so nothing measures)
+- [x] Docs pages ported from Fineliner: `/docs` and `/docs/components/<name>`, one demo file per part with state matrices, a component rail and previous/next
+- [x] The install test adds button, card, checkbox, input, label, switch and tabs
+- [ ] The remaining parts: textarea, field, radio group, select, native select, toggle, toggle group, separator, skeleton, avatar, alert, progress, slider, kbd, spinner, tooltip, popover, dialog, alert dialog, dropdown menu
+- [ ] Meridian's tonight screen, sign-in and settings; a `break-ui` pass
+
 ### Phase 4: data, navigation and the rest of parity
 
 Table, pagination, breadcrumb, accordion, collapsible, command, combobox, sheet, drawer, menubar, navigation menu, context menu, hover card, calendar and date picker, chart (series told apart by fill: flat, stipple and louvers), sonner, sidebar, scroll area, resizable, carousel, input OTP, input group, button group, empty, item, aspect ratio, typography, direction and the conversation set.
@@ -194,6 +202,8 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 - **2026-11-05, Phase 1**: The maintainer confirmed MIT and standing permission to commit, push and continue. The skeleton alphabet moved into the kit, parametric in the pen, so one skeleton makes Display (heavy) and Sans (light, 18% wider); Mono fits it to a cell and adds a lowercase. polygon-clipping failed on the slivers flattened arcs make; Clipper's offsetter strokes and unions reliably. The curve fitter bulged thin capsules (it measures error only at points), fixed by resampling every 8 units before fitting. Display is layered with a text stroke under the fill rather than Fill/Line fonts or COLRv0, so the outline keeps the line's weight at every size. Display, Sans and Mono are 3–11 KB each as WOFF2 and build the same bytes every time; the site's titles and labels now use them.
 - **2026-11-05, Phase 2 (first half)**: The specimen's Follies became the kit's engine, typed and framework-free, and draw on the server: the city, window, medallion, band, arcade and doorway templates. Bands no longer measure: they are drawn wide (3200 units) at their real height and sliced from the bottom, so nothing crops. The home page now runs city → cloud ground → arcade wall like the specimen. A faint seam remains where an element's grain overlay meets the next section's grain (two tile origins). The Press rerolls and exports standalone SVG. Seed stability is the first lasting test.
 - **2026-11-05, Phase 2 (done)**: Fineliner's registry builder and offline install test ported. A registry cannot carry binary files, so the font build now embeds each WOFF2 in `letters.generated.css` (44 KB of fonts, 60 KB of CSS; the downloadable files stay in `public/fonts`). The fixture's first offline install failed for want of cached tarballs; its `package-lock.json` is now committed, so the test needs the cache filled once, not tracked by hand. The kit installs into a fresh Vite app, type-checks under the fixture's strict settings and renders as it does on the site (checked in headless Chrome). The motifs became parts of their own; the first cloud motif read as a loaf, so it is a cumulus with a crown. On Night the sky's loose rings and dots were ink on a dark canvas and vanished; they now take the surface's text colour. The four templates that scatter them changed their snapshots on purpose.
+
+- **2026-11-05, Phase 3 (first part)**: Wrote [Primitives](primitives.md) and ported Fineliner's docs pages. The exemplars follow the style brief's interface table: pills in spot colours, tinted fields, the highlight for chosen, the contour line on hover, pinwheel thumbs and archway tabs. Three things found on the way: Fineliner's `Tabs` never passed `orientation` to Base UI, so vertical tabs drew a horizontal mark (and would take left and right arrows); part rules in the components layer lost to the part's own utility classes, so `parts.css` sits in the utilities layer with more specific selectors; disabled words used a fixed quiet ink that vanishes on Night's canvas, so each surface now sets `--text-quiet`. Installing Base UI with the dev server running left Vite with two React copies (invalid hook calls) until a restart. Checked at 1440 (headless Chrome, Sky) and 375 px (the pane, Sky and Night).
 
 ## Open questions for the maintainer
 

@@ -5,11 +5,19 @@
   "description": "Every part of Serigraph: the base, the Follies engine and every component.",
   "registryDependencies": [
     "@serigraph/base",
+    "@serigraph/badge",
+    "@serigraph/button",
+    "@serigraph/card",
+    "@serigraph/checkbox",
     "@serigraph/follies",
     "@serigraph/folly",
+    "@serigraph/input",
+    "@serigraph/label",
     "@serigraph/lettering",
     "@serigraph/letters",
-    "@serigraph/motif"
+    "@serigraph/motif",
+    "@serigraph/switch",
+    "@serigraph/tabs"
   ],
   "files": [],
   "type": "registry:item"

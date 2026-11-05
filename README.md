@@ -4,7 +4,7 @@ A shadcn/ui component library, website and three typefaces in the style of a lat
 
 <img alt="An exploration of the style: the same phone ticket screen printed in sky blue, pistachio and coral colourways, each with an observatory dome on a round platform above cloud banks." src="docs/style/explorations/round-2/colourways.webp">
 
-**Status:** Phases 0 to 2 done: the kit's tokens, five colourways, the printed grain, surfaces and marks, the appearance runtime, our own fonts (Serigraph Display, Sans and Mono, see `/letters`), Follies, the seeded drawings, and their motifs (see `/press`), and a shadcn registry built from the source (`npm run registry`, not yet hosted). The components and the site follow ([plan](docs/plan.md)). The image above is a generated exploration, for direction only.
+**Status:** Phases 0 to 2 done: the kit's tokens, five colourways, the printed grain, surfaces and marks, the appearance runtime, our own fonts (Serigraph Display, Sans and Mono, see `/letters`), Follies, the seeded drawings, and their motifs (see `/press`), and a shadcn registry built from the source (`npm run registry`, not yet hosted). Phase 3 is under way: the first parts and their docs are at `/docs`. The rest of the components and the site follow ([plan](docs/plan.md)). The image above is a generated exploration, for direction only.
 
 ## Run the site
 

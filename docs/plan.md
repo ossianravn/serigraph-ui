@@ -40,23 +40,23 @@ It repeats [Fineliner](https://github.com/ossianravn/naive-indie-line) (`C:\Code
 
 ## Decisions
 
-Style decisions (S) are the maintainer's; the [Style brief](style.md#open-choices) explains each one. "Default" marks a recommendation the maintainer let stand for Phase S (2026-11-05) without deciding it.
+Style decisions (S) are the maintainer's; the [Style brief](style.md#choices) explains each one. "Default" marks a recommendation the maintainer let stand for Phase S (2026-11-05) without deciding it.
 
 | #   | Decision                                                                                                       | Status                       | Notes                                                                                                                         |
 | --- | -------------------------------------------------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| S1  | **Direction**: the triptych: colour on colour, one fine line, flat planes, depth only in architecture, micro-stipple, clouds, wide flat lettering | decided 2026-11-05 (the seven corrections); proposed in detail | The maintainer rejected round 1 as neo-brutalist and set the seven corrections; the specimen shows them in detail |
+| S1  | **Direction**: the triptych: colour on colour, one fine line, flat planes, depth only in architecture, micro-stipple, clouds, wide flat lettering | decided 2026-11-05 | The maintainer: the specimen captures it; worried it may be too simple beside the references, so add more interwoven drawings |
 | S2  | **Name**: Serigraph (`src/serigraph/`, `@serigraph`); fonts Serigraph Display, Sans and Mono                    | proposed (default)           | Matches the repository; the font brief's Keyline, Clairline and Soffit are the alternatives                                    |
-| S3  | **Colourways**: paper and ink fixed; nine spots; six roles mapped to shadcn tokens; Sky, Pistachio, Coral, Marigold | proposed                  | Every spot passes AA with ink as text; Sky is the default                                                                      |
-| S4  | **Night**: a colourway with a prussian canvas and paper text on it; sets `.dark`                                 | proposed (default)           | Planes and drawings stay bright with ink text                                                                                  |
+| S3  | **Colourways**: paper and ink fixed; nine spots; six roles mapped to shadcn tokens; Sky, Pistachio, Coral, Marigold | decided 2026-11-05 | "Spot on". Every spot passes AA with ink as text; Sky is the default |
+| S4  | **Night**: a colourway with a prussian canvas and paper text on it; sets `.dark` | decided 2026-11-05 | Planes and drawings stay bright with ink text |
 | S5  | **Line**: one ink line, 1.5 px at interface sizes; drawings keep it at any scale (non-scaling strokes)           | proposed                     | 1 px in the specimen to compare; 1.25 px would draw as 1 px, since borders snap to device pixels                              |
 | S6  | **Signature**: Follies, seeded surreal architecture from hand-made templates                                     | proposed (default)           | No heads, windmills, tulips or figures from the reference                                                                      |
 | S7  | **Our own fonts**: Display (wide, flat, inline), Sans (extended capitals first), Mono (light)                     | proposed (default)           | The display brief changes from condensed to wide; Sans lowercase only if it matches the stand-in at 14–16 px                    |
-| S8  | **Reading face** until Serigraph Sans reads well: Archivo                                                         | open                         | Instrument Sans and Manrope in the specimen                                                                                    |
+| S8  | **Reading face** until Serigraph Sans reads well: Archivo | decided 2026-11-05 | |
 | S9  | **Poster mode**: an appearance setting, `data-poster` on or off. On: the canvas in a rounded frame inside a paper mat. Off: no mat or frame, the canvas to the window's edges | decided 2026-11-05: an option; default on proposed | The maintainer liked the mat and asked for an edge-to-edge version as an option. The mat narrows to 8 px on phones |
-| S10 | **Demo product**: a public observatory and planetarium (tonight's shows, tickets, members, settings)              | proposed (default)           | The explorations' dashboard and Starlight ticket screens; name open                                                            |
-| S11 | **Fields**: a tint of the plane beneath, or paper                                                                 | open                         | Tint keeps cream rare; paper reads as "type here" faster                                                                       |
-| S12 | **Pressed**: the shade, a stipple tint, or the inner line closing                                                 | open                         |                                                                                                                               |
-| S13 | **Dialog backdrop**: a fine stipple screen, or a cloud bank rising behind the dialog                               | open                         | Neither is translucent                                                                                                        |
+| S10 | **Demo product**: Meridian, a public observatory and planetarium (tonight's shows, tickets, members, settings) | decided 2026-11-05 | The name followed the recommendation |
+| S11 | **Fields**: a tint of the plane beneath | decided 2026-11-05 | Paper was the alternative |
+| S12 | **Pressed**: the fill steps to its shade | decided 2026-11-05 | Stipple and an inner line were the alternatives |
+| S13 | **Dialog backdrop**: a fine stipple screen | decided 2026-11-05 | A rising cloud bank was the alternative |
 | S14 | **Focus**: a second concentric ring with a gap                                                                    | proposed                     | Visible on every canvas, from kit-a's focused field                                                                           |
 
 Logic decisions (L) follow Fineliner's, carried over by request; each still needs the maintainer's confirmation where Fineliner's did.
@@ -102,8 +102,9 @@ Each phase ships kit parts with the site pages and demo screens that use them.
 - [x] Write the [style brief](style.md)
 - [x] Build the specimen (`specimen/`): colourways, a lettering prototype, motifs, a seeded folly, the interface sampler and switches for every open choice
 - [x] Check the specimen in Sky, Coral and Night at 1440, 800 and 375 px (no horizontal scroll, no console errors)
-- [ ] Maintainer review: agree S1–S14, or redirect
-- [ ] Fold the agreed choices into the specimen and the brief; drop the losing options
+- [x] Maintainer review (2026-11-05): S1, S3, S4, S8 and S10–S13 agreed; S2, S5–S7 and S14 stand as defaults. Asked for: more interwoven drawings, better tabs, cloud outlines that are not cut off
+- [x] Fold the agreed choices into the brief; the specimen keeps its switches as a comparison until Phase 0 ports the tokens
+- [x] Review round: archway tabs redrawn; bands drawn at their measured size (no cut outlines) with buildings and plants; a denser city in the hero and a finale
 
 Exit: the maintainer signs off the specimen as the style.
 
@@ -161,11 +162,8 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 ## Progress log
 
 - **2026-11-05**: Repository initialised with the GitHub remote. Read the maintainer's style and font briefs, the two posters and Fineliner's Phase S. Round 1 (four gpt-image explorations from the brief) came out as web neo-brutalism: cream boxes, 45° extrusions, heavy lines, coarse halftone; the maintainer rejected it and gave the triptych and seven corrections. Round 2 (eight explorations) follows the triptych: colour on colour, flat planes, fine lines, micro-stipple, wide flat lettering; the image model copied the reference's heads, tulips and caption text into the kits, which the kit will not do. Sampled the triptych's spots: all pass AA with a `#262420` ink. Wrote the style brief and built the specimen. The display lettering prototype draws each glyph as a centre-line skeleton swept by a square pen twice (ink at the stem plus two lines, then paper at the stem), which outlines the union with its counters; diagonals are cut flat by a per-glyph clip (a shared clip let one letter's diagonal show inside its neighbour's box). This is the construction Phase 1's font builder should use. Cloud banks are outlined the same way (each puff stroked at twice the line under one fill). Borders snap to device pixels, so the line choices are 1 and 1.5 px. Checked Sky, Coral and Night at 1440, 800 and 375 px. After review the maintainer asked for poster mode as an option: the specimen's Appearance panel now turns the mat and frame off, the canvas running to the window's edges (checked at 1440 and 375 px).
+- **2026-11-05, review round**: The maintainer agreed the direction, colourways, Night, fields, pressed, backdrop, reading face and the observatory (named Meridian), and asked for more interwoven drawings, better tabs and cloud outlines that are not cut off. Tabs are now archways (semicircular heads on jambs, an inner line, labels below the spring line). Bands are drawn at their measured size, one unit to a pixel, so no puff is cropped; each cloud band carries a building and a plant. Follies gained building parts (`specimen/buildings.js`: oblique boxes with arched windows, stairs with treads and risers, an observatory, a pinwheel arch, plants) and a `city` template for the hero and a finale; floating cloud strata are cut flat and outlined at their base. The pane was hidden for part of the check, so desktop was verified with headless Chrome screenshots and phone width by measuring overflow in the pane.
 
 ## Open questions for the maintainer
 
-1. Does the specimen capture the style (S1)? What should change first?
-2. Colourways (S3) and Night (S4).
-3. Fields (S11), pressed (S12), dialog backdrop (S13).
-4. The reading face until Serigraph Sans has a lowercase (S8).
-5. The observatory's name (S10).
+None block Phase 0. Defaults the maintainer may still change: S2 (names), S5 (line), S6 (Follies), S7 (our fonts), S14 (focus), poster mode on by default (S9), and the logic decisions L1–L12.

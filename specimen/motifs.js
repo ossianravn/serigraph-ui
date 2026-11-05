@@ -4,13 +4,14 @@
   const SG = window.SG
   const n = SG.n
   const TAU = Math.PI * 2
-  const fillOf = (f) => (f === 'none' ? 'none' : `var(--${f})`)
+  // A token name ('coral', 'cloud'), or any CSS colour or paint ('url(#…)', 'color-mix(…)'), or 'none'.
+  const fillOf = (f) => (f === 'none' ? 'none' : f.includes('(') ? f : `var(--${f})`)
 
   /** A filled shape outlined in ink. fill is a token name ('coral', 'cloud', 'paper') or a url(#…) / 'none'. */
   const shape = (d, fill, L, more = {}) =>
     SG.el('path', {
       d,
-      style: `fill:${fill.startsWith('url') ? fill : fillOf(fill)};stroke:var(--ink)`,
+      style: `fill:${fillOf(fill)};stroke:var(--ink)`,
       'stroke-width': L,
       'stroke-linejoin': 'round',
       'vector-effect': 'non-scaling-stroke',
@@ -101,7 +102,7 @@
    * A cloud bank: puffs on a flat base, outlined as one shape (every part stroked at twice the line, then filled
    * without a line on top), with open arcs inside where one puff overlaps another.
    */
-  function cloudBank(rs, { x0, x1, base, top, rmin, rmax, fill, L, id, contours = 0.65 }) {
+  function cloudBank(rs, { x0, x1, base, top, rmin, rmax, fill, L, id, contours = 0.65, floating = false }) {
     const puffs = []
     let x = x0 - rmax * 0.3
     while (x < x1 + rmax * 0.3) {
@@ -109,8 +110,17 @@
       puffs.push({ cx: x, cy: rs.between(top + r, top + r + (rmax - rmin) * 0.8), r })
       x += r * rs.between(1.05, 1.45)
     }
-    const shelf = puffs.reduce((s, p) => s + p.cy, 0) / puffs.length
-    const parts = puffs.map((p) => circle(p.cx, p.cy, p.r)).join(' ') + ` M ${n(x0 - rmax)} ${n(shelf)} H ${n(x1 + rmax)} V ${n(base + 40)} H ${n(x0 - rmax)} Z`
+    // A floating bank (a stratum in the sky) is cut flat at its base, with an ink line under it; other banks run on
+    // below the drawing's edge.
+    if (floating) puffs.forEach((p) => {
+      p.cx = Math.min(Math.max(p.cx, x0 + p.r * 0.6), x1 - p.r * 0.6)
+      p.cy = Math.min(p.cy, base - p.r * 0.3)
+    })
+    const shelf = Math.min(puffs.reduce((s, p) => s + p.cy, 0) / puffs.length, base - 4)
+    const [left, right] = floating ? [x0, x1] : [x0 - rmax, x1 + rmax]
+    const parts =
+      puffs.map((p) => circle(p.cx, p.cy, p.r)).join(' ') +
+      ` M ${n(left)} ${n(shelf)} H ${n(right)} V ${n(floating ? base : base + 40)} H ${n(left)} Z`
     const clip = SG.uid(`${id}-cloud`)
     let arcs = ''
     puffs.forEach((p, i) => {
@@ -120,11 +130,21 @@
       const pt = (a) => `${n(p.cx + Math.cos(a) * p.r)} ${n(p.cy + Math.sin(a) * p.r)}`
       arcs += `M ${pt(a0)} A ${n(p.r)} ${n(p.r)} 0 0 1 ${pt(a1)} `
     })
+    let cutInk = {}
+    let cutFill = {}
+    let defs = SG.el('clipPath', { id: clip }, SG.el('path', { d: parts }, null))
+    if (floating) {
+      const [ci, cf] = [SG.uid(`${id}-ci`), SG.uid(`${id}-cf`)]
+      const box = (y) => SG.el('rect', { x: left - rmax * 2, y: top - rmax, width: right - left + rmax * 4, height: y - top + rmax }, null)
+      defs += SG.el('clipPath', { id: ci }, box(base + L * 1.2)) + SG.el('clipPath', { id: cf }, box(base))
+      cutInk = { 'clip-path': `url(#${ci})` }
+      cutFill = { 'clip-path': `url(#${cf})` }
+    }
     return (
-      SG.el('clipPath', { id: clip }, SG.el('path', { d: parts }, null)) +
-      SG.el('path', { d: parts, style: 'fill:var(--ink);stroke:var(--ink)', 'stroke-width': L * 2, 'vector-effect': 'non-scaling-stroke' }, null) +
-      tint(parts, fillOf(fill)) +
-      (arcs ? line(arcs, L, { 'clip-path': `url(#${clip})` }) : '')
+      defs +
+      SG.el('path', { d: parts, style: 'fill:var(--ink);stroke:var(--ink)', 'stroke-width': L * 2, 'vector-effect': 'non-scaling-stroke', ...cutInk }, null) +
+      tint(parts, fillOf(fill), cutFill) +
+      (arcs ? SG.el('g', cutFill, line(arcs, L, { 'clip-path': `url(#${clip})` })) : '')
     )
   }
 

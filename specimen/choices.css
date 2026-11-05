@@ -111,24 +111,23 @@
   border-color: var(--ink);
 }
 
-/* Tabs: archways with small ink doorways; the chosen arch takes the panel's colour and opens into it. */
+/* Tabs: archways. A semicircular head on straight jambs, a second line inside the head for the arch's depth, the
+   label below the spring line. The chosen arch takes the panel's colour and opens into it. */
 .tabs {
   width: 100%;
 }
 .tablist {
   display: flex;
+  align-items: flex-end;
   gap: 10px;
-  padding-left: 28px;
+  padding: 62px 0 0 24px;
 }
 .tab {
   position: relative;
-  flex: 0 1 118px;
-  min-width: 0;
-  height: 78px;
-  padding: 24px 6px 0;
+  min-width: 104px;
+  padding: 2px 20px 14px;
   border: var(--line) solid var(--edge);
-  border-bottom: 0;
-  border-radius: 59px 59px 0 0;
+  border-block: 0;
   background: transparent;
   color: var(--text);
   font-family: var(--font-sans);
@@ -137,26 +136,43 @@
   font-size: 0.6875rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
+  transition: background-color 140ms var(--ease);
 }
+.tab::before,
 .tab::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 16px;
-  height: 22px;
-  margin-left: -8px;
-  border-radius: 8px 8px 0 0;
-  background: var(--ink);
+  bottom: 100%;
+  aspect-ratio: 2 / 1;
+  border: var(--line) solid var(--edge);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+}
+.tab::before {
+  left: calc(-1 * var(--line));
+  right: calc(-1 * var(--line));
+  background: inherit;
+}
+.tab::after {
+  left: 7px;
+  right: 7px;
+}
+.tab:hover {
+  background-color: color-mix(in oklab, var(--surface) 70%, var(--paper));
 }
 .tab[aria-selected='true'] {
   z-index: 1;
-  height: calc(78px + var(--line));
   margin-bottom: calc(-1 * var(--line));
+  padding-bottom: calc(14px + var(--line));
   border-color: var(--ink);
   background: var(--plane) var(--grain);
   color: var(--ink);
+}
+.tab[aria-selected='true']::before,
+.tab[aria-selected='true']::after {
+  border-color: var(--ink);
 }
 .tabpanel {
   padding: 20px 24px;
@@ -164,4 +180,17 @@
 .tabpanel p {
   margin: 0;
   max-width: 36em;
+}
+
+@media (max-width: 480px) {
+  .tablist {
+    gap: 6px;
+    padding-left: 12px;
+  }
+  .tab {
+    min-width: 0;
+    padding-inline: 13px;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+  }
 }

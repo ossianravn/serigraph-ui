@@ -37,6 +37,7 @@
     }
     return {
       x1,
+      top,
       svg:
         M.shape(back, 'structure-shade', L, { 'fill-rule': 'evenodd' }) +
         M.tint(back, `url(#${id}-stipple)`, { 'fill-rule': 'evenodd' }) +
@@ -115,13 +116,6 @@
     const px = pf.between(Math.max(arc.x1 + 160, 850), 1030)
     const py = pf.between(255, 300)
     const rx = pf.between(110, 140)
-    const flowers = rs('flowers')
-    let blooms = ''
-    const count = flowers.int(2, 4)
-    for (let i = 0; i < count; i++) {
-      const left = i % 2 === 0
-      blooms += flower(flowers, { x: left ? flowers.between(30, 230) : flowers.between(1000, 1170), head: flowers.between(330, 410), ground, L, id })
-    }
     const scene =
       M.pinwheel(sun.between(560, 760), sun.between(110, 160), sun.between(62, 84), 'sun', L, { turn: sun.next() * 6 }) +
       M.scatter(rs('sky'), { x0: 30, y0: 24, x1: 1170, y1: 220, L, sparkles: 6, rings: 5, dots: 8 }) +
@@ -129,9 +123,60 @@
       arc.svg +
       stair(rs('stair'), { x0: px - rx - rs('stair-x').between(260, 330), y0: 520, x1: px - rx * 0.55, y1: py + rx * 0.08, L, id }) +
       platform(pf, { cx: px, cy: py, rx, ground, L, id, dome: pf.chance(0.75) }) +
-      blooms +
+      flowers(rs('flowers'), { ground, L, id }) +
       M.cloudBank(rs('front'), { x0: 0, x1: W, base: ground, top: rs('front-top').between(415, 455), rmin: 36, rmax: 74, fill: 'cloud', L, id }) +
       M.scatter(rs('low'), { x0: 40, y0: 470, x1: 1160, y1: 540, L, sparkles: 2, rings: 2, dots: 4, size: [7, 11] })
+    const body = flip ? SG.el('g', { transform: `translate(${W} 0) scale(-1 1)` }, scene) : scene
+    return { W, H, svg: M.defs(id, { pitch }) + body }
+  }
+
+  function flowers(fs, { ground, L, id }) {
+    let out = ''
+    const count = fs.int(2, 4)
+    for (let i = 0; i < count; i++) {
+      out += flower(fs, { x: i % 2 === 0 ? fs.between(30, 230) : fs.between(1000, 1170), head: fs.between(330, 410), ground, L, id })
+    }
+    return out
+  }
+
+  /**
+   * The city: the triptych's density. Layered cloud strata, a sun, an arcade with a louvered arch, a tower with an
+   * observatory, a block framing a pinwheel, a stair whose treads show, plants, and two cloud banks in front.
+   */
+  function city(seed, { L, pitch }) {
+    const [W, H, ground] = [1200, 560, 640]
+    const B = SG.buildings
+    const id = SG.uid('folly')
+    const rs = (label) => SG.stream(seed, label)
+    const flip = rs('layout').chance(0.5)
+    const sun = rs('sun')
+    const sky = rs('sky')
+    const arc = arcade(rs('arcade'), { x0: rs('arcade-x').between(50, 110), top: rs('arcade-y').between(250, 285), ground, L, id })
+    const tw = rs('tower')
+    const tx = tw.between(820, 870)
+    const tWidth = tw.between(150, 175)
+    const ty = tw.between(285, 325)
+    const bk = rs('block')
+    const bx = Math.min(tx - 190, Math.max(arc.x1 - 40, bk.between(560, 620)))
+    const by = bk.between(350, 380)
+    const sideBox = tw.chance(0.6)
+    const scene =
+      M.shape(M.circle(sun.between(170, 300), sun.between(140, 175), sun.between(68, 88)), 'sun', L) +
+      M.scatter(sky, { x0: 30, y0: 60, x1: 1170, y1: 230, L, sparkles: 7, rings: 5, dots: 9 }) +
+      M.cloudBank(rs('strata-a'), { x0: -20, x1: sky.between(380, 480), base: 322, top: 262, rmin: 18, rmax: 32, fill: 'paper', L, id, floating: true }) +
+      M.cloudBank(rs('strata-b'), { x0: sky.between(680, 760), x1: W + 20, base: 292, top: 236, rmin: 16, rmax: 30, fill: 'paper', L, id, floating: true }) +
+      (sideBox ? B.box({ x: tx + tWidth + 26, y: ty + 90, w: 84, h: ground - ty - 90, fill: 'tone-2', L, id, windows: 2 }) : '') +
+      B.box({ x: tx, y: ty, w: tWidth, h: ground - ty, fill: 'tone-1', L, id, windows: 3 }) +
+      B.observatory({ cx: tx + tWidth / 2, base: ty + B.DEPTH[1] * 0.5, r: tWidth * 0.42, fill: 'plane-2', L, id, rs: tw }) +
+      arc.svg +
+      M.cloudBank(rs('mid'), { x0: 0, x1: W, base: ground, top: rs('mid-top').between(405, 430), rmin: 32, rmax: 60, fill: 'paper', L, id }) +
+      B.box({ x: bx, y: by, w: 190, h: ground - by, fill: 'tone-3', L, id }) +
+      B.pinwheelArch({ x: bx + 34, base: by + 178, w: 122, h: 150, frame: 'leaf', colour: 'bloom', L, id }) +
+      B.steps({ x0: bx - 8, y0: 580, x1: bx - 8 - rs('steps').between(230, 270), y1: arc.top, count: rs('steps').int(11, 14), fill: 'stair', L, id, depth: 2 }) +
+      M.cloudBank(rs('front'), { x0: 0, x1: W, base: ground, top: rs('front-top').between(492, 512), rmin: 28, rmax: 56, fill: 'cloud', L, id }) +
+      B.plant(rs('plant-a'), { x: rs('plant-a').between(70, 150), ground: 600, height: 250, L, id, blooms: 2 }) +
+      B.plant(rs('plant-b'), { x: rs('plant-b').between(1050, 1140), ground: 600, height: 220, L, id, blooms: 1 }) +
+      M.scatter(rs('low'), { x0: 260, y0: 518, x1: 940, y1: 548, L, sparkles: 3, rings: 2, dots: 4, size: [7, 11] })
     const body = flip ? SG.el('g', { transform: `translate(${W} 0) scale(-1 1)` }, scene) : scene
     return { W, H, svg: M.defs(id, { pitch }) + body }
   }
@@ -151,8 +196,9 @@
   }
 
   Object.assign(poster, { W: 1200, H: 560 })
+  Object.assign(city, { W: 1200, H: 560 })
   Object.assign(windowScene, { W: 300, H: 320 })
-  const templates = { poster, window: windowScene }
+  const templates = { poster, city, window: windowScene }
 
   /** Draw the folly named by data-folly with data-seed into el, sliced to fill it. */
   function mount(el) {

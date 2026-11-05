@@ -96,8 +96,28 @@
   transform-origin: 60px 60px;
   animation: turn 2.4s linear infinite;
 }
+/* The finale: an arcade wall, then a whole city in the sky, its front clouds running into the footer. */
+.finale {
+  padding-bottom: 0;
+}
+.finale .band[data-band='arcade'] {
+  margin-bottom: 0;
+}
+.finale-art {
+  position: relative;
+  height: clamp(320px, 42vw, 560px);
+  margin: 0 calc(-1 * clamp(18px, 3vw, 40px));
+}
+.finale-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grain);
+  pointer-events: none;
+}
 .footer {
-  margin-top: 56px;
+  margin: 0 calc(-1 * clamp(18px, 3vw, 40px));
+  padding: 8px 16px 28px;
   text-align: center;
 }
 

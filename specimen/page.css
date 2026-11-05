@@ -188,7 +188,8 @@ a {
   margin: 0 calc(-1 * clamp(18px, 3vw, 40px));
 }
 .band[data-band='clouds'] {
-  margin-top: 48px;
+  height: 210px;
+  margin-top: 24px;
   margin-bottom: calc(-1 * clamp(40px, 5vw, 64px));
 }
 .band[data-band='arcade'] {
@@ -241,6 +242,9 @@ a {
   }
   .band {
     height: 84px;
+  }
+  .band[data-band='clouds'] {
+    height: 140px;
   }
 }
 

@@ -108,16 +108,56 @@
     })
   }
 
-  function drawBands() {
+  /**
+   * Bands are drawn at their measured size, one SVG unit to a pixel, so nothing is cropped. A cloud band carries a
+   * building rising behind its clouds and a plant at the other end; an arcade band is a wall of arches.
+   */
+  function drawBand(el, i) {
+    const [w, h] = [el.clientWidth, el.clientHeight]
+    if (!w || !h) return
     const L = SG.linePx()
-    document.querySelectorAll('[data-band]').forEach((el, i) => {
-      if (el.dataset.band === 'clouds') {
-        const body = M.cloudBank(SG.stream(`band-${i}`, 'clouds'), { x0: 0, x1: 1200, base: 120, top: 8, rmin: 28, rmax: 56, fill: 'cloud', L, id: `band${i}` })
-        el.innerHTML = SG.el('svg', { viewBox: '0 0 1200 120', preserveAspectRatio: 'xMidYMax slice', focusable: 'false' }, body)
+    const B = SG.buildings
+    const id = `band${i}`
+    const rs = (k) => SG.stream(`band-${i}`, k)
+    let art = M.defs(id, { pitch: 3 })
+    if (el.dataset.band === 'clouds') {
+      const s = h / 200
+      const ax = w * rs('x').between(0.6, 0.72)
+      const kind = ['observatory', 'arch', 'tower'][i % 3]
+      art += M.cloudBank(rs('back'), { x0: w * 0.45, x1: w, base: h, top: h * 0.36, rmin: h * 0.1, rmax: h * 0.18, fill: 'paper', L, id })
+      if (kind === 'observatory') {
+        art += B.box({ x: ax, y: h * 0.5, w: 150 * s, h, fill: 'tone-1', L, id, windows: 3 })
+        art += B.observatory({ cx: ax + 75 * s, base: h * 0.5 + B.DEPTH[1] * 0.5, r: 62 * s, fill: 'plane-2', L, id, rs: rs('obs') })
+      } else if (kind === 'arch') {
+        art += B.box({ x: ax + 150 * s, y: h * 0.34, w: 80 * s, h, fill: 'tone-2', L, id, windows: 1 })
+        art += B.box({ x: ax, y: h * 0.1, w: 140 * s, h, fill: 'tone-3', L, id })
+        art += B.pinwheelArch({ x: ax + 24 * s, base: h * 0.7, w: 92 * s, h: h * 0.52, frame: 'leaf', colour: 'bloom', L, id })
       } else {
-        const id = `arcade${i}`
-        el.innerHTML = SG.el('svg', { viewBox: '0 0 1200 104', preserveAspectRatio: 'xMidYMin slice', focusable: 'false' }, M.defs(id, { pitch: 3 }) + M.arcadeBand({ L, id }))
+        art += B.box({ x: ax + 92 * s, y: h * 0.3, w: 80 * s, h, fill: 'tone-2', L, id, windows: 1 })
+        art += B.box({ x: ax, y: h * 0.08, w: 96 * s, h, fill: 'tone-4', L, id, windows: 2 })
       }
+      art += M.cloudBank(rs('clouds'), { x0: 0, x1: w, base: h, top: h * 0.56, rmin: h * 0.11, rmax: h * 0.2, fill: 'cloud', L, id })
+      art += B.plant(rs('plant'), { x: w * rs('plant-x').between(0.06, 0.16), ground: h + 10, height: h * 0.95, L, id, blooms: 2 })
+      art += M.scatter(rs('sky'), { x0: w * 0.22, y0: h * 0.08, x1: w * 0.52, y1: h * 0.45, L, sparkles: 3, rings: 2, dots: 4, size: [6, 11] })
+    } else {
+      art += M.arcadeBand({ width: w, height: h, L, id })
+    }
+    el.innerHTML = SG.el('svg', { viewBox: `0 0 ${w} ${h}`, focusable: 'false' }, art)
+  }
+  const bandSizes = new WeakMap()
+  const bandObserver = new ResizeObserver((entries) => {
+    for (const e of entries) {
+      const key = `${Math.round(e.contentRect.width)}x${Math.round(e.contentRect.height)}`
+      if (bandSizes.get(e.target) !== key) {
+        bandSizes.set(e.target, key)
+        drawBand(e.target, [...document.querySelectorAll('[data-band]')].indexOf(e.target))
+      }
+    }
+  })
+  function drawBands() {
+    document.querySelectorAll('[data-band]').forEach((el, i) => {
+      drawBand(el, i)
+      bandObserver.observe(el)
     })
   }
 

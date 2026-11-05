@@ -100,19 +100,19 @@ How the rules land on controls (see the specimen's Interface section):
 | Secondary button  | A pill in plane 2; outline button: just the line, on whatever is beneath                                        |
 | Destructive       | A rose pill with its word                                                                                       |
 | Hover             | A short interior contour line appears inside the pill's upper left, the ligne-claire highlight                   |
-| Pressed           | Open: the fill steps to its shade, a stipple tint, or the contour line closes into an inset outline (S12)        |
+| Pressed           | The fill steps to its shade (mixed toward ink, flat)                                                             |
 | Focus             | A second thin ring outside the first, with a gap of the colour beneath: concentric rings, visible on any canvas |
-| Field             | A pill (or a 16 px-radius box for text areas) filled with a tint of the plane it sits on, fine outline; open: tint or paper (S11) |
+| Field             | A pill (or a 16 px-radius box for text areas) filled with a tint of the plane it sits on, fine outline          |
 | Switch            | A pill track; the knob is a pinwheel that rolls as it slides                                                    |
 | Checkbox, radio   | A rounded square and a circle, fine outline; a fine ink tick and a solid ink dot                                |
 | Segmented control | A plane 2 pill track with the chosen segment as a highlight pill                                                |
-| Tabs              | A row of archways; each has a small solid ink doorway; the active arch is filled and opens into its panel       |
+| Tabs              | A row of archways: a semicircular head on straight jambs, a second line inside the head for the arch's depth, the label below the spring line; the chosen arch takes the panel's colour and opens into it |
 | Badge             | A small flat pill in the mono face                                                                              |
 | Progress          | A pill slot filled with louvers: ink and the action colour in thin horizontal slats, like stair risers          |
 | Slider            | A fine line track; the filled part a thicker line in the action colour; a pinwheel thumb                        |
 | Avatar            | A circle in a spot colour, initials in extended capitals, stipple on the shadow side                            |
 | Table             | Fine ink rules between rows; figures in mono; the selected row a highlight band                                 |
-| Dialog            | A plane with a big radius over the page; open: a fine stipple screen or a cloud bank rising behind it (S13)      |
+| Dialog            | A plane with a big radius over the page, which a fine stipple screen covers                                      |
 | Section edges     | Cloud banks with flat baselines between sections; never a horizontal rule across a page                          |
 | Empty state       | An archway with a solid ink doorway, a sparkle above, one line of text and one action                           |
 | Disabled          | The tint fill and a muted ink; never transparency                                                               |
@@ -128,7 +128,7 @@ Calm controls, lively surfaces, as in Patina and Fineliner: what people operate 
 | ------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | Display | **Serigraph Display** (our own): wide, round, flat, cream fill, fine outline, inline | Titles, heroes, wordmarks, large figures; 32 px and up     |
 | Sans    | **Serigraph Sans** (our own): extended, monoline, tracked capitals                   | Labels, navigation, buttons, kickers, metadata              |
-| Read    | A proven open-licence face until Serigraph Sans has a reading lowercase: Archivo (proposed), Instrument Sans or Manrope | Body text and interface sentences |
+| Read    | Archivo, until Serigraph Sans has a reading lowercase                                | Body text and interface sentences                           |
 | Mono    | **Serigraph Mono** (our own): light, rounded-square, slotted zero                    | Badges, figures in tables, keys, code                       |
 
 Until the fonts exist, the specimen draws display lettering with its own prototype (below) and sets Sans and Mono in stand-ins: Archivo at its widest for the extended capitals and Martian Mono for the mono.
@@ -158,6 +158,8 @@ All three faces are built in this repository from code, as Fineliner's are (`too
 
 Patina's signature is seeded prints of abstract motifs and Fineliner's is seeded pen drawings of things. Serigraph's is **Follies**: seeded surreal architecture in the triptych's manner (arcades, round platforms with black undersides, staircases with louvered undersides, domes, columns, pinwheel suns, tall flowers and stacked cloud banks), composed from hand-made templates whose proportions, counts and colours vary by seed. Every fill is a colourway role, so a drawing reprints in each colourway the way the triptych does. Formats: poster (heroes), window (an arch-topped card image), medallion (avatars, featured figures), band (a cloud and arcade section edge) and doorway (empty states).
 
+Follies is woven through a page, not boxed into a hero: a whole city (layered cloud strata, a sun, an arcade with a louvered arch, a tower with an observatory, a block framing a pinwheel, a stair whose treads show, plants, front clouds) fills the hero and closes the page; at section edges a building rises behind the cloud band and a plant grows in front of it; cards look out through arched windows. The operated interface stays clear of drawings.
+
 Follies never uses the reference's own subjects: no mannequin heads, no windmill, no tulips, no figures. The generated explorations in `docs/style/explorations/round-2` copied some of them; they are direction only, and everything the kit ships is drawn by code from a seed.
 
 ## Motion
@@ -170,14 +172,6 @@ The page is printed, so motion is the print and the mechanism, never the paper:
 - **Clouds** drift a few pixels in heroes, slowly; nothing drifts in the operated interface.
 - Controls answer in 120–180 ms on one curve; everything stops under reduced motion.
 
-## Open choices
+## Choices
 
-The plan tracks these as decisions; the specimen switches between them.
-
-1. Is this the direction (S1)? What should change first?
-2. The colourways and their role assignments (S3), and Night (S4).
-3. Fields: a tint of the plane beneath, or paper (S11).
-4. Pressed: a step to the shade, a stipple tint, or a closed inner line (S12).
-5. Dialog backdrop: a fine stipple screen or a rising cloud bank (S13).
-6. Line weight: 1 or 1.5 px (proposed). Browsers snap borders to whole device pixels, so 1.25 px draws the same as 1 px.
-7. The reading face until Serigraph Sans has a lowercase: Archivo, Instrument Sans or Manrope.
+Agreed on 2026-11-05: the direction, the colourways and Night, fields in a tint of the plane beneath, a pressed fill that steps to its shade, a fine stipple screen behind dialogs, and Archivo as the reading face. Standing as defaults the maintainer may still change: the line weight (1.5 px), the names, Follies, our three fonts, the concentric focus ring, and poster mode on.

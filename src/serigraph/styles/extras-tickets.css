@@ -1,0 +1,231 @@
+/* Drawing for the tickets extras that classes cannot reach, keyed on data-slot. In the utilities layer, so these rules
+   (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* Ticket stub: two half-round notches cut from the top and bottom edges where the stub begins (a mask of two
+     radial gradients, intersected), each rimmed by the line just outside the cut, and a dashed tear line from notch to
+     notch. The rims are circles centred on the edge; the mask hides the half that falls outside the ticket. */
+  [data-slot="ticket-stub"] {
+    --ticket-stub: 5.75rem;
+    --notch: 0.625rem;
+    --tear-x: calc(100% - var(--ticket-stub) - var(--line));
+    border-radius: var(--r-box);
+    mask:
+      radial-gradient(
+        circle at var(--tear-x) 0,
+        transparent var(--notch),
+        #000 calc(var(--notch) + 0.5px)
+      ),
+      radial-gradient(
+        circle at var(--tear-x) 100%,
+        transparent var(--notch),
+        #000 calc(var(--notch) + 0.5px)
+      );
+    mask-composite: intersect;
+    &:dir(rtl) {
+      --tear-x: calc(var(--ticket-stub) + var(--line));
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset-inline-end: calc(var(--ticket-stub) - var(--notch) - var(--line));
+      width: calc(2 * (var(--notch) + var(--line)));
+      aspect-ratio: 1;
+      border: var(--line) solid var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    &::before {
+      top: calc(-1 * (var(--notch) + 2 * var(--line)));
+    }
+    &::after {
+      bottom: calc(-1 * (var(--notch) + 2 * var(--line)));
+    }
+  }
+  [data-slot="ticket-stub-stub"]::before {
+    content: "";
+    position: absolute;
+    inset-block: calc(var(--notch) + var(--space-hair));
+    inset-inline-start: calc(var(--line) / -2);
+    width: var(--line);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      var(--ink) 0 0.3125rem,
+      transparent 0.3125rem 0.5625rem
+    );
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        CanvasText 0 0.3125rem,
+        transparent 0.3125rem 0.5625rem
+      );
+    }
+  }
+
+  /* Poster card: an arch window on top of the plane, one outline. The head is a half circle at a 6:5 window; the
+     window's bottom edge is the sill line, so the plane below drops its top edge and top corners. */
+  [data-slot="poster-card-window"] {
+    aspect-ratio: 6 / 5;
+    overflow: hidden;
+    border: var(--line) solid var(--ink);
+    border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+    background: var(--canvas);
+  }
+  [data-slot="poster-card-body"] {
+    border-top-width: 0;
+    border-radius: 0 0 var(--r-plane) var(--r-plane);
+  }
+  [data-slot="poster-card"] [data-slot="lettering"] {
+    line-height: 1.1;
+  }
+
+  /* Ordinal date: the caption caps by default, larger on request. */
+  [data-slot="ordinal-date"] {
+    &[data-size="md"] {
+      font-size: var(--type-body);
+    }
+    &[data-size="lg"] {
+      font-size: var(--type-lead);
+    }
+    &[data-size="xl"] {
+      font-size: var(--type-h2);
+    }
+  }
+
+  /* Stair stepper: each block is one riser taller than the last; it draws its tread, its riser and the ground line,
+     and the last block closes the stair. Done: louvers counted from the ground, so their slats line up from block to
+     block (or the action colour, flat); current: the highlight; to come: open, the stair drawn in the surface's edge
+     (ink on bright surfaces, paper on Night's canvas), like an outline button. */
+  [data-slot="stair-stepper"] {
+    --stair-rise: var(--space-snug);
+  }
+  [data-slot="stair-stepper-riser"] {
+    block-size: calc(var(--stair-step) * var(--stair-rise) + var(--line));
+    border: var(--line) solid var(--edge, var(--ink));
+    border-inline-end-width: 0;
+  }
+  [data-slot="stair-stepper-step"]:last-child
+    > [data-slot="stair-stepper-riser"] {
+    border-inline-end-width: var(--line);
+  }
+  [data-slot="stair-stepper-step"]:is(
+      [data-state="done"],
+      [data-state="current"]
+    )
+    > [data-slot="stair-stepper-riser"] {
+    border-color: var(--ink);
+    background-image: var(--grain);
+    background-size: var(--grain-size);
+  }
+  [data-slot="stair-stepper-step"][data-state="current"]
+    > [data-slot="stair-stepper-riser"] {
+    background-color: var(--highlight);
+  }
+  [data-done="louvers"]
+    [data-state="done"]
+    > [data-slot="stair-stepper-riser"] {
+    background-image: repeating-linear-gradient(
+      to top,
+      var(--action) 0 3px,
+      var(--ink) 3px 5px
+    );
+  }
+  [data-done="filled"] [data-state="done"] > [data-slot="stair-stepper-riser"] {
+    background-color: var(--action);
+  }
+
+  /* Compact: when the labels cannot stand side by side (about 4.75rem a step), the steps are numbered and the current
+     one is named under the stair; the labels stay in the list for screen readers. */
+  [data-slot="stair-stepper"][data-compact] {
+    & [data-slot="stair-stepper-text"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    & [data-slot="stair-stepper-number"] {
+      display: inline;
+    }
+    & [data-slot="stair-stepper-caption"] {
+      display: block;
+    }
+  }
+  @container stair (width < 23.75rem) {
+    [data-steps="5"] {
+      & [data-slot="stair-stepper-text"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      & [data-slot="stair-stepper-number"] {
+        display: inline;
+      }
+      & [data-slot="stair-stepper-caption"] {
+        display: block;
+      }
+    }
+  }
+  @container stair (width < 28.5rem) {
+    [data-steps="6"] {
+      & [data-slot="stair-stepper-text"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      & [data-slot="stair-stepper-number"] {
+        display: inline;
+      }
+      & [data-slot="stair-stepper-caption"] {
+        display: block;
+      }
+    }
+  }
+  @container stair (width < 36rem) {
+    [data-steps="7"],
+    [data-steps="8"],
+    [data-steps="9"] {
+      & [data-slot="stair-stepper-text"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      & [data-slot="stair-stepper-number"] {
+        display: inline;
+      }
+      & [data-slot="stair-stepper-caption"] {
+        display: block;
+      }
+    }
+  }
+  @media (forced-colors: active) {
+    [data-slot="stair-stepper-riser"] {
+      forced-color-adjust: none;
+      border-color: CanvasText;
+      background: Canvas;
+    }
+    [data-slot="stair-stepper-step"]:is(
+        [data-state="done"],
+        [data-state="current"]
+      )
+      > [data-slot="stair-stepper-riser"] {
+      background: CanvasText;
+    }
+    [data-slot="stair-stepper-step"][data-state="current"]
+      > [data-slot="stair-stepper-riser"] {
+      background: Highlight;
+    }
+  }
+}

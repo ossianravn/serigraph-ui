@@ -1,0 +1,33 @@
+---
+// Every part with a docs page, by group, as an index of plain links: what the kit holds at a glance.
+import { GROUPS } from "@/site/docs/catalogue"
+import SectionHead from "./section-head.astro"
+
+const count = GROUPS.reduce((n, g) => n + g.items.length, 0)
+---
+
+<section class="section home-section" aria-labelledby="h-parts">
+  <SectionHead
+    id="h-parts"
+    title="The parts"
+    href="/docs"
+    link="All components"
+  >
+    {count} parts with shadcn's names, props and slots on Base UI, and whole
+    pages built from them under Blocks.
+  </SectionHead>
+  <div class="home-index">
+    {GROUPS.map(({ group, items }) => (
+      <section aria-label={group}>
+        <h3 class="caps">{group}</h3>
+        <ul>
+          {items.map(({ name, title }) => (
+            <li>
+              <a href={`/docs/components/${name}`}>{title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</section>

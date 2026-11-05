@@ -1,47 +1,27 @@
 ---
-// The foundations specimen: Serigraph's materials on one print. The colourways, the surfaces and marks, and the
-// voices with their Golden Ratio scale, all from the kit. Follies and the parts follow in later phases; the static prototype the style was agreed on stays in specimen/.
+// Home: the kit at its best, then where to go. The hero is the kit's hero-01 block (the one island on the page); the
+// sections below render at build time.
 import Base from "@/site/layouts/base.astro"
-import { Lettering } from "@/serigraph/extras/lettering"
+import { Hero01 } from "@/serigraph/blocks/hero-01"
 import { Folly } from "@/serigraph/extras/folly"
-import { AppearancePanel } from "@/site/appearance-panel"
-import Colourways from "@/site/specimen/colourways.astro"
-import Surfaces from "@/site/specimen/surfaces.astro"
-import Voices from "@/site/specimen/voices.astro"
-import "@/site/specimen/specimen.css"
+import InUse from "@/site/home/in-use.astro"
+import Drawings from "@/site/home/drawings.astro"
+import Letters from "@/site/home/letters.astro"
+import ComponentIndex from "@/site/home/component-index.astro"
+import "@/site/home/home.css"
 ---
 
 <Base
   title="Serigraph"
-  description="A shadcn/ui kit in the style of a late-1970s silkscreen gig poster drawn with a technical pen: the specimen of its colourways, surfaces and voices."
+  description="A shadcn/ui kit printed like a silkscreen gig poster: flat spot colours on spot colours, one fine ink line, seeded drawings of follies in the clouds, and fonts of its own."
 >
-  <div class="hero">
-    <Lettering as="h1" className="hero-title">
-      Serigraph
-    </Lettering>
-    <p class="hero-meta caps">
-      <span>
-        Colourways <span class="sep">•</span> Surfaces{" "}
-        <span class="sep">•</span> Voices
-      </span>
-      <span>
-        Foundations <span class="sep">•</span>
-        <span class="nowrap">
-          November 5<span class="ord">th</span>
-        </span>
-      </span>
-    </p>
-    <div class="hero-body">
-      <p class="hero-lede">
-        A shadcn/ui kit printed like a silkscreen gig poster: flat, luminous
-        spot colours laid one on another, one fine ink line, and a paper mat
-        around the canvas.
-      </p>
-      <AppearancePanel client:idle />
-    </div>
-    <Folly template="city" seed="serigraph" className="hero-art" />
+  <Hero01 client:load />
+  <!-- The city's clouds run on into a section of their colour; the next opens under the arcade wall. -->
+  <div class="ground home-ground">
+    <InUse />
   </div>
-  <Colourways />
-  <Surfaces />
-  <Voices />
+  <Folly template="arcade" seed="home" className="home-arcade" />
+  <Drawings />
+  <Letters />
+  <ComponentIndex />
 </Base>

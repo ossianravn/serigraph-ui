@@ -29,7 +29,7 @@ const type = [
   // Lists: markers in the quiet text; numbered lists count in mono.
   "[&_:where(ul)]:list-disc [&_:where(ol)]:list-decimal [&_:where(ul,ol)]:ps-snug",
   "[&_:where(li)]:ps-1 [&_:where(li+li)]:mt-hair [&_:where(li>ul,li>ol)]:mt-hair",
-  "[&_:where(li)]:marker:text-(--text-quiet) [&_:where(ol>li)]:marker:font-mono [&_:where(ol>li)]:marker:text-small",
+  "[&_:where(li)]:marker:text-(--text) [&_:where(ol>li)]:marker:font-mono [&_:where(ol>li)]:marker:text-small",
   // A quotation set off by one fine line standing in its margin.
   "[&_:where(blockquote)]:border-s-(length:--line) [&_:where(blockquote)]:border-[var(--edge,var(--ink))] [&_:where(blockquote)]:ps-snug [&_:where(blockquote)]:text-lead [&_:where(blockquote)]:leading-lead",
   // Code: inline in mono on a tint of the surface; blocks scroll sideways rather than wrap.

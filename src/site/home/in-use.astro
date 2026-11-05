@@ -1,0 +1,43 @@
+---
+// The kit in use: a slice of Meridian, the demo observatory, printed from the kit's parts at build time (nothing here
+// is operated, so nothing hydrates), with the way into the real thing.
+import { Badge } from "@/serigraph/ui/badge"
+import { buttonVariants } from "@/serigraph/ui/button"
+import { NIGHT, SESSIONS, seatsLeft } from "@/site/meridian/data"
+import SectionHead from "./section-head.astro"
+
+const sessions = SESSIONS.slice(0, 4)
+---
+
+<section class="section home-section" aria-labelledby="h-in-use">
+  <SectionHead
+    id="h-in-use"
+    title="In use"
+    href="/meridian"
+    link="Open Meridian"
+  >
+    Meridian, an observatory and planetarium, built from the kit as you would
+    build with it: tonight's sessions, booking, sign-in and settings.
+  </SectionHead>
+  <div class="plane home-tonight" data-tone="1">
+    <p class="caps">{NIGHT.date}</p>
+    <ul>
+      {sessions.map((session) => (
+        <li>
+          <span class="font-mono">{session.starts}</span>
+          <span class="home-tonight-title">{session.title}</span>
+          {seatsLeft(session) === 0 ? (
+            <Badge variant="outline">Full</Badge>
+          ) : (
+            <Badge variant="secondary" data-tone="3">
+              {seatsLeft(session)} left
+            </Badge>
+          )}
+        </li>
+      ))}
+    </ul>
+    <a class={buttonVariants({ size: "sm" })} href="/meridian">
+      Book a seat
+    </a>
+  </div>
+</section>

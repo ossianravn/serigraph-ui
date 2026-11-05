@@ -229,7 +229,7 @@
   line-height: var(--lh-small);
 }
 
-/* Settings and sign-in: one narrow column. */
+/* Settings: one narrow column. */
 .mer-narrow {
   max-width: 42rem;
 }
@@ -237,63 +237,4 @@
   display: grid;
   gap: var(--space-section);
   margin-top: var(--space-section);
-}
-.mer-signin {
-  display: grid;
-  gap: var(--space-page);
-  align-items: center;
-  padding-block: var(--space-section) 0;
-}
-@media (min-width: 56rem) {
-  .mer-signin {
-    grid-template-columns: minmax(0, 26rem) 16rem;
-    justify-content: center;
-  }
-}
-.mer-signin-art {
-  display: none;
-  width: 16rem;
-}
-@media (min-width: 56rem) {
-  .mer-signin-art {
-    display: block;
-  }
-}
-
-/* A held session on its plane: the hour, what and where, and its menu; on a phone the hour sits above the words. */
-.mer-held {
-  display: grid;
-  grid-template-columns: 4rem minmax(0, 1fr) auto;
-  align-items: baseline;
-  gap: var(--space-hair) var(--space-snug);
-  padding: var(--space-snug) var(--space-line);
-}
-@media (max-width: 40rem) {
-  .mer-held {
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding-inline: var(--space-snug);
-  }
-  .mer-held > div {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-}
-
-/* Nothing to show: a doorway and one line, then one action. */
-.mer-empty {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-snug) var(--space-line);
-  padding-block: var(--space-snug);
-  border-block: var(--line) solid var(--edge);
-  & .folly {
-    flex: none;
-    width: 6rem;
-    aspect-ratio: 160 / 150;
-  }
-  & p {
-    margin: 0;
-    max-width: 28rem;
-  }
 }

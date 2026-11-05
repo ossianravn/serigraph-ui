@@ -1,0 +1,29 @@
+---
+// The letters: the three faces built from one skeleton, set large, and the page with every glyph and the files.
+import { Lettering } from "@/serigraph/extras/lettering"
+import SectionHead from "./section-head.astro"
+---
+
+<section class="section home-section" aria-labelledby="h-letters">
+  <SectionHead
+    id="h-letters"
+    title="Letters"
+    href="/letters"
+    link="See every glyph"
+  >
+    Three faces of our own from one skeleton alphabet: wide round display
+    capitals with a line inside each stem, extended capitals, and a mono.
+  </SectionHead>
+  <div class="home-letters">
+    <Lettering className="home-letters-display">Moonrise 22:14</Lettering>
+    <p class="caps home-letters-sans">
+      <span class="nowrap">
+        Thursday 5<span class="ord">th</span>
+      </span>
+      November <span class="sep">•</span> The dome opens at 21:30
+    </p>
+    <p class="font-mono home-letters-mono">
+      seeing 4/5 · member 0412 · npx shadcn add @serigraph/table
+    </p>
+  </div>
+</section>

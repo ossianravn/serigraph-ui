@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "medallion",
+  "title": "Medallion",
+  "description": "Medallion: sets a featured figure in a round frame: a picture or a seeded medallion drawing, shaded with fine stipple on its shadow side.",
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/folly"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/medallion.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\"\nimport { Folly } from \"@/serigraph/extras/folly\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\nconst SIZES = {\n  sm: \"size-24\",\n  default: \"size-36\",\n  lg: \"size-52\",\n} as const\n\ntype MedallionProps = ComponentPropsWithoutRef<\"div\"> & {\n  /** Draws the medallion folly from this seed when there are no children. */\n  seed?: string | number\n  /** The drawing's accessible name; without one it is decorative. Give an image its own alt text. */\n  label?: string\n  /** Its diameter: 6, 9 or 13rem. */\n  size?: keyof typeof SIZES\n  /** The spot colour behind the drawing: plane 2 by default, or one of the four tones. */\n  tone?: \"plane-2\" | \"1\" | \"2\" | \"3\" | \"4\"\n}\n\n/**\n * A round frame in the one line for a featured figure: an image (the children) or, from a seed, the medallion folly,\n * with a fine stipple on the shadow side. Its sky is its own spot colour and its clouds are paper, so it reads as a\n * circle of colour on any canvas. A person's picture belongs in an Avatar; this is for a feature.\n */\nexport function Medallion({\n  seed,\n  label,\n  size = \"default\",\n  tone = \"plane-2\",\n  className,\n  children,\n  ...props\n}: MedallionProps) {\n  return (\n    <div\n      data-slot=\"medallion\"\n      data-size={size}\n      data-tone={tone}\n      className={cn(\n        \"relative isolate flex shrink-0 items-center justify-center overflow-hidden rounded-full [&>img]:size-full [&>img]:object-cover\",\n        SIZES[size],\n        className,\n      )}\n      {...props}\n    >\n      {children ?? (\n        <Folly\n          template=\"medallion\"\n          seed={seed}\n          label={label}\n          className=\"pointer-events-none size-[120%] shrink-0\"\n        />\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/medallion.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

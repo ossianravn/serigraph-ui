@@ -1,0 +1,30 @@
+---
+// The drawings: Follies in their formats, each from a seed, and the Press where any of them can be rerolled.
+import { Folly } from "@/serigraph/extras/folly"
+import SectionHead from "./section-head.astro"
+---
+
+<section class="section home-section" aria-labelledby="h-drawings">
+  <SectionHead
+    id="h-drawings"
+    title="Follies"
+    href="/press"
+    link="Open the Press"
+  >
+    Seeded surreal architecture in the clouds. The same seed draws the same
+    folly everywhere, and every drawing reprints in each colourway.
+  </SectionHead>
+  <div class="home-follies">
+    <Folly
+      template="window"
+      seed="home window"
+      className="arch-frame home-window"
+    />
+    <Folly
+      template="medallion"
+      seed="home medallion"
+      className="home-medallion"
+    />
+    <Folly template="doorway" seed="home doorway" className="home-doorway" />
+  </div>
+</section>

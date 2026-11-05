@@ -220,7 +220,7 @@ function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props) {
     <ComboboxPrimitive.Empty
       data-slot="combobox-empty"
       className={cn(
-        "hidden w-full justify-center px-tight py-snug text-center text-small leading-small text-(--text-quiet) group-data-empty/combobox-content:flex",
+        "hidden w-full justify-center px-tight py-snug text-center text-small leading-small text-(--text) group-data-empty/combobox-content:flex",
         className,
       )}
       {...props}

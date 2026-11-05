@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cloud-band",
+  "title": "Cloud Band",
+  "description": "Cloud band: ends one section and opens the next: a seeded cloud bank on a flat baseline whose clouds run on into the section below.",
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/folly"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/cloud-band.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\"\nimport { Folly } from \"@/serigraph/extras/folly\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\n/** The colour role of a section: `ground` is the cloud colour, the rest are the colourway's roles of those names. */\nexport type CloudBandRole =\n  | \"ground\"\n  | \"canvas\"\n  | \"plane\"\n  | \"plane-2\"\n  | \"highlight\"\n  | \"tone-1\"\n  | \"tone-2\"\n  | \"tone-3\"\n  | \"tone-4\"\n\ntype CloudBandProps = Omit<ComponentPropsWithoutRef<\"div\">, \"children\"> & {\n  /** Any string or number; the same seed draws the same band. */\n  seed?: string | number\n  /** The section below, which the front clouds continue. `ground` (the cloud colour) by default. */\n  below?: CloudBandRole\n  /** The section above, painted behind the band. Without it the band shows whatever it sits on. */\n  above?: CloudBandRole\n  /** An accessible name; without one the band is decorative and hidden from assistive technology. */\n  label?: string\n}\n\n/**\n * A section edge: the band folly's cloud bank, with a building rising behind it and a plant in front, its flat\n * baseline on the section below and its front clouds in that section's colour, so the clouds run on into it. Set the\n * height with CSS; the drawing slices from the bottom, so a narrow band shows its middle.\n */\nexport function CloudBand({\n  seed = \"serigraph\",\n  below = \"ground\",\n  above,\n  label,\n  className,\n  ...props\n}: CloudBandProps) {\n  return (\n    <div\n      data-slot=\"cloud-band\"\n      data-below={below}\n      data-above={above}\n      className={cn(\"h-[clamp(7.5rem,14vw,13rem)] w-full\", className)}\n      {...props}\n    >\n      <Folly template=\"band\" seed={seed} label={label} className=\"size-full\" />\n    </div>\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/cloud-band.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "arch-frame",
+  "title": "Arch Frame",
+  "description": "Arch frame: frames a picture or a drawing under a round arch, the way the poster looks out through its windows.",
+  "registryDependencies": [
+    "@serigraph/base"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/arch-frame.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\nconst SIZES = {\n  sm: \"w-32\",\n  default: \"w-48\",\n  lg: \"w-72\",\n  fill: \"w-full\",\n} as const\n\ntype ArchFrameProps = ComponentPropsWithoutRef<\"div\"> & {\n  /** Its width: 8, 12 or 18rem, or the width of its container. */\n  size?: keyof typeof SIZES\n}\n\n/**\n * An arch-topped frame for an image or a folly: a round head on straight sides, small bottom radii and one fine\n * line. It keeps a 3:4 shape at every width, so the head stays a half circle; the picture fills it and is cut to it.\n */\nexport function ArchFrame({\n  size = \"default\",\n  className,\n  ...props\n}: ArchFrameProps) {\n  return (\n    <div\n      data-slot=\"arch-frame\"\n      data-size={size}\n      className={cn(\n        \"arch-frame relative isolate shrink-0 [&>*]:size-full [&>img]:object-cover\",\n        SIZES[size],\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/arch-frame.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

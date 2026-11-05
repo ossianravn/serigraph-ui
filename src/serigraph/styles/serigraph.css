@@ -22,6 +22,8 @@
 @import "./composites.css";
 @import "./data.css";
 @import "./conversation.css";
+@import "./extras-tickets.css";
+@import "./extras-poster.css";
 
 /* Night is a colourway; it also answers shadcn's dark variant, so parts that read it work. */
 @custom-variant night (&:where([data-colourway="night"], [data-colourway="night"] *));

@@ -1,0 +1,51 @@
+---
+// The blocks: whole pages built from Serigraph's parts with Meridian's content, each running in a preview frame at
+// desktop and phone width.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import { BlockPreview } from "@/site/docs/blocks/block-preview"
+import { BLOCKS } from "@/site/docs/blocks/blocks"
+import "@/site/docs/docs.css"
+---
+
+<Base
+  title="Blocks"
+  description="Whole pages built from Serigraph's parts, each running in a preview at desktop and phone width."
+>
+  <div class="docs-blocks">
+    <Lettering as="h1" className="docs-title">
+      Blocks
+    </Lettering>
+    <p class="docs-lead">
+      Whole pages built from Serigraph's parts, with Meridian's content. Install
+      one into your app, then make its copy and data yours.
+    </p>
+    {BLOCKS.map(({ name, title, description, variants }) => (
+      <section id={name} class="docs-block" aria-labelledby={`block-${name}`}>
+        <div class="docs-block-head">
+          <h2 id={`block-${name}`}>
+            <a href={`#${name}`}>{title}</a>
+          </h2>
+          <span class="font-mono text-small">{name}</span>
+        </div>
+        <p>{description}</p>
+        <BlockPreview
+          name={name}
+          title={title}
+          variants={variants}
+          client:visible
+        />
+      </section>
+    ))}
+  </div>
+</Base>
+
+<script>
+  import { apply, readSaved, STORAGE_KEY } from "@/serigraph/theme/appearance"
+  import { siteAppearance } from "@/site/appearance"
+
+  // A preview frame that changes the appearance (the settings block) saves it; the page follows.
+  addEventListener("storage", (event) => {
+    if (event.key === STORAGE_KEY) apply(readSaved(siteAppearance))
+  })
+</script>

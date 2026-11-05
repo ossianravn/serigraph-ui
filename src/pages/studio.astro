@@ -1,0 +1,26 @@
+---
+// The colourway studio: start from a preset, give each role a spot, watch it print on real parts and a folly, check
+// the text contrast, and take the colourway away as CSS.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import { Studio } from "@/site/studio/studio"
+import "@/site/studio/studio.css"
+---
+
+<Base
+  title="Studio"
+  description="The colourway studio: start from a preset, give each role a spot, watch it print on real parts and a folly, check contrast and export the CSS."
+>
+  <div class="studio-hero">
+    <Lettering as="h1" className="studio-title">
+      Studio
+    </Lettering>
+    <p class="caps">
+      Colourways <span class="sep">•</span> your own print run{" "}
+      <span class="sep">•</span> export
+    </p>
+  </div>
+  <section class="section studio-section" aria-label="The studio">
+    <Studio client:load />
+  </section>
+</Base>

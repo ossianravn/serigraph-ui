@@ -1,0 +1,142 @@
+/* Drawing for the poster extras that classes cannot reach, keyed on data-slot. In the utilities layer, so these rules
+   (more specific than a single class) win over the part's own utility classes. */
+
+@layer utilities {
+  /* Cloud band: its front clouds take the colour of the section below (data-below), so they run on into it; with
+     data-above the band paints the section above behind itself. Ground is the cloud colour, so it changes nothing. */
+  [data-slot="cloud-band"] {
+    display: block;
+    &[data-below="canvas"] {
+      --cloud: var(--canvas);
+    }
+    &[data-below="plane"] {
+      --cloud: var(--plane);
+    }
+    &[data-below="plane-2"] {
+      --cloud: var(--plane-2);
+    }
+    &[data-below="highlight"] {
+      --cloud: var(--highlight);
+    }
+    &[data-below="tone-1"] {
+      --cloud: var(--tone-1);
+    }
+    &[data-below="tone-2"] {
+      --cloud: var(--tone-2);
+    }
+    &[data-below="tone-3"] {
+      --cloud: var(--tone-3);
+    }
+    &[data-below="tone-4"] {
+      --cloud: var(--tone-4);
+    }
+    &[data-above="ground"] {
+      background-color: var(--cloud);
+    }
+    &[data-above="canvas"] {
+      background-color: var(--canvas);
+    }
+    &[data-above="plane"] {
+      background-color: var(--plane);
+    }
+    &[data-above="plane-2"] {
+      background-color: var(--plane-2);
+    }
+    &[data-above="highlight"] {
+      background-color: var(--highlight);
+    }
+    &[data-above="tone-1"] {
+      background-color: var(--tone-1);
+    }
+    &[data-above="tone-2"] {
+      background-color: var(--tone-2);
+    }
+    &[data-above="tone-3"] {
+      background-color: var(--tone-3);
+    }
+    &[data-above="tone-4"] {
+      background-color: var(--tone-4);
+    }
+  }
+
+  /* Arch frame: its line is the surface's edge colour, so the head still shows where the sky inside meets Night's
+     canvas outside (paper there, ink on every bright surface). */
+  .arch-frame[data-slot="arch-frame"] {
+    border-color: var(--edge, var(--ink));
+  }
+
+  /* Medallion: a circle of its spot colour with the line drawn over its edge, so the picture runs right to it, and a
+     fine stipple on the shadow side (below and to the right): ink dots shown only outside a lit circle set up and to
+     the left. The drawing's sky is the medallion's colour and its clouds are paper, as in the avatar. */
+  [data-slot="medallion"] {
+    --medallion-fill: var(--plane-2);
+    --canvas: var(--medallion-fill);
+    --cloud: var(--paper);
+    background-color: var(--medallion-fill);
+    background-image: var(--grain);
+    background-size: var(--grain-size);
+    &[data-tone="1"] {
+      --medallion-fill: var(--tone-1);
+    }
+    &[data-tone="2"] {
+      --medallion-fill: var(--tone-2);
+    }
+    &[data-tone="3"] {
+      --medallion-fill: var(--tone-3);
+    }
+    &[data-tone="4"] {
+      --medallion-fill: var(--tone-4);
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    &::before {
+      background-image: radial-gradient(
+        circle,
+        var(--ink) 0.6px,
+        transparent 0.9px
+      );
+      background-size: 3px 3px;
+      mask-image: radial-gradient(
+        ellipse 52% 52% at 40% 37%,
+        transparent 99%,
+        #000 100%
+      );
+    }
+    &::after {
+      border: var(--line) solid var(--ink);
+    }
+  }
+  /* Cut to the circle, the drawing's square box never shows, so it takes the grain the folly utility leaves off. */
+  [data-slot="medallion"] > .folly[data-slot="folly"]::after {
+    display: block;
+  }
+
+  /* Colourway swatch: a round chip of the colourway's canvas in the line; the chosen one ringed, the focused one
+     ringed in a dashed line. The line is the surface's edge colour, so the chips show on Night's canvas too. */
+  [data-slot="colourway-swatch"] {
+    display: block;
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    border: var(--line) solid var(--edge, var(--ink));
+    border-radius: 50%;
+    background-color: var(--canvas);
+    background-image: var(--grain);
+    background-size: var(--grain-size);
+    cursor: pointer;
+    &:has(:checked) {
+      outline: var(--line) solid var(--edge, var(--ink));
+      outline-offset: 3px;
+    }
+    &:has(:focus-visible) {
+      outline: var(--line) dashed var(--edge, var(--ink));
+      outline-offset: 3px;
+    }
+  }
+}

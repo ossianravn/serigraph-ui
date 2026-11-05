@@ -1,0 +1,24 @@
+---
+// A home section's head: the title lettered, one sentence, and where to go next, at the reading measure.
+import { Lettering } from "@/serigraph/extras/lettering"
+
+interface Props {
+  id: string
+  title: string
+  href: string
+  link: string
+}
+const { id, title, href, link } = Astro.props
+---
+
+<div class="home-head">
+  <Lettering as="h2" className="home-title" id={id}>
+    {title}
+  </Lettering>
+  <p>
+    <slot />
+  </p>
+  <a class="caps" href={href}>
+    {link} →
+  </a>
+</div>

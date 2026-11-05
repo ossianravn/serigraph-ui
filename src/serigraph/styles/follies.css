@@ -28,7 +28,7 @@
 @utility arch-frame {
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  border: var(--line) solid var(--ink);
+  border: var(--line) solid var(--edge, var(--ink));
   border-radius: 50% 50% var(--r-box) var(--r-box) / 37.5% 37.5% var(--r-box)
     var(--r-box);
   background: var(--canvas);

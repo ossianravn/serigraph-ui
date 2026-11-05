@@ -1,6 +1,6 @@
 # Plan
 
-Status: Phase 4 (data, navigation and the rest of parity) done, 2026-11-05; Phase 5 (extras, blocks, the home page and the colourway studio) is next. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
+Status: Phase 5 (extras, blocks, the home page and the colourway studio) done, 2026-11-05; Phase 6 (release v0.1) is next, and its deployment waits for the maintainer. The style was agreed in Phase S. This file is the progress record: update a phase's checklist and the [log](#progress-log) as work lands.
 
 ## What this is
 
@@ -180,9 +180,16 @@ Exit: parity complete; a 200-row table scrolls without dropped frames.
 - [x] A 200-row table: 16.7 ms median frame interval at 1× and 4× CPU throttling in headless Chrome, one or two frames over 20 ms; without its own scroll layer it repainted the grain every frame (21.8 ms median)
 - [x] Registry: 72 items; the install test adds calendar, chart, code block, command, empty, sidebar, sonner and table (27 items, all their packages, offline)
 
-### Phase 5: extras, blocks, the home page and the colourway studio
+### Phase 5: extras, blocks, the home page and the colourway studio (done)
 
 Ticket stub, programme list, poster card, date with raised ordinal, cloud band, arch frame, medallion, stair stepper, colourway switcher. Blocks: sign-in, settings, dashboard, pricing, article, empty state, hero. The home page; the colourway studio with presets and export.
+
+- [x] Extras (`src/serigraph/extras/`), each with a docs page: ticket stub (notches cut by a mask, a dashed tear line), programme list (the poster's bill), poster card (an arch window over a plane), ordinal date (`Intl`, read in UTC, the ordinal raised), stair stepper (risers, louvered when done, compact on phones), cloud band, arch frame, medallion and the colourway switcher
+- [x] Blocks (`src/serigraph/blocks/`) at `/docs/blocks`, each running in a preview frame at desktop and phone width: hero, sign-in, dashboard, settings, pricing, article and empty states (first run, no results, nothing booked); Meridian's sign-in is now the sign-in block
+- [x] The home page: the hero block (a city you can reroll; its clouds run into the next section), the kit in use, the Follies, the letters and an index of every part; the foundations specimen moved to `/specimen`
+- [x] The colourway studio at `/studio`: the five colourways and four new presets (Dusk, Noon, Matinee, Late show), a spot per role, a live preview of parts and follies, flat contrast per pair, and an export that holds back failing colourways
+- [x] Registry: 88 items (7 blocks); the install test adds hero-01, sign-in-01, the colourway switcher, the ordinal date and the ticket stub (32 items)
+- [ ] The home page's install steps, once the registry has a public address (Phase 6)
 
 ### Phase 6: release v0.1
 
@@ -217,6 +224,8 @@ Docs complete, changelog, share images drawn by Follies, consumer installs into 
 - **2026-11-05, Phase 3 (done)**: Meridian's first screens, built from the kit as a consumer would. Composed Base UI parts cannot cross Astro's boundary (each React component Astro places renders alone, so an avatar's fallback lost its context and the page threw); they render from one React component instead. The `break-ui` pass ran the worst case (a collaboration's lecture title, a double-barrelled name, a long work email, a comet's designation, a session over midnight, 1,200 seats), an empty night and a night of one, at 1440 and 320 px; nine breaks were fixed and the switch stays as the regression check. The pane stopped running `requestAnimationFrame` again, so dialogs could not finish closing there; the flows (book, add, release) were checked in headless Chrome over CDP instead. Fineliner's `Tabs` and `ToggleGroup` orientation fix went to its main the same day.
 
 - **2026-11-05, Phase 4 (done)**: Parity is complete: 72 registry items. Measured the table: scrolling it repainted the printed grain behind the rows every frame, so the table container scrolls on its own layer (`will-change: scroll-position`). From the batches: a folly's grain overlay doubled the canvas grain around fitted drawings (medallion, doorway), now off for those; shadcn's `data-horizontal`/`data-vertical` variants were missing and are now defined; cmdk marks every item `data-disabled="false"`, which the menu-item utility now reads correctly. Open for consolidation: a `fine-icon` stroke utility, the fine tick, a ghost pill, a current-page pill, the group-takes-focus rules and a tinted-surface context are each repeated across batches; `cn` does not know `caps` and `pill` clash with `font-*`, `text-*` and `rounded-*`. Name-drawn avatars read busy as small pinwheels in threads. The screenshot script's fixed port collided between parallel agents.
+
+- **2026-11-05, Phase 5 (done)**: Five agents built the extras, two block sets and the studio in parallel; the hero and the home page were written here. Found on the way: `--text-quiet` measured 2.9–4.3:1 on the canvases, so it is now for disabled words only (the calendar's weekdays, the combobox's empty line and list markers take `--text`); the arch frame's line now follows `--edge`, so its head shows on Night; a control placed on the hero's drawing moved beside the kicker. The shared screenshot script picked its port from the process id and two agents' Chrome met; it now lets Chrome choose. Open: the faint seam where a folly's grain meets the next section; similar-looking window follies across seeds; the extras' and blocks' suggested shared utilities (a ticket notch, louvers from the ground, a stipple-shade crescent, per-role surface utilities).
 
 ## Open questions for the maintainer
 

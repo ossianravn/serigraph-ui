@@ -1,0 +1,286 @@
+/* The colourway studio: presets in a row of pills, the roles in a narrow column beside the preview (below it on
+   phones), then the export at a reading width. Everything operated is flat and quiet; the preview carries the colour. */
+
+.studio-hero {
+  display: grid;
+  gap: var(--space-snug);
+  padding: var(--space-section) var(--gutter) 0;
+}
+.studio-hero p {
+  margin: 0;
+}
+.studio-title {
+  margin: 0;
+  font-size: clamp(3rem, 12vw, 9rem);
+}
+.studio-section {
+  padding-top: var(--space-section);
+}
+.studio {
+  display: grid;
+  gap: var(--space-section);
+}
+.studio-kicker {
+  margin: 0 0 var(--space-tight);
+}
+
+/* Presets: pills on the canvas, three round chips and a name; the matching one takes the highlight. */
+.studio-preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-hair);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.studio-preset {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-hair);
+  height: var(--control-height);
+  padding: 0 var(--space-snug) 0 var(--space-hair);
+  border: var(--line) solid var(--edge);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.studio-preset[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--highlight);
+  color: var(--ink);
+}
+.studio-preset:focus-visible,
+.studio-pick:focus-visible,
+.studio-spot:focus-visible {
+  outline: var(--line) solid var(--edge, var(--ink));
+  outline-offset: 3px;
+}
+.studio-chips {
+  display: inline-flex;
+}
+.studio-chips .studio-chip + .studio-chip {
+  margin-inline-start: -0.5rem;
+}
+.studio-preset .studio-chip {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.studio-chip {
+  flex: none;
+  width: 1.375rem;
+  height: 1.375rem;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+}
+
+/* The desk: the roles' column and the preview. */
+.studio-desk {
+  display: grid;
+  gap: var(--space-line);
+  align-items: start;
+}
+@media (min-width: 64rem) {
+  .studio-desk {
+    grid-template-columns: 23rem minmax(0, 1fr);
+  }
+}
+.studio-panel {
+  padding: var(--space-snug) var(--space-snug) var(--space-tight);
+}
+@media (min-width: 30rem) {
+  .studio-panel {
+    padding-inline: var(--space-line);
+  }
+}
+.studio-group + .studio-group {
+  margin-top: var(--space-snug);
+}
+.studio-role {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 8.75rem;
+  align-items: center;
+  gap: var(--space-tight);
+  min-height: 2.75rem;
+  padding-block: var(--space-hair);
+  border-top: var(--line) solid var(--ink);
+}
+.studio-role-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-tight);
+}
+.studio-ratio {
+  font-family: var(--face-mono);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* A role's spot: a field-tinted pill with its round chip and name, as wide as the longest name. */
+.studio-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-tight);
+  width: 100%;
+  height: var(--control-height-compact);
+  padding: 0 var(--space-tight) 0 0.3rem;
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 30%, var(--paper));
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.studio-pick .studio-chip {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.studio-pick[data-popup-open] {
+  background: var(--highlight);
+}
+.studio-segmented {
+  justify-self: start;
+}
+.studio-spots {
+  width: 19rem;
+}
+.studio-spots > [role="group"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+}
+.studio-spot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  min-height: 2.25rem;
+  padding: 0 var(--space-tight) 0 0.3rem;
+  border: var(--line) solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--type-body);
+  text-align: start;
+  cursor: pointer;
+}
+.studio-spot:hover {
+  border-color: var(--ink);
+}
+.studio-spot[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--highlight);
+}
+
+/* The preview: a canvas of its own in the fine line, the parts in two columns once it is wide enough. */
+.studio-preview {
+  container-type: inline-size;
+  display: grid;
+  min-width: 0;
+  overflow: clip;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-plane);
+}
+.studio-preview-head {
+  display: grid;
+  gap: var(--space-hair);
+  padding: var(--space-line) var(--space-line) 0;
+}
+.studio-preview-head p {
+  margin: 0;
+}
+.studio-preview-title {
+  margin: 0;
+  font-size: var(--type-h1);
+  line-height: var(--lh-h1);
+  font-weight: 650;
+}
+.studio-preview-lede {
+  max-width: 30rem;
+}
+.studio-folly {
+  width: 100%;
+  aspect-ratio: 1200 / 560;
+}
+.studio-preview-parts {
+  display: grid;
+  gap: var(--space-line);
+  align-items: start;
+  padding: var(--space-line) var(--space-line) 0;
+}
+@container (min-width: 40rem) {
+  .studio-preview-parts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.studio-card-body {
+  display: grid;
+  gap: var(--space-snug);
+}
+.studio-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-tight);
+}
+.studio-preview-side {
+  display: grid;
+  gap: var(--space-snug);
+}
+.studio-sessions {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.studio-sessions li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-tight);
+  padding-block: var(--space-hair);
+}
+.studio-sessions li + li {
+  border-top: var(--line) solid var(--ink);
+}
+.studio-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-tight);
+}
+.studio-band {
+  height: 160px;
+  margin-top: var(--space-section);
+}
+.studio-ground {
+  margin: 0;
+  padding: var(--space-snug) var(--space-line);
+  text-align: center;
+}
+
+/* The export, at a reading width. */
+.studio-export {
+  display: grid;
+  gap: var(--space-snug);
+  max-width: 46rem;
+}
+.studio-export-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-tight) var(--space-line);
+}
+.studio-export-head .studio-kicker {
+  margin: 0;
+}
+.studio-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-tight);
+}
+.studio-failing ul {
+  margin: 0;
+  padding-inline-start: 1.1em;
+}

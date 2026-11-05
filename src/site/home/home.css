@@ -1,0 +1,135 @@
+/* The home page below the hero: few large groups, each a lettered head with one sentence and a way on. */
+.home-section {
+  max-width: 72rem;
+  margin-inline: auto;
+}
+.home-ground {
+  padding-bottom: var(--space-page);
+  & > .home-section {
+    padding-top: var(--space-section);
+  }
+}
+.home-arcade {
+  height: 104px;
+  margin-bottom: var(--space-section);
+  & + .home-section {
+    padding-top: 0;
+  }
+}
+.home-head {
+  display: grid;
+  gap: var(--space-tight);
+  max-width: var(--measure);
+  margin-bottom: var(--space-section);
+  & p {
+    margin: 0;
+    font-size: var(--type-lead);
+    line-height: var(--lh-lead);
+  }
+  & > a {
+    justify-self: start;
+    text-decoration: none;
+  }
+  & > a:hover {
+    text-decoration: underline;
+  }
+}
+.home-title {
+  margin: 0;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+/* In use: tonight's sessions on a plane. */
+.home-tonight {
+  display: grid;
+  gap: var(--space-snug);
+  max-width: 34rem;
+  padding: var(--space-line);
+  & p {
+    margin: 0;
+  }
+  & ul {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  & li {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: var(--space-snug);
+    padding-block: var(--space-tight);
+    border-top: var(--line) solid var(--edge);
+  }
+  & a {
+    justify-self: start;
+  }
+}
+.home-tonight-title {
+  font-weight: 600;
+}
+
+/* The drawings in their formats. */
+.home-follies {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-section);
+}
+.home-window {
+  width: 12rem;
+}
+.home-medallion {
+  width: 9rem;
+  aspect-ratio: 1;
+}
+.home-doorway {
+  width: 11rem;
+  aspect-ratio: 160 / 150;
+}
+
+/* The letters, large. */
+.home-letters {
+  display: grid;
+  gap: var(--space-snug);
+  & p {
+    margin: 0;
+  }
+}
+.home-letters-display {
+  font-size: clamp(2.5rem, 9vw, 6.5rem);
+  line-height: 1;
+}
+.home-letters-sans {
+  font-size: var(--type-lead);
+}
+.home-letters-mono {
+  overflow-wrap: anywhere;
+}
+
+/* The index of parts: groups in columns, plain links. */
+.home-index {
+  columns: 13rem;
+  column-gap: var(--space-section);
+  & section {
+    break-inside: avoid;
+    margin-bottom: var(--space-line);
+  }
+  & h3 {
+    margin: 0 0 var(--space-hair);
+  }
+  & ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  & a {
+    display: inline-block;
+    padding-block: 0.125rem;
+    text-decoration: none;
+  }
+  & a:hover {
+    text-decoration: underline;
+  }
+}

@@ -52,6 +52,16 @@
           "target": "~/src/serigraph/styles/data.css"
         },
         {
+          "path": "src/serigraph/styles/extras-poster.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/extras-poster.css"
+        },
+        {
+          "path": "src/serigraph/styles/extras-tickets.css",
+          "type": "registry:file",
+          "target": "~/src/serigraph/styles/extras-tickets.css"
+        },
+        {
           "path": "src/serigraph/styles/feedback.css",
           "type": "registry:file",
           "target": "~/src/serigraph/styles/feedback.css"
@@ -205,6 +215,49 @@
           "path": "src/serigraph/ui/alert-dialog.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/alert-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "arch-frame",
+      "type": "registry:component",
+      "title": "Arch Frame",
+      "description": "Arch frame: frames a picture or a drawing under a round arch, the way the poster looks out through its windows.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/arch-frame.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/arch-frame.tsx"
+        }
+      ]
+    },
+    {
+      "name": "article-01",
+      "type": "registry:block",
+      "title": "Article 01",
+      "description": "Article: a journal post: a lettered title, the date with a raised ordinal, prose at the reading measure, a folly in an arched frame and a pull quote.",
+      "registryDependencies": [
+        "@serigraph/avatar",
+        "@serigraph/badge",
+        "@serigraph/base",
+        "@serigraph/folly",
+        "@serigraph/lettering",
+        "@serigraph/motif",
+        "@serigraph/typography"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/article-01-story.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/article-01-story.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/article-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/article-01.tsx"
         }
       ]
     },
@@ -478,6 +531,23 @@
       ]
     },
     {
+      "name": "cloud-band",
+      "type": "registry:component",
+      "title": "Cloud Band",
+      "description": "Cloud band: ends one section and opens the next: a seeded cloud bank on a flat baseline whose clouds run on into the section below.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/folly"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/cloud-band.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/cloud-band.tsx"
+        }
+      ]
+    },
+    {
       "name": "code-block",
       "type": "registry:component",
       "title": "Code Block",
@@ -515,6 +585,24 @@
           "path": "src/serigraph/ui/collapsible.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "colourway-switcher",
+      "type": "registry:component",
+      "title": "Colourway Switcher",
+      "description": "Colourway switcher: changes how the whole page prints, its colourway, poster mat, line and grain, at once, and remembers the choice for the next visit.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/switch",
+        "@serigraph/toggle-group"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/colourway-switcher.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/colourway-switcher.tsx"
         }
       ]
     },
@@ -582,6 +670,40 @@
           "path": "src/serigraph/ui/context-menu.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/context-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-01",
+      "type": "registry:block",
+      "title": "Dashboard 01",
+      "description": "Dashboard: the observatory's week: four figures in mono, visitors per night and seats by kind of session in Serigraph's fills, tonight's sessions and the bookings ahead.",
+      "dependencies": [
+        "recharts@^3.10.1"
+      ],
+      "registryDependencies": [
+        "@serigraph/avatar",
+        "@serigraph/badge",
+        "@serigraph/base",
+        "@serigraph/card",
+        "@serigraph/chart",
+        "@serigraph/table"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/dashboard-01-charts.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/dashboard-01-charts.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/dashboard-01-lists.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/dashboard-01-lists.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/dashboard-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/dashboard-01.tsx"
         }
       ]
     },
@@ -681,6 +803,29 @@
           "path": "src/serigraph/ui/empty.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/empty.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-01",
+      "type": "registry:block",
+      "title": "Empty 01",
+      "description": "Empty states: a first run, a search with no results and nothing booked, each the doorway folly, one line and one action.",
+      "dependencies": [
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/empty",
+        "@serigraph/input-group",
+        "@serigraph/lettering"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/empty-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/empty-01.tsx"
         }
       ]
     },
@@ -795,6 +940,30 @@
           "path": "src/serigraph/extras/folly.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/extras/folly.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-01",
+      "type": "registry:block",
+      "title": "Hero 01",
+      "description": "Hero: a lettered name over a city the visitor can reroll, one sentence, two actions and the install command.",
+      "dependencies": [
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/code-block",
+        "@serigraph/follies",
+        "@serigraph/folly",
+        "@serigraph/lettering"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/hero-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/hero-01.tsx"
         }
       ]
     },
@@ -1008,6 +1177,23 @@
       ]
     },
     {
+      "name": "medallion",
+      "type": "registry:component",
+      "title": "Medallion",
+      "description": "Medallion: sets a featured figure in a round frame: a picture or a seeded medallion drawing, shaded with fine stipple on its shadow side.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/folly"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/medallion.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/medallion.tsx"
+        }
+      ]
+    },
+    {
       "name": "menubar",
       "type": "registry:component",
       "title": "Menubar",
@@ -1122,6 +1308,22 @@
       ]
     },
     {
+      "name": "ordinal-date",
+      "type": "registry:component",
+      "title": "Ordinal Date",
+      "description": "Ordinal date: prints a date as the poster does, THURSDAY 5TH NOVEMBER in the extended capitals with the ordinal raised.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/ordinal-date.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/ordinal-date.tsx"
+        }
+      ]
+    },
+    {
       "name": "pagination",
       "type": "registry:component",
       "title": "Pagination",
@@ -1157,6 +1359,72 @@
           "path": "src/serigraph/ui/popover.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "poster-card",
+      "type": "registry:component",
+      "title": "Poster Card",
+      "description": "Poster card: features one event under an arch window with a folly in it, the title lettered below; use it sparingly.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/folly",
+        "@serigraph/lettering"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/poster-card.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/poster-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-01",
+      "type": "registry:block",
+      "title": "Pricing 01",
+      "description": "Pricing: three memberships on planes of their own colour, a monthly or yearly price in mono, what each includes ticked, and questions in an accordion.",
+      "dependencies": [
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/accordion",
+        "@serigraph/badge",
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/card",
+        "@serigraph/folly",
+        "@serigraph/lettering",
+        "@serigraph/toggle-group"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/pricing-01-plan.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/pricing-01-plan.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/pricing-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/pricing-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "programme-list",
+      "type": "registry:component",
+      "title": "Programme List",
+      "description": "Programme list: lists what is on, like the bill on a poster: the date with its raised ordinal, the title in the caps or lettered, and the facts between middle dots.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/lettering"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/programme-list.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/programme-list.tsx"
         }
       ]
     },
@@ -1302,6 +1570,45 @@
       ]
     },
     {
+      "name": "settings-01",
+      "type": "registry:block",
+      "title": "Settings 01",
+      "description": "Settings: a narrow settings column: profile, preferences, appearance, emails as switches, and closing the account behind an alert dialog.",
+      "registryDependencies": [
+        "@serigraph/alert-dialog",
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/field",
+        "@serigraph/input",
+        "@serigraph/lettering",
+        "@serigraph/select",
+        "@serigraph/switch",
+        "@serigraph/toggle-group"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/settings-01-account.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/settings-01-account.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/settings-01-appearance.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/settings-01-appearance.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/settings-01-rows.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/settings-01-rows.tsx"
+        },
+        {
+          "path": "src/serigraph/blocks/settings-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/settings-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "sheet",
       "type": "registry:component",
       "title": "Sheet",
@@ -1367,6 +1674,32 @@
           "path": "src/serigraph/ui/sidebar.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sign-in-01",
+      "type": "registry:block",
+      "title": "Sign In 01",
+      "description": "Sign in: email and password on a plane with errors under their fields, keep me signed in, and a link by email instead, beside an arched window.",
+      "dependencies": [
+        "lucide-react@^1.69.0"
+      ],
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/button",
+        "@serigraph/checkbox",
+        "@serigraph/field",
+        "@serigraph/folly",
+        "@serigraph/input",
+        "@serigraph/input-group",
+        "@serigraph/lettering"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/blocks/sign-in-01.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/blocks/sign-in-01.tsx"
         }
       ]
     },
@@ -1446,6 +1779,22 @@
       ]
     },
     {
+      "name": "stair-stepper",
+      "type": "registry:component",
+      "title": "Stair Stepper",
+      "description": "Stair stepper: shows where someone is in a few steps, drawn as a stair seen from the side: done steps louvered, the current step in the highlight.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/stair-stepper.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/stair-stepper.tsx"
+        }
+      ]
+    },
+    {
       "name": "switch",
       "type": "registry:component",
       "title": "Switch",
@@ -1513,6 +1862,22 @@
           "path": "src/serigraph/ui/textarea.tsx",
           "type": "registry:file",
           "target": "~/src/serigraph/ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ticket-stub",
+      "type": "registry:component",
+      "title": "Ticket Stub",
+      "description": "Ticket stub: shows a booked seat as a printed ticket: a plane in a tone with a stub behind a tear line, the number in mono and ADMIT ONE.",
+      "registryDependencies": [
+        "@serigraph/base"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/ticket-stub.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/ticket-stub.tsx"
         }
       ]
     },
@@ -1639,6 +2004,7 @@
         "@serigraph/accordion",
         "@serigraph/alert",
         "@serigraph/alert-dialog",
+        "@serigraph/arch-frame",
         "@serigraph/aspect-ratio",
         "@serigraph/attachment",
         "@serigraph/avatar",
@@ -1652,8 +2018,10 @@
         "@serigraph/carousel",
         "@serigraph/chart",
         "@serigraph/checkbox",
+        "@serigraph/cloud-band",
         "@serigraph/code-block",
         "@serigraph/collapsible",
+        "@serigraph/colourway-switcher",
         "@serigraph/combobox",
         "@serigraph/command",
         "@serigraph/context-menu",
@@ -1675,14 +2043,18 @@
         "@serigraph/lettering",
         "@serigraph/letters",
         "@serigraph/marker",
+        "@serigraph/medallion",
         "@serigraph/menubar",
         "@serigraph/message",
         "@serigraph/message-scroller",
         "@serigraph/motif",
         "@serigraph/native-select",
         "@serigraph/navigation-menu",
+        "@serigraph/ordinal-date",
         "@serigraph/pagination",
         "@serigraph/popover",
+        "@serigraph/poster-card",
+        "@serigraph/programme-list",
         "@serigraph/progress",
         "@serigraph/questionnaire",
         "@serigraph/radio-group",
@@ -1696,10 +2068,12 @@
         "@serigraph/slider",
         "@serigraph/sonner",
         "@serigraph/spinner",
+        "@serigraph/stair-stepper",
         "@serigraph/switch",
         "@serigraph/table",
         "@serigraph/tabs",
         "@serigraph/textarea",
+        "@serigraph/ticket-stub",
         "@serigraph/toggle",
         "@serigraph/toggle-group",
         "@serigraph/tooltip",

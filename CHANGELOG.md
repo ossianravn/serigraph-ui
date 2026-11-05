@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Phase 5: extras, blocks, the home page and the studio
+
+- Extras: ticket stub, programme list, poster card, ordinal date, stair stepper, cloud band, arch frame, medallion and the colourway switcher.
+- Blocks at `/docs/blocks`: hero, sign-in, dashboard, settings, pricing, article and empty states, each previewed at desktop and phone width.
+- A new home page; the foundations specimen moved to `/specimen`.
+- The colourway studio at `/studio`: presets, a spot per role, live contrast and a CSS export.
+- Quiet text is for disabled words only; everything people read keeps 4.5:1.
+- The registry has 88 items.
+
 ### Phase 4: the rest of parity
 
 - 44 more parts on Base UI with shadcn's names and slots, each with a docs page: drawer, sheet, sidebar, scroll area, resizable, aspect ratio, typography, direction, empty, item, accordion, collapsible, breadcrumb, pagination, menubar, navigation menu, context menu, hover card, command, input group, button group, input OTP, combobox, calendar and date picker, carousel, table, chart, sonner, and the conversation set (attachment, bubble, marker, message, message scroller, questionnaire, trace, code block).

@@ -1,5 +1,6 @@
 import { folly } from "@/serigraph/follies"
 import { Booking } from "./booking"
+import { Extras } from "./extras"
 import { Parity } from "./parity"
 import { Folly } from "@/serigraph/extras/folly"
 import { Lettering } from "@/serigraph/extras/lettering"
@@ -73,6 +74,7 @@ export function App() {
       </Card>
       <Booking />
       <Parity />
+      <Extras />
       <Tabs defaultValue="tonight" className="max-w-[34rem]">
         <TabsList>
           <TabsTrigger value="tonight">Tonight</TabsTrigger>

@@ -58,6 +58,11 @@ const items = [
   "sidebar",
   "sonner",
   "table",
+  "hero-01",
+  "sign-in-01",
+  "colourway-switcher",
+  "ordinal-date",
+  "ticket-stub",
 ]
 
 test(

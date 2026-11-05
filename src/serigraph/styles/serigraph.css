@@ -2,6 +2,8 @@
    the grain and the surfaces. */
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./letters.generated.css";
+@import "./lettering.css";
 @import "./tokens.css";
 @import "./colourways.css";
 @import "./textures.generated.css";
@@ -18,6 +20,7 @@
   --font-read: var(--face-read);
   --font-sans: var(--face-sans);
   --font-mono: var(--face-mono);
+  --font-display: var(--face-display);
 
   --text-small: var(--type-small);
   --text-body: var(--type-body);

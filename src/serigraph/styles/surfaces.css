@@ -113,15 +113,13 @@
   );
 }
 
-/* The extended capitals: labels, navigation, buttons, kickers and metadata. */
+/* The extended capitals, in Serigraph Sans: labels, navigation, buttons, kickers and metadata. */
 @utility caps {
-  font-family: var(--face-sans);
-  font-stretch: var(--sans-stretch);
-  font-weight: 600;
+  font-family: var(--face-caps);
+  font-weight: 700;
   font-size: var(--type-small);
   line-height: var(--lh-ui);
-  letter-spacing: var(--label-track);
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 /* A raised ordinal (15TH) and the round middle dot between details, as on the poster. */

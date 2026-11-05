@@ -129,6 +129,14 @@ Exit: the specimen renders from the kit in every colourway at 1440 and 390 px; e
 
 Exit: the fonts render the same in Chromium, Firefox and WebKit; Display reads as the triptych's title at 48–160 px; files under 60 KB each as WOFF2.
 
+- [x] The skeleton alphabet in the kit (`src/serigraph/letters/`): capitals, figures, punctuation, Æ Ø Œ Þ Ŋ and 112 accented capitals from 15 marks; parametric in the pen (half-width, extension), so one skeleton makes Display and Sans
+- [x] `tools/fonts` (`npm run build:fonts`): skeleton paths flattened and swept by a square pen with Clipper's offsetter (mitres to a limit of 2, square caps), cut by the box where diagonals run past it, fitted to cubic curves after dense resampling; class kerning in GPOS; deterministic bytes
+- [x] Serigraph Display (9 KB WOFF2) and Display Inline (3 KB), layered by the kit's `lettering` utility and `<Lettering>`: paper fill, an ink outline from a text stroke under the fill (thickening with size), the inline over it
+- [x] Serigraph Sans Regular and Bold (11 KB each): the same skeleton with a light pen, 18% wider; superior capitals behind `ordn`; the kit's `caps` labels now set in Sans Bold
+- [x] The letters page (`/letters`): every glyph, the faces at size, ordinals, the files
+- [ ] Serigraph Mono: lowercase, slotted zero, `ss01` stepped diagonals, the four ornaments in the PUA
+- [ ] Check in Firefox and WebKit
+
 ### Phase 2: Follies and the motifs
 
 The framework-free engine with labelled forks per part; templates (arcade, platform, stair, dome, column, flowers, sun, cloud banks); formats (poster, window, medallion, band, doorway); `<Folly>` and `folly()`; motifs as components (cloud bank, pinwheel, archway, louvers, sparkle, stipple). The Press: seed, template, colourway, reroll, copy, download SVG. First registry build and install test.

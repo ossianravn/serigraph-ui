@@ -1,4 +1,5 @@
 ---
+import { Lettering } from "@/serigraph/extras/lettering"
 // The voices and the Golden Ratio scale: every type step, the extended capitals, the reading measure, the mono and
 // the six spacing units.
 const steps = [
@@ -20,7 +21,7 @@ const units = [
 ---
 
 <section class="section" id="voices" aria-labelledby="h-voices">
-  <h2 class="section-title" id="h-voices">Voices</h2>
+  <Lettering as="h2" className="section-title" id="h-voices">Voices</Lettering>
   <div class="voices">
     <div class="plane voice-card" data-tone="plane-2">
       <p class="caps">Type scale <span class="sep">•</span> 16 × φ^(n/2)</p>
@@ -45,7 +46,7 @@ const units = [
 
     <div class="voice-stack">
       <div>
-        <p class="caps">Extended capitals <span class="sep">•</span> Archivo 125%</p>
+        <p class="caps">Extended capitals <span class="sep">•</span> Serigraph Sans</p>
         <p class="caps caps-sample">
           Afternoon <span class="sep">•</span> Terrace <span class="sep">•</span>
           Colour

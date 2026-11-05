@@ -1,0 +1,96 @@
+/* The letters page. */
+
+.letters-hero {
+  display: grid;
+  gap: var(--space-snug);
+  padding: var(--space-section) var(--gutter) 0;
+}
+.letters-title {
+  margin: 0;
+  font-size: clamp(4rem, 17vw, 13rem);
+}
+.letters-meta {
+  margin: 0;
+}
+
+.waterfall {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-line);
+  margin-bottom: var(--space-section);
+}
+.sample-160 {
+  font-size: clamp(4rem, 14vw, 10rem);
+}
+.sample-96 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+}
+.sample-48 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+
+.glyph-grid {
+  display: grid;
+  gap: var(--space-tight);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.display-grid {
+  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
+  font-size: 3rem;
+}
+.display-grid li,
+.sans-grid li {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: var(--line) solid var(--edge);
+  border-radius: var(--r-box);
+}
+.sans-grid {
+  grid-template-columns: repeat(auto-fill, minmax(3rem, 1fr));
+  font-family: var(--face-caps);
+  font-size: 1.5rem;
+  margin-top: var(--space-line);
+}
+
+.sans-samples {
+  display: grid;
+  gap: var(--space-snug);
+}
+.sans-line {
+  margin: 0;
+  font-family: var(--face-caps);
+  line-height: 1.2;
+}
+.sans-48 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+.sans-24 {
+  font-size: 1.5rem;
+}
+.bold {
+  font-weight: 700;
+}
+.ordinal {
+  font-variant-numeric: ordinal;
+}
+
+.files {
+  display: grid;
+  gap: var(--space-tight);
+  max-width: 34rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-snug);
+  padding: var(--space-tight) var(--space-snug);
+}
+.file-row .caps {
+  margin-right: auto;
+}

@@ -66,33 +66,17 @@
 }
 .section-title {
   margin: 0 0 var(--space-snug);
-  font-size: var(--type-h1);
-  line-height: var(--lh-h1);
-  font-stretch: 125%;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: var(--type-title);
 }
 .section-lede {
   margin: 0 0 var(--space-line);
   max-width: var(--measure);
 }
 
-/* Interim display face until Serigraph Display exists (Phase 1): Archivo at its widest and heaviest, paper letters
-   with an ink outline, as on the poster. */
-.display-stand-in {
+/* The home page's title: Serigraph Display across the canvas. */
+.hero-title {
   margin: 0;
-  font-family: var(--face-sans);
-  font-size: var(--type-display);
-  line-height: var(--lh-display);
-  font-stretch: 125%;
-  font-weight: 850;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--paper);
-  -webkit-text-stroke: calc(var(--line) * 2) var(--ink);
-  paint-order: stroke fill;
-  overflow-wrap: anywhere;
+  font-size: clamp(2.25rem, 14.5vw, 12rem);
 }
 
 /* The appearance panel: a narrow column. */

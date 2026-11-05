@@ -1,8 +1,8 @@
 ---
 // The foundations specimen: Serigraph's materials on one print. The colourways, the surfaces and marks, and the
-// voices with their Golden Ratio scale, all from the kit. Display lettering, Follies and the parts follow in later
-// phases; the static prototype the style was agreed on stays in specimen/.
+// voices with their Golden Ratio scale, all from the kit. Follies and the parts follow in later phases; the static prototype the style was agreed on stays in specimen/.
 import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
 import { AppearancePanel } from "@/site/appearance-panel"
 import Colourways from "@/site/specimen/colourways.astro"
 import Surfaces from "@/site/specimen/surfaces.astro"
@@ -15,7 +15,9 @@ import "@/site/specimen/specimen.css"
   description="A shadcn/ui kit in the style of a late-1970s silkscreen gig poster drawn with a technical pen: the specimen of its colourways, surfaces and voices."
 >
   <div class="hero">
-    <h1 class="display-stand-in">Serigraph</h1>
+    <Lettering as="h1" className="hero-title">
+      Serigraph
+    </Lettering>
     <p class="hero-meta caps">
       <span>
         Colourways <span class="sep">•</span> Surfaces{" "}

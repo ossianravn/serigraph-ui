@@ -29,6 +29,10 @@
   --face-read: "Archivo Variable", "Archivo", system-ui, sans-serif;
   --face-sans: "Archivo Variable", "Archivo", system-ui, sans-serif;
   --face-mono: "Martian Mono Variable", "Martian Mono", ui-monospace, monospace;
+  /* Our own letters (tools/fonts): Display, set in paper with an ink outline and its Inline over it. */
+  --face-display: "Serigraph Display", var(--face-sans);
+  --face-display-inline: "Serigraph Display Inline";
+  --face-caps: "Serigraph Sans", var(--face-sans);
   --sans-stretch: 125%;
 
   /* Type scale: 16 × phi^(n/2). */

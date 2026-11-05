@@ -1,0 +1,33 @@
+/* Display lettering: Serigraph Display in paper with an ink outline, and Serigraph Display Inline over it in ink, as
+   on the poster's title. The outline is a text stroke painted under the fill, so half of it shows: outside each
+   letter and inside its counters. It thickens a little with size (1.1% of the em) and never thins below the line. */
+@utility lettering {
+  position: relative;
+  display: inline-block;
+  font-family: var(--face-display);
+  font-weight: 400;
+  font-stretch: normal;
+  letter-spacing: 0;
+  line-height: var(--lh-display);
+  color: var(--paper);
+  -webkit-text-stroke: calc(2 * max(var(--line), 0.011em)) var(--ink);
+  paint-order: stroke fill;
+}
+
+/* The inline: the same text in the Inline face, laid exactly over the letters. */
+@utility lettering-inline {
+  position: absolute;
+  inset: 0;
+  font-family: var(--face-display-inline);
+  color: var(--ink);
+  -webkit-text-stroke: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Solid display lettering in one colour, for small sizes or a stamp. */
+@utility lettering-solid {
+  font-family: var(--face-display);
+  font-weight: 400;
+  line-height: var(--lh-display);
+}

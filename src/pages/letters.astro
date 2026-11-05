@@ -1,0 +1,103 @@
+---
+// The letters: Serigraph Display with its inline, and Serigraph Sans in Regular and Bold. Every glyph, the faces at
+// the sizes they are made for, the ordinals, and the font files to download.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import { CHARACTERS } from "@/serigraph/letters/alphabet"
+import "@/site/letters.css"
+
+const glyphs = CHARACTERS.filter((c) => c !== " ")
+const files = [
+  ["Serigraph Display", "serigraph-display"],
+  ["Serigraph Display Inline", "serigraph-display-inline"],
+  ["Serigraph Sans Regular", "serigraph-sans"],
+  ["Serigraph Sans Bold", "serigraph-sans-bold"],
+]
+---
+
+<Base
+  title="Letters"
+  description="Serigraph's own fonts: Serigraph Display, wide and round with an inline, and Serigraph Sans, extended capitals. Every glyph, and the files."
+>
+  <div class="letters-hero">
+    <Lettering as="h1" className="letters-title">
+      Letters
+    </Lettering>
+    <p class="caps letters-meta">
+      Serigraph Display <span class="sep">•</span> Serigraph Sans{" "}
+      <span class="sep">•</span> MIT
+    </p>
+  </div>
+
+  <section class="section" aria-labelledby="h-display">
+    <Lettering as="h2" className="section-title" id="h-display">
+      Display
+    </Lettering>
+    <p class="section-lede">
+      Wide, round, flat capitals from a heavy square pen, set in paper with an
+      ink outline and a thin inline inside each left stem. From 32 px up.
+    </p>
+    <div class="waterfall">
+      <Lettering className="sample-160">Terrace</Lettering>
+      <Lettering className="sample-96">Meridian 1975</Lettering>
+      <Lettering className="sample-48">Starlight · the dome</Lettering>
+      <Lettering className="sample-48">Ærøskøbing Łódź Ölüdeniz</Lettering>
+    </div>
+    <ul
+      class="glyph-grid display-grid"
+      aria-label="Every glyph in Serigraph Display"
+    >
+      {glyphs.map((c) => (
+        <li>
+          <Lettering>{c}</Lettering>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="h-sans">
+    <Lettering as="h2" className="section-title" id="h-sans">
+      Sans
+    </Lettering>
+    <p class="section-lede">
+      Extended capitals from a light square pen, for labels, navigation and
+      details, in Regular and Bold. Raised ordinals come with
+      <code>font-variant-numeric: ordinal</code>.
+    </p>
+    <div class="sans-samples">
+      <p class="sans-line sans-48">Afternoon · Terrace · Colour</p>
+      <p class="sans-line sans-48 bold">Thursday · November 6th</p>
+      <p class="sans-line sans-24 ordinal">
+        The 1st, 2nd, 3rd and 15th of November
+      </p>
+      <p class="caps">
+        Components <span class="sep">•</span> Colourways
+        <span class="sep">•</span> Letters
+      </p>
+    </div>
+    <ul class="glyph-grid sans-grid" aria-label="Every glyph in Serigraph Sans">
+      {glyphs.map((c) => (
+        <li>{c}</li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="h-files">
+    <Lettering as="h2" className="section-title" id="h-files">
+      Files
+    </Lettering>
+    <ul class="files">
+      {files.map(([name, file]) => (
+        <li class="plane file-row" data-tone="plane-2">
+          <span class="caps">{name}</span>
+          <a href={`/fonts/${file}.otf`} download>
+            OTF
+          </a>
+          <a href={`/fonts/${file}.woff2`} download>
+            WOFF2
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>

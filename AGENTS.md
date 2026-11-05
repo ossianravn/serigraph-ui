@@ -55,6 +55,7 @@ The bar: before showing or reporting a screen, ask whether Apple would ship it. 
 
 - Keep every hand-maintained code file at **300 physical lines or fewer**. Generated files, data and documents are excluded.
 - Keep shadcn's component names, props, variants and `data-slot` attributes.
+- In `.astro` files, compose parts that share a React context (Avatar and its fallback, a Dialog and its trigger) inside one React component: Astro renders each React component it places on its own, so a child placed there loses its parent's context.
 - The skeleton alphabet (`src/serigraph/letters/`) is framework-free data and geometry; the fonts are built from it, never edited as files.
 - The Follies engine (`src/serigraph/follies/`) is framework-free TypeScript: no React, no DOM, no `Math.random()` or `Date.now()`. Draw every random choice from `prng(seed)` or a labelled `stream`.
 - Tokens live in `src/serigraph/styles/`: `tokens.css` (paper, ink, spots, the line, type, space, motion), `colourways.css` (roles per colourway), `roles.css` (shadcn roles), `surfaces.css` (the surface and mark utilities). `textures.generated.css` is written by `npm run build:textures`; never edit it by hand.

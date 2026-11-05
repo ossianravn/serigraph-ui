@@ -68,7 +68,17 @@ With grain on, axe left `color-contrast` as "needs review" on 23,530 elements. W
 
 ## What was fixed
 
-Nothing yet: the review stopped before the first edit.
+Fixed on 2026-11-06, in the repair pass:
+
+- **Quiet words on fields.** `control-field` declares `--field-fill` and `--field-quiet` (ink 80% toward the fill, 4.8:1 or more on every field); field groups declare it from `--group-fill`. Placeholders, the select's and native select's unchosen value, input-group addons and text, the combobox chips' input and the calendar demo's empty date use it. `--ink-quiet` is left to disabled words.
+- **Command placeholder**: ink 82% toward its plane.
+- **Calendar outside days**: the surface's text 82% toward the surface, 4.5:1 or more.
+- **Focus ring from the surroundings.** Surfaces (`canvas`, `ground`, `plane`, `float-plane`) set `--ring` for their children, and `:focus-visible`, `focus-ring`, the field groups' rings, the code block's and questionnaire choice's rings use `--ring` before `--edge`. Parts that draw their own surface (tabs content, a checked choice, the segmented track, bubbles, attachments, a selected table row, the muted item, the code block) set `--ring: ink` for what is inside them. On Night's canvas the code block now takes a paper ring and its copy button an ink one.
+- **Menu items**: the highlighted pill takes the ink line.
+- **Meridian**: a completed booking or release moves focus to the "Your seats" heading (`finalFocus`); held seats are tickets with explicit Add a seat and Release buttons instead of a menu; the visitor avatar is hidden inside its named link.
+- **Avatar badge**: a labelled badge has `role="img"`.
+- **Sidebar**: `SidebarTrigger` reports `aria-expanded`; the demo's column is a navigation landmark named "Observatory".
+- **Studio**: the spots popover is named "<role> colour".
 
 ## Open fixes, with suggested owners
 

@@ -81,6 +81,9 @@
       --surface: var(--plane);
       --text: var(--ink);
       --edge: var(--ink);
+      & > * {
+        --ring: var(--ink);
+      }
       padding: var(--space-line);
       border: var(--line) solid var(--ink);
       border-radius: var(--r-plane);

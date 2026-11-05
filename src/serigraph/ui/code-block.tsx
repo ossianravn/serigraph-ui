@@ -15,7 +15,7 @@ import { Button } from "@/serigraph/ui/button"
 // what went wrong. Copy is a ghost pill whose icon becomes a tick. The focus ring goes round the plane.
 
 const FOCUS =
-  "has-[>[data-slot=code-block-content]:focus-visible]:outline-(length:--line) has-[>[data-slot=code-block-content]:focus-visible]:outline-offset-3 has-[>[data-slot=code-block-content]:focus-visible]:outline-(--edge,var(--ink))"
+  "has-[>[data-slot=code-block-content]:focus-visible]:outline-(length:--line) has-[>[data-slot=code-block-content]:focus-visible]:outline-offset-3 has-[>[data-slot=code-block-content]:focus-visible]:outline-(--ring,var(--edge,var(--ink))) *:[--ring:var(--ink)]"
 
 const codeBlockVariants = cva(
   `group/code-block relative flex w-full min-w-0 flex-col overflow-hidden rounded-box border-(length:--line) border-ink bg-(--code-fill) text-[0.875rem] text-ink data-[size=sm]:text-[0.8125rem] ${FOCUS}`,

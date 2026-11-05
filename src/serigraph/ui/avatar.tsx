@@ -87,6 +87,8 @@ function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="avatar-badge"
+      // A labelled badge ("On duty") is an image of a state; a bare span with a label is not announced.
+      role={props["aria-label"] ? "img" : undefined}
       className={cn(
         "absolute end-0 bottom-0 z-20 inline-flex items-center justify-center rounded-full border-(length:--line) border-ink bg-action text-ink select-none",
         "group-data-[size=sm]/avatar:size-2.5 group-data-[size=sm]/avatar:[&>svg]:hidden",

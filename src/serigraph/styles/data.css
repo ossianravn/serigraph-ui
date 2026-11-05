@@ -62,6 +62,9 @@
     --text: var(--ink);
     --text-quiet: var(--ink-quiet);
     --edge: var(--ink);
+    & > * {
+      --ring: var(--ink);
+    }
     background-color: var(--highlight);
     color: var(--ink);
   }

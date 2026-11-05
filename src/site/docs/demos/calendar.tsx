@@ -23,7 +23,7 @@ const CLOSED = [{ before: TODAY }, { dayOfWeek: [1] }]
 
 // The picker's trigger is a field: the surface's tint in the ink line, a calendar icon, the date in the reading face.
 const trigger =
-  "control-field inline-flex h-control cursor-pointer items-center gap-tight px-snug text-start whitespace-nowrap data-[empty=true]:text-ink-quiet [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:[stroke-width:calc(var(--line)*1.5)]"
+  "control-field inline-flex h-control cursor-pointer items-center gap-tight px-snug text-start whitespace-nowrap data-[empty=true]:text-(--field-quiet) [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:[stroke-width:calc(var(--line)*1.5)]"
 
 function NightPicker() {
   const [date, setDate] = useState<Date | undefined>(day(7))

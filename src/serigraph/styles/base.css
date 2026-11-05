@@ -54,9 +54,11 @@
     text-underline-offset: 0.22em;
   }
 
-  /* Focus: a second ring outside the first, with a gap of whatever lies beneath. */
+  /* Focus: a second ring outside the first, with a gap of whatever lies beneath. Its colour is the line of the surface
+     it is drawn on (--ring, which surfaces set for their children), not the control's own: a control that sets its
+     own edge to ink keeps a paper ring on Night's canvas. */
   :focus-visible {
-    outline: var(--line) solid var(--edge, var(--ink));
+    outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
     outline-offset: 3px;
   }
 

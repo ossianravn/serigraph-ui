@@ -27,6 +27,9 @@
       --text: var(--ink);
       --text-quiet: var(--ink-quiet);
       --edge: var(--ink);
+      & > * {
+        --ring: var(--ink);
+      }
       border-color: var(--ink);
       background-color: var(--highlight);
       color: var(--ink);
@@ -51,6 +54,9 @@
     --text: var(--ink);
     --text-quiet: var(--ink-quiet);
     --edge: var(--ink);
+    & > * {
+      --ring: var(--ink);
+    }
     --track-pad: 3px;
     --segment-inset: calc(var(--track-pad) + var(--line));
     gap: 2px;

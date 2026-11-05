@@ -50,7 +50,7 @@ const itemVariants = cva(
         outline:
           "border-(length:--line) border-[var(--edge,var(--ink))] [a]:hover:field-fill [a]:hover:border-ink [a]:hover:[--edge:var(--ink)] [a]:hover:[--text-quiet:var(--ink-quiet)] [a]:hover:[--text:var(--ink)]",
         muted:
-          "field-fill [--edge:var(--ink)] [--text-quiet:var(--ink-quiet)] [--text:var(--ink)]",
+          "field-fill [--edge:var(--ink)] [--text-quiet:var(--ink-quiet)] [--text:var(--ink)] *:[--ring:var(--ink)]",
       },
       size: {
         default: "gap-snug px-snug py-tight",

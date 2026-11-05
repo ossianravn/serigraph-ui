@@ -10,6 +10,9 @@
     --text: var(--ink);
     --text-quiet: var(--ink-quiet);
     --edge: var(--ink);
+    & > * {
+      --ring: var(--ink);
+    }
   }
   /* An outline bubble that is a button or a link takes a tint of the surface under the pointer. */
   @media (hover: hover) {
@@ -68,6 +71,9 @@
       --text: var(--ink);
       --text-quiet: var(--ink-quiet);
       --edge: var(--ink);
+      & * {
+        --ring: var(--ink);
+      }
     }
     /* A ticket that opens darkens a step under the pointer, and gives a little when pressed. */
     &:has(> [data-slot="attachment-trigger"]) {
@@ -120,6 +126,9 @@
     --text: var(--ink);
     --text-quiet: var(--ink-quiet);
     --edge: var(--ink);
+    & > * {
+      --ring: var(--ink);
+    }
     &[data-variant="destructive"] {
       --code-fill: color-mix(in oklab, var(--rose) 30%, var(--paper));
     }

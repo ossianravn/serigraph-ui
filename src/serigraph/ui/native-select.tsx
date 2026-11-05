@@ -23,7 +23,7 @@ function NativeSelect({
       <select
         data-slot="native-select"
         data-size={size}
-        className="control-field h-control w-full min-w-0 cursor-pointer appearance-none py-0 ps-snug pe-10 has-[option[value='']:checked]:text-ink-quiet data-[size=sm]:h-control-compact"
+        className="control-field h-control w-full min-w-0 cursor-pointer appearance-none py-0 ps-snug pe-10 has-[option[value='']:checked]:text-(--field-quiet) data-[size=sm]:h-control-compact"
         {...props}
       />
       <ChevronDownIcon

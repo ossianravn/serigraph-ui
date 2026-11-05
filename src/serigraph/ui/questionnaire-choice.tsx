@@ -27,7 +27,7 @@ function QuestionnaireChoice({
         "hover:not-data-disabled:not-data-checked:bg-[color-mix(in_oklab,var(--surface,var(--canvas))_70%,var(--paper))]",
         "data-checked:border-ink data-checked:bg-highlight data-checked:text-ink data-checked:[--surface:var(--highlight)] data-checked:[--text:var(--ink)] data-checked:[--edge:var(--ink)]",
         "data-invalid:outline-(length:--line) data-invalid:outline-offset-3 data-invalid:outline-rose",
-        "has-[>input:focus-visible]:outline-(length:--line) has-[>input:focus-visible]:outline-offset-3 has-[>input:focus-visible]:outline-(--edge,var(--ink)) data-invalid:has-[>input:focus-visible]:outline-[calc(var(--line)*2)] data-invalid:has-[>input:focus-visible]:outline-rose",
+        "has-[>input:focus-visible]:outline-(length:--line) has-[>input:focus-visible]:outline-offset-3 has-[>input:focus-visible]:outline-(--ring,var(--edge,var(--ink))) data-invalid:has-[>input:focus-visible]:outline-[calc(var(--line)*2)] data-invalid:has-[>input:focus-visible]:outline-rose",
         "data-disabled:cursor-not-allowed data-disabled:border-(--text-quiet,var(--ink-quiet)) data-disabled:text-(--text-quiet,var(--ink-quiet))",
         "forced-colors:data-checked:border-[calc(var(--line)*2)]",
         className,

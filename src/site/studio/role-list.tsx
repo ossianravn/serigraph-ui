@@ -65,7 +65,11 @@ function SpotPicker({
         <Spot pigment={value} />
         {title(value)}
       </PopoverTrigger>
-      <PopoverContent align="end" className="studio-spots">
+      <PopoverContent
+        align="end"
+        className="studio-spots"
+        aria-label={`${label} colour`}
+      >
         <div role="group" aria-label={`${label} colour`}>
           {choicesFor(role).map((pigment) => (
             <button

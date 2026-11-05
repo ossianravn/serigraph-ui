@@ -66,7 +66,7 @@ function ComboboxChipsInput({
     <ComboboxPrimitive.Input
       data-slot="combobox-chip-input"
       className={cn(
-        "h-6 min-w-16 flex-1 border-0 bg-transparent px-1 font-read text-[max(1rem,16px)] leading-ui text-ink outline-none placeholder:text-ink-quiet disabled:cursor-not-allowed disabled:text-ink-quiet",
+        "h-6 min-w-16 flex-1 border-0 bg-transparent px-1 font-read text-[max(1rem,16px)] leading-ui text-ink outline-none placeholder:text-(--field-quiet) disabled:cursor-not-allowed disabled:text-ink-quiet",
         className,
       )}
       {...props}

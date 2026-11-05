@@ -77,20 +77,24 @@
 /* A field: a pill tinted from the surface beneath, the ink line, 16px text so phones never zoom. Invalid adds a rose
    second ring, thicker while focused. */
 @utility control-field {
-  border: var(--line) solid var(--ink);
-  border-radius: 999px;
-  background-color: color-mix(
+  /* The field's tint, and its quiet words (placeholders, an unchosen select): ink 80% toward the tint, 4.8:1 or more
+     on every field. --ink-quiet is for disabled words only. */
+  --field-fill: color-mix(
     in oklab,
     var(--surface, var(--canvas)) 30%,
     var(--paper)
   );
+  --field-quiet: color-mix(in oklab, var(--ink) 80%, var(--field-fill));
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  background-color: var(--field-fill);
   background-image: none;
   color: var(--ink);
   font-family: var(--face-read);
   font-size: max(1rem, 16px);
   line-height: var(--lh-ui);
   &::placeholder {
-    color: var(--ink-quiet);
+    color: var(--field-quiet);
   }
   &:disabled,
   &[data-disabled] {
@@ -118,6 +122,9 @@
   --text: var(--ink);
   --text-quiet: var(--ink-quiet);
   --edge: var(--ink);
+  & > * {
+    --ring: var(--ink);
+  }
   border: var(--line) solid var(--ink);
   border-radius: var(--r-box);
   background-color: var(--plane);
@@ -193,9 +200,12 @@
   outline: none;
   user-select: none;
   /* cmdk marks the highlighted item data-selected="true", and every item data-disabled="true" or "false". */
+  /* The highlight pill takes the ink line, so the mark reaches 3:1 against any plane. */
   &:is([data-highlighted], [data-selected="true"]) {
     background-color: var(--highlight);
     color: var(--ink);
+    outline: var(--line) solid var(--ink);
+    outline-offset: calc(-1 * var(--line));
   }
   &[data-disabled]:not([data-disabled="false"]) {
     color: var(--text-quiet, var(--ink-quiet));

@@ -131,11 +131,11 @@
     background-size: var(--grain-size);
     cursor: pointer;
     &:has(:checked) {
-      outline: var(--line) solid var(--edge, var(--ink));
+      outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
       outline-offset: 3px;
     }
     &:has(:focus-visible) {
-      outline: var(--line) dashed var(--edge, var(--ink));
+      outline: var(--line) dashed var(--ring, var(--edge, var(--ink)));
       outline-offset: 3px;
     }
   }

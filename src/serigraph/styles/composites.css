@@ -17,6 +17,7 @@
       --surface: var(--group-fill);
       --text: var(--ink);
       --text-quiet: var(--ink-quiet);
+      --field-quiet: color-mix(in oklab, var(--ink) 80%, var(--group-fill));
       --edge: var(--ink);
     }
   }
@@ -32,7 +33,7 @@
       outline: none;
     }
     &:has([data-slot="input-group-control"]:focus-visible) {
-      outline: var(--line) solid var(--edge, var(--ink));
+      outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
       outline-offset: 3px;
     }
     &:has([data-slot="input-group-control"]:disabled) {
@@ -68,7 +69,7 @@
   /* Combobox chips: the same field states, keyed on the chips' own input. */
   [data-slot="combobox-chips"] {
     &:has(input:focus-visible) {
-      outline: var(--line) solid var(--edge, var(--ink));
+      outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
       outline-offset: 3px;
     }
     &:has(input:disabled) {
@@ -146,7 +147,7 @@
       outline: none;
     }
     &:has(> .control-field:focus-visible) {
-      outline: var(--line) solid var(--edge, var(--ink));
+      outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
       outline-offset: 3px;
     }
   }
@@ -156,7 +157,7 @@
      code has focus); disabled boxes take the quiet tint and line. */
   [data-slot="input-otp-slot"][data-active="true"] {
     z-index: 1;
-    outline: var(--line) solid var(--edge, var(--ink));
+    outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
     outline-offset: 2px;
   }
   [data-input-otp-container]:has(input[aria-invalid="true"])
@@ -181,9 +182,13 @@
 
   /* Calendar days: ghost pills with the day in the reading face and tabular figures. Today is ringed by a fine line
      just inside its cell; chosen days and a range's ends are highlight circles in the ink line; a range's middle days
-     sit on the band in ink; outside days are quiet; disabled days are struck through, untinted and unlined. */
+     sit on the band in ink; outside days are quieter, and still 4.5:1; disabled days are struck through, untinted and unlined. */
   [data-slot="calendar"] [data-outside] > button[data-day] {
-    --pill-text: var(--text-quiet, var(--ink-quiet));
+    --pill-text: color-mix(
+      in oklab,
+      var(--text, var(--ink)) 82%,
+      var(--surface, var(--canvas))
+    );
   }
   [data-slot="calendar"] button[data-day] {
     font-family: var(--face-read);

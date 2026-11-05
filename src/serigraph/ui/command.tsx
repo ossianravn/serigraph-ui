@@ -85,7 +85,7 @@ function CommandInput({
       <CommandPrimitive.Input
         data-slot="command-input"
         className={cn(
-          "h-full w-full min-w-0 flex-1 bg-transparent font-read text-[length:max(1rem,16px)] leading-ui text-(--text) outline-hidden placeholder:text-(--text-quiet) disabled:cursor-not-allowed disabled:text-(--text-quiet)",
+          "h-full w-full min-w-0 flex-1 bg-transparent font-read text-[length:max(1rem,16px)] leading-ui text-(--text) outline-hidden placeholder:text-[color-mix(in_oklab,var(--text)_82%,var(--surface))] disabled:cursor-not-allowed disabled:text-(--text-quiet)",
           className,
         )}
         {...props}

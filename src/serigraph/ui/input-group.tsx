@@ -30,7 +30,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text items-center justify-center gap-hair py-hair font-mono text-small leading-ui text-ink-quiet select-none group-has-[[data-slot=input-group-control]:disabled]/input-group:cursor-not-allowed [&>svg:not([class*='size-'])]:size-4",
+  "flex h-auto cursor-text items-center justify-center gap-hair py-hair font-mono text-small leading-ui text-(--field-quiet) select-none group-has-[[data-slot=input-group-control]:disabled]/input-group:cursor-not-allowed [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       align: {
@@ -113,7 +113,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       className={cn(
-        "flex items-center gap-hair font-mono text-small leading-ui text-ink-quiet [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-hair font-mono text-small leading-ui text-(--field-quiet) [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}

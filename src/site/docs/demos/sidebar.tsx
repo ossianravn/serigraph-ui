@@ -74,6 +74,8 @@ function Shell({
       collapsible={collapse}
       side={side}
       className="absolute h-full"
+      role="navigation"
+      aria-label="Observatory"
     >
       <SidebarHeader>
         <SidebarMenu>

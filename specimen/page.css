@@ -42,6 +42,9 @@ body {
   border-radius: var(--r-canvas);
   overflow: hidden;
 }
+:root[data-poster='off'] .frame {
+  border: 0;
+}
 
 .caps {
   font-family: var(--font-sans);

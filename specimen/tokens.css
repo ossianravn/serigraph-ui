@@ -33,6 +33,12 @@
   --line: 1px;
 }
 
+/* Poster off: no paper mat and no frame; the canvas runs to the edges of the window. */
+:root[data-poster='off'] {
+  --mat: 0px;
+  --r-canvas: 0px;
+}
+
 :root[data-read='instrument'] {
   --font-read: 'Instrument Sans', system-ui, sans-serif;
 }

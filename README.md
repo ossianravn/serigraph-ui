@@ -14,7 +14,7 @@ Serve the repository root and open the specimen:
 python -m http.server 4801 --bind 127.0.0.1
 ```
 
-Then open `http://127.0.0.1:4801/specimen/`. It shows the colourways, the lettering prototype, the motifs, a seeded folly and the interface sampler; the Appearance button switches colourway, line, fields, pressed state, dialog backdrop, reading face and grain.
+Then open `http://127.0.0.1:4801/specimen/`. It shows the colourways, the lettering prototype, the motifs, a seeded folly and the interface sampler; the Appearance button switches colourway, poster mode (the paper mat on or off), line, fields, pressed state, dialog backdrop, reading face and grain.
 
 ## Documents
 

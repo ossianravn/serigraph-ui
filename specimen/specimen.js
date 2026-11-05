@@ -9,6 +9,7 @@
   const COLOURWAYS = ['sky', 'pistachio', 'coral', 'marigold', 'night']
   const SETTINGS = [
     { key: 'colourway', label: 'Colourway', swatches: COLOURWAYS },
+    { key: 'poster', label: 'Poster mat', toggle: ['on', 'off'] },
     { key: 'line', label: 'Line', options: [['1', '1 px'], ['1.5', '1.5 px']] },
     { key: 'fields', label: 'Fields', options: [['tint', 'Tint'], ['paper', 'Paper']] },
     { key: 'pressed', label: 'Pressed', options: [['shade', 'Shade'], ['stipple', 'Stipple'], ['line', 'Line']] },

@@ -120,6 +120,8 @@ How the rules land on controls (see the specimen's Interface section):
 
 Calm controls, lively surfaces, as in Patina and Fineliner: what people operate is flat and quiet; the colour and the drawings carry the delight.
 
+**Poster mode** is an appearance setting. On (proposed default), the page is the triptych's print: the canvas in a rounded frame with a fine line, inside a paper mat (8–22 px, narrower on phones). Off, there is no mat and no frame: the canvas runs to the window's edges, for apps and full-bleed sites. Everything inside the canvas is the same in both.
+
 ## Voices
 
 | Voice   | Proposal                                                                            | Job                                                         |

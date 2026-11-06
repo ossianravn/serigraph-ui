@@ -1,6 +1,8 @@
 // The templates. Each draws a whole scene from a seed in its own viewBox; a page sizes the format with CSS and the
 // SVG is sliced to fill its box, anchored at the bottom, so nothing is measured.
 import { city } from "./city"
+import { procession, skyline } from "./compositions"
+import { observatoryScene, stageScene } from "./compositions-more"
 import { arcadeWall, band, doorway, medallion, windowScene } from "./formats"
 import { defs } from "./motifs"
 import { seedOf } from "./seed"
@@ -14,6 +16,10 @@ export const TEMPLATES = {
   band,
   arcade: arcadeWall,
   doorway,
+  procession,
+  skyline,
+  observatory: observatoryScene,
+  stage: stageScene,
 } as const
 export type Template = keyof typeof TEMPLATES
 
@@ -25,6 +31,10 @@ const PITCH: Record<Template, number> = {
   band: 3,
   arcade: 3,
   doorway: 2.6,
+  procession: 3,
+  skyline: 3,
+  observatory: 2.8,
+  stage: 2.8,
 }
 
 export const seedNumber = (seed: string | number) => seedOf(String(seed))

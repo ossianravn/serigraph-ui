@@ -16,14 +16,15 @@ export function Drawing({
   line,
   label,
   fills,
+  align,
   className,
   ...props
 }: DrawingProps) {
   const key = JSON.stringify(fills ?? {})
   const svg = useMemo(
-    () => drawing({ object, seed, line, label, fills }),
+    () => drawing({ object, seed, line, label, fills, align }),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- fills by value
-    [object, seed, line, label, key],
+    [object, seed, line, label, key, align],
   )
   return (
     <div

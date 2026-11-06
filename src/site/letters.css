@@ -5,6 +5,23 @@
   gap: var(--space-snug);
   padding: var(--space-section) var(--gutter) 0;
 }
+.letters-stage {
+  height: clamp(16rem, 34vw, 26rem);
+}
+/* From 64rem the stage stands beside the title, its clouds on the title's baseline. */
+@media (min-width: 64rem) {
+  .letters-hero {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: end;
+  }
+  .letters-meta {
+    grid-row: 2;
+  }
+  .letters-stage {
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
 .letters-title {
   margin: 0;
   font-size: clamp(4rem, 17vw, 13rem);

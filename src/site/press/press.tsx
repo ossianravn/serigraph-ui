@@ -13,6 +13,10 @@ const NAMES: Record<Template, string> = {
   band: "Band",
   arcade: "Arcade",
   doorway: "Doorway",
+  procession: "Procession",
+  skyline: "Skyline",
+  observatory: "Observatory",
+  stage: "Stage",
 }
 const title = (v: string) => v.charAt(0).toUpperCase() + v.slice(1)
 const word = () => Math.random().toString(36).slice(2, 8)

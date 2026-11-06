@@ -2,7 +2,15 @@
 // fills in the ink line, the side away from the light stippled, tops a step lighter toward paper. Boxes and arches are
 // in ../buildings.ts; these add the round forms.
 import { shade, tintOf } from "../buildings"
-import { circle, crescent, ellipse, line, shape, stipple, tint } from "../motifs"
+import {
+  circle,
+  crescent,
+  ellipse,
+  line,
+  shape,
+  stipple,
+  tint,
+} from "../motifs"
 import { n, type Pen } from "../svg"
 
 /** An upright cylinder standing on `base`: its body, the shaded right side, and a lighter elliptical top. */
@@ -50,7 +58,14 @@ export function cone(
     h,
     fill,
     ry = rx * 0.3,
-  }: { cx: number; base: number; rx: number; h: number; fill: string; ry?: number },
+  }: {
+    cx: number
+    base: number
+    rx: number
+    h: number
+    fill: string
+    ry?: number
+  },
 ) {
   const apex = `${n(cx)} ${n(base - h)}`
   const body = `M ${apex} L ${n(cx - rx)} ${n(base)} A ${n(rx)} ${n(ry)} 0 0 0 ${n(cx + rx)} ${n(base)} Z`
@@ -102,7 +117,14 @@ export function slab(
     thick,
     fill,
     ry = rx * 0.3,
-  }: { cx: number; y: number; rx: number; thick: number; fill: string; ry?: number },
+  }: {
+    cx: number
+    y: number
+    rx: number
+    thick: number
+    fill: string
+    ry?: number
+  },
 ) {
   const rim = `M ${n(cx - rx)} ${n(y)} V ${n(y + thick)} A ${n(rx)} ${n(ry)} 0 0 0 ${n(cx + rx)} ${n(y + thick)} V ${n(y)} Z`
   return (

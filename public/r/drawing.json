@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drawing",
+  "title": "Drawing",
+  "description": "Drawing: one object from the Follies library (a spiral stair, a telescope, a kite …) as inline SVG, standing on the foot of its box, reprinting in every colourway. The same seed draws the same SVG on the server and in the browser.",
+  "registryDependencies": [
+    "@serigraph/base",
+    "@serigraph/follies"
+  ],
+  "files": [
+    {
+      "path": "src/serigraph/extras/drawing.tsx",
+      "content": "import { useMemo, type ComponentPropsWithoutRef } from \"react\"\nimport { drawing, type DrawingOptions } from \"@/serigraph/follies\"\nimport { cn } from \"@/serigraph/lib/utils\"\n\ntype DrawingProps = DrawingOptions &\n  Omit<ComponentPropsWithoutRef<\"div\">, \"children\">\n\n/**\n * One object from the Follies library (a spiral stair, a telescope, a kite …), standing on the foot of its box and\n * keeping its proportions; size the box with CSS. It reprints in the colourway around it and renders without\n * hydrating: the same seed draws the same SVG on the server and in the browser.\n */\nexport function Drawing({\n  object,\n  seed,\n  line,\n  label,\n  fills,\n  align,\n  className,\n  ...props\n}: DrawingProps) {\n  const key = JSON.stringify(fills ?? {})\n  const svg = useMemo(\n    () => drawing({ object, seed, line, label, fills, align }),\n    // eslint-disable-next-line react-hooks/exhaustive-deps -- fills by value\n    [object, seed, line, label, key, align],\n  )\n  return (\n    <div\n      data-slot=\"drawing\"\n      data-object={object}\n      className={cn(\"folly\", className)}\n      dangerouslySetInnerHTML={{ __html: svg }}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:file",
+      "target": "~/src/serigraph/extras/drawing.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

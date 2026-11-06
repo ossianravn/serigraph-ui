@@ -74,26 +74,21 @@
   border-radius: 50%;
 }
 
-/* The desk: the roles' column and the preview. The preview stays in view while the roles are changed: pinned beside
-   them on wide screens (and scrolling inside itself if it is taller than the window), first on phones. */
+/* The desk: the roles' column and the preview, which stays in view while the roles are changed. */
 .studio-desk {
   display: grid;
   gap: var(--space-line);
   align-items: start;
 }
+/* The preview is pinned: a short window over the roles on phones, beside them (scrolling inside itself) from 64rem. */
 .studio-desk > .studio-preview {
   order: -1;
-}
-/* Phones: the preview is a short pinned window over the roles, so a change shows without scrolling back up. */
-@media (max-width: 63.99rem) {
-  .studio-desk > .studio-preview {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    max-height: 42dvh;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  max-height: 42dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 @media (min-width: 64rem) {
   .studio-desk {
@@ -101,11 +96,8 @@
   }
   .studio-desk > .studio-preview {
     order: 0;
-    position: sticky;
     top: var(--space-snug);
     max-height: calc(100dvh - 2 * var(--space-snug));
-    overflow-y: auto;
-    overscroll-behavior: contain;
   }
 }
 .studio-panel {

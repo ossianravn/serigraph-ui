@@ -69,23 +69,31 @@
   font-weight: 600;
 }
 
-/* The drawings in their formats. */
-.home-follies {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
+/* A spread: the words and what they point to on the left, a scene on the right that rises from the section's foot
+   and runs to the column's edge. On a phone the scene comes after the words. */
+.home-spread {
+  display: grid;
   gap: var(--space-section);
 }
-.home-window {
-  width: 12rem;
+@media (min-width: 64rem) {
+  .home-spread {
+    grid-template-columns: minmax(0, 34rem) minmax(0, 1fr);
+    align-items: end;
+  }
 }
-.home-medallion {
-  width: 9rem;
-  aspect-ratio: 1;
+.home-observatory {
+  height: clamp(22rem, 42vw, 40rem);
+  margin-bottom: calc(-1 * var(--space-page));
 }
-.home-doorway {
-  width: 11rem;
-  aspect-ratio: 160 / 150;
+
+.home-stage {
+  height: clamp(20rem, 36vw, 34rem);
+}
+
+/* The library's procession through the arcade, the full width of the window. */
+.home-procession {
+  height: clamp(16rem, 30vw, 28rem);
+  margin-bottom: var(--space-section);
 }
 
 /* The letters, large. */
@@ -117,6 +125,11 @@
   }
   & h3 {
     margin: 0 0 var(--space-hair);
+  }
+  & .home-emblem {
+    width: 5rem;
+    height: 4.5rem;
+    margin-bottom: var(--space-tight);
   }
   & ul {
     margin: 0;

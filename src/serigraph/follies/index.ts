@@ -80,17 +80,31 @@ export interface DrawingOptions extends Drawn {
   object: string
   /** Role overrides by the object's part names. */
   fills?: Fills
+  /** Where it stands across a box wider than it: at the start, the middle (the default) or the end. */
+  align?: "start" | "middle" | "end"
 }
 
 /** One object from the library as an SVG string, sized by its container; it keeps its proportions, standing on the
  * box's foot. */
-export function drawing({ object, fills = {}, ...options }: DrawingOptions) {
+export function drawing({
+  object,
+  fills = {},
+  align = "middle",
+  ...options
+}: DrawingOptions) {
   const t = thing(object)
+  const x = { start: "xMin", middle: "xMid", end: "xMax" }[align]
   const scene: Scene = {
     w: t.w,
     h: t.h,
-    fit: "xMidYMax meet",
+    fit: `${x}YMax meet`,
     body: (p, seed) => t.draw(p, streams(seed, `${t.name}:`), fills),
   }
-  return draw(scene, `object-${object}`, { "data-drawing": object }, 2.6, options)
+  return draw(
+    scene,
+    `object-${object}`,
+    { "data-drawing": object },
+    2.6,
+    options,
+  )
 }

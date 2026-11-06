@@ -1,6 +1,7 @@
 // The object library, by collection. A new object goes in its collection's file and its array; it then appears on
 // the library page, in <Drawing> and in scenes by name.
 import { ARCHITECTURE } from "./architecture"
+import { ARCHITECTURE_MORE } from "./architecture-more"
 import { GARDEN } from "./garden"
 import { GARDEN_MORE } from "./garden-more"
 import { INSTRUMENTS } from "./instruments"
@@ -13,10 +14,17 @@ import { TRAVEL } from "./travel"
 import { TRAVEL_MORE } from "./travel-more"
 import type { Collection, Thing } from "./library"
 
-export { put, type Collection, type Fills, type Placement, type Thing } from "./library"
+export {
+  put,
+  type Collection,
+  type Fills,
+  type Placement,
+  type Thing,
+} from "./library"
 
 const ALL: Thing[] = [
   ...ARCHITECTURE,
+  ...ARCHITECTURE_MORE,
   ...SKY,
   ...SKY_MORE,
   ...INSTRUMENTS,
@@ -35,7 +43,11 @@ export const OBJECTS: Readonly<Record<string, Thing>> = Object.fromEntries(
 export type ObjectName = string
 
 /** The collections in the library's order, each with its objects. */
-export const COLLECTIONS: { name: Collection; title: string; things: Thing[] }[] = (
+export const COLLECTIONS: {
+  name: Collection
+  title: string
+  things: Thing[]
+}[] = (
   [
     ["architecture", "Architecture"],
     ["sky", "The sky"],
@@ -52,6 +64,15 @@ export const COLLECTIONS: { name: Collection; title: string; things: Thing[] }[]
     things: ALL.filter((t) => t.collection === name),
   }))
   .filter((c) => c.things.length > 0)
+
+/** One object from `pool` that the library has, chosen by `r`; undefined if it has none of them. */
+export function oneOf(
+  r: { pick: <T>(items: readonly T[]) => T },
+  pool: readonly string[],
+) {
+  const have = pool.filter((name) => OBJECTS[name])
+  return have.length ? OBJECTS[r.pick(have)] : undefined
+}
 
 /** An object by name; throws on a name the library does not have, so a typo fails the build. */
 export function thing(name: string): Thing {

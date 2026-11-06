@@ -1,30 +1,22 @@
 ---
-// The drawings: Follies in their formats, each from a seed, and the Press where any of them can be rerolled.
+// The drawings: the object library as a procession through an arcade's niches, full width, and the ways into the
+// library and the Press.
 import { Folly } from "@/serigraph/extras/folly"
+import { OBJECTS } from "@/serigraph/follies"
 import SectionHead from "./section-head.astro"
+
+const count = Object.keys(OBJECTS).length
 ---
 
 <section class="section home-section" aria-labelledby="h-drawings">
   <SectionHead
     id="h-drawings"
     title="Follies"
-    href="/press"
-    link="Open the Press"
+    href="/drawings"
+    link="Every drawing"
   >
-    Seeded surreal architecture in the clouds. The same seed draws the same
-    folly everywhere, and every drawing reprints in each colourway.
+    {count} seeded objects of architecture, sky, instruments and gardens, and
+    the scenes composed from them. Every drawing reprints in each colourway.
   </SectionHead>
-  <div class="home-follies">
-    <Folly
-      template="window"
-      seed="home window"
-      className="arch-frame home-window"
-    />
-    <Folly
-      template="medallion"
-      seed="home medallion"
-      className="home-medallion"
-    />
-    <Folly template="doorway" seed="home doorway" className="home-doorway" />
-  </div>
 </section>
+<Folly template="procession" seed="home" className="home-procession" />

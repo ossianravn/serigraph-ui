@@ -32,6 +32,7 @@
     "@serigraph/dialog",
     "@serigraph/direction",
     "@serigraph/drawer",
+    "@serigraph/drawing",
     "@serigraph/dropdown-menu",
     "@serigraph/empty",
     "@serigraph/field",

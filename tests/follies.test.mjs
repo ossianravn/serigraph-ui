@@ -7,7 +7,7 @@ import { test } from "node:test"
 import { createJiti } from "jiti"
 
 const jiti = createJiti(import.meta.url)
-const { folly, motif, MOTIFS, TEMPLATES } = await jiti.import(
+const { drawing, folly, motif, MOTIFS, OBJECTS, TEMPLATES } = await jiti.import(
   "../src/serigraph/follies/index.ts",
 )
 const SEEDS = ["serigraph", "meridian", "terrace", "1975", "ada"]
@@ -24,6 +24,13 @@ const now = Object.fromEntries([
   ...Object.keys(MOTIFS).flatMap((kind) =>
     SEEDS.map((seed) => [`motif-${kind}:${seed}`, hash(motif({ kind, seed }))]),
   ),
+  // Every object in the library, from two seeds.
+  ...Object.keys(OBJECTS).flatMap((object) =>
+    SEEDS.slice(0, 2).map((seed) => [
+      `object-${object}:${seed}`,
+      hash(drawing({ object, seed })),
+    ]),
+  ),
 ])
 
 if (process.env.UPDATE || !fs.existsSync(file))
@@ -38,6 +45,12 @@ test("the same seed draws the same folly twice", () => {
     )
   for (const kind of Object.keys(MOTIFS))
     assert.equal(motif({ kind, seed: "twice" }), motif({ kind, seed: "twice" }))
+  for (const object of Object.keys(OBJECTS))
+    assert.equal(
+      drawing({ object, seed: "twice" }),
+      drawing({ object, seed: "twice" }),
+      object,
+    )
 })
 
 test("every folly matches its snapshot", () => {

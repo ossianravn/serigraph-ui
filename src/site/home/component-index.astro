@@ -1,6 +1,9 @@
 ---
-// Every part with a docs page, by group, as an index of plain links: what the kit holds at a glance.
+// Every part with a docs page, by group, as an index of plain links under each group's emblem: what the kit holds at a
+// glance.
+import { Drawing } from "@/serigraph/extras/drawing"
 import { GROUPS } from "@/site/docs/catalogue"
+import { emblemOf } from "@/site/docs/emblems"
 import SectionHead from "./section-head.astro"
 
 const count = GROUPS.reduce((n, g) => n + g.items.length, 0)
@@ -19,6 +22,14 @@ const count = GROUPS.reduce((n, g) => n + g.items.length, 0)
   <div class="home-index">
     {GROUPS.map(({ group, items }) => (
       <section aria-label={group}>
+        {emblemOf(group) && (
+          <Drawing
+            object={emblemOf(group) as string}
+            seed={group}
+            align="start"
+            className="home-emblem"
+          />
+        )}
         <h3 class="caps">{group}</h3>
         <ul>
           {items.map(({ name, title }) => (

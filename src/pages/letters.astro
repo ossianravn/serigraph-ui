@@ -2,6 +2,7 @@
 // The letters: Serigraph Display with its inline, and Serigraph Sans in Regular and Bold. Every glyph, the faces at
 // the sizes they are made for, the ordinals, and the font files to download.
 import Base from "@/site/layouts/base.astro"
+import { Folly } from "@/serigraph/extras/folly"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { CHARACTERS } from "@/serigraph/letters/alphabet"
 import "@/site/letters.css"
@@ -34,6 +35,8 @@ const monoRows = [
       Serigraph Display <span class="sep">•</span> Serigraph Sans{" "}
       <span class="sep">•</span> MIT
     </p>
+    <!-- Where letters live: a poster column on a stage in the clouds, beside the title. -->
+    <Folly template="stage" seed="letters page" className="letters-stage" />
   </div>
 
   <section class="section" aria-labelledby="h-display">

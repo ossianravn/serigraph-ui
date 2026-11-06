@@ -772,6 +772,23 @@
       ]
     },
     {
+      "name": "drawing",
+      "type": "registry:component",
+      "title": "Drawing",
+      "description": "Drawing: one object from the Follies library (a spiral stair, a telescope, a kite …) as inline SVG, standing on the foot of its box, reprinting in every colourway. The same seed draws the same SVG on the server and in the browser.",
+      "registryDependencies": [
+        "@serigraph/base",
+        "@serigraph/follies"
+      ],
+      "files": [
+        {
+          "path": "src/serigraph/extras/drawing.tsx",
+          "type": "registry:file",
+          "target": "~/src/serigraph/extras/drawing.tsx"
+        }
+      ]
+    },
+    {
       "name": "dropdown-menu",
       "type": "registry:component",
       "title": "Dropdown Menu",
@@ -859,7 +876,7 @@
       "name": "follies",
       "type": "registry:component",
       "title": "Follies",
-      "description": "The Follies engine, framework-free: seeded surreal architecture in cloud banks, drawn as SVG strings on a server, at build time or in the browser. folly({ template, seed }) draws the city, a window, a medallion, a band, the arcade wall or a doorway, filled from the colourway's roles.",
+      "description": "The Follies engine, framework-free: seeded surreal architecture in cloud banks, drawn as SVG strings on a server, at build time or in the browser. folly({ template, seed }) draws a scene (the city, a window, a medallion, a band, the arcade wall, a doorway, a procession, a skyline, an observatory, a stage); drawing({ object, seed }) draws one object from a library of architecture, sky, instruments, gardens, travel, the stage and everyday moments; every fill is a colourway role.",
       "registryDependencies": [
         "@serigraph/base"
       ],
@@ -880,6 +897,16 @@
           "target": "~/src/serigraph/follies/clouds.ts"
         },
         {
+          "path": "src/serigraph/follies/compositions-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/compositions-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/compositions.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/compositions.ts"
+        },
+        {
           "path": "src/serigraph/follies/formats.ts",
           "type": "registry:file",
           "target": "~/src/serigraph/follies/formats.ts"
@@ -898,6 +925,81 @@
           "path": "src/serigraph/follies/motifs.ts",
           "type": "registry:file",
           "target": "~/src/serigraph/follies/motifs.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/architecture-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/architecture-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/architecture.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/architecture.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/forms.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/forms.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/garden-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/garden-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/garden.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/garden.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/index.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/index.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/instruments-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/instruments-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/instruments.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/instruments.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/library.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/library.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/sky-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/sky-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/sky.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/sky.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/stage-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/stage-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/stage.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/stage.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/travel-more.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/travel-more.ts"
+        },
+        {
+          "path": "src/serigraph/follies/objects/travel.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/travel.ts"
         },
         {
           "path": "src/serigraph/follies/parts.ts",
@@ -960,6 +1062,7 @@
         "@serigraph/base",
         "@serigraph/button",
         "@serigraph/code-block",
+        "@serigraph/drawing",
         "@serigraph/follies",
         "@serigraph/folly",
         "@serigraph/lettering"
@@ -2033,6 +2136,7 @@
         "@serigraph/dialog",
         "@serigraph/direction",
         "@serigraph/drawer",
+        "@serigraph/drawing",
         "@serigraph/dropdown-menu",
         "@serigraph/empty",
         "@serigraph/field",

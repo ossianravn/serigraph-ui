@@ -3,6 +3,7 @@
 import { box, DEPTH, observatory } from "./buildings"
 import { pinwheelArch, plant } from "./plants"
 import { arcadeBand, cloudBank } from "./clouds"
+import { oneOf, put } from "./objects"
 import { circle, pinwheel, scatter, shape } from "./motifs"
 import { platform } from "./parts"
 import { el, rs } from "./svg"
@@ -106,6 +107,30 @@ export const medallion: Scene = {
 }
 
 /** The band between sections: a cloud bank with a building rising behind it and a plant in front. */
+const BAND_STANDING = [
+  "lighthouse",
+  "obelisk",
+  "cypress",
+  "palm",
+  "fountain",
+  "urn",
+  "spiral-stair",
+  "topiary",
+  "column",
+  "advertising-column",
+  "orange-tree",
+  "gate",
+]
+const BAND_FLYING = [
+  "hot-air-balloon",
+  "kite",
+  "zeppelin",
+  "ringed-planet",
+  "comet",
+  "paper-plane",
+  "crescent-moon",
+]
+
 export const band: Scene = {
   w: 3200,
   h: 210,
@@ -191,6 +216,23 @@ export const band: Scene = {
       height: h * 0.95,
       blooms: 2,
     })
+    // Two things from the library, so every page's band has its own: one standing in the clouds, one in the sky.
+    const stand = oneOf(r("stand"), BAND_STANDING)
+    const fly = oneOf(r("fly"), BAND_FLYING)
+    if (stand)
+      art += put(p, seed, stand, {
+        x: ax - r("stand-x").between(260, 420),
+        y: h - 14,
+        h: Math.min(h * 0.9, (150 * stand.h) / stand.w),
+        key: "band",
+      })
+    if (fly)
+      art += put(p, seed, fly, {
+        x: w / 2 - r("fly-x").between(560, 760),
+        y: h * 0.62,
+        h: Math.min(h * 0.55, (170 * fly.h) / fly.w),
+        key: "band-sky",
+      })
     return (
       art +
       scatter(p, r("sky"), {

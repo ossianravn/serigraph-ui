@@ -2,6 +2,7 @@
 
 import { Fragment, useState, useTransition, type ReactNode } from "react"
 import { DicesIcon } from "lucide-react"
+import { Drawing } from "@/serigraph/extras/drawing"
 import { Folly } from "@/serigraph/extras/folly"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { seedOf, stream } from "@/serigraph/follies"
@@ -21,7 +22,8 @@ import {
 // edges), the product's name lettered from edge to edge of the column, then one row that holds the sentence and the
 // actions on the left and the install command on the right, both on one baseline. Below, a city of follies runs the
 // full width, its clouds at the foot, to be continued by the section that follows in the cloud colour. Nothing that is
-// operated sits on the drawing. Reroll draws a new city from the next seed; the seeds walk a stream from the first, so
+// operated sits on the drawing; from 80rem a spiral tower rises out of the clouds through the gap in that row, its
+// landing behind the name. Reroll draws a new city from the next seed; the seeds walk a stream from the first, so
 // every visitor meets the same sequence. Every prop has a default (Serigraph's own landing).
 
 export const meta = {
@@ -88,7 +90,10 @@ export function Hero01({
       aria-labelledby="hero-title"
       className={cn("grid", className)}
     >
-      <div className="grid w-full gap-snug px-(--gutter,clamp(var(--space-snug),3vw,var(--space-section))) pt-line [container-type:inline-size]">
+      <div
+        className="grid w-full gap-snug px-(--gutter,clamp(var(--space-snug),3vw,var(--space-section))) pt-line [container-type:inline-size]"
+        style={{ ["--hero-title" as string]: fit }}
+      >
         <p className="m-0 flex flex-wrap justify-between gap-x-line gap-y-hair caps">
           {bill.map((fact, i) => (
             <Fragment key={i}>
@@ -107,12 +112,12 @@ export function Hero01({
         <Lettering
           as="h1"
           id="hero-title"
-          className="m-0 leading-none"
-          style={{ fontSize: fit }}
+          className="relative z-[2] m-0 leading-none"
+          style={{ fontSize: "var(--hero-title)" }}
         >
           {product}
         </Lettering>
-        <div className="mt-hair grid items-end gap-line md:grid-cols-[minmax(0,34rem)_minmax(0,1fr)]">
+        <div className="mt-hair grid items-end gap-line md:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] min-[80rem]:grid-cols-[minmax(0,34rem)_minmax(12rem,1fr)_minmax(0,26rem)]">
           <div className="grid gap-line">
             <p className="m-0 text-lead leading-lead text-pretty">{lede}</p>
             <div className="flex flex-wrap gap-tight">
@@ -126,6 +131,18 @@ export function Hero01({
                 {secondary.label}
               </a>
             </div>
+          </div>
+          {/* From 80rem a spiral tower climbs out of the city's clouds through the gap between the sentence and the
+              install command, its landing behind the name: the drawing runs through the poster's words. */}
+          <div
+            aria-hidden="true"
+            className="relative hidden self-stretch min-[80rem]:block"
+          >
+            <Drawing
+              object="spiral-tower"
+              seed={seed}
+              className="absolute inset-x-0 -top-[calc(var(--space-snug)+var(--space-hair)+0.4*var(--hero-title))] -bottom-[clamp(15rem,30vw,27rem)] z-0"
+            />
           </div>
           <div className="grid w-full max-w-[26rem] gap-tight md:justify-self-end">
             {install && (
@@ -158,7 +175,7 @@ export function Hero01({
         seed={seed}
         label={`A city of follies in the clouds, drawn from the seed ${seed}`}
         data-hero-city=""
-        className="-mt-line h-[clamp(20rem,44vw,40rem)]"
+        className="relative z-[1] -mt-line h-[clamp(20rem,44vw,40rem)]"
       />
     </section>
   )

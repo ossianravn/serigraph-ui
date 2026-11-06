@@ -109,8 +109,20 @@
 .docs-group {
   margin-top: var(--space-page);
 }
+/* A group's head: its emblem from the drawing library standing on the title's baseline, then the title. */
+.docs-group-head {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-snug);
+  margin-bottom: var(--space-line);
+}
+.docs-group-emblem {
+  flex: none;
+  width: 5rem;
+  height: 5rem;
+}
 .docs-group-title {
-  margin: 0 0 var(--space-line);
+  margin: 0;
   font-size: clamp(var(--type-h1), 4vw, var(--type-title));
 }
 .gallery {

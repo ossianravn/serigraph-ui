@@ -2,8 +2,10 @@
 // The Components index: every part with a docs page, by group, each a card with the part itself at rest, its title
 // and the sentence on what it is for. The previews render on the server; the page ships no script of its own.
 import Base from "@/site/layouts/base.astro"
+import { Drawing } from "@/serigraph/extras/drawing"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { GROUPS } from "@/site/docs/catalogue"
+import { emblemOf } from "@/site/docs/emblems"
 import { GalleryCard } from "@/site/docs/gallery/gallery-card"
 import "@/site/docs/docs.css"
 
@@ -25,9 +27,18 @@ const slug = (group: string) => `g-${group.toLowerCase().replace(/\s+/g, "-")}`
     </p>
     {GROUPS.map(({ group, items }) => (
       <section class="docs-group" aria-labelledby={slug(group)}>
-        <Lettering as="h2" id={slug(group)} className="docs-group-title">
-          {group}
-        </Lettering>
+        <div class="docs-group-head">
+          {emblemOf(group) && (
+            <Drawing
+              object={emblemOf(group) as string}
+              seed={group}
+              className="docs-group-emblem"
+            />
+          )}
+          <Lettering as="h2" id={slug(group)} className="docs-group-title">
+            {group}
+          </Lettering>
+        </div>
         <ul class="gallery">
           {items.map((item) => (
             <li>

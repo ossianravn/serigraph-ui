@@ -21,7 +21,8 @@
   },
   "descriptions": {
     "base": "Tokens, colourways, the paper grain, surfaces, Serigraph's own fonts (embedded in the stylesheet), the appearance runtime and cn. Every other item builds on it; make src/serigraph/styles/serigraph.css your Tailwind entry.",
-    "follies": "The Follies engine, framework-free: seeded surreal architecture in cloud banks, drawn as SVG strings on a server, at build time or in the browser. folly({ template, seed }) draws the city, a window, a medallion, a band, the arcade wall or a doorway, filled from the colourway's roles.",
+    "follies": "The Follies engine, framework-free: seeded surreal architecture in cloud banks, drawn as SVG strings on a server, at build time or in the browser. folly({ template, seed }) draws a scene (the city, a window, a medallion, a band, the arcade wall, a doorway, a procession, a skyline, an observatory, a stage); drawing({ object, seed }) draws one object from a library of architecture, sky, instruments, gardens, travel, the stage and everyday moments; every fill is a colourway role.",
+    "drawing": "Drawing: one object from the Follies library (a spiral stair, a telescope, a kite …) as inline SVG, standing on the foot of its box, reprinting in every colourway. The same seed draws the same SVG on the server and in the browser.",
     "folly": "Folly: a seeded drawing from the Follies engine as inline SVG that fills its box and reprints in every colourway. The same seed draws the same SVG on the server and in the browser.",
     "motif": "Motif: a pinwheel, a sparkle, a cloud or an archway from the Follies engine, an em tall beside text unless sized, in its colourway role or --motif.",
     "lettering": "Lettering: display words in Serigraph Display, paper with an ink outline and the inline line inside each stem.",

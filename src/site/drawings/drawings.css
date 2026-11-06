@@ -18,6 +18,10 @@
   font-size: var(--type-lead);
   line-height: var(--lh-lead);
 }
+.drawings-skyline {
+  height: clamp(16rem, 32vw, 30rem);
+  margin-inline: calc(-1 * var(--gutter));
+}
 .drawings-kicker {
   margin: 0 0 var(--space-line);
   padding-bottom: var(--space-tight);

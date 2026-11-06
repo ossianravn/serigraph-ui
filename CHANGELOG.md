@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### The drawing library
+
+- 69 seeded objects in seven collections (architecture, the sky, instruments, the garden, travel and post, the stage, everyday moments), drawn with `drawing()` or `<Drawing>`, all shown at `/drawings`.
+- Composed scenes: a procession through an arcade, a skyline, an observatory, a stage.
+- The home page as one poster: a spiral tower from the city to the name, scenes beside each section's words, the procession, emblems for the component groups.
+- Every page's band draws its own objects; Meridian opens on its observatory; a 404 page.
+
 ### Repair pass
 
 - Faster: the printed grain is bitmap tiles, the site's fonts and grain load as cached files, islands hydrate when the browser is idle, and the blocks page loads its previews one at a time and never while scrolling.

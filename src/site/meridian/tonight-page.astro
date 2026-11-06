@@ -4,12 +4,20 @@
 // page renders the real data; the dev-only data switch renders the worst case and the edges.
 import { Lettering } from "@/serigraph/extras/lettering"
 import { Folly } from "@/serigraph/extras/folly"
-import { Motif } from "@/serigraph/extras/motif"
+import { Drawing } from "@/serigraph/extras/drawing"
 import { Alert, AlertDescription, AlertTitle } from "@/serigraph/ui/alert"
 import { Tonight } from "./tonight"
 import type { Dataset } from "./worst-case"
 
 type Props = Dataset
+
+// Each kind of thing in the sky, drawn from the library beside its name.
+const SKY_DRAWING = {
+  planet: "ringed-planet",
+  moon: "crescent-moon",
+  galaxy: "star-cluster",
+  cluster: "star-cluster",
+} as const
 const { night, sky, sessions, visitor } = Astro.props
 ---
 
@@ -25,10 +33,10 @@ const { night, sky, sessions, visitor } = Astro.props
       </p>
     </div>
     <Folly
-      template="window"
+      template="observatory"
       seed={night.date}
-      label="An observatory dome on a cloud under a pinwheel sun"
-      className="arch-frame mer-window"
+      label="A telescope on a platform in the clouds under a ringed planet and the moon"
+      className="mer-window"
     />
   </header>
   <div class="mer-board">
@@ -62,9 +70,10 @@ const { night, sky, sessions, visitor } = Astro.props
         {sky.map((object) => (
           <li>
             <span>
-              <Motif
-                kind={object.kind === "planet" ? "pinwheel" : "sparkle"}
+              <Drawing
+                object={SKY_DRAWING[object.kind]}
                 seed={object.name}
+                className="mer-sky-icon"
               />{" "}
               {object.name}
               <span class="mer-sky-where">{object.where}</span>

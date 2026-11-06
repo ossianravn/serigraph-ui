@@ -230,3 +230,19 @@
 .panel-switch[aria-checked="true"] .panel-knob {
   transform: translateX(1.375rem) rotate(110deg);
 }
+
+/* A page title with a drawing standing on its baseline, as a poster sets an object beside its name. */
+.title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-tight) var(--space-line);
+  & > :is(h1, h2) {
+    margin: 0;
+  }
+}
+.title-drawing {
+  flex: none;
+  width: clamp(4.5rem, 10vw, 8rem);
+  height: clamp(5rem, 11vw, 9rem);
+}

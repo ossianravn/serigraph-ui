@@ -1,0 +1,90 @@
+---
+// Not found: a signpost on the clouds pointing three ways, a balloon drifting off, and the ways back.
+import Base from "@/site/layouts/base.astro"
+import { Drawing } from "@/serigraph/extras/drawing"
+import { Lettering } from "@/serigraph/extras/lettering"
+import { buttonVariants } from "@/serigraph/ui/button"
+---
+
+<Base
+  title="Not found"
+  description="This page has drifted off into the clouds."
+>
+  <div class="lost">
+    <div class="lost-words">
+      <p class="caps">
+        Error <span class="sep">•</span> 404
+      </p>
+      <Lettering as="h1" className="lost-title">
+        Drifted off
+      </Lettering>
+      <p class="lost-lede">
+        There is nothing at this address. It may have moved, or the link may
+        have a typo in it.
+      </p>
+      <div class="lost-actions">
+        <a class={buttonVariants()} href="/">
+          Back to the start
+        </a>
+        <a class={buttonVariants({ variant: "outline" })} href="/docs">
+          Browse components
+        </a>
+      </div>
+    </div>
+    <div class="lost-art" aria-hidden="true">
+      <Drawing object="hot-air-balloon" seed="lost" className="lost-balloon" />
+      <Drawing object="signpost" seed="lost" className="lost-signpost" />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .lost {
+    display: grid;
+    gap: var(--space-section);
+    align-items: end;
+    padding: var(--space-section) var(--gutter) 0;
+  }
+  @media (min-width: 56rem) {
+    .lost {
+      grid-template-columns: minmax(0, 34rem) minmax(0, 1fr);
+    }
+  }
+  .lost-words {
+    display: grid;
+    gap: var(--space-snug);
+    & p {
+      margin: 0;
+    }
+  }
+  .lost-title {
+    margin: 0;
+    font-size: clamp(3rem, 10vw, 7rem);
+  }
+  .lost-lede {
+    max-width: var(--measure);
+    font-size: var(--type-lead);
+    line-height: var(--lh-lead);
+  }
+  .lost-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-tight);
+  }
+  .lost-art {
+    position: relative;
+    height: clamp(18rem, 36vw, 28rem);
+  }
+  .lost-signpost {
+    position: absolute;
+    inset: auto 0 0 auto;
+    width: 60%;
+    height: 70%;
+  }
+  .lost-balloon {
+    position: absolute;
+    inset: 0 auto auto 8%;
+    width: 30%;
+    height: 55%;
+  }
+</style>

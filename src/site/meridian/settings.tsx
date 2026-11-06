@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Drawing } from "@/serigraph/extras/drawing"
 import { Lettering } from "@/serigraph/extras/lettering"
 import {
   AlertDialog,
@@ -76,9 +77,12 @@ export function Settings({
 
   return (
     <div className="mer-settings mer-narrow">
-      <Lettering as="h1" className="mer-title">
-        Settings
-      </Lettering>
+      <div className="title-row">
+        <Lettering as="h1" className="mer-title">
+          Settings
+        </Lettering>
+        <Drawing object="compass" seed="settings" className="title-drawing" />
+      </div>
       <FieldSet>
         <FieldLegend>Profile</FieldLegend>
         <form

@@ -91,8 +91,7 @@
 }
 .mer-window {
   display: none;
-  justify-self: center;
-  width: 11rem;
+  height: clamp(14rem, 22vw, 20rem);
 }
 @media (min-width: 48rem) {
   .mer-window {
@@ -236,6 +235,12 @@
     letter-spacing: -0.06em;
     white-space: nowrap;
   }
+}
+.mer-sky-icon {
+  display: inline-block;
+  width: 1.75rem;
+  height: 1.5rem;
+  vertical-align: -0.35rem;
 }
 .mer-sky-where {
   display: block;

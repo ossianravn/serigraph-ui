@@ -2,7 +2,9 @@
 // One component's docs page: its title lettered and one sentence, the component's states in one column of a fixed
 // width, then previous and next; from lg the nav of every component runs beside it.
 import Base from "@/site/layouts/base.astro"
+import { Drawing } from "@/serigraph/extras/drawing"
 import { Lettering } from "@/serigraph/extras/lettering"
+import { emblemOf } from "@/site/docs/emblems"
 import ComponentNav from "@/site/docs/component-nav.astro"
 import ComponentPager from "@/site/docs/component-pager.astro"
 import { DemoHost } from "@/site/docs/demo-host"
@@ -27,9 +29,18 @@ const { meta } = Astro.props
 <Base title={meta.title} description={meta.description}>
   <div class="docs">
     <div class="min-w-0">
-      <Lettering as="h1" className="docs-title">
-        {meta.title}
-      </Lettering>
+      <div class="title-row">
+        <Lettering as="h1" className="docs-title">
+          {meta.title}
+        </Lettering>
+        {emblemOf(meta.group ?? "") && (
+          <Drawing
+            object={emblemOf(meta.group ?? "") as string}
+            seed={name}
+            className="title-drawing"
+          />
+        )}
+      </div>
       <p class="docs-lead">{meta.description}</p>
       <div class="docs-demo">
         <DemoHost name={name} client:idle />

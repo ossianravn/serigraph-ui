@@ -94,14 +94,14 @@ export const stageScene: Scene = {
         dots: 6,
       }) +
       (column
-        ? put(p, seed, column, { x: 120, y: 540, h: 440, key: "column" })
+        ? put(p, seed, column, { x: 230, y: 540, h: 440, key: "column" })
         : "") +
       (speakers
-        ? put(p, seed, speakers, { x: 560, y: 548, h: 230, key: "speakers" })
+        ? put(p, seed, speakers, { x: 590, y: 548, h: 230, key: "speakers" })
         : "") +
-      (mic ? put(p, seed, mic, { x: 420, y: 552, h: 240, key: "mic" }) : "") +
+      (mic ? put(p, seed, mic, { x: 470, y: 552, h: 230, key: "mic" }) : "") +
       (light
-        ? put(p, seed, light, { x: 10, y: 560, h: 260, key: "light" })
+        ? put(p, seed, light, { x: 0, y: 556, h: 210, key: "light" })
         : "") +
       cloudBank(p, rs(seed, "stage-clouds"), {
         x0: 10,

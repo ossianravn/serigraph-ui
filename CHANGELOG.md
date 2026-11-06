@@ -10,6 +10,8 @@
 - Every page's band draws its own objects; Meridian opens on its observatory; a 404 page.
 - Redrawn: the cypress (a flame of foliage tongues), the topiary (one to three clipped balls in a planter with finials), the constellation (stars in spot colours in a dust of pinpoints), the padlock (a rounded body with a thin side), the kite's tail; the fountain's water stays water-coloured on Night.
 
+- The drawings page, home's later sections and every page's footer band are laid out and painted only when they near the window.
+
 ### Repair pass
 
 - Faster: the printed grain is bitmap tiles, the site's fonts and grain load as cached files, islands hydrate when the browser is idle, and the blocks page loads its previews one at a time and never while scrolling.

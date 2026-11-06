@@ -75,6 +75,9 @@
 .site-band {
   height: 210px;
   margin-top: var(--space-page);
+  /* Below every page's content: laid out and painted only when it nears the window. */
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 210px;
 }
 .site-footer {
   padding: var(--space-line) var(--gutter);

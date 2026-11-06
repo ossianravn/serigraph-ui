@@ -22,6 +22,11 @@
   height: clamp(16rem, 32vw, 30rem);
   margin-inline: calc(-1 * var(--gutter));
 }
+/* Seventy drawings: a collection is laid out and painted only when it nears the window. */
+.drawings-collection {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 1200px;
+}
 .drawings-kicker {
   margin: 0 0 var(--space-line);
   padding-bottom: var(--space-tight);

@@ -93,23 +93,48 @@ Production build, headless Chrome at 1440 × 1000, CPU throttled 4×, cache off.
 
 Scrolling top to bottom at 4× (dev server): `/`, `/letters`, `/specimen` and `/docs` hold a 17–18 ms p95 frame; `/docs/blocks` went from a 54 ms p95 and 39 frames over 20 ms to 27 ms and 20 (18 ms and 5 unthrottled). The chart docs page stays over budget: six interactive charts hydrate together.
 
+### After the drawing library (2026-11-06)
+
+The library put far more inline SVG on the pages: home's HTML grew from 167 KB to 425 KB (27 to 59 KB gzipped), and `/drawings` is 957 KB (121 KB gzipped), of which 934 KB is SVG, mostly path data (572 KB). Same lab as above, three runs each:
+
+| Page                      | FCP        | Blocking | Longest task | JS     |
+| ------------------------- | ---------- | -------- | ------------ | ------ |
+| `/`                       | 668–952 ms | 0 ms     | 59–423 ms    | 143 KB |
+| `/drawings`               | 496–536 ms | 0–939 ms | 198–985 ms   | 0      |
+| `/meridian`               | 244–276 ms | 0 ms     | 0            | 235 KB |
+| `/docs`                   | 248–408 ms | 0–1 ms   | 124–149 ms   | 0      |
+| `/letters`                | 300–416 ms | 0 ms     | 0–66 ms      | 0      |
+| `/docs/components/button` | 172–300 ms | 18–33 ms | 68–109 ms    | 108 KB |
+
+`/drawings` had no script at all: its long task was the style, layout and paint of seventy drawings. Each of its collections, home's sections below In use and every page's footer band now take `content-visibility: auto`, so they are laid out and painted only near the window. After that:
+
+| Page        | FCP        | Blocking  | Longest task |
+| ----------- | ---------- | --------- | ------------ |
+| `/`         | 584–788 ms | 9–13 ms   | 61–321 ms    |
+| `/drawings` | 460–564 ms | 64–318 ms | 114–333 ms   |
+| `/docs`     | 312–636 ms | 0–126 ms  | 120–288 ms   |
+
+Scrolling top to bottom at 4× in the production build: `/` holds a 17.5–18.5 ms p95 frame (max 22–26 ms); `/drawings` 22 ms p95 with one to three frames over 33 ms as collections render in.
+
+Two findings for later. Home's first paint is about 0.3–0.6 s later than before the library, still well inside the LCP budget. `/drawings` is over the 100 KB HTML budget at 121 KB gzipped: rounding path coordinates to one decimal would make it 107 KB, and to whole units 88 KB, but the stipple patterns need two decimals and small parts would lose their shape. Splitting it by collection, or dropping the skyline above the grid (107 KB unpacked), are the candidates. The placeholder height must be `contain-intrinsic-block-size`: a single `contain-intrinsic-size` value sets both axes, and the collections, as grid items, took the 1200 px placeholder as their width at 375 px.
+
 ### Techniques
 
-| Technique                                                                       | State                                                                             |
-| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Static HTML first, islands only where something is operated                     | In use; several islands load on the first view that could wait (fixes 1, 2, 5, 6) |
-| Follies drawn at build time as inline SVG; a hydrating drawing keeps its markup | In use                                                                            |
-| Grain under the content on every surface, scrolled on the compositor            | In use; the docs nav scrolls without repainting                                   |
-| Filter-free grain tiles                                                         | In use: WebP bitmaps                                                              |
-| First-screen fonts as preloaded WOFF2 files, `font-display: swap`               | In use on the site; the registry's stylesheet keeps them embedded                 |
-| A metric-matched fallback font (`size-adjust`, `ascent-override`)               | Not needed while the faces are embedded; needed with fix 3                        |
-| Per-demo chunks for docs pages                                                  | In use (`demo-host.tsx` loads one demo by name)                                   |
-| `content-visibility: auto` on long pages                                        | In use on the sections of `/letters`                                              |
-| Same-origin prefetch through the Speculation Rules API (moderate eagerness)     | Not yet                                                                           |
-| Cross-document view transitions (`@view-transition`), none under reduced motion | Not yet                                                                           |
-| Back/forward cache: no `unload` handlers, no `no-store`                         | Believed eligible; not checked                                                    |
-| Brotli or zstd, a year's cache for hashed files                                 | Not yet; no deployment (fix 9)                                                    |
-| `scheduler.yield()` in long work                                                | Not yet: hydration is the long work                                               |
+| Technique                                                                       | State                                                                                      |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Static HTML first, islands only where something is operated                     | In use; several islands load on the first view that could wait (fixes 1, 2, 5, 6)          |
+| Follies drawn at build time as inline SVG; a hydrating drawing keeps its markup | In use                                                                                     |
+| Grain under the content on every surface, scrolled on the compositor            | In use; the docs nav scrolls without repainting                                            |
+| Filter-free grain tiles                                                         | In use: WebP bitmaps                                                                       |
+| First-screen fonts as preloaded WOFF2 files, `font-display: swap`               | In use on the site; the registry's stylesheet keeps them embedded                          |
+| A metric-matched fallback font (`size-adjust`, `ascent-override`)               | Not needed while the faces are embedded; needed with fix 3                                 |
+| Per-demo chunks for docs pages                                                  | In use (`demo-host.tsx` loads one demo by name)                                            |
+| `content-visibility: auto` on long pages                                        | In use: `/letters`' sections, `/drawings`' collections, home below In use, the footer band |
+| Same-origin prefetch through the Speculation Rules API (moderate eagerness)     | Not yet                                                                                    |
+| Cross-document view transitions (`@view-transition`), none under reduced motion | Not yet                                                                                    |
+| Back/forward cache: no `unload` handlers, no `no-store`                         | Believed eligible; not checked                                                             |
+| Brotli or zstd, a year's cache for hashed files                                 | Not yet; no deployment (fix 9)                                                             |
+| `scheduler.yield()` in long work                                                | Not yet: hydration is the long work                                                        |
 
 ## Where v0.1 stands
 

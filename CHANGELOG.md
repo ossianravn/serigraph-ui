@@ -16,7 +16,7 @@
 
 - Faster: the printed grain is bitmap tiles, the site's fonts and grain load as cached files, islands hydrate when the browser is idle, and the blocks page loads its previews one at a time and never while scrolling.
 - Poster mode is off by default.
-- A new hero: the bill, the name lettered across the column, the install command, and a city to reroll.
+- A new hero: the name lettered across the column, the install command, and a city to reroll.
 - The studio keeps its preview in view while you change roles, on phones too.
 - The specimen's surfaces and voices are a sheet of aligned rows; the voices are shown at sizes where they can be seen.
 - Meridian: held seats are tickets with Add a seat and Release; sign-in fits one screen; focus stays put after booking or releasing.

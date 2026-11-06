@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useState, useTransition, type ReactNode } from "react"
+import { useState, useTransition, type ReactNode } from "react"
 import { DicesIcon } from "lucide-react"
 import { Drawing } from "@/serigraph/extras/drawing"
 import { Folly } from "@/serigraph/extras/folly"
@@ -18,9 +18,8 @@ import {
   CodeBlockTitle,
 } from "@/serigraph/ui/code-block"
 
-// A landing hero set like a gig poster: the bill across the top (a line of facts in the capitals, spread to both
-// edges), the product's name lettered from edge to edge of the column, then one row that holds the sentence and the
-// actions on the left and the install command on the right, both on one baseline. Below, a city of follies runs the
+// A landing hero set like a gig poster: the product's name lettered from edge to edge of the column, then one row that
+// holds the sentence and the actions on the left and the install command on the right, both on one baseline. Below, a city of follies runs the
 // full width, its clouds at the foot, to be continued by the section that follows in the cloud colour. Nothing that is
 // operated sits on the drawing; from 80rem a spiral tower rises out of the clouds through the gap in that row, its
 // landing behind the name. Reroll draws a new city from the next seed; the seeds walk a stream from the first, so
@@ -29,7 +28,7 @@ import {
 export const meta = {
   title: "Hero",
   description:
-    "A poster's bill, the name lettered edge to edge, one sentence, two actions and the install command, over a city the visitor can reroll.",
+    "The name lettered edge to edge, one sentence, two actions and the install command, over a city the visitor can reroll.",
 }
 
 const ADJECTIVES = ["clear", "high", "late", "pale", "still", "warm", "wide"]
@@ -51,8 +50,6 @@ interface Action {
 export interface Hero01Props {
   /** The product's name, lettered across the column, and the page's heading. */
   product?: string
-  /** The bill: short facts in the capitals, spread across the top. */
-  bill?: ReactNode[]
   /** One sentence on what it is. */
   lede?: ReactNode
   primary?: Action
@@ -66,12 +63,6 @@ export interface Hero01Props {
 
 export function Hero01({
   product = "Serigraph",
-  bill = [
-    "A shadcn/ui kit",
-    "Five colourways",
-    "Three fonts of its own",
-    "Follies in the clouds",
-  ],
   lede = "Flat, luminous spot colours laid one on another, one fine ink line, and seeded drawings of architecture in the clouds.",
   primary = { label: "Browse components", href: "/docs" },
   secondary = { label: "See it in use", href: "/meridian" },
@@ -94,21 +85,6 @@ export function Hero01({
         className="grid w-full gap-snug px-(--gutter,clamp(var(--space-snug),3vw,var(--space-section))) pt-line [container-type:inline-size]"
         style={{ ["--hero-title" as string]: fit }}
       >
-        <p className="m-0 flex flex-wrap justify-between gap-x-line gap-y-hair caps">
-          {bill.map((fact, i) => (
-            <Fragment key={i}>
-              {i > 0 && (
-                <span
-                  aria-hidden="true"
-                  className={cn(i > 1 && "max-sm:hidden")}
-                >
-                  •
-                </span>
-              )}
-              <span className={cn(i > 1 && "max-sm:hidden")}>{fact}</span>
-            </Fragment>
-          ))}
-        </p>
         <Lettering
           as="h1"
           id="hero-title"

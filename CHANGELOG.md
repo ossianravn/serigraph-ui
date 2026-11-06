@@ -8,6 +8,7 @@
 - Composed scenes: a procession through an arcade, a skyline, an observatory, a stage.
 - The home page as one poster: a spiral tower from the city to the name, scenes beside each section's words, the procession, emblems for the component groups.
 - Every page's band draws its own objects; Meridian opens on its observatory; a 404 page.
+- Redrawn: the cypress (a flame of foliage tongues), the topiary (one to three clipped balls in a planter with finials), the constellation (stars in spot colours in a dust of pinpoints), the padlock (a rounded body with a thin side), the kite's tail; the fountain's water stays water-coloured on Night.
 
 ### Repair pass
 

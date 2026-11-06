@@ -3,6 +3,7 @@
 import { ARCHITECTURE } from "./architecture"
 import { ARCHITECTURE_MORE } from "./architecture-more"
 import { GARDEN } from "./garden"
+import { GARDEN_TREES } from "./garden-trees"
 import { GARDEN_MORE } from "./garden-more"
 import { INSTRUMENTS } from "./instruments"
 import { INSTRUMENTS_MORE } from "./instruments-more"
@@ -29,6 +30,7 @@ const ALL: Thing[] = [
   ...SKY_MORE,
   ...INSTRUMENTS,
   ...INSTRUMENTS_MORE,
+  ...GARDEN_TREES,
   ...GARDEN,
   ...GARDEN_MORE,
   ...TRAVEL,

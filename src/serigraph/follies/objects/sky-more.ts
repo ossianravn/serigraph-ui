@@ -95,7 +95,7 @@ export function puffCloud(
   return tone.def + lumps(p, [...backs, floor, ...front])
 }
 
-/** A constellation: five to seven stars, sparkles and pinpoints, joined by fine lines that stop short of each. */
+/** A constellation: five to seven stars in spot colours and a double star, joined by fine lines that stop short of each, in a dust of pinpoints. */
 const constellation: Draw = (p, r) => {
   // A walk of turning steps, scaled to fill the box, stretching one way by at most 1.8 times the other.
   const lay = r("layout")
@@ -118,18 +118,19 @@ const constellation: Draw = (p, r) => {
   const [ox, oy] = [(300 - span * sx) / 2, (220 - tall * sy) / 2]
   const big = lay.int(0, count - 1)
   const kinds = r("kinds")
+  // Stars in the poster's spots, one large paper star with a smaller one turned behind it, and a double star or two.
   const stars = walk.map((q, i) => {
-    const spark = i === big || kinds.chance(0.5)
-    const s = i === big ? kinds.between(21, 26) : kinds.between(10, 14)
-    const kind = spark ? "spark" : kinds.chance(0.5) ? "ring" : "dot"
-    return { x: ox + (q.x - x0) * sx, y: oy + (q.y - y0) * sy, kind, s }
+    const s = i === big ? kinds.between(28, 34) : kinds.between(12, 17)
+    const kind = i !== big && kinds.chance(0.22) ? "ring" : "star"
+    const fill = i === big ? "paper" : kinds.pick(["paper", "sun", "highlight"])
+    return { x: ox + (q.x - x0) * sx, y: oy + (q.y - y0) * sy, kind, s, fill }
   })
   const edges = stars.slice(1).map((_, i) => [i, i + 1] as [number, number])
   if (count >= 6 && lay.chance(0.6)) edges.push([count - 1, count - 4])
   else if (lay.chance(0.5))
     edges[lay.int(1, edges.length - 1)]![0] = lay.int(0, 1)
   const gapOf = (st: (typeof stars)[number]) =>
-    st.kind === "spark" ? st.s * 0.5 + 5 : st.kind === "ring" ? 9 : 6
+    st.kind === "ring" ? 11 : st.s * 0.4 + 5
   let lines = ""
   for (const [a, b] of edges) {
     const [s0, s1] = [stars[a]!, stars[b]!]
@@ -144,16 +145,20 @@ const constellation: Draw = (p, r) => {
       lines += `M ${n(s0.x + ux * g0)} ${n(s0.y + uy * g0)} L ${n(s1.x - ux * g1)} ${n(s1.y - uy * g1)} `
   }
   let out = lines ? looseLine(p, lines) : ""
-  for (const st of stars)
-    out +=
-      st.kind === "spark"
-        ? sparkle(p, st.x, st.y, st.s)
-        : st.kind === "ring"
-          ? ring(p, st.x, st.y, 4.2) + pinpoint(st.x, st.y, 1.4)
-          : pinpoint(st.x, st.y, 2.6)
   const dust = r("dust")
-  for (let i = 0; i < 4; i++)
-    out += pinpoint(dust.between(20, 280), dust.between(20, 200), 1.3)
+  for (let i = 0; i < 10; i++)
+    out += pinpoint(
+      dust.between(12, 288),
+      dust.between(12, 208),
+      dust.between(1, 1.7),
+    )
+  for (const st of stars) {
+    const turned = `<g transform="rotate(45 ${n(st.x)} ${n(st.y)})">${star(p, st.x, st.y, st.s * 0.74, "sun")}</g>`
+    out +=
+      st.kind === "ring"
+        ? ring(p, st.x, st.y, 7) + pinpoint(st.x, st.y, 2.4)
+        : (st.s > 24 ? turned : "") + star(p, st.x, st.y, st.s, st.fill)
+  }
   return out
 }
 

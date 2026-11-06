@@ -101,27 +101,34 @@ const openDoor: Draw = (p, r, fx) => {
   )
 }
 
-/** A round padlock, thick as a coin, its shackle closed and a keyhole in its face. */
+/** A padlock: a rounded body with a thin side face, its shackle closed, a keyhole in a round plate. */
 const padlock: Draw = (p, r, fx) => {
   const [a, b] = tones(r("tones"))
   const [f, metal] = [fx.body ?? a, fx.shackle ?? b]
-  const back = circle(100, 154, 62)
-  // The coin's edge: tangents from the face (88, 162) to the back, 12 right and 8 up.
-  const hull = "M 122.4 213.6 l 12 -8 L 65.6 102.4 l -12 8 Z"
+  const [x, y, w, h, k] = [30, 116, 112, 108, 14]
+  const front = rect(x, y, w, h, k)
+  const back = rect(x + 10, y - 7, w, h, k)
+  // The side face: tangents from the top left and bottom right corners, perpendicular to the depth (10, -7).
+  const [tx, ty] = [k * 0.573, k * 0.819]
+  const tl = `${n(x + k - tx)} ${n(y + k - ty)}`
+  const br = `${n(x + w - k + tx)} ${n(y + h - k + ty)}`
+  const hull = `M ${tl} l 10 -7 L ${n(x + w - k + tx + 10)} ${n(y + h - k + ty - 7)} L ${br} Z`
   const shackle =
-    "M 54 140 V 76 A 40 40 0 0 1 134 76 V 140 H 120 V 76 A 26 26 0 0 0 68 76 V 140 Z"
+    "M 52 122 V 72 A 35 35 0 0 1 122 72 V 122 H 108 V 72 A 21 21 0 0 0 66 72 V 122 Z"
+  const plate = circle(x + w / 2, y + h * 0.48, 22)
   return (
     shape(p, shackle, metal) +
-    clip(p, shackle, shaded(p, rect(110, 20, 40, 130), metal)) +
+    clip(p, shackle, shaded(p, rect(102, 20, 40, 110), metal)) +
     shape(p, shackle, "none") +
     shape(p, back, shade(f)) +
     tint(hull, shade(f)) +
     tint(back + hull, stipple(p)) +
-    line(p, "M 122.4 213.6 l 12 -8 M 53.6 110.4 l 12 -8") +
-    sphere(p, 88, 162, 62, f) +
-    line(p, circle(88, 162, 52)) +
-    shape(p, circle(88, 162, 20), tintOf(f, 62)) +
-    shape(p, "M 81 156 A 7 7 0 1 1 95 156 L 92 174 H 84 Z", "ink")
+    line(p, `M ${tl} l 10 -7 M ${br} l 10 -7`) +
+    shape(p, front, f) +
+    shape(p, front, "none") +
+    line(p, rect(x + 9, y + 9, w - 18, h - 18, k - 6)) +
+    shape(p, plate, tintOf(f, 62)) +
+    shape(p, "M 79 162 A 7 7 0 1 1 93 162 L 90 180 H 82 Z", "ink")
   )
 }
 

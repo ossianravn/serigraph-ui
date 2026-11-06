@@ -186,9 +186,9 @@ const urn = garden("urn", "an urn", [200, 300], (p, r, F) => {
 
 /** A fountain: a round basin, a column carrying a bowl, a jet, and water falling in paper arcs. */
 const fountain = garden("fountain", "a fountain", [300, 300], (p, r, F) => {
-  const tone = r("stone").pick(["tone-1", "tone-4", "structure"])
+  const tone = r("stone").pick(["tone-1", "plane-2", "structure"])
   const stone = fillOf(F, "stone", tone)
-  const water = fillOf(F, "water", "highlight")
+  const water = fillOf(F, "water", "platform")
   const [cx, yb, rb] = [150, r("bowl").between(118, 132), 72]
   const bowl = d`M ${cx - rb} ${yb} A ${rb} 30 0 0 0 ${cx + rb} ${yb} Z`
   const fall = (pts: P[], w: number) => stem(p, pts, w, 1.3, "paper")

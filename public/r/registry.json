@@ -947,6 +947,11 @@
           "target": "~/src/serigraph/follies/objects/garden-more.ts"
         },
         {
+          "path": "src/serigraph/follies/objects/garden-trees.ts",
+          "type": "registry:file",
+          "target": "~/src/serigraph/follies/objects/garden-trees.ts"
+        },
+        {
           "path": "src/serigraph/follies/objects/garden.ts",
           "type": "registry:file",
           "target": "~/src/serigraph/follies/objects/garden.ts"

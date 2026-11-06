@@ -1,10 +1,9 @@
 // Objects: the garden. Each object draws in its own box; see library.ts for the contract and architecture.ts for the bar.
 // Leaves are the house leaf (plants.ts): pointed, a midrib, stipple on the half away from the light. The helpers here
 // (a path tag, curves, bands, leaves, pots) are shared with garden-more.ts.
-import { box, shade, tintOf } from "../buildings"
+import { shade, tintOf } from "../buildings"
 import * as M from "../motifs"
 import { el, n, type Pen } from "../svg"
-import { sphere } from "./forms"
 import { fillOf, type Thing } from "./library"
 
 const { ball, circle, crescent, ellipse, line, shape, stipple, tint } = M
@@ -119,55 +118,6 @@ export const arc = (p: Pen, c: P, rr: number, a0: number, a1: number) => {
   const [s, t] = [pol(c, a0 / 57.3, rr), pol(c, a1 / 57.3, rr)]
   return line(p, d`M ${s} A ${rr} ${rr} 0 0 1 ${t}`)
 }
-
-/** A flame-shaped cypress on a short trunk, stippled down its right side, a few flame lines inside. */
-const cypress = garden("cypress", "a cypress", [120, 400], (p, r, F) => {
-  const f = fillOf(F, "foliage", "leaf")
-  const [cx, yb, W] = [58, 372, r("width").between(50, 60)]
-  const lean = r("lean").between(-4, 9)
-  const yt = r("height").between(8, 44)
-  const H = yb - yt
-  const tip: P = [cx + lean, yt]
-  const left = d`M ${[cx - W * 0.5, yb]} C ${[cx - W * 1.15, yb - H * 0.35]} ${[cx - W * 0.35, yt + H * 0.3]} ${tip}`
-  const right = d`C ${[cx + W * 0.45 + lean * 0.5, yt + H * 0.3]} ${[cx + W * 1.15, yb - H * 0.35]} ${[cx + W * 0.5, yb]}`
-  const foot = d`A ${W * 0.5} ${W * 0.22} 0 0 1 ${[cx - W * 0.5, yb]} Z`
-  const side = d`M ${tip} C ${[cx + W * 0.1, yt + H * 0.4]} ${[cx + W * 0.45, yb - H * 0.25]} ${[cx + W * 0.2, yb + W * 0.3]} H ${cx + W * 1.5} V ${yt} Z`
-  const s = r("lines")
-  const flames = cat([-0.5, -0.24, 0.04, 0.3].slice(0, s.int(3, 4)), (k) => {
-    const y0 = yb - H * s.between(0.05, 0.22)
-    const y1 = yt + H * s.between(0.16, 0.4)
-    const c: P = [cx + k * W * 1.3 + lean * 0.3, (y0 + y1) / 2]
-    const e: P = [cx + k * W * 0.3 + lean * 0.7, y1]
-    return line(p, d`M ${[cx + k * W, y0]} Q ${c} ${e}`)
-  })
-  const wood = fillOf(F, "trunk", "structure")
-  const base: P = [cx, 400]
-  const trunk = stem(p, [base, [cx, yb - 8]], 11, 10, wood)
-  return trunk + solid(p, `${left} ${right} ${foot}`, f, side) + flames
-})
-
-/** A clipped ball of a tree on a straight trunk, in a square planter box. */
-const topiary = garden("topiary", "a topiary tree", [190, 300], (p, r, F) => {
-  const f = fillOf(F, "foliage", "leaf")
-  const tub = fillOf(F, "planter", r("tub").pick(["tone-1", "tone-4", "stair"]))
-  const [x, y, w] = [34, 236, 104]
-  const c: P = [x + w / 2 + 12, y - 7.5]
-  const k = (q: P) => lerp(c, q, 0.8)
-  const soil = d`M ${k([x, y])} L ${k([x + 24, y - 15])} L ${k([x + w + 24, y - 15])} L ${k([x + w, y])} Z`
-  const R = r("size").between(56, 70)
-  const o: P = [c[0], c[1] - r("trunk").between(58, 80) - R]
-  const belt = line(p, d`M ${x} ${y + 14} H ${x + w}`)
-  const wood = fillOf(F, "trunk", "structure")
-  return (
-    box(p, { x, y, w, h: 64, fill: tub }) +
-    (r("band").chance(0.6) ? belt : "") +
-    shape(p, soil, "ink") +
-    stem(p, [c, [c[0], o[1] + R * 0.5]], 11, 9, wood) +
-    sphere(p, o[0], o[1], R, f) +
-    arc(p, o, R * 0.78, 196, 246) +
-    arc(p, o, R * 0.56, 214, 244)
-  )
-})
 
 /** A frond: a long arching leaf cut into leaflets along both edges, a midrib, stipple on its lower half. */
 function frond(p: Pen, b: P, t: P, c: P, w: number, f: string) {
@@ -297,4 +247,4 @@ const poppy = garden("poppy", "a poppy", [200, 400], (p, r, F) => {
   )
 })
 
-export const GARDEN: Thing[] = [cypress, topiary, palm, cactus, poppy]
+export const GARDEN: Thing[] = [palm, cactus, poppy]

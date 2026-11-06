@@ -187,17 +187,20 @@ const balloon: Draw = (p, r, fills) => {
   ].join("")
 }
 
-/** A diamond kite on cross spars, its far half in shade, a tail of bows. */
+/** A diamond kite on cross spars, its far half in shade, a long swaying tail of bows. */
 const kite: Draw = (p, r, fills) => {
   const [a = "", b = ""] = trioOf(fills, r, ["panel", "panel-2"])
   const h = r("width").between(64, 72)
   const diamond = P(100, 0, [0, 10, -h, 78, h, 78, 0, 204, 0, 78])
   const tilt = r("tilt").between(-15, -6)
   const [T = O, L = O, R = O, B = O, C = O] = spin(diamond, tilt, 100, 110)
-  const tail = looping(B, [0.06, 1, 1, -0.06], [16, 30, 1.1])
-  const knot = (k: number) => tail[Math.round(k * 1.2)] ?? B
+  // The tail sways down in a widening S, four bows along it.
+  const sway = r("sway").between(16, 22) * r("side").pick([-1, 1])
+  const tail = steps(61, 0, 1).map((t) =>
+    at(...B, sway * Math.sin(t * 8.4) * (0.35 + t) + 10 * t, t * 122),
+  )
   const alt = (i: number) => (i % 2 ? b : a)
-  const bows = [12, 66, 96].map((k, i) => bow(p, ...knot(k), 14, alt(i)))
+  const bows = [14, 30, 45, 60].map((k, i) => bow(p, ...tail[k]!, 13, alt(i)))
   const flying = `M ${n(C[0])} ${n(C[1])} Q ${n(C[0] - 50)} 240 6 334`
   return [
     loose(p, flying) + loose(p, path(tail)) + bows.join(""),

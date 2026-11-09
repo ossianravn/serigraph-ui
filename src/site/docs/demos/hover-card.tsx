@@ -5,7 +5,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/serigraph/ui/hover-card"
-import { SKY } from "@/site/meridian/data"
+import { SKY } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

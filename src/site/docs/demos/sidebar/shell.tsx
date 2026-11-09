@@ -24,7 +24,7 @@ import {
   SKY,
   seatsLeft,
   VISITOR,
-} from "@/site/meridian/data"
+} from "@/site/sample/observatory"
 
 // The sidebar demo's Meridian: tonight's sessions, the telescopes, members, saved lists and the page beside the
 // sidebar.

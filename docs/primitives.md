@@ -83,7 +83,7 @@ Replace these shadcn tokens on sight: `bg-background` → nothing (the surface s
 
 ## Extras and blocks (Phase 5)
 
-Extras are the parts this style suggests that shadcn has none of; they live in `src/serigraph/extras/` beside `Folly`, `Motif` and `Lettering`, and their docs pages are in the "Serigraph extras" group. Blocks are whole pages in `src/serigraph/blocks/<name>-01.tsx` (helpers `<name>-01-<part>.tsx`), each exporting a default component and a `meta`, with Meridian's content as props with defaults; `/docs/blocks` runs each in a preview frame.
+Extras are the parts this style suggests that shadcn has none of; they live in `src/serigraph/extras/` beside `Folly`, `Motif` and `Lettering`, and their docs pages are in the "Serigraph extras" group. Blocks are whole pages in `src/serigraph/blocks/<name>-01.tsx` (helpers `<name>-01-<part>.tsx`), each exporting a default component and a `meta`, with an imaginary observatory's content (Meridian) as props with defaults; `/docs/blocks` runs each in a preview frame.
 
 | Extra              | Serigraph treatment                                                                                                                                                          |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

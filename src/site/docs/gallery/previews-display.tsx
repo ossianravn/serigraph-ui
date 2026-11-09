@@ -42,7 +42,7 @@ import {
   TableRow,
 } from "@/serigraph/ui/table"
 import { Typography, TypographyKicker } from "@/serigraph/ui/typography"
-import { SESSIONS } from "@/site/meridian/data"
+import { SESSIONS } from "@/site/sample/observatory"
 
 // Data display parts whose demo opens with something taller or wider than a card's plate: the same part, holding a
 // little of Meridian's content.

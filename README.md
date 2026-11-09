@@ -4,7 +4,7 @@ A shadcn/ui component library, website and three typefaces in the style of a lat
 
 <img alt="Serigraph's home page in the Sky colourway: the name lettered in wide paper capitals with an ink outline and an inline, a sentence, two pill buttons and an install command, over a city of follies (an observatory, an arcade with a staircase, a pinwheel arch) rising out of cream and yellow clouds." src="docs/style/home.webp">
 
-**Status:** in a repair pass before v0.1: the maintainer found the site laggy and several screens unfinished, so the release and its deployment are held ([plan](docs/plan.md)). Every shadcn/ui part on Base UI with shadcn's names, props and `data-slot`s, nine parts of Serigraph's own, seven blocks, Follies (seeded drawings of architecture in the clouds), three fonts of our own, a colourway studio and Meridian, a demo observatory built only from the kit: 88 registry items.
+**Status:** in a repair pass before v0.1: the maintainer found the site laggy and several screens unfinished, so the release and its deployment are held ([plan](docs/plan.md)). Every shadcn/ui part on Base UI with shadcn's names, props and `data-slot`s, nine parts of Serigraph's own, seven blocks, Follies (seeded drawings of architecture in the clouds), three fonts of our own, a drawing library and the Press to reroll it, and a colourway studio: 89 registry items.
 
 ## What is in it
 

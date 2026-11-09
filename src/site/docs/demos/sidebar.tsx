@@ -30,7 +30,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/serigraph/ui/sidebar"
-import { SESSIONS, VISITOR } from "@/site/meridian/data"
+import { SESSIONS, VISITOR } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 import { Choice } from "./sidebar/choice"
 import {

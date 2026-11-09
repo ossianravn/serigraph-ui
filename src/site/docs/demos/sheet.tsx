@@ -13,7 +13,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/serigraph/ui/sheet"
-import { inTimeOrder, NIGHT, SESSIONS, seatsLeft } from "@/site/meridian/data"
+import {
+  inTimeOrder,
+  NIGHT,
+  SESSIONS,
+  seatsLeft,
+} from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

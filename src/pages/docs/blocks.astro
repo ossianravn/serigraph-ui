@@ -1,5 +1,5 @@
 ---
-// The blocks: whole pages built from Serigraph's parts with Meridian's content, each running in a preview frame at
+// The blocks: whole pages built from Serigraph's parts with an imaginary observatory's content, each running in a preview frame at
 // desktop and phone width.
 import Base from "@/site/layouts/base.astro"
 import { Lettering } from "@/serigraph/extras/lettering"
@@ -17,8 +17,9 @@ import "@/site/docs/docs.css"
       Blocks
     </Lettering>
     <p class="docs-lead">
-      Whole pages built from Serigraph's parts, with Meridian's content. Install
-      one into your app, then make its copy and data yours.
+      Whole pages built from Serigraph's parts, filled with the programme of an
+      imaginary observatory. Install one into your app, then make its copy and
+      data yours.
     </p>
     {BLOCKS.map(({ name, title, description, variants }) => (
       <section id={name} class="docs-block" aria-labelledby={`block-${name}`}>

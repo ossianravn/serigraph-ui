@@ -17,7 +17,7 @@ import {
   count,
   inTimeOrder,
   seatsLeft,
-} from "@/site/meridian/data"
+} from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 import { ObservingLog } from "./table/observing-log"
 

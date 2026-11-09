@@ -1,5 +1,5 @@
-// Meridian, an observatory and planetarium: one night's sessions, the sky, and the visitor signed in. Plain data, the
-// same on the server and in the browser; the worst-case set in worst-case.ts has the same shape.
+// The docs' sample content: Meridian, an imaginary observatory and planetarium, with one night's sessions, the sky and
+// a visitor. Plain data, the same on the server and in the browser.
 
 export type Kind = "show" | "talk" | "telescope"
 

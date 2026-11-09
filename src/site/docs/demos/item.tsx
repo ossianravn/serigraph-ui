@@ -18,7 +18,7 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/serigraph/ui/item"
-import { SESSIONS, count, seatsLeft } from "@/site/meridian/data"
+import { SESSIONS, count, seatsLeft } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

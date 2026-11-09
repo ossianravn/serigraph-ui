@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/serigraph/ui/navigation-menu"
-import { inTimeOrder, SESSIONS, seatsLeft } from "@/site/meridian/data"
+import { inTimeOrder, SESSIONS, seatsLeft } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

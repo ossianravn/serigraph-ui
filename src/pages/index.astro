@@ -4,7 +4,7 @@
 import Base from "@/site/layouts/base.astro"
 import { Hero01 } from "@/serigraph/blocks/hero-01"
 import { Folly } from "@/serigraph/extras/folly"
-import InUse from "@/site/home/in-use.astro"
+import Blocks from "@/site/home/blocks.astro"
 import Drawings from "@/site/home/drawings.astro"
 import Letters from "@/site/home/letters.astro"
 import ComponentIndex from "@/site/home/component-index.astro"
@@ -18,7 +18,7 @@ import "@/site/home/home.css"
   <Hero01 client:idle />
   <!-- The city's clouds run on into a section of their colour; the next opens under the arcade wall. -->
   <div class="ground home-ground">
-    <InUse />
+    <Blocks />
   </div>
   <Folly template="arcade" seed="home" className="home-arcade" />
   <Drawings />

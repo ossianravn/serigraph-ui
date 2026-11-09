@@ -65,7 +65,7 @@ export function Hero01({
   product = "Serigraph",
   lede = "Flat, luminous spot colours laid one on another, one fine ink line, and seeded drawings of architecture in the clouds.",
   primary = { label: "Browse components", href: "/docs" },
-  secondary = { label: "See it in use", href: "/meridian" },
+  secondary = { label: "See the blocks", href: "/docs/blocks" },
   install = "npx shadcn add @serigraph/serigraph",
   seed: first = "serigraph",
   className,

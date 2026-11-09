@@ -16,7 +16,7 @@ import {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/serigraph/ui/context-menu"
-import { SESSIONS, seatsLeft } from "@/site/meridian/data"
+import { SESSIONS, seatsLeft } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

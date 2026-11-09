@@ -5,7 +5,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/serigraph/ui/resizable"
-import { NIGHT, SESSIONS, count, seatsLeft } from "@/site/meridian/data"
+import { NIGHT, SESSIONS, count, seatsLeft } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

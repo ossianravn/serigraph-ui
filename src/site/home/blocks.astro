@@ -1,25 +1,26 @@
 ---
-// The kit in use: a slice of Meridian, the demo observatory, printed from the kit's parts at build time (nothing here
-// is operated, so nothing hydrates), with the way into the real thing.
+// The kit in use: whole pages built from its parts, shown by a slice of one (tonight's programme from the dashboard
+// block, printed from the kit's parts at build time, so nothing hydrates), with the way to every block.
 import { Badge } from "@/serigraph/ui/badge"
 import { buttonVariants } from "@/serigraph/ui/button"
 import { Folly } from "@/serigraph/extras/folly"
-import { NIGHT, SESSIONS, seatsLeft } from "@/site/meridian/data"
+import { NIGHT, SESSIONS, seatsLeft } from "@/site/sample/observatory"
 import SectionHead from "./section-head.astro"
 
 const sessions = SESSIONS.slice(0, 4)
 ---
 
-<section class="section home-section home-spread" aria-labelledby="h-in-use">
+<section class="section home-section home-spread" aria-labelledby="h-blocks">
   <div class="home-spread-words">
     <SectionHead
-      id="h-in-use"
-      title="In use"
-      href="/meridian"
-      link="Open Meridian"
+      id="h-blocks"
+      title="Blocks"
+      href="/docs/blocks"
+      link="See every block"
     >
-      Meridian, an observatory and planetarium, built from the kit as you would
-      build with it: tonight's sessions, booking, sign-in and settings.
+      Whole pages built from the parts, ready to install and make your own: a
+      hero, sign-in, a dashboard, settings, pricing, an article and empty
+      states.
     </SectionHead>
     <div class="plane home-tonight" data-tone="1">
       <p class="caps">{NIGHT.date}</p>
@@ -38,12 +39,15 @@ const sessions = SESSIONS.slice(0, 4)
           </li>
         ))}
       </ul>
-      <a class={buttonVariants({ size: "sm" })} href="/meridian">
-        Book a seat
+      <a
+        class={buttonVariants({ size: "sm" })}
+        href="/docs/blocks#dashboard-01"
+      >
+        Open the dashboard
       </a>
     </div>
   </div>
-  <!-- Meridian's own observatory: the telescope on its platform in the clouds, under tonight's planet and moon. -->
+  <!-- The observatory the blocks are filled from: the telescope on its platform in the clouds, under tonight's planet and moon. -->
   <Folly
     template="observatory"
     seed="meridian"

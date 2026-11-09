@@ -12,7 +12,7 @@ import {
 import { Field, FieldLabel } from "@/serigraph/ui/field"
 import { Input } from "@/serigraph/ui/input"
 import { Separator } from "@/serigraph/ui/separator"
-import { NIGHT, SKY } from "@/site/meridian/data"
+import { NIGHT, SKY } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

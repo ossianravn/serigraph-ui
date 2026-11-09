@@ -230,3 +230,18 @@
 .press-section {
   padding-top: var(--space-line);
 }
+
+/* On a phone the drawing comes first, then the controls, then the neighbouring seeds, so what the controls change
+   stays near them. */
+@media (max-width: 59.99rem) {
+  .press-main {
+    display: contents;
+  }
+  .press-stage {
+    order: -1;
+  }
+  .press-stage[data-template="object"] .press-art {
+    height: clamp(14rem, 38vh, 22rem);
+    margin: var(--space-line);
+  }
+}

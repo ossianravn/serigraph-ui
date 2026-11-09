@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### After the maintainer's review
+
+- Drawings: an overview of the seven collections, a page for each with how to draw them in a project, and every drawing opens in the Press.
+- The Press draws any object from the library as well as any scene, shows its neighbouring seeds, copies the code that draws it, and keeps what it draws in the address.
+- The footer band no longer cuts off what rises above its clouds.
+- The specimen opens on its own city; the appearance panel sits beside the colourways.
+- The letters page opens on its title.
+- The components index: each card holds its preview, name and sentence together.
+- Meridian, the demo observatory, is gone; home's In use section is now Blocks, and the hero's second action goes to them.
+
 ### The drawing library
 
 - 69 seeded objects in seven collections (architecture, the sky, instruments, the garden, travel and post, the stage, everyday moments), drawn with `drawing()` or `<Drawing>`, all shown at `/drawings`.

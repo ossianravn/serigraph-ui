@@ -28,7 +28,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/serigraph/ui/chart"
-import { count } from "@/site/meridian/data"
+import { count } from "@/site/sample/observatory"
 import { DemoSection, type DemoMeta } from "../demo-kit"
 import * as data from "./chart/data"
 

@@ -13,7 +13,7 @@ import {
   SKY,
   inTimeOrder,
   type SkyObject,
-} from "@/site/meridian/data"
+} from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

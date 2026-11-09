@@ -17,7 +17,7 @@ import {
 } from "@/serigraph/ui/resizable"
 import { ScrollArea } from "@/serigraph/ui/scroll-area"
 import { Separator } from "@/serigraph/ui/separator"
-import { SESSIONS } from "@/site/meridian/data"
+import { SESSIONS } from "@/site/sample/observatory"
 import { Scaled } from "./parts"
 
 // Panels and people whose demo opens with a part taller than a card's plate, or so small it reads as a speck: the

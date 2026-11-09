@@ -21,7 +21,7 @@ import {
   CommandShortcut,
 } from "@/serigraph/ui/command"
 import { Kbd } from "@/serigraph/ui/kbd"
-import { inTimeOrder, SESSIONS, SKY } from "@/site/meridian/data"
+import { inTimeOrder, SESSIONS, SKY } from "@/site/sample/observatory"
 import { DemoSection, StateRow, type DemoMeta } from "../demo-kit"
 
 export const meta: DemoMeta = {

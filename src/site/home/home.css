@@ -38,7 +38,7 @@
   font-size: clamp(2.5rem, 7vw, 4.5rem);
 }
 
-/* In use: tonight's sessions on a plane. */
+/* Blocks: tonight's programme from the dashboard block, on a plane. */
 .home-tonight {
   display: grid;
   gap: var(--space-snug);

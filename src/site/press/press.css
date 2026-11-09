@@ -5,21 +5,28 @@
   gap: var(--space-tight);
   padding: var(--space-line) var(--gutter) 0;
 }
-.press-hero p {
+.press-lede {
   margin: 0;
+  max-width: var(--measure);
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
+}
+/* A linked drawing stays hidden until the island has read the address. */
+.press-pending .press-art {
+  visibility: hidden;
 }
 
 .press-title {
   margin: 0;
   font-size: clamp(2.5rem, 7vw, 5.5rem);
 }
-.press {
+.press-layout {
   display: grid;
   gap: var(--space-line);
   align-items: start;
 }
 @media (min-width: 60rem) {
-  .press {
+  .press-layout {
     grid-template-columns: 22rem minmax(0, 1fr);
   }
 }
@@ -82,8 +89,69 @@
   background-color: color-mix(in oklab, var(--action) 92%, var(--ink));
 }
 .press-actions {
-  grid-template-columns: auto auto 1fr;
+  justify-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: var(--space-tight);
+}
+.press-note:empty {
+  display: none;
+}
+/* The object list fits its longest name. */
+.press-select {
+  width: 15rem;
+}
+.press-main {
+  display: grid;
+  gap: var(--space-line);
+  min-width: 0;
+}
+.press-stage[data-template="object"] .press-art {
+  aspect-ratio: auto;
+  height: clamp(16rem, 50vh, 30rem);
+  margin: var(--space-section) var(--space-line);
+}
+/* The object from the next four seeds, each drawing it large when pressed. */
+.press-neighbours {
+  display: grid;
+  gap: var(--space-snug);
+}
+.press-near-title {
+  margin: 0;
+  font-size: var(--type-small);
+}
+.press-near {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-snug);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.press-near-button {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-tight);
+  width: 100%;
+  padding: var(--space-snug) var(--space-tight);
+  border: var(--line) solid var(--edge, var(--ink));
+  border-radius: var(--r-box);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.press-near-button:hover .press-near-seed {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.press-near-art {
+  width: 100%;
+  height: clamp(4rem, 9vw, 7rem);
+}
+.press-near-seed {
+  font-family: var(--face-mono);
+  font-size: var(--type-small);
 }
 .press-stage {
   overflow: hidden;

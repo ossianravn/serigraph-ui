@@ -1,4 +1,4 @@
-/* The drawing library: collections of objects on the canvas, each above its name. */
+/* The drawing library: an overview of the collections, a page per collection, and the grid both use. */
 .drawings {
   display: grid;
   gap: var(--space-page);
@@ -7,10 +7,11 @@
 .drawings-head {
   display: grid;
   gap: var(--space-snug);
+  justify-items: start;
 }
 .drawings-title {
   margin: 0;
-  font-size: var(--type-display);
+  font-size: clamp(3rem, 12vw, 9rem);
 }
 .drawings-lede {
   margin: 0;
@@ -18,41 +19,120 @@
   font-size: var(--type-lead);
   line-height: var(--lh-lead);
 }
-.drawings-skyline {
-  height: clamp(16rem, 32vw, 30rem);
-  margin-inline: calc(-1 * var(--gutter));
-}
-/* Seventy drawings: a collection is laid out and painted only when it nears the window. */
-.drawings-collection {
-  content-visibility: auto;
-  contain-intrinsic-block-size: auto 1200px;
-}
-.drawings-kicker {
-  margin: 0 0 var(--space-line);
-  padding-bottom: var(--space-tight);
-  border-bottom: var(--line) solid var(--edge);
-}
-.drawings-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  gap: var(--space-section) var(--space-line);
+.drawings-crumb {
   margin: 0;
-  padding: 0;
-  list-style: none;
 }
-.drawings-item {
+
+/* A collection: its title and line, its drawings, and the way to the rest. Laid out and painted only near the window. */
+.drawings-collection {
+  display: grid;
+  gap: var(--space-line);
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 30rem;
+}
+.drawings-collection-head {
   display: grid;
   gap: var(--space-tight);
 }
-.drawings-art {
-  height: 16rem;
+.drawings-collection-title {
+  margin: 0;
+  font-size: clamp(var(--type-h1), 4vw, var(--type-title));
+  line-height: 1.2;
+  & a {
+    text-decoration: none;
+  }
+  & a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: var(--line);
+    text-underline-offset: 0.12em;
+  }
 }
-.drawings-name {
+.drawings-collection-lead {
+  margin: 0;
+  max-width: var(--measure);
+}
+.drawings-more {
+  margin: 0;
+}
+
+/* The collections, one of them current. */
+.drawings-nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-hair) var(--space-tight);
+  gap: var(--space-tight) var(--space-line);
+  margin: var(--space-tight) 0 0;
+  padding: 0;
+  list-style: none;
+  & a {
+    color: inherit;
+    text-decoration: none;
+  }
+  & a:hover,
+  & a[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: var(--line);
+    text-underline-offset: 0.3em;
+  }
+}
+
+/* The grid: each item is two shared rows, the drawing standing on one line and its name starting on the next. */
+.object-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-line) var(--space-snug);
   margin: 0;
-  font-size: var(--type-small);
-  line-height: var(--lh-small);
+  padding: 0;
+  list-style: none;
+  & > li {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    min-width: 0;
+  }
+}
+@media (min-width: 40rem) {
+  .object-grid {
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: var(--space-section) var(--space-line);
+  }
+}
+.object-link {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  justify-items: center;
+  row-gap: var(--space-tight);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--r-box);
+}
+.object-link:focus-visible {
+  outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
+  outline-offset: var(--space-tight);
+}
+.object-art {
+  align-self: end;
+  width: 100%;
+  height: clamp(8rem, 30vw, 11rem);
+}
+.object-name {
+  align-self: start;
+  text-align: center;
+  text-decoration-thickness: var(--line);
+  text-underline-offset: 0.3em;
+}
+.object-link:hover .object-name {
+  text-decoration-line: underline;
+}
+
+/* How a project draws them. */
+.drawings-add {
+  display: grid;
+  gap: var(--space-snug);
+  max-width: 40rem;
+}
+.drawings-code {
+  display: grid;
+  gap: var(--space-snug);
+  margin-top: var(--space-tight);
 }

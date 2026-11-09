@@ -1,0 +1,24 @@
+---
+// A grid of library drawings, each opening in the Press with the same seed. Each item spans two shared rows, the
+// drawing then its name, so the drawings stand on one line and the names start on the next, whatever each drawing's
+// height or each name's length.
+import { Drawing } from "@/serigraph/extras/drawing"
+import type { Thing } from "@/serigraph/follies"
+import { labelOf, pressHref } from "./collections"
+
+interface Props {
+  objects: Thing[]
+}
+const { objects } = Astro.props
+---
+
+<ul class="object-grid">
+  {objects.map((t) => (
+    <li>
+      <a href={pressHref(t.name, t.name)} class="object-link">
+        <Drawing object={t.name} seed={t.name} className="object-art" />
+        <span class="caps object-name">{labelOf(t)}</span>
+      </a>
+    </li>
+  ))}
+</ul>

@@ -1,6 +1,7 @@
 ---
-// The Press: Follies, rerolled. Every template, any seed, any colourway, and the SVG to take away; then the formats
-// and the motifs on their own.
+// The Press: Follies, rerolled. Every scene and every object in the library, any seed, any colourway, and the SVG
+// or the code to take away; then the formats and the motifs on their own. The drawings pages link here with
+// ?object=…&seed=…; until the island has read that, the drawing is hidden, so a linked object never flashes the city.
 import Base from "@/site/layouts/base.astro"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { Folly } from "@/serigraph/extras/folly"
@@ -11,15 +12,20 @@ import "@/site/press/press.css"
 
 <Base
   title="The Press"
-  description="Follies, Serigraph's seeded drawings of surreal architecture: every template, any seed, any colourway, and the SVG to take away."
+  description="Follies, Serigraph's seeded drawings: every scene and every object in the library, any seed, any colourway, and the SVG or code to take away."
 >
+  <script is:inline>
+    if (/[?&](object|template)=/.test(location.search))
+      document.documentElement.classList.add("press-pending")
+  </script>
   <div class="press-hero">
     <Lettering as="h1" className="press-title">
       The Press
     </Lettering>
-    <p class="caps">
-      Follies <span class="sep">•</span> seeded architecture{" "}
-      <span class="sep">•</span> every colourway
+    <p class="press-lede">
+      Draw any scene or any object from the <a href="/drawings">library</a> from
+      a seed of your own, in any colourway, and take away its SVG or the line of
+      code that draws it.
     </p>
   </div>
   <section class="section press-section" aria-label="The press">

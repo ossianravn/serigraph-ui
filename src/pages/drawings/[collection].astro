@@ -1,0 +1,66 @@
+---
+// One collection of the drawing library: every drawing in it, the other collections beside it, and how a project draws
+// them. Every drawing opens in the Press.
+import Base from "@/site/layouts/base.astro"
+import { Lettering } from "@/serigraph/extras/lettering"
+import ObjectGrid from "@/site/drawings/object-grid.astro"
+import { InstallCode } from "@/site/drawings/install-code"
+import { COLLECTION_PAGES } from "@/site/drawings/collections"
+import "@/site/drawings/drawings.css"
+
+export function getStaticPaths() {
+  return COLLECTION_PAGES.map((c) => ({ params: { collection: c.key } }))
+}
+
+const c = COLLECTION_PAGES.find((p) => p.key === Astro.params.collection)!
+const first = c.objects[0]?.name ?? "kite"
+---
+
+<Base
+  title={`${c.title} · Drawings`}
+  description={`Serigraph's drawings of ${c.title.toLowerCase()}: ${c.lead}`}
+>
+  <div class="drawings">
+    <header class="drawings-head">
+      <p class="caps drawings-crumb">
+        <a href="/drawings">Drawings</a>
+      </p>
+      <Lettering as="h1" className="drawings-title">
+        {c.title}
+      </Lettering>
+      <p class="drawings-lede">{c.lead}</p>
+      <nav aria-label="Collections">
+        <ul class="drawings-nav">
+          {COLLECTION_PAGES.map((p) => (
+            <li>
+              <a
+                href={p.href}
+                class="caps"
+                aria-current={p.key === c.key ? "page" : undefined}
+              >
+                {p.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+    <ObjectGrid objects={c.objects} />
+    <section class="drawings-add" aria-labelledby="add">
+      <h2 id="add" class="drawings-collection-title">
+        <Lettering>Draw them</Lettering>
+      </h2>
+      <p class="drawings-collection-lead">
+        The whole library comes with the Drawing component; give it an object's
+        name and any seed, and the same seed always draws the same drawing.
+      </p>
+      <InstallCode
+        client:visible
+        lines={[
+          "npx shadcn add @serigraph/drawing",
+          `<Drawing object="${first}" seed="your-seed" />`,
+        ]}
+      />
+    </section>
+  </div>
+</Base>

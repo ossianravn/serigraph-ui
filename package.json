@@ -14,9 +14,13 @@
   },
   "packageManager": "npm@11.17.0",
   "scripts": {
+    "start": "astro dev --host 127.0.0.1 --open",
+    "prestart": "node tools/ensure-deps.mjs",
     "dev": "astro dev --host 127.0.0.1",
+    "predev": "node tools/ensure-deps.mjs",
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
+    "prepreview": "node tools/ensure-deps.mjs && astro build",
     "typecheck": "astro check",
     "lint": "eslint .",
     "format": "prettier --write .",

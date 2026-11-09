@@ -42,17 +42,17 @@ Make `src/serigraph/styles/serigraph.css` your Tailwind entry (`@import "./serig
 
 ## Run the site
 
-Requires Node.js 24 and npm 11.
+Requires Node.js 24 (`.nvmrc`) and npm 11.
 
 ```sh
-npm ci
+npm start
 ```
 
-```sh
-npm run dev
-```
+It installs the dependencies when they are missing or older than the lockfile, starts the site at `http://127.0.0.1:4801` and opens it in your browser. `npm run dev` does the same without opening a browser. To look at the production build, `npm run preview` builds it and serves it at `http://127.0.0.1:4802`.
 
-Open `http://127.0.0.1:4801`. Checks: `typecheck`, `lint`, `format:check`, `build`, `test:seeds` (every Follies template and motif against its snapshot), `check:contrast` (every text pair in every colourway, with the grain composited in), `registry:check` and `test:consumer`. `npm run build:textures` regenerates the grain; `npm run build:fonts` rebuilds the fonts from the skeleton alphabet. The build draws a share image for every page.
+If an install stops with `EPERM` or `EBUSY` on Windows, a Serigraph server that is still running holds a file in `node_modules` open: stop it with Ctrl+C in its terminal and run the command again.
+
+Checks: `typecheck`, `lint`, `format:check`, `build`, `test:seeds` (every Follies template and motif against its snapshot), `check:contrast` (every text pair in every colourway, with the grain composited in), `registry:check` and `test:consumer`. `npm run build:textures` regenerates the grain; `npm run build:fonts` rebuilds the fonts from the skeleton alphabet. The build draws a share image for every page.
 
 The static prototype the style was agreed on stays in `specimen/`:
 

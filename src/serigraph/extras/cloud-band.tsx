@@ -43,7 +43,7 @@ export function CloudBand({
       data-slot="cloud-band"
       data-below={below}
       data-above={above}
-      className={cn("h-[clamp(7.5rem,14vw,13rem)] w-full", className)}
+      className={cn("h-[clamp(9.5rem,17.75vw,16.5rem)] w-full", className)}
       {...props}
     >
       <Folly template="band" seed={seed} label={label} className="size-full" />

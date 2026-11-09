@@ -131,9 +131,13 @@ const BAND_FLYING = [
   "crescent-moon",
 ]
 
+// The band is drawn on a 210-unit ground with 56 units of sky above it: domes, finials, blooms and the library's
+// objects rise up to 44 units over the ground's top, and the sky keeps them whole.
+const SKY = 56
+
 export const band: Scene = {
   w: 3200,
-  h: 210,
+  h: 210 + SKY,
   fit: "xMidYMax slice",
   body: (p, seed) => {
     const [w, h] = [3200, 210]
@@ -233,19 +237,17 @@ export const band: Scene = {
         h: Math.min(h * 0.55, (170 * fly.h) / fly.w),
         key: "band-sky",
       })
-    return (
-      art +
-      scatter(p, r("sky"), {
-        x0: w / 2 - 240,
-        y0: h * 0.08,
-        x1: w / 2 + 60,
-        y1: h * 0.45,
-        sparkles: 3,
-        rings: 2,
-        dots: 4,
-        size: [6, 11],
-      })
-    )
+    const sky = scatter(p, r("sky"), {
+      x0: w / 2 - 240,
+      y0: h * 0.08 - SKY * 0.6,
+      x1: w / 2 + 60,
+      y1: h * 0.45,
+      sparkles: 3,
+      rings: 2,
+      dots: 4,
+      size: [6, 11],
+    })
+    return `<g transform="translate(0 ${SKY})">${art + sky}</g>`
   },
 }
 

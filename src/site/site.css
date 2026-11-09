@@ -73,11 +73,11 @@
   text-decoration: underline;
 }
 .site-band {
-  height: 210px;
+  height: 266px;
   margin-top: var(--space-page);
   /* Below every page's content: laid out and painted only when it nears the window. */
   content-visibility: auto;
-  contain-intrinsic-block-size: auto 210px;
+  contain-intrinsic-block-size: auto 266px;
 }
 .site-footer {
   padding: var(--space-line) var(--gutter);

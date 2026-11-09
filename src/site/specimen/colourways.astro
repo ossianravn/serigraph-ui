@@ -2,16 +2,22 @@
 import { Lettering } from "@/serigraph/extras/lettering"
 // The colourways side by side: each a small print with its roles named, the way the triptych rotates its colours.
 import { APPEARANCE } from "@/serigraph/theme"
+import { AppearancePanel } from "@/site/appearance-panel"
 
 const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1)
 ---
 
 <section class="section ground ground-section" id="colourways" aria-labelledby="h-colourways">
-  <Lettering as="h2" className="section-title" id="h-colourways">Colourways</Lettering>
-  <p class="section-lede">
-    One print, its spot colours rotated among the same roles. Paper and ink
-    never change.
-  </p>
+  <div class="cw-head">
+    <div>
+      <Lettering as="h2" className="section-title" id="h-colourways">Colourways</Lettering>
+      <p class="section-lede">
+        One print, its spot colours rotated among the same roles. Paper and ink
+        never change.
+      </p>
+    </div>
+    <AppearancePanel client:idle />
+  </div>
   <div class="cw-grid">
     {
       APPEARANCE.colourway.map((colourway) => (

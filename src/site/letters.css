@@ -6,28 +6,34 @@
   padding: var(--space-section) var(--gutter) 0;
 }
 .letters-stage {
-  height: clamp(16rem, 34vw, 26rem);
+  height: clamp(14rem, 50vw, 20rem);
 }
-/* From 64rem the stage stands beside the title, its clouds on the title's baseline. */
+/* From 64rem the stage stands beside the title and its lede, as tall as both: it takes no height of its own, so the
+   words set the rows and the page opens on the title. */
 @media (min-width: 64rem) {
   .letters-hero {
     grid-template-columns: auto minmax(0, 1fr);
     align-items: end;
   }
-  .letters-meta {
+  .letters-lede {
     grid-row: 2;
   }
   .letters-stage {
-    grid-row: 1;
+    grid-row: 1 / span 2;
     grid-column: 2;
+    height: 0;
+    min-height: 100%;
   }
 }
 .letters-title {
   margin: 0;
   font-size: clamp(4rem, 17vw, 13rem);
 }
-.letters-meta {
+.letters-lede {
   margin: 0;
+  max-width: var(--measure);
+  font-size: var(--type-lead);
+  line-height: var(--lh-lead);
 }
 
 .waterfall {

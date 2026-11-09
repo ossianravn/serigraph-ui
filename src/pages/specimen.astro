@@ -1,11 +1,10 @@
 ---
 // The specimen: Serigraph's materials on one print. The colourways, the surfaces and marks, and the voices with their
-// Golden Ratio scale, all from the kit, with the appearance panel. The static prototype the style was agreed on stays
+// Golden Ratio scale, all from the kit; the appearance panel sits with the colourways. The static prototype the style was agreed on stays
 // in specimen/.
 import Base from "@/site/layouts/base.astro"
 import { Lettering } from "@/serigraph/extras/lettering"
 import { Folly } from "@/serigraph/extras/folly"
-import { AppearancePanel } from "@/site/appearance-panel"
 import Colourways from "@/site/specimen/colourways.astro"
 import Surfaces from "@/site/specimen/surfaces.astro"
 import Voices from "@/site/specimen/voices.astro"
@@ -21,24 +20,12 @@ import "@/site/specimen/sheet.css"
     <Lettering as="h1" className="hero-title">
       Specimen
     </Lettering>
-    <p class="hero-meta caps">
-      <span>
-        Colourways <span class="sep">•</span> Surfaces{" "}
-        <span class="sep">•</span> Voices
-      </span>
-      <span>
-        Five colourways <span class="sep">•</span> One line
-      </span>
+    <p class="hero-lede">
+      A shadcn/ui kit printed like a silkscreen gig poster: flat, luminous spot
+      colours laid one on another, one fine ink line, and a paper mat around the
+      canvas.
     </p>
-    <div class="hero-body">
-      <p class="hero-lede">
-        A shadcn/ui kit printed like a silkscreen gig poster: flat, luminous
-        spot colours laid one on another, one fine ink line, and a paper mat
-        around the canvas.
-      </p>
-      <AppearancePanel client:idle />
-    </div>
-    <Folly template="city" seed="serigraph" className="hero-art" />
+    <Folly template="city" seed="specimen" className="hero-art" />
   </div>
   <Colourways />
   <Surfaces />

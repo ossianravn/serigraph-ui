@@ -5,27 +5,9 @@
   gap: var(--space-line);
   padding: var(--space-section) var(--gutter) 0;
 }
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--space-hair) var(--space-line);
-  margin: 0;
-}
 .hero-art {
   height: clamp(300px, 44vw, 600px);
-  margin: 0 calc(-1 * var(--gutter));
-}
-.hero-body {
-  display: grid;
-  gap: var(--space-line);
-  align-items: start;
-}
-@media (min-width: 60rem) {
-  .hero-body {
-    grid-template-columns: minmax(0, var(--measure)) auto;
-    justify-content: space-between;
-  }
+  margin: calc(-1 * var(--space-line)) calc(-1 * var(--gutter)) 0;
 }
 .hero-lede {
   margin: 0;
@@ -34,7 +16,19 @@
   line-height: var(--lh-lead);
 }
 
-/* Colourways. */
+/* Colourways: the heading and lede, with the appearance panel beside them to try each one on the page. */
+.cw-head {
+  display: grid;
+  gap: var(--space-line);
+  align-items: start;
+  margin-bottom: var(--space-section);
+}
+@media (min-width: 60rem) {
+  .cw-head {
+    grid-template-columns: minmax(0, var(--measure)) auto;
+    justify-content: space-between;
+  }
+}
 .cw-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));

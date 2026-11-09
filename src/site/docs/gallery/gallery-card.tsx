@@ -3,8 +3,8 @@ import { DemoPreview, previewClaim, type DemoMeta } from "../demo-kit"
 import { Scaled } from "./parts"
 import { PREVIEWS, SCALE } from "./previews"
 
-// One part on the Components index: a plate in plane 2 inside the fine line, showing the part at rest, then its title
-// and the sentence on what it is for. The plate renders on the server from the part's own demo (its first example
+// One part on the Components index: a card in plane 2 inside the fine line, the part at rest above a rule, its title
+// and the sentence on what it is for below, so each name sits inside the card it belongs to. The plate renders on the server from the part's own demo (its first example
 // row), or from a preview made for the index where that row would not show the part (overlays open in a portal, only
 // in the browser; some first rows are a whole page). The plate is a picture, not a control: inert and hidden from
 // assistive technology, so the title's link, which covers the card, is the card's one target.
@@ -24,8 +24,8 @@ export function GalleryCard({ name }: { name: string }) {
   const Preview = PREVIEWS[name] ?? demo.default
   const scale = PREVIEWS[name] ? undefined : SCALE[name]
   return (
-    <article className="gallery-card">
-      <div className="plane gallery-plate" data-tone="plane-2">
+    <article className="plane gallery-card" data-tone="plane-2">
+      <div className="gallery-plate">
         <div aria-hidden="true" inert className="gallery-preview">
           <DemoPreview.Provider value={previewClaim()}>
             {scale ? (

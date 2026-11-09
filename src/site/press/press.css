@@ -115,7 +115,7 @@
 }
 .press-stage[data-template="band"] .press-art {
   aspect-ratio: auto;
-  height: 210px;
+  height: 266px;
   margin-top: var(--space-section);
 }
 .press-stage[data-template="arcade"] .press-art {

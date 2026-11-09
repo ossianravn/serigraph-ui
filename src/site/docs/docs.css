@@ -128,7 +128,7 @@
 .gallery {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-section) var(--space-line);
+  gap: var(--space-line);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -149,12 +149,15 @@
 .gallery-card {
   position: relative;
   display: grid;
-  align-content: start;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  overflow: clip;
 }
 .gallery-plate {
   position: relative;
-  height: 14rem;
+  height: 12rem;
   overflow: clip;
+  border-bottom: var(--line) solid var(--ink);
 }
 .gallery-preview {
   position: absolute;
@@ -171,7 +174,8 @@
   }
 }
 .gallery-title {
-  margin: var(--space-snug) 0 0;
+  margin: 0;
+  padding: var(--space-snug) var(--space-snug) 0;
   font-family: var(--face-read);
   font-size: var(--type-lead);
   line-height: var(--lh-lead);
@@ -195,13 +199,14 @@
   text-decoration-thickness: var(--line);
   text-underline-offset: 0.2em;
 }
-.gallery-card:has(a:focus-visible) .gallery-plate {
-  outline: var(--line) solid var(--edge, var(--ink));
+.gallery-card:has(a:focus-visible) {
+  outline: var(--line) solid var(--ring, var(--edge, var(--ink)));
   outline-offset: 3px;
 }
 .gallery-sentence {
   max-width: var(--measure);
-  margin: var(--space-hair) 0 0;
+  margin: 0;
+  padding: var(--space-hair) var(--space-snug) var(--space-snug);
   font-size: var(--type-small);
   line-height: var(--lh-small);
 }
